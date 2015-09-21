@@ -1,0 +1,41 @@
+AddHandler php5-script .php
+
+# RewriteEngine On
+# RewriteCond %{HTTP_HOST} ^DOMAIN.com [NC]
+# RewriteRule ^(.*)$ http://www.DOMAIN.com/$1 [L,R=301]
+
+# ErrorDocument 404 http://www.DOMAIN.com
+
+# Remove eTags
+Header unset ETag  
+FileETag None  
+    
+# Restrict access to .htaccess
+<Files .htaccess>  
+Order Allow,Deny  
+Deny from all  
+</Files>
+
+# Restrict access to wp-config
+<Files wp-config.php>  
+Order Deny,Allow  
+Deny from all  
+</Files>
+
+# Disable access to trackbacks/pingbacks
+<FilesMatch "^(xmlrpc\.php|wp-trackback\.php)">
+Order Deny,Allow
+Deny from all
+</FilesMatch>
+
+
+# GZIP compression (this is tested on MediaTemple. Other servers may require a different compression declaration
+<filesmatch "\.(gif|jpg|png|ico|css|js|woff|ttf|svg|eot)$">
+    SetOutputFilter DEFLATE
+</filesmatch>
+
+# For when webfonts give a "Resource interpreted as Font but transferred with MIME type ___" error. Un-comment the one relevant to the error.
+# AddType font/ttf .ttf
+# AddType font/eot .eot
+# AddType font/otf .otf
+# AddType font/woff .woff

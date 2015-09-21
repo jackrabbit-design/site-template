@@ -1,0 +1,37 @@
+/* = STRUCTURE = no need to adjust ========================= */
+
+    body{min-width:0;}
+    
+    .wp-core-ui .button-primary{border:none;-webkit-box-shadow:none;box-shadow:none;color:#fff;text-decoration:none;}
+    .wp-core-ui .button-primary:hover{-webkit-box-shadow:none;box-shadow:none;border:none;}
+    
+    #login{padding:20px;margin:30px auto 0;}
+    #jrd-login{background:url(../images/jrd.png) no-repeat 75px top;margin:0 auto;display:block;padding:0 0 15px;width:320px;height:70px;}
+    
+    .login form{box-shadow:none;background:#fff;-webkit-box-shadow:0 1px 3px rgba(0,0,0,.13);box-shadow:0 1px 3px rgba(0,0,0,.13);}
+    .login #nav{text-align:center;}
+    .login #backtoblog{text-align:center;margin:5px 0 0;border-bottom:1px solid #d8d8d8;padding:0 0 20px;}
+    .login #backtoblog a,
+        .login #nav a{font-weight:100;}
+    .login #backtoblog a:hover,
+        .login #nav a:hover{font-weight:100;}
+
+
+
+/* = STYLES = customize for the site ========================= */
+
+    html, body{background:#f3f3f3;color:#444;}
+    
+    .wp-core-ui .button-primary{color:#fff;}
+    .wp-core-ui .button-primary:hover{}
+    
+    .login label, .forgetmenot label{color:#10887E;}
+    
+    .wp-core-ui .button-primary{background:#D14124;}
+    .wp-core-ui .button-primary:hover{background:#D5543A;}
+    
+    body.login #login h1 a{background:url(../images/logo.png) no-repeat;width:213px;height:124px;}
+    
+    .login #nav a:hover,
+    .login #backtoblog a:hover,
+    .login h1 a:hover{color:#A21817;}
