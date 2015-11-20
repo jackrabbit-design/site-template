@@ -47,36 +47,33 @@ if ( function_exists( 'register_nav_menus' ) ) {
 	);
 }
 
+/* ========================================================================= */
+/* !DISABLE EMOJIS */
+/* ========================================================================= */
 
-/* Add a Stylesheet for Admin Content Area */
-/*
-function admin_font_setup(){
-    add_editor_style( array( 'style-editor.css', '/' ) );
-}
-add_action( 'after_setup_theme', 'admin_font_setup' );
-*/
-
+remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
 /* Globally Hide Admin Meta Boxes */
 function hide_meta_boxes() {
      remove_meta_box('postcustom','post','normal'); // custom fields post
      remove_meta_box('postcustom','page','normal'); // custom fields page
-     
+
      //remove_meta_box('commentstatusdiv','post','normal'); // discussion post
      remove_meta_box('commentstatusdiv','page','normal'); // discussion page
-     
+
      //remove_meta_box('commentsdiv','post','normal'); // comments post
      //remove_meta_box('commentsdiv','page','normal'); // comments page
 
      //remove_meta_box('authordiv','post','normal'); // author post
      remove_meta_box('authordiv','page','normal'); // author page
-     
+
      //remove_meta_box('revisionsdiv','post','normal'); // revisions post
      //remove_meta_box('revisionsdiv','page','normal'); // revisions page
-     
+
      //remove_meta_box('postimagediv','post','normal'); // featured image post
      remove_meta_box('postimagediv','page','normal'); // featured image page
-     
+
      //remove_meta_box('pageparentdiv','page','normal'); // page attributes
 
      //remove_meta_box('tagsdiv-post-tag','post','normal'); // post tags
@@ -129,7 +126,7 @@ add_action( 'login_footer', 'jrd_login' );
 /* ========================================================================= */
 /* !ENQUEUE SCRIPTS */
 /* ========================================================================= */
-     
+
 function enqueue_scripts() {
     wp_deregister_script( 'jquery' );
     wp_enqueue_script('modernizr', get_bloginfo('url').'/ui/js/modernizr.js', array(), null);
@@ -138,12 +135,12 @@ function enqueue_scripts() {
     wp_enqueue_script('init', get_bloginfo('url').'/ui/js/jquery.init.js', array('jquery', 'plugins'), null, true);
 }
 add_action('wp_enqueue_scripts', 'enqueue_scripts');
-    
-    
+
+
 /* ========================================================================= */
 /* !ENQUEUE STYLES */
 /* ========================================================================= */
-    
+
 function enqueue_styles() {
     wp_enqueue_style('style', get_bloginfo('url').'/ui/css/style.css', array(), null);
 }
@@ -197,11 +194,11 @@ function check_is_subpage() {
 }
 
 
-/* HOW TO USE 
+/* HOW TO USE
    Plug this code below into your submenu sidebar and set the theme location to use the menu you want to reference. This code checks whether the page is a subpage.
    If page is a subpage it echos the children menu items of it. If page is not it then echos the top level pages of the menu.
 
-<?php if(check_is_subpage() == false){ ?>         
+<?php if(check_is_subpage() == false){ ?>
     <h3><?php bloginfo('name'); ?></h3>
     <div class="submenu-widget">
         <?php wp_nav_menu(array('theme_location' => 'main-menu', 'container' => '', 'menu_class' => 'menu', 'menu_id' => '', 'depth' => 2)); ?>
@@ -248,7 +245,7 @@ add_filter('excerpt_more', 'new_excerpt_more');
 
 function alx_browser_body_class( $classes ) {
     global $is_lynx, $is_gecko, $is_IE, $is_opera, $is_NS4, $is_safari, $is_chrome, $is_iphone;
- 
+
     if($is_lynx) $classes[] = 'lynx';
     elseif($is_gecko) $classes[] = 'gecko';
     elseif($is_opera) $classes[] = 'opera';
@@ -275,9 +272,9 @@ function alx_browser_body_class( $classes ) {
         }
     }
     else $classes[] = 'unknown';
- 
+
     if( $is_iphone ) $classes[] = 'iphone';
- 
+
     return $classes;
 }
 add_filter( 'body_class', 'alx_browser_body_class' );
@@ -353,7 +350,7 @@ if ( is_admin() ) {
 function jrd_paginate() {
 	global $wp_query, $wp_rewrite;
 	$wp_query->query_vars['paged'] > 1 ? $current = $wp_query->query_vars['paged'] : $current = 1;
-	
+
 	$pagination = array(
 		'base' => @add_query_arg('page','%#%'),
 		'format' => '',
@@ -366,19 +363,19 @@ function jrd_paginate() {
 		'next_text' => '',
 		'prev_text' => ''
 		);
-	
+
 	if( $wp_rewrite->using_permalinks() )
 		$pagination['base'] = user_trailingslashit( trailingslashit( remove_query_arg( 's', get_pagenum_link( 1 ) ) ) . 'page/%#%/', 'paged' );
-	
+
 	if( !empty($wp_query->query_vars['s']) )
 		$pagination['add_args'] = array( 's' => urlencode(get_query_var( 's' )) );
-	
+
 	if($wp_query->query_vars['posts_per_page'] < $wp_query->found_posts){
 
 	    echo '<div id="search-nav">';
         echo paginate_links( $pagination );
         echo '</div>';
-	
+
 	}
 }
 */
@@ -388,14 +385,14 @@ function jrd_paginate() {
 /* !SHORTCUT CODES */
 /* ========================================================================= */
 /*
-function morelink($atts, $content = null) {  
-    extract(shortcode_atts(array(  
+function morelink($atts, $content = null) {
+    extract(shortcode_atts(array(
         "link" => '',
         "target" => ''
-    ), $atts));  
-    return '<a href="'.$link.'" class="button btn-read-more" target="'.$target.'">'.$content.'</a>';  
-}  
-add_shortcode('button', 'morelink'); 
+    ), $atts));
+    return '<a href="'.$link.'" class="button btn-read-more" target="'.$target.'">'.$content.'</a>';
+}
+add_shortcode('button', 'morelink');
 */
 
 
@@ -453,6 +450,6 @@ add_filter('the_posts', 'show_future_posts');
 /* ----- Get File Extension (ex: PDF, DOC) ----- */
 /*
 function jrd_get_file_ext($file_url){
-	return pathinfo($file_url, PATHINFO_EXTENSION); 
+	return pathinfo($file_url, PATHINFO_EXTENSION);
 }
 */

@@ -64,6 +64,10 @@ define('NONCE_SALT',       'my(3[[UIDRjyDa]&%66g<gHcrn<|Y pL^< BDuHpyqw@=jSIIh?W
  * prefix. Only numbers, letters, and underscores please!
  */
 $table_prefix  = 'wp_';
+/**
+ *  If possible, change this to a prefix similar to below
+ *  $table_prefix  = 'jrd_';
+*/
 
 /**
  * WordPress Localized Language, defaults to English.
@@ -83,7 +87,7 @@ define('WPLANG', '');
  * in their development environments.
  */
 
-if(isset($_GET['debug']){
+if(isset($_GET['debug'])){
    define('WP_DEBUG', true);
 }else{
    define('WP_DEBUG', false);
