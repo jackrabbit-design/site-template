@@ -453,3 +453,14 @@ function jrd_get_file_ext($file_url){
 	return pathinfo($file_url, PATHINFO_EXTENSION);
 }
 */
+
+/* ========================================================================= */
+/* !CLEAN FUNCTION - Helpful making better hash links out of repeating fields. */
+/* ========================================================================= */
+
+function clean($string) {
+	$string = strip_tags($string);
+	$string = str_replace(' ', '-', $string); 
+
+   return preg_replace('/[^A-Za-z0-9\-]/', '', $string); 
+}
