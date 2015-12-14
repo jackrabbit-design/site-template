@@ -197,7 +197,7 @@ class tmhUtilities {
       return;
 
     // some error that is a 401 but isn't because the OAuth token and signature are incorrect
-    // TODO: this check is horrid but helps avoid requesting twice when the username and password are wrong
+    // this check is horrid but helps avoid requesting twice when the username and password are wrong
     if (stripos($tmhOAuth->response['response'], 'password') !== false)
      return;
 
