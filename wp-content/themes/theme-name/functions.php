@@ -122,6 +122,16 @@ function jrd_login() {
 }
 add_action( 'login_footer', 'jrd_login' );
 
+function jrd_login_url(){
+	return get_bloginfo('url');
+}
+add_action( 'login_headerurl', 'jrd_login_url' );
+
+function jrd_login_title(){
+	return get_bloginfo('name');
+}
+add_action( 'login_headertitle', 'jrd_login_title' );
+
 
 /* ========================================================================= */
 /* !ENQUEUE SCRIPTS */
