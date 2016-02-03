@@ -6,6 +6,9 @@ AddHandler php5-script .php
 
 # ErrorDocument 404 http://www.DOMAIN.com
 
+# Deny iframe embedding
+Header always append X-Frame-Options SAMEORIGIN
+
 # Remove eTags
 Header unset ETag  
 FileETag None  

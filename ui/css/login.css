@@ -22,14 +22,11 @@
 
     html, body{background:#f3f3f3;color:#444;}
     
-    .wp-core-ui .button-primary{color:#fff;}
-    .wp-core-ui .button-primary:hover{}
-    
-    .login label, .forgetmenot label{color:#10887E;}
-    
-    .wp-core-ui .button-primary{background:#D14124;}
+    .wp-core-ui .button-primary{color:#fff; background:#D14124; text-shadow: none;}
     .wp-core-ui .button-primary:hover{background:#D5543A;}
     
+    .login label, .forgetmenot label{color:#10887E;}
+        
     body.login #login h1 a{background:url(../images/logo.png) no-repeat;width:213px;height:124px;}
     
     .login #nav a:hover,
