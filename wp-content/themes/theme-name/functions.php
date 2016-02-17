@@ -474,3 +474,20 @@ function clean($string) {
 
    return preg_replace('/[^A-Za-z0-9\-]/', '', $string); 
 }
+
+/* ========================================================================= */
+/* !TAG WRAP - No more empty tags*/
+/* Usage:
+/* echo tag_wrap(get_field('whatever'), 'h3 class="something"');
+/* output: <h3 class="something">[contents of whatever field]</h3>
+/* ========================================================================= */
+
+function tag_wrap($f,$t){
+    if($f){
+        $r = "<{$t}>{$f}";
+        $e = explode(' ',$t);
+        $e = $e[0];
+        $r .= "</{$e}>";
+        return $r;
+    }
+}
