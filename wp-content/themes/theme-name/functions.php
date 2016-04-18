@@ -470,9 +470,9 @@ function jrd_get_file_ext($file_url){
 
 function clean($string) {
 	$string = strip_tags($string);
-	$string = str_replace(' ', '-', $string); 
+	$string = str_replace(' ', '-', $string);
 
-   return preg_replace('/[^A-Za-z0-9\-]/', '', $string); 
+   return preg_replace('/[^A-Za-z0-9\-]/', '', $string);
 }
 
 /* ========================================================================= */
@@ -491,3 +491,26 @@ function tag_wrap($f,$t){
         return $r;
     }
 }
+
+
+/* ========================================================================= */
+/* !CUSTOM CHILD SITE COLOR
+	Add a custom color strip to the header for child sites on a multisite
+	install. Helps differentiate them when jumping back and forth.
+/* ========================================================================= */
+
+/*add_action('admin_enqueue_scripts', 'my_admin_background');
+function my_admin_background() {
+    wp_enqueue_style('custom-style', get_template_directory_uri() . '/css/custom_script.css');
+	global $blog_id;
+    $color = '';
+    if ($blog_id == 1) {
+        $color = '#E1B13A';
+    } elseif ($blog_id == 2) {
+        $color = '#BA273A';
+    } elseif ($blog_id == 3) {
+        $color = '#BFD945';
+    }
+    $custom_css = "#wpadminbar { border-top: 5px solid $color }";
+    wp_add_inline_style( 'custom-style', $custom_css );
+}*/
