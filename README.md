@@ -1,6 +1,10 @@
 # site-template
 
-### Version 2.0
+### 2.1
+- Update jQuery to 3.1.0
+- Remove jQuery source map
+
+### 2.0
 - Moved files into _build and _wp folders by default
 - Added debug condition to wp-config
 - Removed emoji support from functions
