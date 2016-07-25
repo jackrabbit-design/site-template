@@ -3,6 +3,7 @@
 ### 2.1
 - Update jQuery to 3.1.0
 - Remove jQuery source map
+- Add search.php to theme
 
 ### 2.0
 - Moved files into _build and _wp folders by default
