@@ -1,4 +1,8 @@
-<!-- DEVELOPER NOTE: MAKE SURE THIS IS AFTER <meta charset="utf-8" />
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="utf-8" />
+    <!--
                                     +        
                                   ++++       
                                  ++++++      
@@ -25,3 +29,14 @@
                                   33+        
 
 -->
+    <meta name="MSSmartTagsPreventParsing" content="true" /><!--[if lte IE 9]><meta http-equiv="X-UA-Compatible" content="IE=Edge"/><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Title</title>
+	<link type="text/css" rel="stylesheet" media="all" href="../ui/css/style.css" />
+    <link type="text/plain" rel="author" href="../authors.txt" />
+    <link type="image/x-icon" rel="shortcut icon" href="../favicon.ico" />
+    <script src="../ui/js/modernizr.js"></script>
+    <script src="../ui/js/jquery.js" type="text/javascript"></script>
+    <?php wp_head(); ?>
+</head>
+<body>
