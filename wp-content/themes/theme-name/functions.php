@@ -334,6 +334,7 @@ add_theme_support('admin-bar', array('callback' => '__return_false'));
 /* !YOAST ANALYZE CUSTOM FIELDS - Make Yoast Scan Our Custom Fields */
 /* ========================================================================= */
 
+/* BROKEN AS OF WPSEO 3.0 - DON'T USE! 
 if ( is_admin() ) {
     function add_custom_to_yoast( $content ) {
         global $post;
@@ -351,6 +352,7 @@ if ( is_admin() ) {
     }
     add_filter('wpseo_pre_analysis_post_content', 'add_custom_to_yoast');
 }
+*/
 
 /* ========================================================================= */
 /* !WORDPRESS PAGINATION SCRIPT */
