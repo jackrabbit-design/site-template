@@ -2,6 +2,8 @@
 /* BE SURE TO COMMENT CODE/IDENTIFY PER PLUGIN CALL */
 /* ========================================================================= */
 
+svg4everybody();
+
 jQuery(function($){
 
 
@@ -23,19 +25,19 @@ jQuery(function($){
         // if transform3d isn't available, use top over background-position
         //$('#element').css('top', Math.ceil(n/2) + 'px');
 
-    });    
+    });
 */
 
 
 
-    /* ====== Twitter API Call ============================================= 
+    /* ====== Twitter API Call =============================================
         Note: Script Automatically adds <li> before and after template. Don't forget to setup Auth info in /twitter/index.php */
     /*
-    $('#tweets-loading').tweet({       
+    $('#tweets-loading').tweet({
         modpath: '/path/to/twitter/', // only needed if twitter folder is not in root
         username: 'jackrabbits',
         count: 1,
-		template: '<p>{text}</p><p class="tweetlink">{time}</p>' 
+		template: '<p>{text}</p><p class="tweetlink">{time}</p>'
 	});
     */
 
