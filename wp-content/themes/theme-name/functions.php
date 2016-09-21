@@ -494,6 +494,15 @@ function tag_wrap($f,$t){
     }
 }
 
+/* ========================================================================= */
+/* SVG Support */
+/* ========================================================================= */
+function cc_mime_types($mimes) {
+  $mimes['svg'] = 'image/svg+xml';
+  return $mimes;
+}
+add_filter('upload_mimes', 'cc_mime_types');
+
 
 /* ========================================================================= */
 /* !CUSTOM CHILD SITE COLOR
