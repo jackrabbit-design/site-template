@@ -6,6 +6,8 @@ $postName         = 'Newsroom'; // Name of post type
 $postNameSlug     = 'news-post'; // Name of post type
 $postNameSingular = 'News Posts'; // Singular Name
 $postNamePlural   = 'News Posts'; // Plural Name
+$postDashIcon     = 'ADD ICON NAME HERE'; // Define Dashicon | Commonly Used: News = dashicons-welcome-widgets-menus, Clients - dashicons-businessman, Team - dashicons-groups, Event - dashicons-calendar, Full List - https://developer.wordpress.org/resource/dashicons/
+
 register_post_type(
 	$postNameSlug, array(
 		'labels' => array(
@@ -21,6 +23,7 @@ register_post_type(
 		'public' => true,
 		'show_ui' => true,
 		'capability_type' => 'post',
+        'menu_icon' => $postDashIcon,
 		'hierarchical' => true,
 		'rewrite' => array('slug' => $postNameSlug),
 		'query_var' => true,
@@ -28,8 +31,8 @@ register_post_type(
 		'exclude_from_search' => false,
 		'has_archive' => false,
 		'supports' => array(
-    		'title', 
-    		'editor', 
+    		'title',
+    		'editor',
     		'author',
     		'thumbnail', //featured image, theme must also support thumbnails
     		'excerpt',
@@ -37,7 +40,7 @@ register_post_type(
     		'custom-fields',
     		'comments',
     		'revisions',
-    		'page-attributes' //template and menu order, hierarchical must be true 
+    		'page-attributes' //template and menu order, hierarchical must be true
 		)
 	)
 );
@@ -48,7 +51,7 @@ $taxonomyNameSlug     = 'news-type';
 $taxonomyNameSingular = 'News Type';
 $taxonomyNamePlural   = 'News Types';
 register_taxonomy(
-	$taxonomyNameSlug, array($postNameSlug), array( 
+	$taxonomyNameSlug, array($postNameSlug), array(
 		'hierarchical' => true, // Category or Tag functionality
 		'query_var' => true,
 		'rewrite' => array('slug' => $taxonomyNameSlug),
