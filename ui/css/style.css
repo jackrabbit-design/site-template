@@ -95,7 +95,7 @@
 /* != PLACEHOLDER ATTRIBUTE STYLES = input or textarea - placeholder="whatever" ===== */
 /*
     ::-webkit-input-placeholder { color: #aaa; }
-    :-moz-placeholder           { color: #aaa; }
+    ::-moz-placeholder          { color: #aaa; }
 */
 
 	form ul { margin: 0; }
