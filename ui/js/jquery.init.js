@@ -2,8 +2,6 @@
 /* BE SURE TO COMMENT CODE/IDENTIFY PER PLUGIN CALL */
 /* ========================================================================= */
 
-svg4everybody();
-
 jQuery(function($){
 
 
