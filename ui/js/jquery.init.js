@@ -35,8 +35,11 @@ jQuery(function($){
         modpath: '/path/to/twitter/', // only needed if twitter folder is not in root
         username: 'jackrabbits',
         count: 1,
-		template: '<p>{text}</p><p class="tweetlink">{time}</p>'
-	});
+	template: '<p>{text}</p><p class="tweetlink">{time}</p>'
+    });
+    $('.tweet_text a').each(function(){
+        $(this).attr('target','_blank');
+    });
     */
 
 });
