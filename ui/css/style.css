@@ -65,40 +65,6 @@
     ::-webkit-selection { background: #aaa; color: #fff; }
 */
 
-/* != ICON FONT DECLARATION ===== */
-
-/*    [data-icon]:before { font-family: "jack-social"; content: attr(data-icon); font-style: normal; font-weight: normal; font-variant: normal; text-transform: none !important; speak: none; display: inline-block; text-decoration: none; width: 1em; line-height: 1em; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    [class^="social-"]:before,
-    [class*=" social-"]:before { font-family: "jack-social"; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none !important; speak: none; display: inline-block; text-decoration: none; width: 1em; line-height: 1em; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    .social-email:before { content: "a"; }
-    .social-email-round:before { content: "A"; }
-    .social-facebook:before { content: "f"; }
-    .social-facebook-round:before { content: "F"; }
-    .social-flickr:before { content: "c"; }
-    .social-flickr-round:before { content: "C"; }
-    .social-googleplus:before { content: "g"; }
-    .social-googleplus-round:before { content: "G"; }
-    .social-instagram:before { content: "i"; }
-    .social-instagram-round:before { content: "I"; }
-    .social-linkedin:before { content: "l"; }
-    .social-linkedin-round:before { content: "L"; }
-    .social-pinterest:before { content: "p"; }
-    .social-pinterest-round:before { content: "P"; }
-    .social-rss:before { content: "r"; }
-    .social-rss-round:before { content: "R"; }
-    .social-sharethis:before { content: "s"; }
-    .social-sharethis-round:before { content: "S"; }
-    .social-twitter:before { content: "t"; }
-    .social-twitter-round:before { content: "T"; }
-    .social-vimeo:before { content: "v"; }
-    .social-vimeo-round:before { content: "V"; }
-    .social-yelp:before { content: "x"; }
-    .social-yelp-round:before { content: "X"; }
-    .social-youtube:before { content: "y"; }
-    .social-youtube-round:before { content: "Y"; }
-    .social-youtube2:before { content: "u"; }
-    .social-youtube2-round:before { content: "U"; }*/
-
 /* != DEFAULT WORDPRESS STYLES = USE AS NEEDED = .wp-caption = .wp-caption-dd = .wpGallery = .shutter = .shutterset ==== */
 
     .aligncenter { display: block; margin: 25px auto; }
@@ -116,11 +82,11 @@
     h6 { font: normal 24px/1.2 sans-serif; color: #f00; }
 
     .content-main ul { }
-    .content-main ul li { position: relative; padding-left: 10px; }
-    .content-main ul li:before { content: '•'; position: absolute; left: 0; }
+    .content-main ul > li { position: relative; padding-left: 10px; }
+    .content-main ul > li:before { content: '•'; position: absolute; left: 0; }
     .content-main ol { counter-reset:li;}
-    .content-main ol li { position: relative; padding-left: 20px; }
-    .content-main ol li:before { content:counter(li) '. '; counter-increment: li; position: absolute; left: 0; }
+    .content-main ol > li { position: relative; padding-left: 20px; }
+    .content-main ol > li:before { content:counter(li) '. '; counter-increment: li; position: absolute; left: 0; }
 
     .wrap { width: 1100px; box-sizing: border-box; margin: 0 auto; max-width: 100%; padding: 0 20px; }
 
