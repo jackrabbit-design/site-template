@@ -125,7 +125,7 @@ add_action( 'login_headertitle', 'jrd_login_title' );
 function enqueue_scripts() {
     wp_deregister_script( 'jquery' );
     wp_enqueue_script('modernizr', get_bloginfo('url').'/ui/js/modernizr.js', array(), null);
-    wp_enqueue_script('modernizr', get_bloginfo('url').'/ui/js/svgxuse.js', array(), null);
+    wp_enqueue_script('svgxuse', get_bloginfo('url').'/ui/js/svgxuse.js', array(), null);
     wp_enqueue_script('jquery', get_bloginfo('url').'/ui/js/jquery.js', array(), null);
     wp_enqueue_script('plugins', get_bloginfo('url').'/ui/js/jquery.plugins.js', array('jquery'), null, true);
     wp_enqueue_script('init', get_bloginfo('url').'/ui/js/jquery.init.js', array('jquery', 'plugins'), null, true);
