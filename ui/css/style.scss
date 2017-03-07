@@ -11,6 +11,11 @@
     /* != .clearfix - CLEAR ELEMENTS */ .clear{clear: both;} .clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;} .clearfix{display:inline-table;} * html .clearfix{height:1%;}/* Hides from IE-mac \*/ .clearfix{display:block;}/* Hides from IE-mac \*/ * html .clearfix{zoom:1;}/* IE6 */ *:first-child+html .clearfix{zoom:1;}/* IE7 */
     /* != .wordwrap - CONTINUE LONG URLS/WORDS ON NEXT LINE */ .wordwrap{white-space:pre;white-space:pre-wrap;white-space:pre-line;white-space:-pre-wrap;white-space:-o-pre-wrap;white-space:-moz-pre-wrap;word-wrap:break-word;}
 
+/* Background Position Reset */
+* {
+    background-position: center;
+    background-repeat: no-repeat;
+}
 /* ========================================================================= */
 /* !FONTS (@fontface generated with FontSpring Syntax formatting */
 /* ========================================================================= */
