@@ -1,7 +1,8 @@
 # site-template
 
-### 2.1.1
+### 3.0.0
 - Everything that's been done since 2.1.0
+- Remove MSSmartTagsPreventParsing meta
 
 ### 2.1.0
 - Update jQuery to 3.1.0
