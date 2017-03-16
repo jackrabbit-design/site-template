@@ -29,7 +29,7 @@ jQuery(function($){
 
 
     /* ====== Twitter API Call =============================================
-        Note: Script Automatically adds <li> before and after template. Don't forget to setup Auth info in /twitter/index.php */
+        This script automatically adds <li> before and after template. Don't forget to setup Auth info in /twitter/index.php */
     /*
     $('#tweets-loading').tweet({
         modpath: '/path/to/twitter/', // only needed if twitter folder is not in root
