@@ -241,27 +241,6 @@ add_filter('excerpt_more', 'new_excerpt_more');
 
 
 /* ========================================================================= */
-/*  EXCERPT LIMITER */
-/* ========================================================================= */
-
-function limit_excerpt($string, $word_limit) {
-	$words = explode(' ', $string);
-	return implode(' ', array_slice($words, 0, $word_limit));
-}
-
-/* Example Usage:
-
-Solution 1:
-<?php $excerpt = limit_excerpt(get_the_excerpt(), '50'); ?>
-<?php echo $excerpt . '...' ?>
-
-Solution 2:
-<?php echo limit_excerpt(get_the_excerpt(), '50'); ?>
-
-*/
-
-
-/* ========================================================================= */
 /*  Browser detection body_class() output */
 /* ========================================================================= */
 
