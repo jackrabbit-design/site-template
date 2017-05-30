@@ -334,7 +334,7 @@ function printr($var){ echo '<pre>'; print_r($var); echo '</pre>'; };
 /* !REMOVE ADMIN TOOLBAR */
 /* ========================================================================= */
 
-add_filter('show_admin_bar', '__return_false');
+// add_filter('show_admin_bar', '__return_false');
 
 
 /* ========================================================================= */
