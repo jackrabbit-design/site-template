@@ -405,7 +405,7 @@ function my_mce_before_init( $settings ) {
 
 
 /* ========================================================================= */
-/* !WORDPERSS CUSTOM THEME FUNCTIONS */
+/* !WORDPERSS CUSTOM THEME FUNCTIONS - Please use ACF and Meta Queries */
 /* ========================================================================= */
 
 /* ----- SHOW FUTURE POSTS FOR EVENT CUSTOM POST TYPES ----- */
@@ -434,6 +434,7 @@ function jrd_get_file_ext($file_url){
 
 function clean($string) {
     $string = strip_tags($string);
+    $string = strtolower($string);
     $string = str_replace(' ', '-', $string);
     return preg_replace('/[^A-Za-z0-9\-]/', '', $string);
 }
