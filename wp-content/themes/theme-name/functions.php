@@ -308,6 +308,28 @@ add_filter('post_mime_types', 'modify_post_mime_types');
 
 function printr($var){ echo '<pre>'; print_r($var); echo '</pre>'; };
 
+/* ========================================================================= */
+/*  EXCERPT LIMITER */
+/* ========================================================================= */
+
+function limit_excerpt($string, $word_limit) {
+    $words = explode(' ', $string);
+    return implode(' ', array_slice($words, 0, $word_limit));
+}
+
+/* Example Usage:
+
+Solution 1:
+<?php $excerpt = limit_excerpt(get_the_excerpt(), '50'); ?>
+<?php echo $excerpt . '...' ?>
+
+Solution 2:
+<?php echo limit_excerpt(get_the_excerpt(), '50'); ?>
+
+*/
+
+
+/*
 
 /* ========================================================================= */
 /* !REMOVE ADMIN TOOLBAR */
