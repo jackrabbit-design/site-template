@@ -143,6 +143,13 @@
         &:hover {  }
     }
 
+/* != MS input field treatments ====== */
+select::-ms-expand { display: none; }
+textarea { overflow: auto; }
+
+/* != Firefox input field treatment ===== */
+select { -moz-appearance: none; }
+
 
 /* ========================================================================= */
 /* !MEDIA QUERIES */
