@@ -521,3 +521,32 @@ function my_admin_background() {
     $custom_css = "#wpadminbar { border-top: 5px solid $color }";
     wp_add_inline_style( 'custom-style', $custom_css );
 }*/
+
+/* ========================================================================= */
+/* !RELEVANSSI Add visible custom fields to the_excerpt when searching.
+/* ========================================================================= */
+/*
+add_filter('relevanssi_excerpt_content', 'custom_fields_to_excerpts', 10, 3);
+function custom_fields_to_excerpts($content, $post, $query) {
+
+        $custom_fields = get_post_custom_keys($post->ID);
+        $remove_underscore_fields = true;
+
+        if (is_array($custom_fields)) {
+            $custom_fields = array_unique($custom_fields);
+            foreach ($custom_fields as $field) {
+                if ($remove_underscore_fields) {
+                    if (substr($field, 0, 1) == '_') continue;
+                }
+                $values = get_post_meta($post->ID, $field, false);
+                if ("" == $values) continue;
+                foreach ($values as $value) {
+                    if ( !is_array ( $value ) ) {
+                        $content .= " " . $value;
+                    }
+                }
+            }
+        }
+    return $content;
+}
+*/
