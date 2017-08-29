@@ -28,7 +28,7 @@ html,body,div,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite
     [class*=" social-"]:before { font-family: "jack-social"; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none !important; speak: none; display: inline-block; text-decoration: none; width: 1em; line-height: 1em; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     .social-email:before { content: "\61"; }
     .social-email-rounded:before { content: "\41"; }
-    .social-facebook:before { content: "\66"; } 
+    .social-facebook:before { content: "\66"; }
     .social-facebook-rounded:before { content: "\46"; }
     .social-flickr:before { content: "\63"; }
     .social-flickr-rounded:before { content: "\43"; }
@@ -132,8 +132,6 @@ h6 {
 
 .wrap {
   width: 1180px;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
   margin: 0 auto;
   max-width: 100%;
   padding: 0 20px; }

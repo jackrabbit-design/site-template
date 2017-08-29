@@ -27,7 +27,7 @@
     [class*=" social-"]:before { font-family: "jack-social"; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none !important; speak: none; display: inline-block; text-decoration: none; width: 1em; line-height: 1em; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     .social-email:before { content: "\61"; }
     .social-email-rounded:before { content: "\41"; }
-    .social-facebook:before { content: "\66"; } 
+    .social-facebook:before { content: "\66"; }
     .social-facebook-rounded:before { content: "\46"; }
     .social-flickr:before { content: "\63"; }
     .social-flickr-rounded:before { content: "\43"; }
@@ -76,7 +76,7 @@
         @if ($vertical) {
             left: 50%;
             top: 50%;
-            transform: translate(-50%,-50%);    
+            transform: translate(-50%,-50%);
         } @else if ($left) {
             left: 0;
             top: 50%;
@@ -125,7 +125,7 @@
     .content-main ol > li { position: relative; padding-left: 20px; }
     .content-main ol > li:before { content:counter(li) '. '; counter-increment: li; position: absolute; left: 0; }
 
-    .wrap { width: 1180px; box-sizing: border-box; margin: 0 auto; max-width: 100%; padding: 0 20px; }
+    .wrap { width: 1180px; margin: 0 auto; max-width: 100%; padding: 0 20px; }
 
 
 
@@ -153,7 +153,7 @@
     /* != Select menus with a .select-menu container or gform-select-menu applied in gravity forms ===== */
     .select-menu,                       .gform-select-menu div { position: relative; width: 260px; border: 1px solid $gray-light; border-radius: 50px; box-shadow: 0 2px 3px rgba(0,0,0,.1); vertical-align: middle; display: inline-block; overflow: hidden; transition: .2s; margin: 0 10px 0 0; }
     .select-menu:after,                 .gform-select-menu div:after { transition: .2s; content: ''; position: absolute; right: 14px; top: calc(50% - 8px); z-index: 1; pointer-events: none; @include size(16px); background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M8%209.293l-3.56-3.56c-.196-.196-.513-.196-.708%200-.195.194-.195.51%200%20.706l3.829%203.829c.12.12.283.157.439.13.154.027.32-.01.44-.13l3.828-3.829c.195-.195.195-.512%200-.707-.195-.195-.512-.195-.708%200L8%209.292zM0%208c0%204.418%203.58%208%208%208s8-3.582%208-8-3.582-8-8-8-8%203.582-8%208zm1%200c0-3.866%203.134-7%207-7s7%203.134%207%207-3.134%207-7%207-7-3.134-7-7z%22%20fill%3D%22%23b7b7b7%22%2F%3E%3C%2Fsvg%3E'); }
-    .select-menu:hover,                 .gform-select-menu div:hover { border-color: darken($gray-light, 10%); 
+    .select-menu:hover,                 .gform-select-menu div:hover { border-color: darken($gray-light, 10%);
         &:after { background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M8%209.293l-3.56-3.56c-.196-.196-.513-.196-.708%200-.195.194-.195.51%200%20.706l3.829%203.829c.12.12.283.157.439.13.154.027.32-.01.44-.13l3.828-3.829c.195-.195.195-.512%200-.707-.195-.195-.512-.195-.708%200L8%209.292zM0%208c0%204.418%203.58%208%208%208s8-3.582%208-8-3.582-8-8-8-8%203.582-8%208zm1%200c0-3.866%203.134-7%207-7s7%203.134%207%207-3.134%207-7%207-7-3.134-7-7z%22%20fill%3D%22%2300704a%22%2F%3E%3C%2Fsvg%3E'); }
     }
     .select-menu select,                .gform-select-menu div select { padding: 0 10px 0 20px; cursor: pointer; color: lighten($gray, 10%); text-transform: uppercase; font-size: 12px; letter-spacing:.2em; font-weight: 500;     background-color: #fff; width: 120%; height: 40px; line-height: 40px; border: 0; border-radius: 0; -webkit-appearance: none; -moz-appearance: none; -ms-appearance: none; appearance: none; text-indent: 0.01px; text-overflow: ''; position: relaive; z-index: 1;  }
