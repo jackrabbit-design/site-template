@@ -120,7 +120,7 @@
 
     .content-main ul:not(.gform_fields) { }
     .content-main ul:not(.gform_fields) > li { position: relative; padding-left: 10px; }
-    .content-main ul:not(.gform_fields) > li:before { content: '•'; position: absolute; left: 0; }
+    .content-main ul:not(.gform_fields) > li:before { content: '\2022'; position: absolute; left: 0; }
     .content-main ol { counter-reset:li;}
     .content-main ol > li { position: relative; padding-left: 20px; }
     .content-main ol > li:before { content:counter(li) '. '; counter-increment: li; position: absolute; left: 0; }
@@ -197,7 +197,7 @@
             appearance: none;
             text-indent: 0.01px;
             text-overflow: '';
-            position: relaive;
+            position: relative;
             z-index: 1;
         }
         select::-ms-expand {

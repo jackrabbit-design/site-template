@@ -113,7 +113,7 @@ h6 {
   padding-left: 10px; }
 
 .content-main ul:not(.gform_fields) > li:before {
-  content: '•';
+  content: '\2022';
   position: absolute;
   left: 0; }
 
