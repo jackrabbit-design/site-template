@@ -244,7 +244,7 @@ add_filter('excerpt_more', 'new_excerpt_more');
 /*  Browser detection body_class() output */
 /* ========================================================================= */
 
-function alx_browser_body_class( $classes ) {
+function body_class_adjustments( $classes ) {
     global $is_lynx, $is_gecko, $is_IE, $is_opera, $is_NS4, $is_safari, $is_chrome, $is_iphone;
 
     if($is_lynx) $classes[] = 'lynx';
@@ -278,7 +278,7 @@ function alx_browser_body_class( $classes ) {
 
     return $classes;
 }
-add_filter( 'body_class', 'alx_browser_body_class' );
+add_filter( 'body_class', 'body_class_adjustments' );
 
 
 /* ========================================================================= */
