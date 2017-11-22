@@ -118,12 +118,16 @@
     h5 { font: normal 24px/1.2 sans-serif; color: #f00; }
     h6 { font: normal 24px/1.2 sans-serif; color: #f00; }
 
-    .content-main ul:not(.gform_fields) { }
-    .content-main ul:not(.gform_fields) > li { position: relative; padding-left: 10px; }
-    .content-main ul:not(.gform_fields) > li:before { content: '\2022'; position: absolute; left: 0; }
-    .content-main ol { counter-reset:li;}
-    .content-main ol > li { position: relative; padding-left: 20px; }
-    .content-main ol > li:before { content:counter(li) '. '; counter-increment: li; position: absolute; left: 0; }
+    .content-main ul:not([class*="gf"]) {
+        > li { position: relative; padding-left: 10px;
+            &:before { content: '\2022'; position: absolute; left: 0; }
+        }
+    }
+    .content-main ol { counter-reset:li;
+        > li { position: relative; padding-left: 20px;
+            &:before { content:counter(li) '. '; counter-increment: li; position: absolute; left: 0; }
+        }
+    }
 
     .wrap { width: 1180px; margin: 0 auto; max-width: 100%; padding: 0 20px; }
 

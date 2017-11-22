@@ -108,11 +108,11 @@ h6 {
   font: normal 24px/1.2 sans-serif;
   color: #f00; }
 
-.content-main ul:not(.gform_fields) > li {
+.content-main ul:not([class*="gf"]) > li {
   position: relative;
   padding-left: 10px; }
 
-.content-main ul:not(.gform_fields) > li:before {
+.content-main ul:not([class*="gf"]) > li:before {
   content: '\2022';
   position: absolute;
   left: 0; }
