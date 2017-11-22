@@ -85,27 +85,27 @@ html,body,div,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite
 
 /* != LAYOUT STYLES ===== */
 h1 {
-  font: normal 24px/1.2 sans-serif;
+  font: 24px/1.2 sans-serif;
   color: #f00; }
 
 h2 {
-  font: normal 24px/1.2 sans-serif;
+  font: 24px/1.2 sans-serif;
   color: #f00; }
 
 h3 {
-  font: normal 24px/1.2 sans-serif;
+  font: 24px/1.2 sans-serif;
   color: #f00; }
 
 h4 {
-  font: normal 24px/1.2 sans-serif;
+  font: 24px/1.2 sans-serif;
   color: #f00; }
 
 h5 {
-  font: normal 24px/1.2 sans-serif;
+  font: 24px/1.2 sans-serif;
   color: #f00; }
 
 h6 {
-  font: normal 24px/1.2 sans-serif;
+  font: 24px/1.2 sans-serif;
   color: #f00; }
 
 .content-main ul:not([class*="gf"]) > li {
