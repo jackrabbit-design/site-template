@@ -4,7 +4,7 @@
 // Sample Register Post
 $postName         = 'Newsroom'; // Name of post type
 $postNameSlug     = 'news-post'; // Name of post type
-$postNameSingular = 'News Posts'; // Singular Name
+$postNameSingular = 'News Post'; // Singular Name
 $postNamePlural   = 'News Posts'; // Plural Name
 $postDashIcon     = 'dashicons-admin-post'; // Define Dashicon | Commonly Used: News = dashicons-welcome-widgets-menus, Clients - dashicons-businessman, Team - dashicons-groups, Event - dashicons-calendar, Full List - https://developer.wordpress.org/resource/dashicons/
 
