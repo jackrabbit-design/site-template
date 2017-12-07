@@ -1,0 +1,48 @@
+#tinymce h1,
+.mce-container-body .mce-menu-item:nth-child(2) .mce-text {
+    font: 700 50px/1.32 sans-serif;
+    color: #000;
+}
+#tinymce h2,
+.mce-container-body .mce-menu-item:nth-child(3) .mce-text {
+    font: normal 36px/1.33 sans-serif;
+    color: #000;
+}
+#tinymce h3,
+.mce-container-body .mce-menu-item:nth-child(4) .mce-text {
+    font: 600 18px/1.27 sans-serif;
+    color: #000;
+}
+#tinymce h4,
+.mce-container-body .mce-menu-item:nth-child(5) .mce-text {
+    font: normal 18px/1.1 sans-serif;
+    color: #000;
+}
+#tinymce h5,
+.mce-container-body .mce-menu-item:nth-child(6) .mce-text {
+    font: normal 14px/1.35 Arial, sans-serif;
+    color: #000;
+}
+#tinymce h6,
+.mce-container-body .mce-menu-item:nth-child(7) .mce-text {
+    font: normal 14px/1.35 Arial, sans-serif;
+    color: #000;
+}
+#tinymce p,
+.mce-container-body .mce-menu-item:nth-child(1) .mce-text {
+    font-size:14px;
+    line-height:1.36;
+    color:#000;
+    font-family:Arial,Helvetica,"Helvetica Neue",sans-serif;
+}
+#tinymce a {
+    color:#ED2024;
+    text-decoration:underline;
+}
+
+#tinymce h2 strong,
+#tinymce h3 strong,
+#tinymce h4 strong,
+#tinymce h5 strong {
+    font-weight: inherit;
+}
