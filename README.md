@@ -1,5 +1,7 @@
 # site-template
 
+Original Developer: *Your Name*
+
 ### 3.0.0
 - Everything that's been done since 2.1.0
 - Remove MSSmartTagsPreventParsing meta
