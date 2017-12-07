@@ -1,6 +1,6 @@
 # site-template
 
-Original Developer: *Your Name*
+Original Developer: _Your Name_
 
 ### 3.0.0
 - Everything that's been done since 2.1.0
