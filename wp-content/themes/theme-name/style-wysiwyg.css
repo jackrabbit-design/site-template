@@ -1,3 +1,5 @@
+@import url("/ui/css/parts/fonts.css");
+
 #tinymce h1,
 .mce-container-body .mce-menu-item:nth-child(2) .mce-text {
     font: 700 50px/1.32 sans-serif;

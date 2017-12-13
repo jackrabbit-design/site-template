@@ -1,0 +1,44 @@
+/* ========================================================================= */
+/* !FONTS (@fontface generated with FontSpring Syntax formatting */
+/* ========================================================================= */
+
+/* != JACK SOCIAL ICON FONT DECLARATION ===== */
+/*
+    @font-face { font-family: "jack-social";
+        src:url("../fonts/JackSocial/jack-social.eot");
+        src:url("../fonts/JackSocial/jack-social.eot?#iefix") format("embedded-opentype"), url("../fonts/JackSocial/jack-social.ttf") format("truetype"), url("../fonts/JackSocial/jack-social.woff") format("woff"), url("../fonts/JackSocial/jack-social.svg#jack-social") format("svg");
+        font-weight: normal; font-style: normal;
+    }
+
+    [data-icon]:before { font-family: "jack-social"; content: attr(data-icon); font-style: normal; font-weight: normal; font-variant: normal; text-transform: none !important; speak: none; display: inline-block; text-decoration: none; width: 1em; line-height: 1em; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    [class^="social-"]:before,
+    [class*=" social-"]:before { font-family: "jack-social"; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none !important; speak: none; display: inline-block; text-decoration: none; width: 1em; line-height: 1em; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    .social-email:before { content: "\61"; }
+    .social-email-rounded:before { content: "\41"; }
+    .social-facebook:before { content: "\66"; }
+    .social-facebook-rounded:before { content: "\46"; }
+    .social-flickr:before { content: "\63"; }
+    .social-flickr-rounded:before { content: "\43"; }
+    .social-googleplus:before { content: "\67"; }
+    .social-googleplus-rounded:before { content: "\47"; }
+    .social-issuu:before { content: "\75"; }
+    .social-issuu-rounded:before { content: "\55"; }
+    .social-linkedin:before { content: "\6c"; }
+    .social-linkedin-rounded:before { content: "\4c"; }
+    .social-pinterest:before { content: "\70"; }
+    .social-pinterest-rounded:before { content: "\50"; }
+    .social-rss:before { content: "\72"; }
+    .social-rss-rounded:before { content: "\52"; }
+    .social-sharethis:before { content: "\73"; }
+    .social-sharethis-rounded:before { content: "\53"; }
+    .social-twitter:before { content: "\74"; }
+    .social-twitter-rounded:before { content: "\54"; }
+    .social-vimeo:before { content: "\76"; }
+    .social-vimeo-rounded:before { content: "\56"; }
+    .social-yelp:before { content: "\78"; }
+    .social-yelp-rounded:before { content: "\58"; }
+    .social-youtube:before { content: "\79"; }
+    .social-youtube-rounded:before { content: "\59"; }
+    .social-instagram:before { content: "\69"; }
+    .social-instagram-rounded:before { content: "\49"; }
+*/
