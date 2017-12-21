@@ -168,7 +168,7 @@ add_filter("gform_submit_button", "form_submit_button", 10, 2);
 function form_submit_button($button, $form){
     $button_array = $form["button"];
     $button_text = $button_array["text"];
-    return "<button type='submit' class='submit' id='gform_submit_button_{" . $form["id"] . "}'><span>$button_text</span></button>";
+    return "<button type='submit' class='submit btn' id='gform_submit_button_{" . $form["id"] . "}'><span>$button_text</span></button>";
 }
 
 
