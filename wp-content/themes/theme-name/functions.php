@@ -501,6 +501,16 @@ add_filter('upload_mimes', 'cc_mime_types');
 
 
 /* ========================================================================= */
+/* Move Yoast to bottom 
+   Shove yoast to the bottom of the edit page where it belongs. */
+/* ========================================================================= */
+function yoasttobottom() {
+    return 'low';
+}
+add_filter( 'wpseo_metabox_prio', 'yoasttobottom');
+
+
+/* ========================================================================= */
 /* Add Classes to next_posts_link and prev_posts_link. */
 /* ========================================================================= */
 /*
