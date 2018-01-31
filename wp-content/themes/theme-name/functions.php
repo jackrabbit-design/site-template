@@ -572,3 +572,41 @@ function custom_fields_to_excerpts($content, $post, $query) {
     return $content;
 }
 */
+
+/* ========================================================================= */
+/* !jrd_img  Printes out all the things.
+/* ========================================================================= */
+/*
+/*
+    $field          = field name
+    $size           = size of image from image array; leave blank to retrieve full url
+    $sub            = if true it will use get_sub_field();
+    $classes        = string of class/es; default blank 
+    $id             = string of an id; default blank
+    $data           = array of data attributes. 
+
+    echo jrd_img('img', 'large', false, '', 'this')
+*/
+
+function jrd_img( $field, $size, $sub = false, $classes, $id, $data = array()) {
+    $img_src = ($sub == true) ? get_sub_field( $field ) : get_field( $field );
+    if($img_src) {
+        $my_classes = ($classes != '') ? ' class="'.$classes.'" ' : ' ';
+        $my_id = ($id != '') ? ' id="'.$id.'" ' : ' ';
+        //fields from images
+        $img_url = ($size != '') ? $img_src['sizes'][$size] : $img_src['url'];
+        $img_alt = $img_src['alt'];
+        $img_title = $img_src['title'];
+        //data attributes
+        $my_data = '';
+        if($data) {
+            foreach($data as $key => $value) {
+                $my_data .= 'data-'.$key.'="'.$value.'" ';
+            }
+        }
+
+        $img = '<img'.$my_id.$my_classes.'src="'.$img_url.'" alt="'.img_alt.'" '.$my_data.'/>';
+
+        return $img; 
+    }
+}
