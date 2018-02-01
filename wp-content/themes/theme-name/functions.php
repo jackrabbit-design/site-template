@@ -574,7 +574,7 @@ function custom_fields_to_excerpts($content, $post, $query) {
 */
 
 /* ========================================================================= */
-/* !jrd_img  Printes out all the things.
+/* !jrd_img  Prints out all the things.
 /* ========================================================================= */
 /*
 /*
