@@ -25,6 +25,7 @@ register_post_type(
 		'capability_type' => 'post',
         'menu_icon' => $postDashIcon,
 		'hierarchical' => true,
+		'rest_api' => true,
 		'rewrite' => array('slug' => $postNameSlug),
 		'query_var' => true,
 		'show_in_nav_menus' => true,

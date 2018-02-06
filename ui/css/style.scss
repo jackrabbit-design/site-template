@@ -175,9 +175,37 @@
         }
     }
 
+/* ========================================================================= */
+/* ELEMENT BASED CSS STRUTURE */
+/* ========================================================================= */
+/*
+    header {
+        rules for header desktop and some defaults
+    }
+
+    @include break(1100){
+        header {
+            rules of breakpoint
+        }
+    }
+
+    @include break(768){
+        header {
+            rules of other breakpoint
+        }
+    }
+
+    @media screen and (max-width: 480px){
+        header {
+            rules of other breakpoint
+        }
+    }
+
+*/
+
 
 /* ========================================================================= */
-/* !MEDIA QUERIES */
+/* MEDIA QUERIES */
 /* ========================================================================= */
 
 /* @media screen and (max-width: XXXpx) {  } */
