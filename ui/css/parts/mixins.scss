@@ -29,3 +29,38 @@
             transform: translate(0, -50%);
         }
     }
+
+    // Breakpoint Mixin
+    @mixin break($p, $b: 'max-width'){
+        @media screen and ( $b: $p + px ){
+            @content;
+        }
+    }
+
+/* 
+    // Use Case: $b (second) variable is optional and defaults to 'max-width'
+
+    @include break(1100){
+        h1{
+            background: red;
+        }
+    }
+
+    // Output
+    @media screen and (max-width: 1100px) { 
+        h1 { background: red; }
+    }
+
+    // Also, if you want to specify the 2nd variable for break type (i.e., min-height)
+
+    @include break(1100, 'min-height'){
+        h1 {
+            background:red;
+        }
+    }
+
+    // Output
+    @media screen and (min-height: 1100px) { 
+        h1 { background: red; }
+    }
+*/

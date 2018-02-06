@@ -1,36 +1,79 @@
-    @import 'parts/reset';
-    @import 'parts/fonts';
-    @import 'parts/mixins';
+@import 'parts/reset';
+@import 'parts/fonts';
+@import 'parts/mixins';
 
+/* Add Vendor Stylesheets here */ 
 
 /* ========================================================================= */
 /* !STYLES */
 /* ========================================================================= */
 
-	html, body {  }
+	html, body { 
+    
+    }
 
 /* != SELECTION STYLES (Leaving these blank will show no indication of text selection) ===== */
 /*
-    ::selection         { background: #aaa; color: #fff; }
-    ::-moz-selection    { background: #aaa; color: #fff; }
-    ::-webkit-selection { background: #aaa; color: #fff; }
+    ::selection         { 
+        background: #aaa; 
+        color: #fff;
+    }
+    ::-moz-selection    { 
+        background: #aaa; 
+        color: #fff;
+    }
+    ::-webkit-selection { 
+        background: #aaa; 
+        color: #fff;
+    }
 */
 
 /* != DEFAULT WORDPRESS STYLES = USE AS NEEDED = .wp-caption = .wp-caption-dd = .wpGallery = .shutter = .shutterset ==== */
 
-    .aligncenter { display: block; margin: 25px auto; }
-    .alignleft { float: left; margin: 0 25px 25px 0; }
-    .alignright { float: right; margin: 0 0 25px 25px; }
-    .alignnone { display: inline-block; }
+    .aligncenter { 
+        display: block; 
+        margin: 25px auto;
+    }
+
+    .alignleft { 
+        float: left; 
+        margin: 0 25px 25px 0; 
+    }
+
+    .alignright { 
+        float: right; 
+        margin: 0 0 25px 25px; 
+    }
+
+    .alignnone { 
+        display: inline-block;
+    }
 
 /* != LAYOUT STYLES ===== */
 
-    h1 { font: normal 24px/1.2 sans-serif; color: #f00; }
-    h2 { font: normal 24px/1.2 sans-serif; color: #f00; }
-    h3 { font: normal 24px/1.2 sans-serif; color: #f00; }
-    h4 { font: normal 24px/1.2 sans-serif; color: #f00; }
-    h5 { font: normal 24px/1.2 sans-serif; color: #f00; }
-    h6 { font: normal 24px/1.2 sans-serif; color: #f00; }
+    h1 { 
+        
+    }
+    
+    h2 { 
+
+    }
+    
+    h3 { 
+
+    }
+    
+    h4 { 
+
+    }
+    
+    h5 {
+    
+    }
+    
+    h6 {
+
+    }
 
     .content-main ul:not([class*="gf"]) {
         > li { position: relative; padding-left: 10px;
@@ -43,27 +86,57 @@
         }
     }
 
-    .wrap { width: 1180px; margin: 0 auto; max-width: 100%; padding: 0 20px; }
+    .wrap { 
+        width: 1180px; 
+        margin: 0 auto; 
+        max-width: 100%; 
+        padding: 0 20px;
+    }
+
+    /*
+
+    .wrap { 
+        max-width: 1180px; 
+        width: 100%;
+        margin: 0 auto; 
+        padding: 0 20px;
+    }
+
+    */
 
 
 
 /* != PLACEHOLDER ATTRIBUTE STYLES = input or textarea - placeholder="whatever" ===== */
 /*
-    ::-webkit-input-placeholder { color: #aaa; }
-    ::-moz-placeholder          { color: #aaa; }
+    ::-webkit-input-placeholder { 
+        color: #aaa;
+    }
+
+    ::-moz-placeholder {
+        color: #aaa;
+    }
 */
 
     input {
-        &[type=text], &[type=password], &[type=url], &[type=email] {  }
+        &[type=text], 
+        &[type=password], 
+        &[type=url], 
+        &[type=email] { 
+
+        }
     }
 
-    input[type=submit], button { display: inline-block; cursor: pointer;
-        &:hover {  }
+    input[type=submit], button { 
+        display: inline-block; 
+        cursor: pointer;
+        &:hover { 
+        }
     }
 
 
     /* != Select menus with a .select-menu container or gform-select-menu applied in gravity forms ===== */
-    .select-menu, .gform-select-menu div {
+    .select-menu, 
+    .gform-select-menu div {
         position: relative;
         width: 260px;
         border: 1px solid #f00;

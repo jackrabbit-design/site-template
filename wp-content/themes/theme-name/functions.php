@@ -1,15 +1,16 @@
 <?php
 /* ========================================================================= */
-/* !WORDPRESS EXTERNAL FILES     */
+/* WORDPRESS EXTERNAL FILES     */
 /* ========================================================================= */
 
 include_once 'functions/functions-post-types.php';
+include_once 'functions/functions-helpers.php';
 //include_once 'functions/functions-widgets.php';
 //include_once 'functions/functions-comments.php';
 
 
 /* ========================================================================= */
-/* !WORDPRESS SECURITY */
+/* WORDPRESS SECURITY */
 /* ========================================================================= */
 
 remove_action('wp_head','feed_links_extra', 3); // Display the links to the extra feeds such as category feeds
@@ -26,7 +27,7 @@ remove_action('wp_head','wp_generator'); // Display the XHTML generator that is 
 add_filter('login_errors','__return_null');
 
 /* ========================================================================= */
-/* !WORDPRESS CUSTOMIZATION & SETUP */
+/* WORDPRESS CUSTOMIZATION & SETUP */
 /* ========================================================================= */
 
 /* Post Thumbnail Sizes */
@@ -45,7 +46,7 @@ if ( function_exists( 'register_nav_menus' ) ) {
 }
 
 /* ========================================================================= */
-/* !DISABLE EMOJIS */
+/* DISABLE EMOJIS */
 /* ========================================================================= */
 
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
@@ -53,46 +54,44 @@ remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
 /* Globally Hide Admin Meta Boxes */
 function hide_meta_boxes() {
-     remove_meta_box('postcustom','post','normal'); // custom fields post
-     remove_meta_box('postcustom','page','normal'); // custom fields page
-     //remove_meta_box('commentstatusdiv','post','normal'); // discussion post
-     remove_meta_box('commentstatusdiv','page','normal'); // discussion page
-     //remove_meta_box('commentsdiv','post','normal'); // comments post
-     //remove_meta_box('commentsdiv','page','normal'); // comments page
-     //remove_meta_box('authordiv','post','normal'); // author post
-     remove_meta_box('authordiv','page','normal'); // author page
-     //remove_meta_box('revisionsdiv','post','normal'); // revisions post
-     //remove_meta_box('revisionsdiv','page','normal'); // revisions page
-     //remove_meta_box('postimagediv','post','normal'); // featured image post
-     remove_meta_box('postimagediv','page','normal'); // featured image page
-     //remove_meta_box('pageparentdiv','page','normal'); // page attributes
-     //remove_meta_box('tagsdiv-post-tag','post','normal'); // post tags
-     //remove_meta_box('categorydiv','post','normal'); // post categories
-     //remove_meta_box('postexcerpt','post','normal'); // post excerpt
-     remove_meta_box('trackbacksdiv','post','normal'); // track backs
+    remove_meta_box('postcustom','post','normal');                  // custom fields post
+    remove_meta_box('postcustom','page','normal');                  // custom fields page
+    remove_meta_box('commentstatusdiv','page','normal');            // discussion page
+    remove_meta_box('authordiv','page','normal');                   // author page
+    remove_meta_box('postimagediv','page','normal');                // featured image page
+    remove_meta_box('trackbacksdiv','post','normal');               // track backs
+    //remove_meta_box('pageparentdiv','page','normal');             // page attributes
+    //remove_meta_box('tagsdiv-post-tag','post','normal');          // post tags
+    //remove_meta_box('categorydiv','post','normal');               // post categories
+    //remove_meta_box('postexcerpt','post','normal');               // post excerpt
+    //remove_meta_box('revisionsdiv','post','normal');              // revisions post
+    //remove_meta_box('revisionsdiv','page','normal');              // revisions page
+    //remove_meta_box('postimagediv','post','normal');              // featured image post
+    //remove_meta_box('commentsdiv','post','normal');               // comments post
+    //remove_meta_box('commentsdiv','page','normal');               // comments page
+    //remove_meta_box('authordiv','post','normal');                 // author post
+    //remove_meta_box('commentstatusdiv','post','normal');          // discussion post
 }
 add_action('admin_init', 'hide_meta_boxes');
 
 
 /* Hide Wordpress Default Dashboard Widgets */
 function remove_dashboard_widgets() {
-
     global $wp_meta_boxes;
-
     unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']);
     unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_incoming_links']);
-    //unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now']);
     unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_plugins']);
     unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_recent_drafts']);
     unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_recent_comments']);
     unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']);
     unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_secondary']);
+    //unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now']);
 }
 add_action('wp_dashboard_setup', 'remove_dashboard_widgets' );
 
 
 /* ========================================================================= */
-/* !CUSTOM LOGIN STYLES */
+/* CUSTOM LOGIN STYLES */
 /* ========================================================================= */
 
 function my_login_stylesheet() {
@@ -119,7 +118,7 @@ add_action( 'login_headertitle', 'jrd_login_title' );
 
 
 /* ========================================================================= */
-/* !ENQUEUE SCRIPTS */
+/* ENQUEUE SCRIPTS */
 /* ========================================================================= */
 
 function enqueue_scripts() {
@@ -134,7 +133,7 @@ add_action('wp_enqueue_scripts', 'enqueue_scripts');
 
 
 /* ========================================================================= */
-/* !ENQUEUE STYLES */
+/* ENQUEUE STYLES */
 /* ========================================================================= */
 
 function enqueue_styles() {
@@ -161,7 +160,7 @@ add_action('admin_head', 'my_custom_fonts');
 
 
 /* ========================================================================= */
-/* !GRAVITY FORM CUSTOMIZATIONS */
+/* GRAVITY FORM CUSTOMIZATIONS */
 /* ========================================================================= */
 
 add_filter("gform_submit_button", "form_submit_button", 10, 2);
@@ -173,7 +172,7 @@ function form_submit_button($button, $form){
 
 
 /* ========================================================================= */
-/* !ADD ACF5 OPTIONS PAGE - more args available at http://www.advancedcustomfields.com/resources/acf_add_options_page/  */
+/* ADD ACF5 OPTIONS PAGE - more args available at http://www.advancedcustomfields.com/resources/acf_add_options_page/  */
 /* ========================================================================= */
 
 if( function_exists('acf_add_options_page') ) {
@@ -182,64 +181,6 @@ if( function_exists('acf_add_options_page') ) {
         'menu_slug' => 'options'
     ));
 }
-
-/* ========================================================================= */
-/* !WORDPRESS SUBPAGE SIDEBAR MENU */
-/* ========================================================================= */
-
-function jrd_tertiary_menu( $args ){
-    include_once 'functions/class-walker-tertiary-menu.php';
-    $uri_parts = explode('/', $_SERVER['REQUEST_URI']);
-    $args['ancestor'] = get_page_by_path($uri_parts[1]);
-    $args['echo'] = false;
-    $args['walker'] = new Walker_Tertiary_Menu();
-    return wp_nav_menu($args);
-}
-
-
-function check_is_subpage() {
-    global $post;                                 // load details about this page
-    if ( is_page() && $post->post_parent ) {      // test to see if the page has a parent
-           return $post->post_parent;             // return the ID of the parent post
-    } else {                                      // there is no parent so...
-           return false;                          // ...the answer to the question is false
-    }
-}
-
-
-/* HOW TO USE
-   Plug this code below into your submenu sidebar and set the theme location to use the menu you want to reference. This code checks whether the page is a subpage.
-   If page is a subpage it echos the children menu items of it. If page is not it then echos the top level pages of the menu.
-
-<?php if(check_is_subpage() == false){ ?>
-    <h3><?php bloginfo('name'); ?></h3>
-    <div class="submenu-widget">
-        <?php wp_nav_menu(array('theme_location' => 'main-menu', 'container' => '', 'menu_class' => 'menu', 'menu_id' => '', 'depth' => 2)); ?>
-    </div>
-<?php } else { ?>
-    <h3><?php $anc = get_ancestors(get_the_ID(),'page'); $count = count($anc); if($count > 0){ $anc_pg = get_post($anc[($count - 1)]); echo $anc_pg->post_title; } else the_title(); ?></h3>
-    <div class="submenu-widget">
-        <?php echo jrd_tertiary_menu(array('theme_location' => 'main-menu', 'container' => '', 'menu_class' => 'menu', 'menu_id' => '', 'depth' => 3)); ?>
-    </div>
-<?php } ?>
-*/
-
-/* ========================================================================= */
-/*  Get Post Slug */
-/* ========================================================================= */
-
-function the_slug($echo=true){
-    $slug = basename(get_permalink());
-    do_action('before_slug', $slug);
-    $slug = apply_filters('slug_filter', $slug);
-    if( $echo ) echo $slug;
-    do_action('after_slug', $slug);
-    return $slug;
-}
-
-/* Use the tag below when querying the slug of a post.
-
-<?php the_slug(); ?> */
 
 
 /* ========================================================================= */
@@ -253,40 +194,82 @@ add_filter('excerpt_more', 'new_excerpt_more');
 
 
 /* ========================================================================= */
-/*  Browser detection body_class() output */
+/*  BROWSER DETECTION body_class() OUTPUT */
 /* ========================================================================= */
 
 function body_class_adjustments( $classes ) {
-    global $is_lynx, $is_gecko, $is_IE, $is_opera, $is_NS4, $is_safari, $is_chrome, $is_iphone;
 
-    if($is_lynx) $classes[] = 'lynx';
-    elseif($is_gecko) $classes[] = 'gecko';
-    elseif($is_opera) $classes[] = 'opera';
-    elseif($is_NS4) $classes[] = 'ns4';
-    elseif($is_safari) $classes[] = 'safari';
-    elseif($is_chrome) $classes[] = 'chrome';
-    elseif($is_IE) {
-        $browser = $_SERVER['HTTP_USER_AGENT'];
-        $browser = substr( "$browser", 25, 8);
-        if ($browser == "MSIE 7.0"  ) {
+    $browser = $_SERVER['HTTP_USER_AGENT'];
+    global  $is_iphone,     //iPhone Safari
+            $is_chrome,     //Google Chrome
+            $is_safari,     //Safari
+            $is_NS4,        //NetScape 4
+            $is_opera,      //Opera
+            $is_macIE,      //Mac Internet Explorer
+            $is_winIE,      //Windows Internet Explorer
+            $is_gecko,      //FireFox
+            $is_lynx,       //Lynx - The Rad Termninal Browsers
+            $is_IE,         //Internet Explore
+            $is_edge;       //Microsoft Edge
+
+    $classes = array();
+    /* Browsers no one cares about or uses... just fun to keep lol lynx*/
+    if($is_lynx)        $classes[] = 'lynx';
+    elseif($is_NS4)     $classes[] = 'ns4';
+    elseif($is_opera)   $classes[] = 'opera';
+    elseif($is_chrome) {
+        $browser = explode(' ', $browser);
+        $browser = explode('/', $browser[11]);
+        $browser = explode('.', $browser[1]);
+        $browser = 'chrome-'.$browser[0];
+        $classes[] = $browser;
+        $classes[] = 'chrome';
+    }
+    elseif($is_gecko) {
+        $browser = explode(' ', $browser);
+        $browser = $browser[9];
+        $browser = strtolower($browser);
+        $browser = str_replace('/', '-', str_replace('.0', '', $browser));
+        $classes[]   = $browser;
+        $classes[]   = 'gecko';
+    }
+    elseif($is_safari) {
+        $browser = explode(" ", $browser);
+        $browser = str_replace('Version/', '', $browser[11]);
+        $browser = explode(".", $browser);
+        $browser = 'safari-'.$browser[0];
+        $classes[]   = $browser;
+        $classes[]   = 'safari';
+    } elseif($is_edge) {
+        $browser = explode(" ", $browser);
+        $browser = strtolower(str_replace('/', '-', $browser[12]));
+        $browser = explode('.', $browser);
+        $browser = $browser[0];
+        $classes[] = $browser;
+        $classes[] = 'edge';
+    } elseif($is_IE) {
+        $iecheck = substr( "$browser", 25, 8);
+        if ($iecheck == "MSIE 7.0"  ) {
             $classes[] = 'ie7';
             $classes[] = 'ie';
-        } elseif ($browser == "MSIE 6.0" ) {
+        } elseif ($iecheck == "MSIE 6.0" ) {
             $classes[] = 'ie6';
             $classes[] = 'ie';
-        } elseif ($browser == "MSIE 8.0" ) {
+        } elseif ($iecheck == "MSIE 8.0" ) {
             $classes[] = 'ie8';
             $classes[] = 'ie';
-        } elseif ($browser == "MSIE 9.0" ) {
+        } elseif ($iecheck == "MSIE 9.0" ) {
             $classes[] = 'ie9';
             $classes[] = 'ie';
+        } elseif ($iecheck == "MSIE 10." ) {
+            $classes[] = 'ie10';
+            $classes[] = 'ie';
         } else {
+            //Assume ie11 it's the last one.
+            $classes[] = 'ie11';
             $classes[] = 'ie';
         }
-    }
-    else $classes[] = 'unknown';
-
-    if( $is_iphone ) $classes[] = 'iphone';
+    } 
 
     return $classes;
 }
@@ -294,7 +277,7 @@ add_filter( 'body_class', 'body_class_adjustments' );
 
 
 /* ========================================================================= */
-/* !REMOVE <P> WRAPPER WHEN ONLY <IMG /> IS CONTAINED WITHIN */
+/* REMOVE <P> WRAPPER WHEN ONLY <IMG /> IS CONTAINED WITHIN */
 /* ========================================================================= */
 
 function filter_ptags_on_images($content){
@@ -304,7 +287,7 @@ add_filter('the_content', 'filter_ptags_on_images');
 
 
 /* ========================================================================= */
-/* !ADD OPTION TO FILTER PDF IN MEDIA LIBRARY */
+/* ADD OPTION TO FILTER PDF IN MEDIA LIBRARY */
 /* ========================================================================= */
 
 function modify_post_mime_types($post_mime_types) {
@@ -315,82 +298,29 @@ add_filter('post_mime_types', 'modify_post_mime_types');
 
 
 /* ========================================================================= */
-/* !EASY PRINTR() */
+/* SVG Support */
 /* ========================================================================= */
 
-function printr($var){ echo '<pre>'; print_r($var); echo '</pre>'; };
-
-/* ========================================================================= */
-/*  EXCERPT LIMITER */
-/* ========================================================================= */
-
-function limit_excerpt($string, $word_limit) {
-    $words = explode(' ', $string);
-    return implode(' ', array_slice($words, 0, $word_limit));
+function cc_mime_types($mimes) {
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
 }
-
-/* Example Usage:
-
-Solution 1:
-<?php $excerpt = limit_excerpt(get_the_excerpt(), '50'); ?>
-<?php echo $excerpt . '...' ?>
-
-Solution 2:
-<?php echo limit_excerpt(get_the_excerpt(), '50'); ?>
-
-*/
-
-
-/*
-
-/* ========================================================================= */
-/* !REMOVE ADMIN TOOLBAR */
-/* ========================================================================= */
-
-// add_filter('show_admin_bar', '__return_false');
+add_filter('upload_mimes', 'cc_mime_types');
 
 
 /* ========================================================================= */
-/* !WORDPRESS PAGINATION SCRIPT */
+/* Move Yoast to bottom 
+   Shove yoast to the bottom of the edit page where it belongs. */
 /* ========================================================================= */
 
-/*
-function jrd_paginate() {
-    global $wp_query, $wp_rewrite;
-    $wp_query->query_vars['paged'] > 1 ? $current = $wp_query->query_vars['paged'] : $current = 1;
-
-    $pagination = array(
-        'base' => @add_query_arg('page','%#%'),
-        'format' => '',
-        'total' => $wp_query->max_num_pages,
-        'current' => $current,
-        'show_all' => false,
-        'mid_size' => 1,
-        'end_size' => 3,
-        'type' => 'plain',
-        'next_text' => '',
-        'prev_text' => ''
-        );
-
-    if( $wp_rewrite->using_permalinks() )
-        $pagination['base'] = user_trailingslashit( trailingslashit( remove_query_arg( 's', get_pagenum_link( 1 ) ) ) . 'page/%#%/', 'paged' );
-
-    if( !empty($wp_query->query_vars['s']) )
-        $pagination['add_args'] = array( 's' => urlencode(get_query_var( 's' )) );
-
-    if($wp_query->query_vars['posts_per_page'] < $wp_query->found_posts){
-
-        echo '<div id="search-nav">';
-        echo paginate_links( $pagination );
-        echo '</div>';
-
-    }
+function yoasttobottom() {
+    return 'low';
 }
-*/
+add_filter( 'wpseo_metabox_prio', 'yoasttobottom');
 
 
 /* ========================================================================= */
-/* !SHORTCUT CODES */
+/* SHORTCUT CODES */
 /* ========================================================================= */
 /*
 function morelink($atts, $content = null) {
@@ -404,10 +334,8 @@ add_shortcode('button', 'morelink');
 */
 
 
-
-
 /* ========================================================================= */
-/* !TINYMCE SELECT DROPDOWN CLASS SETUP CODES */
+/* TINYMCE SELECT DROPDOWN CLASS SETUP CODES */
 /* ========================================================================= */
 
 /*
@@ -436,78 +364,6 @@ function my_mce_before_init( $settings ) {
 
 }
 */
-
-
-/* ========================================================================= */
-/* !WORDPERSS CUSTOM THEME FUNCTIONS - Please use ACF and Meta Queries */
-/* ========================================================================= */
-
-/* ----- SHOW FUTURE POSTS FOR EVENT CUSTOM POST TYPES ----- */
-/*
-function show_future_posts($posts) {
-   global $wp_query, $wpdb;
-   if(is_single() && $wp_query->post_count == 0)
-   {
-      $posts = $wpdb->get_results($wp_query->request);
-   }
-   return $posts;
-}
-add_filter('the_posts', 'show_future_posts');
-*/
-
-/* ----- Get File Extension (ex: PDF, DOC) ----- */
-/*
-function jrd_get_file_ext($file_url){
-    return pathinfo($file_url, PATHINFO_EXTENSION);
-}
-*/
-
-/* ========================================================================= */
-/* !CLEAN FUNCTION - Helpful making better hash links out of repeating fields. */
-/* ========================================================================= */
-
-function clean($string) {
-    $string = strip_tags($string);
-    $string = strtolower($string);
-    $string = str_replace(' ', '-', $string);
-    return preg_replace('/[^A-Za-z0-9\-]/', '', $string);
-}
-
-/* ========================================================================= */
-/* !TAG WRAP - No more empty tags*/
-/* Usage:
-/* echo tag_wrap(get_field('whatever'), 'h3 class="something"');
-/* output: <h3 class="something">[contents of whatever field]</h3>
-/* ========================================================================= */
-
-function tag_wrap($f,$t){
-    if($f){
-        $r = "<{$t}>{$f}";
-        $e = explode(' ',$t);
-        $e = $e[0];
-        $r .= "</{$e}>";
-        return $r;
-    }
-}
-
-/* ========================================================================= */
-/* SVG Support */
-/* ========================================================================= */
-function cc_mime_types($mimes) {
-    $mimes['svg'] = 'image/svg+xml';
-    return $mimes;
-}
-add_filter('upload_mimes', 'cc_mime_types');
-
-
-/* ========================================================================= */
-/* Move Yoast to bottom 
-   Shove yoast to the bottom of the edit page where it belongs. */
-/* ========================================================================= */
-function yoasttobottom() {
-    return 'low';
-}
-add_filter( 'wpseo_metabox_prio', 'yoasttobottom');
 
 
 /* ========================================================================= */
@@ -544,8 +400,9 @@ function my_admin_background() {
     wp_add_inline_style( 'custom-style', $custom_css );
 }*/
 
+
 /* ========================================================================= */
-/* !RELEVANSSI Add visible custom fields to the_excerpt when searching.
+/* RELEVANSSI Add visible custom fields to the_excerpt when searching.
 /* ========================================================================= */
 /*
 add_filter('relevanssi_excerpt_content', 'custom_fields_to_excerpts', 10, 3);
@@ -572,41 +429,3 @@ function custom_fields_to_excerpts($content, $post, $query) {
     return $content;
 }
 */
-
-/* ========================================================================= */
-/* !jrd_img  Prints out all the things.
-/* ========================================================================= */
-/*
-/*
-    $field          = field name
-    $size           = size of image from image array; leave blank to retrieve full url
-    $sub            = if true it will use get_sub_field();
-    $classes        = string of class/es; default blank 
-    $id             = string of an id; default blank
-    $data           = array of data attributes. 
-
-    echo jrd_img('img', 'large', false, '', 'this')
-*/
-
-function jrd_img( $field, $size, $sub = false, $classes, $id, $data = array()) {
-    $img_src = ($sub == true) ? get_sub_field( $field ) : get_field( $field );
-    if($img_src) {
-        $my_classes = ($classes != '') ? ' class="'.$classes.'" ' : ' ';
-        $my_id = ($id != '') ? ' id="'.$id.'" ' : ' ';
-        //fields from images
-        $img_url = ($size != '') ? $img_src['sizes'][$size] : $img_src['url'];
-        $img_alt = $img_src['alt'];
-        $img_title = $img_src['title'];
-        //data attributes
-        $my_data = '';
-        if($data) {
-            foreach($data as $key => $value) {
-                $my_data .= 'data-'.$key.'="'.$value.'" ';
-            }
-        }
-
-        $img = '<img'.$my_id.$my_classes.'src="'.$img_url.'" alt="'.img_alt.'" '.$my_data.'/>';
-
-        return $img; 
-    }
-}
