@@ -6,39 +6,94 @@ AddHandler php5-script .php
 
 # ErrorDocument 404 http://www.DOMAIN.com
 
-# Deny iframe embedding
-Header always append X-Frame-Options SAMEORIGIN
-
-# Remove eTags
-Header unset ETag  
-FileETag None  
-    
-# Restrict access to .htaccess
-<Files .htaccess>  
-Order Allow,Deny  
-Deny from all  
-</Files>
-
-# Restrict access to wp-config
-<Files wp-config.php>  
-Order Deny,Allow  
-Deny from all  
-</Files>
-
-# Disable access to trackbacks/pingbacks
-<FilesMatch "^(xmlrpc\.php|wp-trackback\.php)">
-Order Deny,Allow
-Deny from all
-</FilesMatch>
-
-
-# GZIP compression (this is tested on MediaTemple. Other servers may require a different compression declaration
-<filesmatch "\.(gif|jpg|png|ico|css|js|woff|ttf|svg|eot)$">
-    SetOutputFilter DEFLATE
-</filesmatch>
-
 # For when webfonts give a "Resource interpreted as Font but transferred with MIME type ___" error. Un-comment the one relevant to the error.
 # AddType font/ttf .ttf
 # AddType font/eot .eot
 # AddType font/otf .otf
 # AddType font/woff .woff
+
+# Deny iframe embedding
+Header always append X-Frame-Options SAMEORIGIN
+
+# Remove eTags
+Header unset ETag
+FileETag None
+
+# GZIP compression (this is tested on MediaTemple. Other servers may require a different compression declaration
+<FilesMatch "\.(gif|jpg|png|ico|css|js|woff|ttf|svg|eot)$">
+    SetOutputFilter DEFLATE
+</FilesMatch>
+
+
+# ===================================== #
+# Prevent SQL injection and url hacking
+# ===================================== #
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond %{REQUEST_METHOD} ^(HEAD|TRACE|DELETE|TRACK) [NC]
+    RewriteRule ^(.*)$ - [F,L]
+    RewriteCond %{QUERY_STRING} \.\.\/ [NC,OR]
+    RewriteCond %{QUERY_STRING} boot\.ini [NC,OR]
+    RewriteCond %{QUERY_STRING} tag\= [NC,OR]
+    RewriteCond %{QUERY_STRING} ftp\:  [NC,OR]
+    RewriteCond %{QUERY_STRING} http\:  [NC,OR]
+    RewriteCond %{QUERY_STRING} https\:  [NC,OR]
+    RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+    RewriteCond %{QUERY_STRING} mosConfig_[a-zA-Z_]{1,21}(=|%3D) [NC,OR]
+    RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [NC,OR]
+    RewriteCond %{QUERY_STRING} ^.*(\[|\]|\(|\)|<|>|ê|"|;|\?|\*|=$).* [NC,OR]
+    RewriteCond %{QUERY_STRING} ^.*(&#x22;|&#x27;|&#x3C;|&#x3E;|&#x5C;|&#x7B;|&#x7C;).* [NC,OR]
+    RewriteCond %{QUERY_STRING} ^.*(%24&x).* [NC,OR]
+    RewriteCond %{QUERY_STRING} ^.*(%0|%A|%B|%C|%D|%E|%F|127\.0).* [NC,OR]
+    RewriteCond %{QUERY_STRING} ^.*(globals|encode|localhost|loopback).* [NC,OR]
+    RewriteCond %{QUERY_STRING} ^.*(request|select|insert|union|declare).* [NC]
+    RewriteCond %{HTTP_COOKIE} !^.*wordpress_logged_in_.*$
+    RewriteRule ^(.*)$ - [F,L]
+</IfModule>
+
+
+# ======================================== #
+# Restrict access to files and directories
+# ======================================== #
+
+<Files wp-config.php>
+    Order Deny,Allow
+    Deny from all
+</Files>
+<Files readme.html>
+    Order Deny,Allow
+    Deny from all
+</Files>
+<Files license.txt>
+    Order Deny,Allow
+    Deny from all
+</Files>
+<Files xmlrpc.php>
+    Order Deny,Allow
+    Deny from all
+</Files>
+<Files wp-trackback.php>
+    Order Deny,Allow
+    Deny from all
+</Files>
+
+# Deny access to all .htaccess files. Some may reside in subdirectories.
+<Files ~ "^.*\.([Hh][Tt][Aa])">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Set file expiration, fixing "leverage browser caching". Don't uncomment till after site launch.
+# <IfModule mod_expires.c>
+#    ExpiresActive on
+#    ExpiresDefault "access plus 1 month"
+#    ExpiresByType application/javascript "access plus 1 year"
+#    ExpiresByType image/x-ico "access plus 1 year"
+#    ExpiresByType image/jpg "access plus 14 days"
+#    ExpiresByType image/jpeg "access plus 14 days"
+#    ExpiresByType image/gif "access plus 14 days"
+#    ExpiresByType image/png "access plus 14 days"
+#    ExpiresByType text/css "access plus 14 days"
+# </IfModule>

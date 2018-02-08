@@ -1,0 +1,15 @@
+User-agent: Googlebot
+Disallow: /out/
+Allow: /*
+
+User-agent: *
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/cache/
+Disallow: /cgi-bin/
+Disallow: /trackback/
+Disallow: /comments/
+Disallow: /out/
+Disallow: /readme.html
+Disallow: /license.txt
+Disallow: /xmlrpc.php

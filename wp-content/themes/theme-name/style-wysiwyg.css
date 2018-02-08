@@ -1,0 +1,83 @@
+@import url("/ui/css/parts/fonts.css");
+
+#tinymce h1,
+.mce-container-body .mce-menu-item:nth-child(2) .mce-text {
+    font: 700 50px/1.1 sans-serif;
+    color: #000;
+}
+#tinymce h2,
+.mce-container-body .mce-menu-item:nth-child(3) .mce-text {
+    font: normal 36px/1.2 sans-serif;
+    color: #000;
+}
+#tinymce h3,
+.mce-container-body .mce-menu-item:nth-child(4) .mce-text {
+    font: 600 18px/1.2 sans-serif;
+    color: #000;
+}
+#tinymce h4,
+.mce-container-body .mce-menu-item:nth-child(5) .mce-text {
+    font: normal 18px/1.2 sans-serif;
+    color: #000;
+}
+#tinymce h5,
+.mce-container-body .mce-menu-item:nth-child(6) .mce-text {
+    font: normal 14px/1.2 sans-serif;
+    color: #000;
+}
+#tinymce h6,
+.mce-container-body .mce-menu-item:nth-child(7) .mce-text {
+    font: normal 14px/1.2 sans-serif;
+    color: #000;
+}
+#tinymce p,
+#tinymce li,
+.mce-container-body .mce-menu-item:nth-child(1) .mce-text {
+    font-size:14px;
+    line-height:1.5;
+    color:#000;
+    font-family: sans-serif;
+}
+#tinymce a {
+    color:#00f;
+    text-decoration:underline;
+}
+
+#tinymce h2 strong,
+#tinymce h3 strong,
+#tinymce h4 strong,
+#tinymce h5 strong {
+    font-weight: inherit;
+}
+
+#tinymce ul { 
+    padding:0;
+}
+#tinymce ul > li { 
+    position: relative;
+    padding-left: 26px;
+    list-style:none;
+    margin-bottom:1.07em;
+}
+#tinymce ul > li:before { 
+    content: '\2022';
+    position: absolute;
+    left: 10px;
+}
+
+#tinymce ol { 
+    counter-reset: li;
+    padding:0;
+}
+#tinymce ol > li { 
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 1.07em;
+    list-style:none;
+}
+#tinymce ol > li:before { 
+    content: counter(li) ". ";
+    counter-increment: li;
+    position: absolute;
+    left: 10px;
+}

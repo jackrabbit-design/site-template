@@ -4,7 +4,6 @@
 
 /*
     = Twitter API 1.1 Pull
-    = Plugin Name
 */
 
 /* Twitter API 1.1 Pull - https://github.com/StanScates/Tweet.js-Mod */

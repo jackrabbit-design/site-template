@@ -1,15 +1,11 @@
 <?php
-//define('WP_HOME','http://');
-//define('WP_SITEURL','http://');
-define('UPLOADS', 'assets');
+//define('WP_HOME','http://WWW.DOMAIN.COM');
+//define('WP_SITEURL','http://WWW.DOMAIN.COM');
+define('UPLOADS', 'assets'); // Define website URL assets folder
 define('DISALLOW_FILE_EDIT', true);
-define('AUTOMATIC_UPDATER_DISABLED', true);
 
-/* Define website URL assets folder and FTP connection info */
+/* Define FTP connection info */
 /*
-define('WP_HOME','http://WWW.DOMAIN.COM');
-define('WP_SITEURL','http://WWW.DOMAIN.COM');
-define( 'UPLOADS', '/assets' );
 define('FTP_HOST', '');
 define('FTP_USER', '');
 define('FTP_PASS', '!');
