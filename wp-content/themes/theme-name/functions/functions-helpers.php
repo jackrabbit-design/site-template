@@ -24,10 +24,13 @@ function printr($var){ echo '<pre>'; print_r($var); echo '</pre>'; };
 /*  GET POST SLUG */
 /* ========================================================================= */
 
-function the_slug($echo=true){
+function get_the_slug(){
     global $post;
     $slug = $post->post_name;
     return $slug;
+}
+function the_slug(){
+    echo get_the_slug();
 }
 
 /* Use the tag below when querying the slug of a post.
