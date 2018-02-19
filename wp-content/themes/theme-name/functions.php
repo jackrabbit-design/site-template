@@ -169,6 +169,7 @@ function form_submit_button($button, $form){
     $button_text = $button_array["text"];
     return "<button type='submit' class='submit btn' id='gform_submit_button_{" . $form["id"] . "}'><span>$button_text</span></button>";
 }
+add_filter( 'gform_confirmation_anchor', '__return_true' );
 
 
 /* ========================================================================= */
