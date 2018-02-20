@@ -2,107 +2,107 @@
 @import 'parts/fonts';
 @import 'parts/mixins';
 
-/* Add Vendor Stylesheets here */ 
+/* Add Vendor Stylesheets here */
 
 /* ========================================================================= */
 /* !STYLES */
 /* ========================================================================= */
 
-	html, body { 
-    
+	html, body {
+
     }
 
 /* != SELECTION STYLES (Leaving these blank will show no indication of text selection) ===== */
 /*
-    ::selection         { 
-        background: #aaa; 
+    ::selection         {
+        background: #aaa;
         color: #fff;
     }
-    ::-moz-selection    { 
-        background: #aaa; 
+    ::-moz-selection    {
+        background: #aaa;
         color: #fff;
     }
-    ::-webkit-selection { 
-        background: #aaa; 
+    ::-webkit-selection {
+        background: #aaa;
         color: #fff;
     }
 */
 
 /* != DEFAULT WORDPRESS STYLES = USE AS NEEDED = .wp-caption = .wp-caption-dd = .wpGallery = .shutter = .shutterset ==== */
 
-    .aligncenter { 
-        display: block; 
+    .aligncenter {
+        display: block;
         margin: 25px auto;
     }
 
-    .alignleft { 
-        float: left; 
-        margin: 0 25px 25px 0; 
+    .alignleft {
+        float: left;
+        margin: 0 25px 25px 0;
     }
 
-    .alignright { 
-        float: right; 
-        margin: 0 0 25px 25px; 
+    .alignright {
+        float: right;
+        margin: 0 0 25px 25px;
     }
 
-    .alignnone { 
+    .alignnone {
         display: inline-block;
     }
 
 /* != LAYOUT STYLES ===== */
 
-    h1 { 
-        
-    }
-    
-    h2 { 
+    h1 {
 
     }
-    
-    h3 { 
+
+    h2 {
 
     }
-    
-    h4 { 
+
+    h3 {
 
     }
-    
+
+    h4 {
+
+    }
+
     h5 {
-    
+
     }
-    
+
     h6 {
 
     }
 
     .content-main ul:not([class*="gf"]) {
-        > li { 
-            position: relative; 
+        > li {
+            position: relative;
             padding-left: 10px;
-            &:before { 
-                content: '\2022'; 
-                position: absolute; 
+            &:before {
+                content: '\2022';
+                position: absolute;
                 left: 0; }
         }
     }
-    .content-main ol { 
+    .content-main ol {
         counter-reset:li;
-        > li { 
-            position: relative; 
+        > li {
+            position: relative;
             padding-left: 20px;
-            &:before { 
-                content:counter(li) '. '; 
-                counter-increment: li; 
-                position: absolute; 
-                right: calc(100% - 15px); 
+            &:before {
+                content:counter(li) '. ';
+                counter-increment: li;
+                position: absolute;
+                right: calc(100% - 15px);
             }
         }
     }
 
-    .wrap { 
-        max-width: 1180px; 
+    .wrap {
+        max-width: 1180px;
         width: 100%;
-        margin: 0 auto; 
+        margin: 0 auto;
         padding: 0 20px;
     }
 
@@ -110,7 +110,7 @@
 
 /* != PLACEHOLDER ATTRIBUTE STYLES = input or textarea - placeholder="whatever" ===== */
 /*
-    ::-webkit-input-placeholder { 
+    ::-webkit-input-placeholder {
         color: #aaa;
     }
 
@@ -120,26 +120,26 @@
 */
 
     input {
-        &[type=text], 
-        &[type=password], 
-        &[type=url], 
+        &[type=text],
+        &[type=password],
+        &[type=url],
         &[type=number],
-        &[type=tel], 
-        &[type=email] { 
+        &[type=tel],
+        &[type=email] {
 
         }
     }
 
-    input[type=submit], button { 
-        display: inline-block; 
+    input[type=submit], button {
+        display: inline-block;
         cursor: pointer;
-        &:hover { 
+        &:hover {
         }
     }
 
 
     /* != Select menus with a .select-menu container or gform-select-menu applied in gravity forms ===== */
-    .select-menu, 
+    .select-menu,
     .gform-select-menu div {
         position: relative;
         width: 260px;
