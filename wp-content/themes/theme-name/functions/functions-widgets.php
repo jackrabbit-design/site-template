@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /* Remove Default Wordpress Widgets */
 function my_unregister_widgets() {
@@ -19,14 +19,14 @@ add_action( 'widgets_init', 'my_unregister_widgets' );
 
 
 /* Register Widget Sidebars */
-if ( function_exists('register_sidebar') )
-    register_sidebar(array(
+if ( function_exists( 'register_sidebar' ) )
+    register_sidebar( array(
     	'name' => 'Sidebar',
         'before_widget' => '',
         'after_widget' => '',
         'before_title' => '',
         'after_title' => '',
-    ));
+    ) );
 
 
 
@@ -46,27 +46,27 @@ class Blog_Tags extends WP_Widget {
     function widget($args, $instance) {
         extract($args);
         global $post;
-                
+
         // Before widget
-        echo $before_widget; 
+        echo $before_widget;
         // Declare Variables
         $title = $instance['title'];
         $num = $instance['num'];
         if(Empty($num)){ $num = 50; }
-        
+
         // Widget HTML
         ?>
-            <div class="block block-tags">                    	
-                <h4><?php echo $title; ?></h4>                       
+            <div class="block block-tags">
+                <h4><?php echo $title; ?></h4>
                 <div class="block-content">
                     <?php wp_tag_cloud( array('taxonomy' => 'blog-tags', 'format' => 'list', 'smallest' => 11, 'largest' => 11, 'separator' => '', 'unit' => 'px', 'number' => $num) ); ?>
                 </div>
             </div>
-        
+
         <?php // After widget
-        
+
         echo $after_widget;
-        
+
         wp_reset_query();
     }
 
@@ -74,14 +74,14 @@ class Blog_Tags extends WP_Widget {
         return $new_instance;
     }
 
-    function form($instance) { 
-    
+    function form($instance) {
+
         global $post;
-        
-        
+
+
         // Widget Admin Editor Fields
         ?>
-        
+
         <!-- Title: Text Input -->
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:'); ?></label>
@@ -92,7 +92,7 @@ class Blog_Tags extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'num' ); ?>"><?php _e('Number of Tags to Show:'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'num' ); ?>" name="<?php echo $this->get_field_name( 'num' ); ?>" value="<?php echo $instance['num']; ?>" class="widefat" />
 		</p>
-        
+
    <?php }
 }
 add_action('widgets_init', create_function('', register_widget('Blog_Tags')));

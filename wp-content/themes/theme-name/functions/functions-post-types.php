@@ -26,7 +26,7 @@ register_post_type(
         'menu_icon' => $postDashIcon,
 		'hierarchical' => true,
 		'rest_api' => true,
-		'rewrite' => array('slug' => $postNameSlug),
+		'rewrite' => array( 'slug' => $postNameSlug ),
 		'query_var' => true,
 		'show_in_nav_menus' => true,
 		'exclude_from_search' => false,
@@ -52,10 +52,10 @@ $taxonomyNameSlug     = 'news-type';
 $taxonomyNameSingular = 'News Type';
 $taxonomyNamePlural   = 'News Types';
 register_taxonomy(
-	$taxonomyNameSlug, array($postNameSlug), array(
+	$taxonomyNameSlug, array( $postNameSlug ), array(
 		'hierarchical' => true, // Category or Tag functionality
 		'query_var' => true,
-		'rewrite' => array('slug' => $taxonomyNameSlug),
+		'rewrite' => array( 'slug' => $taxonomyNameSlug ),
 		'labels' => array(
 		     'name' => $taxonomyName,
 		     'singular_name' => $taxonomyNameSingular,

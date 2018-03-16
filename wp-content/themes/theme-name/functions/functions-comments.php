@@ -1,19 +1,19 @@
-<?php 
+<?php
 
 /* ========================================================================= */
 /* !WORDPRESS COMMENTS HTML FUNCTION */
 /* ========================================================================= */
 
-function jhfn_comment($comment, $args, $depth) {
-    $GLOBALS['comment'] = $comment;  
+function jrd_comments($comment, $args, $depth) {
+    $GLOBALS['comment'] = $comment;
     //print_r($comment);
 
     /* Check if post is by Author for special styling */
-    $isByAuthor = false; 
-    if($comment->comment_author_email == get_the_author_meta('email')) {  
-      $isByAuthor = true;  
-    }  
-?>  
+    $isByAuthor = false;
+    if($comment->comment_author_email == get_the_author_meta('email')) {
+      $isByAuthor = true;
+    }
+?>
 
 <li>
     <h4><span><?php echo $comment->comment_author; ?></span> wrote:</h4>
