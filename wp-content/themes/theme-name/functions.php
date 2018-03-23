@@ -198,7 +198,7 @@ add_filter( 'excerpt_more', 'new_excerpt_more' );
 /*  BROWSER DETECTION body_class() OUTPUT */
 /* ========================================================================= */
 
-function body_class_adjustments( $classes ) {
+function body_class_adjustments( $classes1 ) {
 
     $browser = $_SERVER['HTTP_USER_AGENT'];
     global  $is_iphone,     //iPhone Safari
@@ -260,7 +260,7 @@ function body_class_adjustments( $classes ) {
         }
     }
 
-    return $classes;
+    return array_merge( $classes1, $classes );
 }
 add_filter( 'body_class', 'body_class_adjustments' );
 
