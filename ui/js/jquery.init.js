@@ -6,8 +6,8 @@ jQuery(function($){
 
     // ORPHANIZER
     $(".orphan").each(function() {
-        var txt = $(this).html().trim().replace('&nbsp;',' ');
-        var wordArray = txt.split(" ");
+        let txt = $(this).html().trim().replace('&nbsp;',' ');
+        let wordArray = txt.split(" ");
         if (wordArray.length > 1) {
             wordArray[wordArray.length-2] += "&nbsp;" + wordArray[wordArray.length-1];
             wordArray.pop();
