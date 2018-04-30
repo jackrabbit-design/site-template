@@ -83,7 +83,7 @@ define('WPLANG', '');
  * in their development environments.
  */
 
-define( 'WP_DEBUG', isset( $_GET['debug'] );
+define( 'WP_DEBUG', isset( $_GET['debug'] ) );
 
 /* REVISION SETTINGS */
 define('WP_POST_REVISIONS', 5);
