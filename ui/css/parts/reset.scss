@@ -87,6 +87,7 @@
     }
     input, button, textarea, select {
         -webkit-appearance: none;
+        outline:1px solid transparent;
     }
     textarea {
         resize:none;
