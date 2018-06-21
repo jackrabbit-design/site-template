@@ -133,3 +133,14 @@ function jrd_img( $field, $size, $sub = false, $classes, $id, $data = array() ) 
         return $img;
     }
 }
+
+
+/* ========================================================================= */
+/* JRD Link - use with ACF link field
+/* ========================================================================= */
+
+function jrd_link($link, $classes, $id) {
+    if($classes) {  $classes = "class=\"{$classes}\""; }
+    if($id) {       $id = "id=\"{$id}\""; }
+    return "<a href=\"{$link['url']}\" title=\"{$link['title']}\" target=\"{$link['target']}\" {$classes} {$id}>{$link['title']}</a>";
+}
