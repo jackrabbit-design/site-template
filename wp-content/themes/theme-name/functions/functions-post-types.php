@@ -1,6 +1,6 @@
 <?php
-/*
 
+/*
 // Sample Register Post
 $postName         = 'Newsroom'; // Name of post type
 $postNameSlug     = 'news-post'; // Name of post type
@@ -74,4 +74,20 @@ register_taxonomy(
 		 )
 	)
 );
+
+
+// Change Capitlites for Members Plugin
+// Repalce 'capability_type' => 'post', with this
+'map_meta_cap' => true,
+'capability_type' => $postNameSlug,
+'capabilities' => array(
+	'edit_post'          => 'edit_'.$postNameSlug, 
+	'read_post'          => 'read_'.$postNameSlug, 
+	'delete_post'        => 'delete_'.$postNameSlug, 
+	'edit_posts'         => 'edit_'.$postNameSlug, 
+	'edit_others_posts'  => 'edit_others_'.$postNameSlug, 
+	'publish_posts'      => 'publish_'.$postNameSlug',       
+	'read_private_posts' => 'read_private_'.$postNameSlug, 
+	'create_posts'       => 'edit_'.$postNameSlug, 
+),
 */
