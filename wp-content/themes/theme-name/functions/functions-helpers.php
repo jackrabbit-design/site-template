@@ -103,7 +103,6 @@ function clean( $string ) {
 /*
     $field          = field name
     $size           = size of image from image array; leave blank to retrieve full url
-    $sub            = if true it will use get_sub_field();
     $classes        = string of class/es; default blank
     $id             = string of an id; default blank
     $data           = array of data attributes.
@@ -111,8 +110,8 @@ function clean( $string ) {
     echo jrd_img('img', 'large', false, '', 'this')
 */
 
-function jrd_img( $field, $size, $sub = false, $classes, $id, $data = array() ) {
-    $img_src = ( $sub == true ) ? get_sub_field( $field ) : get_field( $field );
+function jrd_img( $field, $size, $classes, $id, $data = array() ) {
+    $img_src = $field;
     if ( $img_src ) {
         $my_classes = ( $classes != '' ) ? ' class="' . $classes . '" ' : ' ';
         $my_id = ( $id != '' ) ? ' id="'.$id.'" ' : ' ';
@@ -133,7 +132,6 @@ function jrd_img( $field, $size, $sub = false, $classes, $id, $data = array() ) 
         return $img;
     }
 }
-
 
 /* ========================================================================= */
 /* JRD Link - use with ACF link field
