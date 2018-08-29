@@ -140,3 +140,27 @@ function jrd_img( $field, $size, $classes, $id, $data = array() ) {
 function jrd_link($link, $class = '', $id = '') {
     return "<a href='{$link['url']}' title='{$link['title']}' target='{$link['target']}' class='$class' id='$id'>{$link['title']}</a>";
 }
+
+/* ========================================================================= */
+/* Terms Dropdown - Add Taxonmy 
+/* ========================================================================= */
+
+function jrd_terms_dropdown($tax, $default_text = 'Sort by Category', $id = '') {
+    $terms = get_terms( 
+        array(
+            'taxonomy' => $tax,
+            'hide_empty' => false,
+        )
+    );
+    $html  = "<select id=\"{$id}\" name=\"{$tax}\">";
+    $html .= "<option value=\"\">{$default_text}</option>";
+    foreach($terms as $term) {
+        if( isset($_GET[$tax]) && $_GET[$tax] == $term->slug ) {
+            $html .= "<option selected value=\"{$term->slug}\">{$term->name}</option>";
+        } else {
+            $html .= "<option value=\"{$term->slug}\">{$term->name}</option>";
+        }
+    }
+    $html .= '</select>';
+    return $html;
+}
