@@ -4,7 +4,7 @@
 //define('WP_HOME','http://WWW.DOMAIN.COM');
 //define('WP_SITEURL','http://WWW.DOMAIN.COM');
 
-define('UPLOADS', 'assets'); // Define website URL assets folder
+// define('UPLOADS', 'assets'); // Define website URL assets folder, only on non-WPEngine installs
 define('DISALLOW_FILE_EDIT', true);
 
 /* DEBUG MODE */
