@@ -138,7 +138,7 @@ function jrd_img( $field, $size, $classes, $id, $data = array() ) {
 /* ========================================================================= */
 
 function jrd_link($link, $class = '', $id = '') {
-    return "<a href='{$link['url']}' title='{$link['title']}' target='{$link['target']}' class='$class' id='$id'>{$link['title']}</a>";
+    return "<a href='{$link['url']}' title='{$link['title']}' target='{$link['target']}' class='$class' id='$id'><span>{$link['title']}</span></a>";
 }
 
 /* ========================================================================= */
