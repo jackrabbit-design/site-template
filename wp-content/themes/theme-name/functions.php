@@ -431,3 +431,9 @@ function custom_fields_to_excerpts( $content, $post, $query ) {
     return $content;
 }
 */
+
+// Stay logged in for longer periods
+add_filter( 'auth_cookie_expiration', 'keep_me_logged_in' );
+function keep_me_logged_in( $expirein ) {
+    return 10 * DAY_IN_SECONDS;
+}
