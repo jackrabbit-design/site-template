@@ -194,6 +194,17 @@
         }
     }
 
+    .gform_validation_container {
+        // display: none;
+        // visibility: hidden;
+        // uncomment the above if the below doesn't work.
+        position:absolute;
+        top:-9999px;
+        left:-9999px;
+        pointer-events:none;
+        opacity:0;
+    }
+
 
 /* ========================================================================= */
 /* MEDIA QUERIES */
