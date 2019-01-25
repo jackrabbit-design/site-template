@@ -5,15 +5,18 @@
 jQuery(function($){
 
     // ORPHANIZER
-    $(".orphan").each(function() {
-        let txt = $(this).html().trim().replace('&nbsp;',' ');
-        let wordArray = txt.split(" ");
-        if (wordArray.length > 1) {
-            wordArray[wordArray.length-2] += "&nbsp;" + wordArray[wordArray.length-1];
-            wordArray.pop();
-            $(this).html(wordArray.join(" "));
-        }
-    });
+    function orphanize(){
+        $(".orphan").each(function() {
+            let txt = $(this).html().trim().replace('&nbsp;',' ');
+            let wordArray = txt.split(" ");
+            if (wordArray.length > 1) {
+                wordArray[wordArray.length-2] += "&nbsp;" + wordArray[wordArray.length-1];
+                wordArray.pop();
+                $(this).html(wordArray.join(" "));
+            }
+        });
+    };
+    orphanize();
 
     // PARALLAX
     $.fn.plax = function(x, y){
