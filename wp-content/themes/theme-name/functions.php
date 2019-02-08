@@ -123,11 +123,11 @@ add_action( 'login_headertitle', 'jrd_login_title' );
 
 function enqueue_scripts() {
     wp_deregister_script( 'jquery' );
-    wp_enqueue_script( 'jquery', get_bloginfo( 'url' ) . '/ui/js/jquery.js', array(), null );
-    wp_enqueue_script( 'modernizr', get_bloginfo( 'url' ) . '/ui/js/modernizr.js', array(), null, true );
-    wp_enqueue_script( 'svgxuse', get_bloginfo( 'url' ) . '/ui/js/svgxuse.js', array(), null, true );
-    wp_enqueue_script( 'plugins', get_bloginfo( 'url' ) . '/ui/js/jquery.plugins.js', array( 'jquery' ), null, true );
-    wp_enqueue_script( 'init', get_bloginfo( 'url' ) . '/ui/js/jquery.init.js', array( 'jquery', 'plugins', 'modernizr' ), null, true );
+    wp_enqueue_script( 'jquery',    '/ui/js/jquery.js', array(), null );
+    wp_enqueue_script( 'modernizr', '/ui/js/modernizr.js', array(), null, true );
+    wp_enqueue_script( 'svgxuse',   '/ui/js/svgxuse.js', array(), null, true );
+    wp_enqueue_script( 'plugins',   '/ui/js/jquery.plugins.js', array( 'jquery' ), null, true );
+    wp_enqueue_script( 'init',      '/ui/js/jquery.init.js?v=' . filemtime( 'ui/js/jquery.init.js' ), array('jquery', 'plugins', 'modernizr'), null, true);
 }
 add_action( 'wp_enqueue_scripts', 'enqueue_scripts' );
 
@@ -137,12 +137,12 @@ add_action( 'wp_enqueue_scripts', 'enqueue_scripts' );
 /* ========================================================================= */
 
 function enqueue_styles() {
-    wp_enqueue_style( 'style', get_bloginfo( 'url' ) . '/ui/css/style.css', array(), null );
+    wp_enqueue_style( 'style', '/ui/css/style.css?v=' . filemtime( 'ui/css/style.css' ), array(), null );
 }
 // With Print Style Sheet
 // function enqueue_styles() {
-//     wp_enqueue_style( 'style', get_bloginfo( 'url' ) . '/ui/css/style.css', array(), null, 'screen' );
-//     wp_enqueue_style( 'print', get_bloginfo( 'url' ) . '/ui/css/print.css', array(), null, 'print' );
+//     wp_enqueue_style( 'style', '/ui/css/style.css', array(), null, 'screen' );
+//     wp_enqueue_style( 'print', '/ui/css/print.css', array(), null, 'print' );
 // }
 add_action( 'wp_enqueue_scripts', 'enqueue_styles' );
 

@@ -5,87 +5,80 @@
     TABLE OF CONTENTS
     ******************
     EASY PRINTR()
-    GET POST SLUG
+    GET/THE POST SLUG
     EXCERPT LIMITER
     TAG WRAP
     CLEAN FUNCTION
     JRD_IMG
+    JRD_LINK
+    JRD_TERMS_DROPDOWN
 
 */
 
-/* ========================================================================= */
-/* EASY PRINTR() */
-/* ========================================================================= */
 
+/**
+ * Easily echo a preformatted print_r
+ * @param  mixed $var Variable to examine
+ * @return array      Array to be returned
+ */
 function printr( $var ){ echo '<pre>'; print_r( $var ); echo '</pre>'; };
 
 
-/* ========================================================================= */
-/*  GET POST SLUG */
-/* ========================================================================= */
-
+/**
+ * Get the slug of a post
+ * @return int The posts's slug
+ */
 function get_the_slug() {
     global $post;
     $slug = $post->post_name;
     return $slug;
 }
+/**
+ * Echo the slug of a post
+ * @return int The post's slug
+ */
 function the_slug() {
     echo get_the_slug();
 }
 
-/* Use the tag below when querying the slug of a post.
 
-<?php the_slug(); ?> */
-
-
-/* ========================================================================= */
-/*  EXCERPT LIMITER */
-/* ========================================================================= */
-
+/**
+ * Limit the amount of words in a given string
+ * @param  string $string     The string to limit
+ * @param  int $word_limit    The max word length
+ * @return string             The delimited string
+ */
 function limit_excerpt( $string, $word_limit ) {
     $words = explode( ' ', $string );
     return implode( ' ', array_slice( $words, 0, $word_limit ) );
 }
 
-/* Example Usage:
 
-    Solution 1:
-    <?php $excerpt = limit_excerpt(get_the_excerpt(), '50'); ?>
-    <?php echo $excerpt . '...' ?>
-
-    Solution 2:
-    <?php echo limit_excerpt(get_the_excerpt(), '50'); ?>
-
-*/
-
-
-/* ========================================================================= */
-/* TAG WRAP - No more empty tags*/
-/* ========================================================================= */
-
-function tag_wrap( $f, $t ) {
-    $r = "<{$t}>{$f}";
-    $e = explode( ' ', $t );
-    $e = $e[0];
-    $r .= "</{$e}>";
-    return $r;
+/**
+ * Wrap a variable in a tag
+ * @param  string $string   The text to be wrapped
+ * @param  string $wrapper  The wrapper element
+ * @return string           The returned HTML
+ */
+function tag_wrap( $string, $wrapper ) {
+    $return = "<{$wrapper}>{$string}";
+    $element = explode( ' ', $wrapper );
+    $element = $element[0];
+    $return .= "</{$element}>";
+    return $return;
 }
 
 /* Example Usage:
-
     echo tag_wrap(get_field('feild_name'), 'h3 class="something"');
     output: <h3 class="something">[contents]</h3>
-
 */
 
 
-
-/* REPLACE CLEAN */
-
-/* ========================================================================= */
-/* CLEAN FUNCTION - Helpful making better hash links out of repeating fields. */
-/* ========================================================================= */
-
+/**
+ * CLEAN FUNCTION - Helpful making better hash links out of repeating fields.
+ * @param  string $string The string to be clenaed
+ * @return string         The sanitized string
+ */
 function clean( $string ) {
     $string = strip_tags( $string );
     $string = strtolower( $string );
@@ -93,32 +86,25 @@ function clean( $string ) {
     return preg_replace( '/[^A-Za-z0-9\-]/', '', $string );
 }
 
-/* REPLACE CLEAN */
 
-
-/* ========================================================================= */
-/* JRD_IMG  Prints out all the things.
-/* ========================================================================= */
-/*
-/*
-    $field          = field name
-    $size           = size of image from image array; leave blank to retrieve full url
-    $classes        = string of class/es; default blank
-    $id             = string of an id; default blank
-    $data           = array of data attributes.
-
-    echo jrd_img('img', 'large', false, '', 'this')
-*/
-
+/**
+ * Returns a proper <img /> tag with all necessary attributes and values
+ * @param  array $field   The ACF image field
+ * @param  string $size    The image_size as defined in functions.php
+ * @param  string $classes The desired HTML element class for the image
+ * @param  string $id      The desired HTML element ID for the image
+ * @param  array  $data    key=>val pairs for data attributes for the image
+ * @return string          The HTML for the image
+ */
 function jrd_img( $field, $size, $classes, $id, $data = array() ) {
-    $img_src = $field;
-    if ( $img_src ) {
+    $img_array = $field;
+    if ( $img_array ) {
         $my_classes = ( $classes != '' ) ? ' class="' . $classes . '" ' : ' ';
         $my_id = ( $id != '' ) ? ' id="'.$id.'" ' : ' ';
         //fields from images
-        $img_url = ( $size != '' ) ? $img_src['sizes'][$size] : $img_src['url'];
-        $img_alt = $img_src['alt'];
-        $img_title = $img_src['title'];
+        $img_url = ( $size != '' ) ? $img_array['sizes'][$size] : $img_array['url'];
+        $img_alt = $img_array['alt'];
+        $img_title = $img_array['title'];
         //data attributes
         $my_data = '';
         if ( $data) {
@@ -133,20 +119,26 @@ function jrd_img( $field, $size, $classes, $id, $data = array() ) {
     }
 }
 
-/* ========================================================================= */
-/* JRD Link - use with ACF link field
-/* ========================================================================= */
-
+/**
+ * JRD Link - use with ACF link field
+ * @param  array $link  The ACF link field
+ * @param  string $class The desired HTML element class for the link
+ * @param  string $id    The desired HTML ID for the link
+ * @return string        HTML for the link
+ */
 function jrd_link($link, $class = '', $id = '') {
     return "<a href='{$link['url']}' title='{$link['title']}' target='{$link['target']}' class='$class' id='$id'><span>{$link['title']}</span></a>";
 }
 
-/* ========================================================================= */
-/* Terms Dropdown - Add Taxonmy 
-/* ========================================================================= */
-
+/**
+ * Taxonomy terms as a select menu
+ * @param  string $tax          The taxonomy's slug
+ * @param  string $default_text The default text for the select menu (eg. All Categories)
+ * @param  string $id           The desired HTML element ID for the dropdown
+ * @return string               HTML for the select menu
+ */
 function jrd_terms_dropdown($tax, $default_text = 'Sort by Category', $id = '') {
-    $terms = get_terms( 
+    $terms = get_terms(
         array(
             'taxonomy' => $tax,
             'hide_empty' => false,
