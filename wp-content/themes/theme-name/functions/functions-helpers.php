@@ -61,15 +61,17 @@ function limit_excerpt( $string, $word_limit ) {
  * @return string           The returned HTML
  */
 function tag_wrap( $string, $wrapper ) {
-    $return = "<{$wrapper}>{$string}";
-    $element = explode( ' ', $wrapper );
-    $element = $element[0];
-    $return .= "</{$element}>";
-    return $return;
+	if($string){
+	    $return = "<{$wrapper}>{$string}";
+	    $element = explode( ' ', $wrapper );
+	    $element = $element[0];
+	    $return .= "</{$element}>";
+	    return $return;
+    }
 }
 
 /* Example Usage:
-    echo tag_wrap(get_field('feild_name'), 'h3 class="something"');
+    echo tag_wrap(get_field('field_name'), 'h3 class="something"');
     output: <h3 class="something">[contents]</h3>
 */
 
