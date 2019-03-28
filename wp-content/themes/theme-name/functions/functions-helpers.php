@@ -142,7 +142,7 @@ function jrd_link($link, $class = '', $id = '') {
  * @param  string $id           The desired HTML element ID for the dropdown
  * @return string               HTML for the select menu
  */
-function jrd_terms_dropdown($tax, $default_text = 'Sort by Category', $id = '') {
+function jrd_terms_dropdown($tax, $default_text = 'Select Category', $id = '') {
     $terms = get_terms(
         array(
             'taxonomy' => $tax,
@@ -152,11 +152,8 @@ function jrd_terms_dropdown($tax, $default_text = 'Sort by Category', $id = '') 
     $html  = "<select id=\"{$id}\" name=\"{$tax}\">";
     $html .= "<option value=\"\">{$default_text}</option>";
     foreach($terms as $term) {
-        if( isset($_GET[$tax]) && $_GET[$tax] == $term->slug ) {
-            $html .= "<option selected value=\"{$term->slug}\">{$term->name}</option>";
-        } else {
-            $html .= "<option value=\"{$term->slug}\">{$term->name}</option>";
-        }
+        $selected = ( isset($_GET[$tax]) && $_GET[$tax] == $term->slug ) ? 'selected' : '';
+        $html .= "<option $selected value=\"{$term->slug}\">{$term->name}</option>";
     }
     $html .= '</select>';
     return $html;
