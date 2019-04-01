@@ -98,26 +98,26 @@ function clean( $string ) {
  * @param  array  $data    key=>val pairs for data attributes for the image
  * @return string          The HTML for the image
  */
-function jrd_img( $field, $size, $classes, $id, $data = array() ) {
+function jrd_img( $field, $size = 'large', $classes = '', $id = '', $data = array() ) {
     $img_array = $field;
     if ( $img_array ) {
-        $my_classes = ( $classes != '' ) ? ' class="' . $classes . '" ' : ' ';
-        $my_id = ( $id != '' ) ? ' id="'.$id.'" ' : ' ';
+        $my_classes = ( $classes != '' ) ? "class=\"{$classes}\"" : ' ';
+        $my_id = ( $id != '' ) ? "id=\"{$id}\"" : ' ';
         //fields from images
-        $img_url = ( $size != '' ) ? $img_array['sizes'][$size] : $img_array['url'];
+        $img_url = $img_array['sizes'][$size];
         $img_alt = $img_array['alt'];
         $img_title = $img_array['title'];
         //data attributes
         $my_data = '';
         if ( $data) {
             foreach ( $data as $key => $value ) {
-                $my_data .= 'data-'.$key.'="'.$value.'" ';
+                $my_data .= "data-{$key}=\"{$value}\"";
             }
         }
 
-        $img = '<img' . $my_id . $my_classes . 'src="' . $img_url . '" alt="' . $img_alt . '" ' . $my_data . '/>';
+        $img_html = "<img src=\"$img_url\" alt=\"$img_alt\" $my_id $my_classes $my_data />";
 
-        return $img;
+        return $img_html;
     }
 }
 
