@@ -4,6 +4,12 @@ AddHandler php5-script .php
 # RewriteCond %{HTTP_HOST} ^DOMAIN.com [NC]
 # RewriteRule ^(.*)$ http://www.DOMAIN.com/$1 [L,R=301]
 
+# X-Content-Type nosniff
+# <IfModule mod_headers.c>
+#    Header set X-Content-Type-Options nosniff
+# </IfModule>
+
+
 # ErrorDocument 404 http://www.DOMAIN.com
 
 # For when webfonts give a "Resource interpreted as Font but transferred with MIME type ___" error. Un-comment the one relevant to the error.
