@@ -437,3 +437,13 @@ add_filter( 'auth_cookie_expiration', 'keep_me_logged_in' );
 function keep_me_logged_in( $expirein ) {
     return 10 * DAY_IN_SECONDS;
 }
+
+//Add instructions to Featured Image metabox
+function jrd_add_featured_image_size( $html ) {
+    switch ( get_post_type() ) {
+        case 'post': $size = '640x480'; break;
+    }
+    if ( isset($size) ) $html .= "$size recommended.";
+    return $html;
+}
+add_filter( 'admin_post_thumbnail_html', 'jrd_add_featured_image_size');
