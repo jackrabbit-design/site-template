@@ -1,0 +1,167 @@
+/* ========================================================================= */
+/* !RESETS AND DEFAULTS */
+/* ========================================================================= */
+
+    html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p,
+    blockquote, pre, abbr, address, cite, code, del, dfn, img,
+    ins, kbd, q, samp, var, hr, acronym, dl, dt, dd, ol, ul, li,
+    pre, fieldset, form, label, legend, table, caption, tbody,
+    tfoot, thead, tr, th, td, article, aside, canvas, details,
+    figcaption, figure, footer, header, hgroup, menu, nav,
+    section, summary, time, mark, audio, video {
+        border:0;
+        outline:0;
+        font-style:normal;
+        font-weight:400;
+        font-size:100%;
+        vertical-align:baseline;
+        margin:0;
+        padding:0;
+        -webkit-text-size-adjust:100%;
+    }
+    em, strong, b, i, a, span, sub, sup, small {
+        border:0;
+        outline:0;
+        font-size:100%;
+        vertical-align:baseline;
+        margin:0;
+        padding:0;
+    }
+    /*
+    a:focus {
+        outline:0;
+    }
+    :focus, :active {
+        outline:none; outline:0;
+    } ::-moz-focus-inner {
+        outline:none;
+    }
+    */
+
+    article, aside, details, figcaption, figure, footer,
+    header, hgroup, menu, nav, section {
+        display:block;
+    }
+    li {
+        list-style:none;
+    }
+    a {
+        text-decoration:none;
+    }
+    blockquote:before, blockquote:after, q:before, q:after {
+        content:"";
+    }
+    table {
+        border-collapse:collapse;
+        border-spacing:0;
+    }
+    hr {
+        display:block;
+        height:1px;
+        border-top:1px solid #000;
+        color:#000;
+    }
+    input, select {
+        vertical-align:middle;
+    }
+    sub {
+        vertical-align:sub;
+        font-size:smaller;
+        line-height:0px;
+    }
+    sup {
+        vertical-align:super;
+        font-size:smaller;
+        line-height:0px;
+    }
+    input, button, textarea, select, label, img {
+        display:inline-block;
+        max-width:100%;
+        height:auto;
+    }
+    input, button, textarea, select, optgroup, option {
+        font-family:inherit;
+        font-size:inherit;
+        font-style:inherit;
+        font-weight:inherit;
+    }
+    input, button, textarea, select {
+        -webkit-appearance: none;
+        outline:1px solid transparent;
+    }
+    textarea {
+        resize:none;
+        overflow:auto;
+    }
+    button, a span {
+        cursor:pointer;
+    }
+    button {
+        border:0;
+        text-align:center;
+    }
+    button::-moz-focus-inner {
+        padding:0;
+        border:0;
+    }
+    table {
+        table-layout:fixed;
+    }
+    a[href^=tel] {
+         color:inherit;
+     }
+    select {
+        -moz-appearance:none;
+        -webkit-appearance:none;
+        -ms-appearance:none;
+    }
+    select:-moz-focusring {
+        color:transparent;
+    }
+    select::-ms-expand {
+        display:none; ;
+    }
+
+    /* != FONT SMOOTHING */
+    body, input, button, textarea {
+        -webkit-font-smoothing:antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* != ms-clear */
+    input[type=text]::-ms-clear  {
+        display: none;
+    }
+
+    /* != BACKGROUND POSITION AND BOX SIZING */
+    *, *:before, *:after {
+        box-sizing: border-box;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    /* != .clearfix - CLEAR ELEMENTS */
+    .clear {
+        clear: both;
+    }
+    .clearfix {
+        display:block;
+        &:after {
+            visibility:hidden;
+            display:block;
+            font-size:0;
+            content:" ";
+            clear:both;
+            height:0;
+        }
+    }
+    /* != .wordwrap - CONTINUE LONG URLS/WORDS ON NEXT LINE */
+    .wordwrap {
+        white-space:pre;
+        white-space:pre-wrap;
+        white-space:pre-line;
+        white-space:-pre-wrap;
+        white-space:-o-pre-wrap;
+        white-space:-moz-pre-wrap;
+        word-wrap:break-word;
+    }

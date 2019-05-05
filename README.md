@@ -2,6 +2,12 @@
 
 Original Developer: **Your Name**
 
+### 3.1.0
+- Functions File
+- Added helper file
+- Adjusted browser_class(); 
+- Adjusted the_slug();
+
 ### 3.0.0
 - Everything that's been done since 2.1.0
 - Remove MSSmartTagsPreventParsing meta
