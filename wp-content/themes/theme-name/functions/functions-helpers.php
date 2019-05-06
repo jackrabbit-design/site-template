@@ -21,8 +21,11 @@
  * @param  mixed $var Variable to examine
  * @return array      Array to be returned
  */
-function printr( $var ){ echo '<pre>'; print_r( $var ); echo '</pre>'; };
-
+function printr( $var ){
+    echo '<pre>';
+    print_r( $var );
+    echo '</pre>';
+}
 
 /**
  * Get the slug of a post
@@ -33,6 +36,7 @@ function get_the_slug() {
     $slug = $post->post_name;
     return $slug;
 }
+
 /**
  * Echo the slug of a post
  * @return int The post's slug
@@ -40,7 +44,6 @@ function get_the_slug() {
 function the_slug() {
     echo get_the_slug();
 }
-
 
 /**
  * Limit the amount of words in a given string
@@ -53,7 +56,6 @@ function limit_excerpt( $string, $word_limit ) {
     return implode( ' ', array_slice( $words, 0, $word_limit ) );
 }
 
-
 /**
  * Wrap a variable in a tag
  * @param  string $string   The text to be wrapped
@@ -61,7 +63,7 @@ function limit_excerpt( $string, $word_limit ) {
  * @return string           The returned HTML
  */
 function tag_wrap( $string, $wrapper ) {
-	if($string){
+	if ( $string ) {
 	    $return = "<{$wrapper}>{$string}";
 	    $element = explode( ' ', $wrapper );
 	    $element = $element[0];
@@ -69,12 +71,10 @@ function tag_wrap( $string, $wrapper ) {
 	    return $return;
     }
 }
-
 /* Example Usage:
     echo tag_wrap(get_field('field_name'), 'h3 class="something"');
     output: <h3 class="something">[contents]</h3>
 */
-
 
 /**
  * CLEAN FUNCTION - Helpful making better hash links out of repeating fields.
@@ -88,7 +88,6 @@ function clean( $string ) {
     return preg_replace( '/[^A-Za-z0-9\-]/', '', $string );
 }
 
-
 /**
  * Returns a proper <img /> tag with all necessary attributes and values
  * @param  array $field   The ACF image field
@@ -99,26 +98,17 @@ function clean( $string ) {
  * @return string          The HTML for the image
  */
 function jrd_img( $field, $size = 'large', $classes = '', $id = '', $data = array() ) {
-    $img_array = $field;
-    if ( $img_array ) {
-        $my_classes = ( $classes != '' ) ? "class=\"{$classes}\"" : ' ';
-        $my_id = ( $id != '' ) ? "id=\"{$id}\"" : ' ';
-        //fields from images
-        $img_url = $img_array['sizes'][$size];
-        $img_alt = $img_array['alt'];
-        $img_title = $img_array['title'];
-        //data attributes
-        $my_data = '';
-        if ( $data) {
-            foreach ( $data as $key => $value ) {
-                $my_data .= "data-{$key}=\"{$value}\"";
-            }
+    $atts = array(
+        'class' => $classes,
+        'id' => $id,
+    );
+    if ( !empty( $data ) ) {
+        foreach ( $data as $key=>$val ) {
+            $key = str_replace( 'data-', '', $key );
+            $atts['data-' . $key] = $val;
         }
-
-        $img_html = "<img src=\"$img_url\" alt=\"$img_alt\" $my_id $my_classes $my_data />";
-
-        return $img_html;
     }
+    return wp_get_attachment_image( $field['ID'], $size, false, $atts );
 }
 
 /**
@@ -128,8 +118,8 @@ function jrd_img( $field, $size = 'large', $classes = '', $id = '', $data = arra
  * @param  string $id    The desired HTML ID for the link
  * @return string        HTML for the link
  */
-function jrd_link($link, $class = '', $id = '') {
-    if($link) {
+function jrd_link( $link, $class = '', $id = '' ) {
+    if ( $link ) {
         $link_url = esc_url( $link['url'] );
         return "<a href='{$link_url}' title='{$link['title']}' target='{$link['target']}' class='$class' id='$id'><span>{$link['title']}</span></a>";
     }
@@ -142,7 +132,7 @@ function jrd_link($link, $class = '', $id = '') {
  * @param  string $id           The desired HTML element ID for the dropdown
  * @return string               HTML for the select menu
  */
-function jrd_terms_dropdown($tax, $default_text = 'Select Category', $id = '') {
+function jrd_terms_dropdown( $tax, $default_text = 'Select Category', $id = '' ) {
     $terms = get_terms(
         array(
             'taxonomy' => $tax,
@@ -151,8 +141,8 @@ function jrd_terms_dropdown($tax, $default_text = 'Select Category', $id = '') {
     );
     $html  = "<select id=\"{$id}\" name=\"{$tax}\">";
     $html .= "<option value=\"\">{$default_text}</option>";
-    foreach($terms as $term) {
-        $selected = ( isset($_GET[$tax]) && $_GET[$tax] == $term->slug ) ? 'selected' : '';
+    foreach ( $terms as $term ) {
+        $selected = ( isset( $_GET[$tax] ) && $_GET[$tax] == $term->slug ) ? 'selected' : '';
         $html .= "<option $selected value=\"{$term->slug}\">{$term->name}</option>";
     }
     $html .= '</select>';
