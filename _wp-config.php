@@ -13,3 +13,6 @@ define( 'WP_DEBUG', isset( $_GET['debug'] ) );
 /* REVISION SETTINGS */
 define('WP_POST_REVISIONS', 5);
 define('AUTOSAVE_INTERVAL', 160 );
+
+/* MULTISITE SETTINGS */
+//define('COOKIE_DOMAIN', $_SERVER['HTTP_HOST'] ); // Define cookie location for multisite children
