@@ -114,7 +114,7 @@ add_action( 'login_headerurl', 'jrd_login_url' );
 function jrd_login_title() {
     return get_bloginfo( 'name' );
 }
-add_action( 'login_headertitle', 'jrd_login_title' );
+add_action( 'login_headertext', 'jrd_login_title' );
 
 
 /* ========================================================================= */
