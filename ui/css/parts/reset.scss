@@ -12,7 +12,6 @@
         border:0;
         outline:0;
         font-style:normal;
-        font-weight:400;
         font-size:100%;
         vertical-align:baseline;
         margin:0;
@@ -85,7 +84,14 @@
         font-style:inherit;
         font-weight:inherit;
     }
-    input, button, textarea, select {
+    input[type=text],
+    input[type=password],
+    input[type=url],
+    input[type=number],
+    input[type=tel],
+    input[type=email],
+    input[type=submit],
+    button, textarea, select {
         -webkit-appearance: none;
         outline:1px solid transparent;
     }

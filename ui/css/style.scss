@@ -105,7 +105,13 @@
         padding: 0 20px;
     }
 
+    #header {
 
+    }
+
+    #footer {
+
+    }
 
 /* != PLACEHOLDER ATTRIBUTE STYLES = input or textarea - placeholder="whatever" ===== */
 /*
@@ -147,7 +153,7 @@
         display: inline-block;
         overflow: hidden;
         margin: 0 10px 0 0;
-        &:after, &:after {
+        &:before, &:after {
             content: '';
             position: absolute;
             right: 14px;
@@ -159,6 +165,7 @@
         }
         &:hover {
             border-color: #00f;
+            &:before {/* bg image */}
             &:after {/* bg image */}
         }
         select {
@@ -203,10 +210,3 @@
         pointer-events:none;
         opacity:0;
     }
-
-
-/* ========================================================================= */
-/* MEDIA QUERIES */
-/* ========================================================================= */
-
-/* @media screen and (max-width: XXXpx) {  } */
