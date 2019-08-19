@@ -120,8 +120,9 @@ function jrd_img( $field, $size = 'large', $classes = '', $id = '', $data = arra
  */
 function jrd_link( $link, $class = '', $id = '' ) {
     if ( $link ) {
+        $link_title = $link['title'] ?: $link['url'];
         $link_url = esc_url( $link['url'] );
-        return "<a href='{$link_url}' title='{$link['title']}' target='{$link['target']}' class='$class' id='$id'><span>{$link['title']}</span></a>";
+        return "<a href='{$link_url}' title='{$link_title}' target='{$link['target']}' class='$class' id='$id'><span>{$link['title']}</span></a>";
     }
 }
 
