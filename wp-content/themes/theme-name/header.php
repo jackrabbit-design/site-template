@@ -32,5 +32,18 @@
     <?php
     wp_head();
     ?>
+    <?php 
+    /* Uncomment and replace UA-XXX-Y
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXX-Y"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-XXX-Y');
+    </script>
+    */ 
+    ?>
 </head>
 <body <?php body_class(); ?>>
