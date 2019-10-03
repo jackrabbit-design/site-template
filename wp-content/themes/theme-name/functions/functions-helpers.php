@@ -22,9 +22,9 @@
  * @return array      Array to be returned
  */
 function printr( $var ){
-    echo '<pre>';
+    echo '<pre>' . PHP_EOL;
     print_r( $var );
-    echo '</pre>';
+    echo '</pre>' . PHP_EOL;
 }
 
 /**
@@ -67,7 +67,7 @@ function tag_wrap( $string, $wrapper ) {
 	    $return = "<{$wrapper}>{$string}";
 	    $element = explode( ' ', $wrapper );
 	    $element = $element[0];
-	    $return .= "</{$element}>";
+	    $return .= "</{$element}>" . PHP_EOL;
 	    return $return;
     }
 }
@@ -108,7 +108,7 @@ function jrd_img( $field, $size = 'large', $classes = '', $id = '', $data = arra
             $atts['data-' . $key] = $val;
         }
     }
-    return wp_get_attachment_image( $field['ID'], $size, false, $atts );
+    return wp_get_attachment_image( $field['ID'], $size, false, $atts ) . PHP_EOL;
 }
 
 /**
@@ -122,7 +122,7 @@ function jrd_link( $link, $class = '', $id = '' ) {
     if ( $link ) {
         $link_title = $link['title'] ?: $link['url'];
         $link_url = esc_url( $link['url'] );
-        return "<a href='{$link_url}' title='{$link_title}' target='{$link['target']}' class='$class' id='$id'><span>{$link['title']}</span></a>";
+        return "<a href='{$link_url}' title='{$link_title}' target='{$link['target']}' class='$class' id='$id'><span>{$link['title']}</span></a>" . PHP_EOL;
     }
 }
 
@@ -140,12 +140,12 @@ function jrd_terms_dropdown( $tax, $default_text = 'Select Category', $id = '' )
             'hide_empty' => false,
         )
     );
-    $html  = "<select id=\"{$id}\" name=\"{$tax}\">";
-    $html .= "<option value=\"\">{$default_text}</option>";
+    $html  = "<select id=\"{$id}\" name=\"{$tax}\">" . PHP_EOL;
+    $html .= "<option value=\"\">{$default_text}</option>" . PHP_EOL;
     foreach ( $terms as $term ) {
         $selected = ( isset( $_GET[$tax] ) && $_GET[$tax] == $term->slug ) ? 'selected' : '';
-        $html .= "<option $selected value=\"{$term->slug}\">{$term->name}</option>";
+        $html .= "<option $selected value=\"{$term->slug}\">{$term->name}</option>" . PHP_EOL;
     }
-    $html .= '</select>';
+    $html .= '</select>' . PHP_EOL;
     return $html;
 }
