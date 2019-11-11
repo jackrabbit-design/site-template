@@ -149,3 +149,35 @@ function jrd_terms_dropdown( $tax, $default_text = 'Select Category', $id = '' )
     $html .= '</select>' . PHP_EOL;
     return $html;
 }
+
+
+/**
+ * Generate a date range for events
+ * Usage with ACF: jrd_date_range( get_field( 'event_start_date' ), get_field( 'event_end_date' ) );
+ * Note that the fields would be set to return as 'Ymd'.
+ * @param  string $start_date, in whatever format $date_format is set to
+ * @param  string $end_date, in whatever format $date_format is set to
+ * @param  string $date_format, the format of the above 2 parameters, defaulting to Ymd
+ */
+function jrd_date_range( $start_date, $end_date = null, $date_format = 'Ymd' ) {
+    if ( $start_date ) {
+        $start_datetime = date_create_from_format( $date_format, $start_date );
+        if ( $end_date ) {
+            $end_datetime = date_create_from_format( $date_format, $end_date );
+            if ( $start_datetime->format( 'Y' ) == $end_datetime->format( 'Y' ) ) {
+                if ( $start_datetime->format( 'F' ) == $end_datetime->format( 'F' ) ) {
+                    $date_range = $start_datetime->format( 'F j') . '-' . $end_datetime->format( 'j, Y');
+                } else {
+                    $date_range = $start_datetime->format( 'F j') . ' - ' . $end_datetime->format( 'F j, Y');
+                }
+            } else {
+                $date_range = $start_datetime->format( 'F j, Y') . ' - ' . $end_datetime->format( 'F j, Y');
+            }
+        } else {
+            $date_range = $start_datetime->format('F j, Y');
+        }
+    } else {
+        $date_range = '';
+    }
+    return $date_range;
+}
