@@ -161,22 +161,30 @@ function jrd_terms_dropdown( $tax, $default_text = 'Select Category', $id = '' )
  */
 function jrd_date_range( $start_date, $end_date = null, $date_format = 'Ymd' ) {
     if ( $start_date ) {
+        // if there's at least a start date
         $start_datetime = date_create_from_format( $date_format, $start_date );
         if ( $end_date ) {
+            // if there's also an end date
             $end_datetime = date_create_from_format( $date_format, $end_date );
             if ( $start_datetime->format( 'Y' ) == $end_datetime->format( 'Y' ) ) {
+                // if start date and end date are the same year
                 if ( $start_datetime->format( 'F' ) == $end_datetime->format( 'F' ) ) {
+                    // if start date and end date have the same month and year, return ex. January 1-3, 2020
                     $date_range = $start_datetime->format( 'F j') . '-' . $end_datetime->format( 'j, Y');
                 } else {
+                    // otherwise, return ex. Jan 30 - Feb 1, 2020
                     $date_range = $start_datetime->format( 'F j') . ' - ' . $end_datetime->format( 'F j, Y');
                 }
             } else {
+                // if start date and end date have different years, return ex. December 30 - January 1, 2020
                 $date_range = $start_datetime->format( 'F j, Y') . ' - ' . $end_datetime->format( 'F j, Y');
             }
         } else {
+            // if there's no end date, just return the start date, ex. January 30, 2020
             $date_range = $start_datetime->format('F j, Y');
         }
     } else {
+        // otherwise, return nothing
         $date_range = '';
     }
     return $date_range;
