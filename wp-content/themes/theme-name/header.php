@@ -32,7 +32,7 @@
     <?php
     wp_head();
     ?>
-    <?php 
+    <?php
     /* Uncomment and replace UA-XXX-Y
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXX-Y"></script>
@@ -43,7 +43,9 @@
 
         gtag('config', 'UA-XXX-Y');
     </script>
-    */ 
+    */
     ?>
 </head>
 <body <?php body_class(); ?>>
+
+<noscript><div style="text-align:center;background-color:#000;color:#fff;padding:5px;">It looks like JavaScript is disabled in your browser. Please enable JavaScript to view the full site.</div></noscript>
