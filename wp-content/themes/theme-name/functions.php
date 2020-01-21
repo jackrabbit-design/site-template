@@ -447,3 +447,17 @@ function jrd_add_featured_image_size( $html ) {
     return $html;
 }
 add_filter( 'admin_post_thumbnail_html', 'jrd_add_featured_image_size');
+
+// Prevent non-Jackrabbit users from accessing ACF config pages
+if ( is_admin() ) {
+    $not_jrd = strpos( get_userdata(get_current_user_id())->data->user_login, 'jackrabbit' ) == -1;
+    $currently_acf = false;
+    if ( isset( $_GET['post'] ) ) {
+        if ( 'acf-field-group' == get_post( $_GET['post'] )->post_type ) $currently_acf = true;
+    }
+    if ( 'acf-field-group' == $_GET['post_type'] ) $currently_acf = true;
+    if ( $currently_acf && $not_jrd ) {
+        echo "You are not authorized to edit custom fields.";
+        die;
+    }
+}
