@@ -2,6 +2,14 @@
 /* !SASS VARIABLES & MIXINS */
 /* ========================================================================= */
 
+    @mixin flex($justify, $alignitems, $flexwrap, $flexdirection) {
+		display: flex;
+		justify-content: $justify;
+		align-items: $alignitems;
+		flex-wrap: $flexwrap;
+		flex-direction: $flexdirection;
+    }
+
     @mixin size($w, $h: $w) { width: $w; height: $h; }
 
     // VERTICALLY CENTER CONTAINERS
