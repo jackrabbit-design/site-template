@@ -1,17 +1,17 @@
 <?php
 /*
-    Add helper functions, methods, and classes here. Helphers are for templating and not for adjusting body_class and functionaility.
+	Add helper functions, methods, and classes here. Helphers are for templating and not for adjusting body_class and functionaility.
 
-    TABLE OF CONTENTS
-    ******************
-    EASY PRINTR()
-    GET/THE POST SLUG
-    EXCERPT LIMITER
-    TAG WRAP
-    CLEAN FUNCTION
-    JRD_IMG
-    JRD_LINK
-    JRD_TERMS_DROPDOWN
+	TABLE OF CONTENTS
+	******************
+	EASY PRINTR()
+	GET/THE POST SLUG
+	EXCERPT LIMITER
+	TAG WRAP
+	CLEAN FUNCTION
+	JRD_IMG
+	JRD_LINK
+	JRD_TERMS_DROPDOWN
 
 */
 
@@ -21,10 +21,10 @@
  * @param  mixed $var Variable to examine
  * @return array      Array to be returned
  */
-function printr( $var ){
-    echo '<pre>' . PHP_EOL;
-    print_r( $var );
-    echo '</pre>' . PHP_EOL;
+function printr( $var ) {
+	echo '<pre>' . PHP_EOL;
+	print_r( $var );
+	echo '</pre>' . PHP_EOL;
 }
 
 /**
@@ -32,9 +32,9 @@ function printr( $var ){
  * @return int The posts's slug
  */
 function get_the_slug() {
-    global $post;
-    $slug = $post->post_name;
-    return $slug;
+	global $post;
+	$slug = $post->post_name;
+	return $slug;
 }
 
 /**
@@ -42,7 +42,7 @@ function get_the_slug() {
  * @return int The post's slug
  */
 function the_slug() {
-    echo get_the_slug();
+	echo esc_html( get_the_slug() );
 }
 
 /**
@@ -52,8 +52,8 @@ function the_slug() {
  * @return string             The delimited string
  */
 function limit_excerpt( $string, $word_limit ) {
-    $words = explode( ' ', $string );
-    return implode( ' ', array_slice( $words, 0, $word_limit ) );
+	$words = explode( ' ', $string );
+	return implode( ' ', array_slice( $words, 0, $word_limit ) );
 }
 
 /**
@@ -64,16 +64,16 @@ function limit_excerpt( $string, $word_limit ) {
  */
 function tag_wrap( $string, $wrapper ) {
 	if ( $string ) {
-	    $return = "<{$wrapper}>{$string}";
-	    $element = explode( ' ', $wrapper );
-	    $element = $element[0];
-	    $return .= "</{$element}>" . PHP_EOL;
-	    return $return;
-    }
+		$return  = "<{$wrapper}>{$string}";
+		$element = explode( ' ', $wrapper );
+		$element = $element[0];
+		$return .= "</{$element}>" . PHP_EOL;
+		return wp_kses_post( $return );
+	}
 }
 /* Example Usage:
-    echo tag_wrap(get_field('field_name'), 'h3 class="something"');
-    output: <h3 class="something">[contents]</h3>
+	echo tag_wrap(get_field('field_name'), 'h3 class="something"');
+	output: <h3 class="something">[contents]</h3>
 */
 
 /**
@@ -82,10 +82,10 @@ function tag_wrap( $string, $wrapper ) {
  * @return string         The sanitized string
  */
 function clean( $string ) {
-    $string = strip_tags( $string );
-    $string = strtolower( $string );
-    $string = str_replace( ' ', '-', $string );
-    return preg_replace( '/[^A-Za-z0-9\-]/', '', $string );
+	$string = wp_strip_all_tags( $string );
+	$string = strtolower( $string );
+	$string = str_replace( ' ', '-', $string );
+	return preg_replace( '/[^A-Za-z0-9\-]/', '', $string );
 }
 
 /**
@@ -98,17 +98,18 @@ function clean( $string ) {
  * @return string          The HTML for the image
  */
 function jrd_img( $field, $size = 'large', $classes = '', $id = '', $data = array() ) {
-    $atts = array(
-        'class' => $classes,
-        'id' => $id,
-    );
-    if ( !empty( $data ) ) {
-        foreach ( $data as $key=>$val ) {
-            $key = str_replace( 'data-', '', $key );
-            $atts['data-' . $key] = $val;
-        }
-    }
-    return wp_get_attachment_image( $field['ID'], $size, false, $atts ) . PHP_EOL;
+	$atts = array(
+		'class' => $classes,
+		'id'    => $id,
+	);
+	if ( ! empty( $data ) ) {
+		foreach ( $data as $key => $val ) {
+			$key = str_replace( 'data-', '', $key );
+
+			$atts[ 'data-' . $key ] = $val;
+		}
+	}
+	return wp_kses_post( wp_get_attachment_image( $field['ID'], $size, false, $atts ) ) . PHP_EOL;
 }
 
 /**
@@ -119,11 +120,11 @@ function jrd_img( $field, $size = 'large', $classes = '', $id = '', $data = arra
  * @return string        HTML for the link
  */
 function jrd_link( $link, $class = '', $id = '' ) {
-    if ( $link ) {
-        $link_title = $link['title'] ?: $link['url'];
-        $link_url = esc_url( $link['url'] );
-        return "<a href='{$link_url}' title='{$link_title}' target='{$link['target']}' class='$class' id='$id'><span>{$link['title']}</span></a>" . PHP_EOL;
-    }
+	if ( $link ) {
+		$link_title = $link['title'] ? $link['title'] : $link['url'];
+		$link_url   = esc_url( $link['url'] );
+		return "<a href='{$link_url}' title='{$link_title}' target='{$link['target']}' class='$class' id='$id'><span>{$link['title']}</span></a>" . PHP_EOL;
+	}
 }
 
 /**
@@ -134,20 +135,20 @@ function jrd_link( $link, $class = '', $id = '' ) {
  * @return string               HTML for the select menu
  */
 function jrd_terms_dropdown( $tax, $default_text = 'Select Category', $id = '' ) {
-    $terms = get_terms(
-        array(
-            'taxonomy' => $tax,
-            'hide_empty' => false,
-        )
-    );
-    $html  = "<select id=\"{$id}\" name=\"{$tax}\">" . PHP_EOL;
-    $html .= "<option value=\"\">{$default_text}</option>" . PHP_EOL;
-    foreach ( $terms as $term ) {
-        $selected = ( isset( $_GET[$tax] ) && $_GET[$tax] == $term->slug ) ? 'selected' : '';
-        $html .= "<option $selected value=\"{$term->slug}\">{$term->name}</option>" . PHP_EOL;
-    }
-    $html .= '</select>' . PHP_EOL;
-    return $html;
+	$terms = get_terms(
+		array(
+			'taxonomy'   => $tax,
+			'hide_empty' => false,
+		)
+	);
+	$html  = "<select id=\"{$id}\" name=\"{$tax}\">" . PHP_EOL;
+	$html .= "<option value=\"\">{$default_text}</option>" . PHP_EOL;
+	foreach ( $terms as $term ) {
+		$selected = ( isset( $_GET[ $tax ] ) && $_GET[ $tax ] === $term->slug ) ? 'selected' : '';
+		$html    .= "<option $selected value=\"{$term->slug}\">{$term->name}</option>" . PHP_EOL;
+	}
+	$html .= '</select>' . PHP_EOL;
+	return $html;
 }
 
 
@@ -160,32 +161,32 @@ function jrd_terms_dropdown( $tax, $default_text = 'Select Category', $id = '' )
  * @param  string $date_format, the format of the above 2 parameters, defaulting to Ymd
  */
 function jrd_date_range( $start_date, $end_date = null, $date_format = 'Ymd' ) {
-    if ( $start_date ) {
-        // if there's at least a start date
-        $start_datetime = date_create_from_format( $date_format, $start_date );
-        if ( $end_date ) {
-            // if there's also an end date
-            $end_datetime = date_create_from_format( $date_format, $end_date );
-            if ( $start_datetime->format( 'Y' ) == $end_datetime->format( 'Y' ) ) {
-                // if start date and end date are the same year
-                if ( $start_datetime->format( 'F' ) == $end_datetime->format( 'F' ) ) {
-                    // if start date and end date have the same month and year, return ex. January 1-3, 2020
-                    $date_range = $start_datetime->format( 'F j') . '-' . $end_datetime->format( 'j, Y');
-                } else {
-                    // otherwise, return ex. Jan 30 - Feb 1, 2020
-                    $date_range = $start_datetime->format( 'F j') . ' - ' . $end_datetime->format( 'F j, Y');
-                }
-            } else {
-                // if start date and end date have different years, return ex. December 30 - January 1, 2020
-                $date_range = $start_datetime->format( 'F j, Y') . ' - ' . $end_datetime->format( 'F j, Y');
-            }
-        } else {
-            // if there's no end date, just return the start date, ex. January 30, 2020
-            $date_range = $start_datetime->format('F j, Y');
-        }
-    } else {
-        // otherwise, return nothing
-        $date_range = '';
-    }
-    return $date_range;
+	if ( $start_date ) {
+		// if there's at least a start date
+		$start_datetime = date_create_from_format( $date_format, $start_date );
+		if ( $end_date ) {
+			// if there's also an end date
+			$end_datetime = date_create_from_format( $date_format, $end_date );
+			if ( $start_datetime->format( 'Y' ) === $end_datetime->format( 'Y' ) ) {
+				// if start date and end date are the same year
+				if ( $start_datetime->format( 'F' ) === $end_datetime->format( 'F' ) ) {
+					// if start date and end date have the same month and year, return ex. January 1-3, 2020
+					$date_range = $start_datetime->format( 'F j' ) . '-' . $end_datetime->format( 'j, Y' );
+				} else {
+					// otherwise, return ex. Jan 30 - Feb 1, 2020
+					$date_range = $start_datetime->format( 'F j' ) . ' - ' . $end_datetime->format( 'F j, Y' );
+				}
+			} else {
+				// if start date and end date have different years, return ex. December 30 - January 1, 2020
+				$date_range = $start_datetime->format( 'F j, Y' ) . ' - ' . $end_datetime->format( 'F j, Y' );
+			}
+		} else {
+			// if there's no end date, just return the start date, ex. January 30, 2020
+			$date_range = $start_datetime->format( 'F j, Y' );
+		}
+	} else {
+		// otherwise, return nothing
+		$date_range = '';
+	}
+	return $date_range;
 }
