@@ -30,6 +30,9 @@ add_filter( 'login_errors', '__return_null' );
 /* WordPress Customization & Setup */
 /* ========================================================================= */
 
+/* Disable Wordpress's Auto-scale of Images */
+add_filter( 'big_image_size_threshold', '__return_false' );
+
 /* Post Thumbnail Sizes */
 add_theme_support( 'post-thumbnails' );
 set_post_thumbnail_size( 64, 64, true );
