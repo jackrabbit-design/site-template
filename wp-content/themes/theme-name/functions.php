@@ -318,14 +318,21 @@ add_filter( 'upload_mimes', 'cc_mime_types' );
 
 
 /* ========================================================================= */
-/* Move Yoast to bottom
-   Shove yoast to the bottom of the edit page where it belongs. */
+/* Move Yoast or Rank Math to Bottom
+   Shove Yoast/Rank Math to the bottom of the edit page where it belongs. */
 /* ========================================================================= */
 
 function yoasttobottom() {
 	return 'low';
 }
 add_filter( 'wpseo_metabox_prio', 'yoasttobottom' );
+
+
+function rank_math_change_metabox_priority() {
+    return 'low';
+}
+add_filter( 'rank_math/metabox/priority', 'rank_math_change_metabox_priority' );
+
 
 
 /* ========================================================================= */
@@ -476,3 +483,26 @@ if ( is_admin() ) {
 		die;
 	}
 }
+
+/* ================================================================================ */
+/* Add Edit Post Link to Lower Left Corner; Hide Admin Bar for Your User */
+/* ================================================================================ */
+// 
+function jrd_edit_post(){
+    $html = '';
+    if ( current_user_can( 'administrator' ) ) {
+        global $post;
+        wp_enqueue_style( 'dashicons' );
+        $html = "
+        <style>
+            #jrd-edit-post { position:fixed; left:0; bottom:0; background:#23282d; display:block; width: 70px; height: 70px; transform: translate(-50%, 50%) rotate(45deg); transform-origin: center center; text-align: center; z-index:9999; }
+            #jrd-edit-post span { transform: translateX(27px) translateY(4px) rotate(-45deg); display: block; transform-origin: center center; }
+        #wpadminbar {display: none;}
+        </style>
+        ";
+        $html .= '<a href="' . get_edit_post_link($post->ID) . '" id="jrd-edit-post"><span class="dashicons dashicons-edit"></span></a>';
+    }
+    echo $html;
+}
+add_action('wp_footer', 'jrd_edit_post');
+
