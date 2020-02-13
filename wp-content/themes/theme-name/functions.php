@@ -318,20 +318,15 @@ add_filter( 'upload_mimes', 'cc_mime_types' );
 
 
 /* ========================================================================= */
-/* Move Yoast or Rank Math to Bottom
+/* Move SEO Shit to Bottom of Edit Page
    Shove Yoast/Rank Math to the bottom of the edit page where it belongs. */
 /* ========================================================================= */
 
-function yoasttobottom() {
+function seo_to_bottom() {
 	return 'low';
 }
-add_filter( 'wpseo_metabox_prio', 'yoasttobottom' );
-
-
-function rank_math_change_metabox_priority() {
-    return 'low';
-}
-add_filter( 'rank_math/metabox/priority', 'rank_math_change_metabox_priority' );
+add_filter( 'wpseo_metabox_prio', 'seo_to_bottom' );
+add_filter( 'rank_math/metabox/priority', 'seo_to_bottom' );
 
 
 
