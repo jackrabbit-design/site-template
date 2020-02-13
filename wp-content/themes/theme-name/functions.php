@@ -318,7 +318,7 @@ add_filter( 'upload_mimes', 'cc_mime_types' );
 
 
 /* ========================================================================= */
-/* Move SEO Shit to Bottom of Edit Page
+/* Move SEO to Bottom of Edit Page
    Shove Yoast/Rank Math to the bottom of the edit page where it belongs. */
 /* ========================================================================= */
 

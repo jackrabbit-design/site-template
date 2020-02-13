@@ -12,6 +12,7 @@
 	JRD_IMG
 	JRD_LINK
 	JRD_TERMS_DROPDOWN
+    JRD_SOCIAL_NAV
 
 */
 
@@ -189,4 +190,38 @@ function jrd_date_range( $start_date, $end_date = null, $date_format = 'Ymd' ) {
 		$date_range = '';
 	}
 	return $date_range;
+}
+
+
+
+/**
+ * Social Media Nav Creator
+ * @param string $field_name    parent field name
+ * @param string $icon_fn       icon field name; I usually use a select field.
+ * @param string $url_fn        url field
+ * @param string $option        is it on the options page? default is true
+ * List of Options for easy copypasta
+    social_facebook : Facebook
+    social_instagram : Instagram
+    social_linkedin : LinkedIn
+    social_pinterest : Pinterest
+    social_rss : RSS
+    social_sharethis : ShareThis
+    social_twitter : Twitter
+    social_vimeo : Vimeo
+    social_youtube : YouTube
+ */
+function jrd_social_nav( $field_name, $icon_field, $url_field, $id = 'nav-social') {
+    $html   = '';
+    if ( have_rows( $field_name, 'option' ) ) {
+        $html .= "<nav id=\"{$id}\" class=\"social-media\"><ul>";
+        while ( have_rows( $field_name, 'option' ) ) {
+            the_row();
+            $icon  = get_sub_field( $icon_field );
+            $url   = get_sub_field( $url_field );
+            $html .= "<li><a href=\"{$url}\" target=\"_blank\"><svg class=\"{$icon}\"><use xlink:href=\"/ui/svg/social-sprites.svg#{$icon}\"></use></svg></a></li> ";
+        }
+        $html .= '</ul></nav>';
+    }
+    return $html;
 }
