@@ -30,7 +30,7 @@ add_filter( 'login_errors', '__return_null' );
 /* WordPress Customization & Setup */
 /* ========================================================================= */
 
-/* Disable Wordpress's Auto-scale of Images */
+/* Disable WordPress's Auto-scale of Images */
 add_filter( 'big_image_size_threshold', '__return_false' );
 
 /* Post Thumbnail Sizes */
@@ -482,22 +482,22 @@ if ( is_admin() ) {
 /* ================================================================================ */
 /* Add Edit Post Link to Lower Left Corner; Hide Admin Bar for Your User */
 /* ================================================================================ */
-// 
-function jrd_edit_post(){
-    $html = '';
-    if ( current_user_can( 'administrator' ) ) {
-        global $post;
-        wp_enqueue_style( 'dashicons' );
-        $html = "
-        <style>
-            #jrd-edit-post { position:fixed; left:0; bottom:0; background:#23282d; display:block; width: 70px; height: 70px; transform: translate(-50%, 50%) rotate(45deg); transform-origin: center center; text-align: center; z-index:9999; }
-            #jrd-edit-post span { transform: translateX(27px) translateY(4px) rotate(-45deg); display: block; transform-origin: center center; }
-        #wpadminbar {display: none;}
-        </style>
-        ";
-        $html .= '<a href="' . get_edit_post_link($post->ID) . '" id="jrd-edit-post"><span class="dashicons dashicons-edit"></span></a>';
-    }
-    echo $html;
+
+function jrd_edit_post() {
+	$html = '';
+	if ( current_user_can( 'administrator' ) ) {
+		global $post;
+		wp_enqueue_style( 'dashicons' );
+		$html  = '
+		<style>
+			#jrd-edit-post { position:fixed; left:0; bottom:0; background:#23282d; display:block; width: 70px; height: 70px; transform: translate(-50%, 50%) rotate(45deg); transform-origin: center center; text-align: center; z-index:9999; }
+			#jrd-edit-post span { transform: translateX(27px) translateY(4px) rotate(-45deg); display: block; transform-origin: center center; }
+		#wpadminbar {display: none;}
+		</style>
+		';
+		$html .= '<a href="' . get_edit_post_link( $post->ID ) . '" id="jrd-edit-post"><span class="dashicons dashicons-edit"></span></a>';
+	}
+	echo $html;
 }
-add_action('wp_footer', 'jrd_edit_post');
+add_action( 'wp_footer', 'jrd_edit_post' );
 
