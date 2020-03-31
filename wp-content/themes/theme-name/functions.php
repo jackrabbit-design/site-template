@@ -459,18 +459,19 @@ function keep_me_logged_in( $expirein ) {
 }
 
 //Add instructions to Featured Image metabox
-function jrd_add_featured_image_size( $html ) {
+function jrd_add_featured_image_size() {
 	switch ( get_post_type() ) {
 		case 'post':
 			$size = '640x480';
 			break;
 	}
 	if ( isset( $size ) ) {
-		$html .= "$size recommended.";
+		$content = "$size recommended.";
+		$css     = "<style>#postimagediv .inside:after { content: '$content' }</style>";
+		echo $css;
 	}
-	return $html;
 }
-add_filter( 'admin_post_thumbnail_html', 'jrd_add_featured_image_size' );
+add_action( 'admin_head', 'jrd_add_featured_image_size' );
 
 // Prevent non-Jackrabbit users from accessing ACF config pages
 if ( is_admin() ) {
