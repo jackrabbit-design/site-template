@@ -110,7 +110,12 @@ function jrd_img( $field, $size = 'large', $classes = '', $id = '', $data = arra
 			$atts[ 'data-' . $key ] = $val;
 		}
 	}
-	return wp_kses_post( wp_get_attachment_image( $field['ID'], $size, false, $atts ) ) . PHP_EOL;
+	if ( is_int( $field ) ) {
+		$image_id = $field;
+	} else {
+		$image_id = $field['ID'];
+	}
+	return wp_kses_post( wp_get_attachment_image( $image_id, $size, false, $atts ) ) . PHP_EOL;
 }
 
 /**
