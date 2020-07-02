@@ -482,7 +482,7 @@ if ( is_admin() ) {
 			$currently_acf = true;
 		}
 	}
-	if ( 'acf-field-group' === $_GET['post_type'] ) {
+	if ( isset( $_GET['post_type'] ) && 'acf-field-group' === $_GET['post_type'] ) {
 		$currently_acf = true;
 	}
 	if ( $currently_acf && $not_jrd ) {
@@ -503,7 +503,7 @@ function jrd_edit_post() {
 		$html  = '
 		<style>
 			#jrd-edit-post { position:fixed; left:0; bottom:0; background:#23282d; display:block; width: 70px; height: 70px; transform: translate(-50%, 50%) rotate(45deg); transform-origin: center center; text-align: center; z-index:9999; }
-			#jrd-edit-post span { transform: translateX(27px) translateY(4px) rotate(-45deg); display: block; transform-origin: center center; }
+			#jrd-edit-post span { transform: translateX(27px) translateY(4px) rotate(-45deg); display: block; transform-origin: center center; color: #fff; }
 		#wpadminbar {display: none;}
 		</style>
 		';

@@ -98,11 +98,17 @@ function clean( $string ) {
  * @param  array  $data    key=>val pairs for data attributes for the image
  * @return string          The HTML for the image
  */
-function jrd_img( $field, $size = 'large', $classes = '', $id = '', $data = array() ) {
-	$atts = array(
-		'class' => $classes,
-		'id'    => $id,
-	);
+function jrd_img( $field, $size = 'large', $classes = null, $id = null, $data = array() ) {
+	if ( ! $field ) {
+		return false;
+	}
+	$atts = array();
+	if ( $id ) {
+		$atts['id'] = $id;
+	}
+	if ( $classes ) {
+		$atts['class'] = $class;
+	}
 	if ( ! empty( $data ) ) {
 		foreach ( $data as $key => $val ) {
 			$key = str_replace( 'data-', '', $key );
