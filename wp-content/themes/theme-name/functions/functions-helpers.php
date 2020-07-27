@@ -141,10 +141,11 @@ function jrd_link( $link, $class = '', $id = '' ) {
 
 /**
  * Taxonomy terms as a select menu
- * @param  string $tax          The taxonomy's slug
- * @param  string $default_text The default text for the select menu (eg. All Categories)
- * @param  string $id           The desired HTML element ID for the dropdown
- * @return string               HTML for the select menu
+ * @param  string $tax            The taxonomy's slug
+ * @param  string $default_text   The default text for the select menu (eg. All Categories)
+ * @param  string $default_value  The default value for the select menu (ex. the landing page's permalink)
+ * @param  string $id             The desired HTML element ID for the dropdown
+ * @return string                 HTML for the select menu
  */
 function jrd_terms_dropdown( $tax, $default_text = 'Select Category', $default_value = '', $id = '' ) {
 	$terms = get_terms(
