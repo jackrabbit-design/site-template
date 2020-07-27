@@ -16,7 +16,7 @@ jQuery(function($){
                 $(this).html(wordArray.join(" "));
             }
         });
-    };
+    }
     orphanize();
 
     // PARALLAX
