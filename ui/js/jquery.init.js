@@ -45,3 +45,5 @@ jQuery(function($){
     */
 
 });
+
+function focusIt(){ document.getElementById("jumptocontent").focus(); }

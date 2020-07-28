@@ -48,4 +48,12 @@
 </head>
 <body <?php body_class(); ?>>
 
-<noscript><div style="text-align:center;background-color:#000;color:#fff;padding:5px;">It looks like JavaScript is disabled in your browser. Please enable JavaScript to view the full site.</div></noscript>
+<noscript aria-hidden="true"><div style="text-align:center;background-color:#000;color:#fff;padding:5px;">It looks like JavaScript is disabled in your browser. Please enable JavaScript to view the full site.</div></noscript>
+
+<header id="header" role="banner">
+	<a id="skipnav" onclick="focusIt();" href="#jumptocontent" aria-label="Skip Navigation">Skip to Main Content</a>
+</header>
+
+<div id="body-content" role="main">
+	<a id="jumptocontent" name="jumptocontent"></a>
+</div>
