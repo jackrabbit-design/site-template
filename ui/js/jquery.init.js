@@ -5,6 +5,19 @@
 
 jQuery(function($){
 
+	// Alert Close
+	$('#alert .close').on('click',function(e){
+		e.preventDefault();
+		$('#alert').slideUp(100);
+		$.post(window.location,
+	       {
+	         alert: 'hide'
+	       },
+	       function(data) { }
+	    );
+	    return false;
+    });
+
     // ORPHANIZER
     function orphanize(){
         $(".orphan").each(function() {

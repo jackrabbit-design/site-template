@@ -1,3 +1,15 @@
+<?php
+	$alert_cookie = 'show';
+	if(isset($_COOKIE['alert_cookie']) && $_COOKIE['alert_cookie'] != ''){
+		$alert_cookie = $_COOKIE['alert_cookie'];
+	}
+	global $alert;
+	$alert = $alert_cookie;
+	if(isset($_POST['alert']) && $_POST['alert'] != ''){
+		$alert = $_POST['alert'];
+		setcookie( "alert_cookie", $alert, strtotime( '+1 day' ),'/' );
+	}
+?>
 <!DOCTYPE html>
 <html lang="en-US" prefix="og: http://ogp.me/ns#">
 <head>
@@ -49,6 +61,14 @@
 <body <?php body_class(); ?>>
 
 <noscript aria-hidden="true"><div style="text-align:center;background-color:#000;color:#fff;padding:5px;">It looks like JavaScript is disabled in your browser. Please enable JavaScript to view the full site.</div></noscript>
+
+<?php
+    if(get_field('_display_alert','options') && $alert != 'hide'){
+?>
+<div id="alert" role="complementary">
+	<a href="#" class="close">&times;</a>
+</div>
+<?php } ?>
 
 <header id="header" role="banner">
 	<a id="skipnav" onclick="focusIt();" href="#jumptocontent" aria-label="Skip Navigation">Skip to Main Content</a>
