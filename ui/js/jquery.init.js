@@ -5,16 +5,14 @@
 
 jQuery(function($){
 
-	// Alert Close
+	// Alert
+	if(Cookies.get('alert_cookie') != 'hide'){
+		$('#alert').css('display','block');
+	}
 	$('#alert .close').on('click',function(e){
 		e.preventDefault();
 		$('#alert').slideUp(100);
-		$.post(window.location,
-	       {
-	         alert: 'hide'
-	       },
-	       function(data) { }
-	    );
+		Cookies.set('alert_cookie', 'hide', { expires: 1, path: '/' });
 	    return false;
     });
 
