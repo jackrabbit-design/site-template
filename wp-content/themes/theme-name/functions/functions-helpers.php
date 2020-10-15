@@ -107,7 +107,7 @@ function jrd_img( $field, $size = 'large', $classes = null, $id = null, $data = 
 		$atts['id'] = $id;
 	}
 	if ( $classes ) {
-		$atts['class'] = $class;
+		$atts['class'] = $classes;
 	}
 	if ( ! empty( $data ) ) {
 		foreach ( $data as $key => $val ) {
