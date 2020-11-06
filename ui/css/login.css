@@ -24,7 +24,7 @@ body {
 }
 
 #jrd-login {
-    background: url(../images/jrd.png) no-repeat 75px top;
+    background: url(../svg/jrd.svg) no-repeat center top;
     margin: 0 auto;
     display: block;
     padding: 0 0 15px;
@@ -58,6 +58,10 @@ body {
 .login #backtoblog a:hover,
 .login #nav a:hover {
     font-weight: 100;
+}
+
+.login .privacy-policy-page-link {
+	margin:1em 0 2em;
 }
 
 
