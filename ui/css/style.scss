@@ -3,12 +3,24 @@
 @import 'parts/mixins';
 @import 'parts/vendor';
 
+$font_body: Helvetica, Arial, sans-serif;
+$font_heading: Helvetica, Arial, $font_body;
+
+$primary_color: #000000;
+$secondary_color: #333333;
+
 /* ========================================================================= */
 /* !STYLES */
 /* ========================================================================= */
 
 	html, body {
-
+        font: {
+            family: $font_body;
+            weight: 400;
+            size: 16px;
+        }
+        letter-spacing: -.04/16*1em;
+        line-height: 1.5;
     }
 
 /* != SELECTION STYLES (Leaving these blank will show no indication of text selection) ===== */
@@ -50,28 +62,152 @@
 
 /* != LAYOUT STYLES ===== */
 
-    h1 {
+    p, blockquote, ul, ol, hr, a.btn {
+        margin-bottom: 1em;
+    }
 
+    h1 {
+        font: {
+            family: $font_heading;
+            size: 96px;
+            weight: 700;
+        }
+        letter-spacing: calc(-0.3/96*1em);
+        margin-bottom: 0.5em;
     }
 
     h2 {
-
+        font: {
+            family: $font_heading;
+            size: 48px;
+            weight: 700;
+        }
+        letter-spacing: calc(-0.3/48*1em);
+        margin-bottom: 0.5em;
     }
 
     h3 {
-
+        font: {
+            family: $font_heading;
+            size: 24px;
+            weight: 700;
+        }
+        letter-spacing: calc(-0.3/24*1em);
+        margin-bottom: 0.5em;
     }
 
     h4 {
-
+        font: {
+            family: $font_heading;
+            size: 20px;
+            weight: 700;
+        }
+        letter-spacing: calc(-0.3/20*1em);
+        margin-bottom: 0.5em;
     }
 
     h5 {
-
+        font: {
+            family: $font_heading;
+            size: 16px;
+            weight: 700;
+        }
+        text-transform: uppercase;
+        letter-spacing: calc(-0.3/16*1em);
+        margin-bottom: 0.5em;
     }
 
     h6 {
+        font: {
+            family: $font_heading;
+            size: 12px;
+            weight: 700;
+        }
+        text-transform: uppercase;
+        letter-spacing: calc(1/12*1em);
+        margin-bottom: 0.5em;
+    }
 
+    ul {
+        li {
+            list-style-type:  "\1F407";
+        }
+    }
+
+    ol {
+        li {
+            list-style-type: lower-roman;
+        }
+    }
+
+    /* BUTTONS */
+    a, .gform_footer input, .utility button {
+        &.btn {
+            display: inline-block;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1;
+            padding: 13px 20px;
+            color: #fff;
+            background-color: $primary_color;
+            border-radius: 5px;
+            transition: .2s;
+            border: 1px solid $primary_color;
+            &:hover {
+                color: $primary_color;
+                background-color: #fff;
+            }
+            &__small {
+            }
+            &__white {
+            }
+            &__dark {
+            }
+            &__hero {
+            }
+        }
+    }
+
+    table {
+        thead {
+            background-color: #aaaaaa;
+        }
+        tbody {
+            background-color: #eeeeee;
+            >:nth-child(2n) {
+                background-color: #dddddd
+            }
+        }
+        th, td {
+            padding: 10px;
+        }
+    }
+
+    blockquote {
+        
+        cite {
+            padding: 10px;
+            border-left: 2px solid #000;
+            background-color: #eeeeee;
+        }
+    }
+
+    figure, .wp-caption {
+        display: table;
+        img {
+            display: block;
+        }
+        figcaption, .wp-caption-text {
+            padding: 10px;
+            margin: 10px 0;
+            border-top: 2px solid #000;
+            display: table-caption;
+            caption-side: bottom;
+            background-color: #eeeeee;
+        }
     }
 
     .content-main {
@@ -119,6 +255,34 @@
 
     }
 
+    .social-share-links {
+        font-size: 0;
+        margin: 10px 0px;
+        .social {
+            @include size(20px);
+            padding: 2px;
+            background-color: $primary_color;
+            border-radius: 10px;
+            display:inline-block;
+            font-size: 0;
+            vertical-align: middle;
+            &:hover {
+                background-color: $secondary_color;
+            }
+            svg {
+                vertical-align: 0px;
+                @include size(16px);
+                fill: #fff;
+            }
+            + .social {
+                margin-left: 10px;
+            }
+        }
+        >span {
+            color: #fff;
+        }
+    }
+
 /* != PLACEHOLDER ATTRIBUTE STYLES = input or textarea - placeholder="whatever" ===== */
 /*
     ::-webkit-input-placeholder {
@@ -150,15 +314,18 @@
 
 
     /* != Select menus with a .select-menu container or gform-select-menu applied in gravity forms ===== */
+    select,
     .select-menu,
     .gform-select-menu div {
         position: relative;
         width: 260px;
-        border: 1px solid #f00;
+        border-radius: 4px;
+        border: 1px solid #C8C4BC;
         vertical-align: middle;
         display: inline-block;
         overflow: hidden;
-        margin: 0 10px 0 0;
+        margin: 0 26px 0 0;
+        height: 40px;
         &:before, &:after {
             content: '';
             position: absolute;
@@ -167,20 +334,22 @@
             z-index: 1;
             pointer-events: none;
             @include size(16px);
-            /* bg image */
+            background: {
+                image: inline-svg('<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 15"><defs><style>.cls-1{fill:#7f7f7f;fill-rule:evenodd}</style></defs><path class="cls-1" d="M11 9l-5.5 6L0 9h11zM5.5 0L11 6H0l5.5-6z"/></svg>')
+            }
         }
         &:hover {
-            border-color: #00f;
+            /*border-color: #00f;*/
             &:before {/* bg image */}
             &:after {/* bg image */}
         }
         select {
-            padding: 0 10px 0 20px;
+            padding: 0 10px 0 16px;
             cursor: pointer;
-            color: #0f0;
+            color: #2E2D2B;
             background-color: #fff;
             width: 120%;
-            height: 40px;
+            height: 100%;
             line-height: 40px;
             border: 0;
             border-radius: 0;
