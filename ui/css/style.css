@@ -237,10 +237,6 @@ input[type=text]::-ms-clear {
 /* ========================================================================= */
 html, body {
   font-family: Helvetica, Arial, sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  letter-spacing: -0.0025em;
-  line-height: 1.5;
 }
 
 /* != SELECTION STYLES (Leaving these blank will show no indication of text selection) ===== */
@@ -279,70 +275,44 @@ html, body {
 }
 
 /* != LAYOUT STYLES ===== */
-p, blockquote, ul, ol, hr, a.btn {
-  margin-bottom: 1em;
-}
-
 h1 {
   font-family: Helvetica, Arial, Helvetica, Arial, sans-serif;
   font-size: 96px;
-  font-weight: 700;
-  letter-spacing: calc(-0.3/96*1em);
   margin-bottom: 0.5em;
 }
 
 h2 {
   font-family: Helvetica, Arial, Helvetica, Arial, sans-serif;
   font-size: 48px;
-  font-weight: 700;
-  letter-spacing: calc(-0.3/48*1em);
   margin-bottom: 0.5em;
 }
 
 h3 {
   font-family: Helvetica, Arial, Helvetica, Arial, sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: calc(-0.3/24*1em);
+  font-size: 36px;
   margin-bottom: 0.5em;
 }
 
 h4 {
   font-family: Helvetica, Arial, Helvetica, Arial, sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: calc(-0.3/20*1em);
+  font-size: 24px;
   margin-bottom: 0.5em;
 }
 
 h5 {
   font-family: Helvetica, Arial, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: calc(-0.3/16*1em);
+  font-size: 20px;
   margin-bottom: 0.5em;
 }
 
 h6 {
   font-family: Helvetica, Arial, Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: calc(1/12*1em);
+  font-size: 18px;
   margin-bottom: 0.5em;
 }
 
-ul li {
-  list-style-type: "🐇";
-}
-
-ol li {
-  list-style-type: lower-roman;
-}
-
 /* BUTTONS */
-a.btn, .gform_footer input.btn, .utility button.btn {
+a.btn {
   display: inline-block;
   text-transform: uppercase;
   text-decoration: none;
@@ -353,31 +323,47 @@ a.btn, .gform_footer input.btn, .utility button.btn {
   padding: 13px 20px;
   color: #fff;
   background-color: #000000;
-  border-radius: 5px;
+  border-radius: 4px;
   transition: 0.2s;
   border: 1px solid #000000;
 }
-a.btn:hover, .gform_footer input.btn:hover, .utility button.btn:hover {
+a.btn:hover {
   color: #000000;
   background-color: #fff;
 }
 table thead {
-  background-color: #aaaaaa;
+  background-color: #ffffff;
 }
 table tbody {
-  background-color: #eeeeee;
+  background-color: #ffffff;
 }
 table tbody > :nth-child(2n) {
-  background-color: #dddddd;
+  background-color: #ffffff;
 }
 table th, table td {
   padding: 10px;
 }
 
+blockquote p {
+  padding-left: 20px;
+  position: relative;
+}
+blockquote p:before {
+  content: "“";
+  position: absolute;
+  left: 0;
+  font: normal 500 50px sans-serif;
+  color: #333333;
+}
+blockquote p:after {
+  content: "”";
+  position: absolute;
+  font: normal 500 50px sans-serif;
+  color: #333333;
+}
 blockquote cite {
-  padding: 10px;
-  border-left: 2px solid #000;
-  background-color: #eeeeee;
+  display: inline-block;
+  margin-left: 20px;
 }
 
 figure, .wp-caption {
@@ -435,36 +421,6 @@ figure figcaption, figure .wp-caption-text, .wp-caption figcaption, .wp-caption 
   line-height: 0;
   height: 0;
   width: 0;
-}
-
-.social-share-links {
-  font-size: 0;
-  margin: 10px 0px;
-}
-.social-share-links .social {
-  width: 20px;
-  height: 20px;
-  padding: 2px;
-  background-color: #000000;
-  border-radius: 10px;
-  display: inline-block;
-  font-size: 0;
-  vertical-align: middle;
-}
-.social-share-links .social:hover {
-  background-color: #333333;
-}
-.social-share-links .social svg {
-  vertical-align: 0px;
-  width: 16px;
-  height: 16px;
-  fill: #fff;
-}
-.social-share-links .social + .social {
-  margin-left: 10px;
-}
-.social-share-links > span {
-  color: #fff;
 }
 
 /* != PLACEHOLDER ATTRIBUTE STYLES = input or textarea - placeholder="whatever" ===== */

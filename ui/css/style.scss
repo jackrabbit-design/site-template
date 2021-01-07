@@ -16,11 +16,7 @@ $secondary_color: #333333;
 	html, body {
         font: {
             family: $font_body;
-            weight: 400;
-            size: 16px;
         }
-        letter-spacing: -.04/16*1em;
-        line-height: 1.5;
     }
 
 /* != SELECTION STYLES (Leaving these blank will show no indication of text selection) ===== */
@@ -62,86 +58,56 @@ $secondary_color: #333333;
 
 /* != LAYOUT STYLES ===== */
 
-    p, blockquote, ul, ol, hr, a.btn {
-        margin-bottom: 1em;
-    }
-
     h1 {
         font: {
             family: $font_heading;
             size: 96px;
-            weight: 700;
         }
-        letter-spacing: calc(-0.3/96*1em);
-        margin-bottom: 0.5em;
+        margin-bottom: .5em;
     }
 
     h2 {
         font: {
             family: $font_heading;
             size: 48px;
-            weight: 700;
         }
-        letter-spacing: calc(-0.3/48*1em);
-        margin-bottom: 0.5em;
+        margin-bottom: .5em;
     }
 
     h3 {
         font: {
             family: $font_heading;
-            size: 24px;
-            weight: 700;
+            size: 36px;
         }
-        letter-spacing: calc(-0.3/24*1em);
-        margin-bottom: 0.5em;
+        margin-bottom: .5em;
     }
 
     h4 {
         font: {
             family: $font_heading;
-            size: 20px;
-            weight: 700;
+            size: 24px;
         }
-        letter-spacing: calc(-0.3/20*1em);
-        margin-bottom: 0.5em;
+        margin-bottom: .5em;
     }
 
     h5 {
         font: {
             family: $font_heading;
-            size: 16px;
-            weight: 700;
+            size: 20px;
         }
-        text-transform: uppercase;
-        letter-spacing: calc(-0.3/16*1em);
-        margin-bottom: 0.5em;
+        margin-bottom: .5em;
     }
 
     h6 {
         font: {
             family: $font_heading;
-            size: 12px;
-            weight: 700;
+            size: 18px;
         }
-        text-transform: uppercase;
-        letter-spacing: calc(1/12*1em);
-        margin-bottom: 0.5em;
-    }
-
-    ul {
-        li {
-            list-style-type:  "\1F407";
-        }
-    }
-
-    ol {
-        li {
-            list-style-type: lower-roman;
-        }
+        margin-bottom: .5em;
     }
 
     /* BUTTONS */
-    a, .gform_footer input, .utility button {
+    a {
         &.btn {
             display: inline-block;
             text-transform: uppercase;
@@ -153,7 +119,7 @@ $secondary_color: #333333;
             padding: 13px 20px;
             color: #fff;
             background-color: $primary_color;
-            border-radius: 5px;
+            border-radius: 4px;
             transition: .2s;
             border: 1px solid $primary_color;
             &:hover {
@@ -173,12 +139,12 @@ $secondary_color: #333333;
 
     table {
         thead {
-            background-color: #aaaaaa;
+            background-color: #ffffff;
         }
         tbody {
-            background-color: #eeeeee;
+            background-color: #ffffff;
             >:nth-child(2n) {
-                background-color: #dddddd
+                background-color: #ffffff
             }
         }
         th, td {
@@ -187,11 +153,26 @@ $secondary_color: #333333;
     }
 
     blockquote {
-        
+        p {
+            padding-left: 20px;
+            position: relative;
+            &:before {
+                content: "“";
+                position: absolute;
+                left: 0;
+                font: normal 500 50px sans-serif;
+                color: $secondary_color;
+            }
+            &:after {
+                content: "”";
+                position: absolute;
+                font: normal 500 50px sans-serif;
+                color: $secondary_color;
+            }
+        }
         cite {
-            padding: 10px;
-            border-left: 2px solid #000;
-            background-color: #eeeeee;
+            display: inline-block;
+            margin-left: 20px;
         }
     }
 
@@ -253,34 +234,6 @@ $secondary_color: #333333;
 
     #footer {
 
-    }
-
-    .social-share-links {
-        font-size: 0;
-        margin: 10px 0px;
-        .social {
-            @include size(20px);
-            padding: 2px;
-            background-color: $primary_color;
-            border-radius: 10px;
-            display:inline-block;
-            font-size: 0;
-            vertical-align: middle;
-            &:hover {
-                background-color: $secondary_color;
-            }
-            svg {
-                vertical-align: 0px;
-                @include size(16px);
-                fill: #fff;
-            }
-            + .social {
-                margin-left: 10px;
-            }
-        }
-        >span {
-            color: #fff;
-        }
     }
 
 /* != PLACEHOLDER ATTRIBUTE STYLES = input or textarea - placeholder="whatever" ===== */
