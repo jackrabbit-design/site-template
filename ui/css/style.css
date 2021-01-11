@@ -275,106 +275,13 @@ html, body {
 }
 
 /* != LAYOUT STYLES ===== */
-h1 {
-  font-size: 96px;
-  margin-bottom: 0.5em;
-}
-
-h2 {
-  font-size: 48px;
-  margin-bottom: 0.5em;
-}
-
-h3 {
-  font-size: 36px;
-  margin-bottom: 0.5em;
-}
-
-h4 {
-  font-size: 24px;
-  margin-bottom: 0.5em;
-}
-
-h5 {
-  font-size: 20px;
-  margin-bottom: 0.5em;
-}
-
-h6 {
-  font-size: 18px;
-  margin-bottom: 0.5em;
-}
-
 /* BUTTONS */
 .btn {
   display: inline-block;
-  text-transform: uppercase;
   text-decoration: none;
-  font-size: 14px;
-  font-weight: bold;
   text-align: center;
-  line-height: 1;
-  padding: 13px 20px;
-  color: #fff;
-  background-color: #000000;
-  border-radius: 4px;
   transition: 0.2s;
-  border: 1px solid #000000;
 }
-.btn:hover {
-  color: #000000;
-  background-color: #fff;
-}
-table thead {
-  background-color: #ffffff;
-}
-table tbody {
-  background-color: #ffffff;
-}
-table tbody > :nth-child(2n) {
-  background-color: #ffffff;
-}
-table th, table td {
-  padding: 10px;
-}
-
-blockquote p {
-  padding-left: 20px;
-  position: relative;
-}
-blockquote p:before {
-  content: "“";
-  position: absolute;
-  left: 0;
-  font: normal 500 50px sans-serif;
-  color: #333333;
-}
-blockquote p:after {
-  content: "”";
-  position: absolute;
-  font: normal 500 50px sans-serif;
-  color: #333333;
-}
-blockquote cite {
-  display: inline-block;
-  margin-left: 20px;
-}
-
-figure, .wp-caption {
-  display: table;
-}
-figure img, .wp-caption img {
-  display: block;
-}
-figure figcaption, figure .wp-caption-text, .wp-caption figcaption, .wp-caption .wp-caption-text {
-  padding: 10px;
-  margin: 10px 0;
-  border-top: 2px solid #000;
-  display: table-caption;
-  caption-side: bottom;
-  background-color: #eeeeee;
-}
-
 .content-main ul:not([class*=gf]) > li {
   position: relative;
   padding-left: 10px;
@@ -432,22 +339,17 @@ input[type=submit], button {
   cursor: pointer;
 }
 /* != Select menus with a .select-menu container or gform-select-menu applied in gravity forms ===== */
-select,
 .select-menu,
 .gform-select-menu div {
   position: relative;
-  width: 260px;
-  border-radius: 4px;
-  border: 1px solid #C8C4BC;
+  width: 100%;
+  border: 1px solid #f00;
   vertical-align: middle;
   display: inline-block;
   overflow: hidden;
-  margin: 0 26px 0 0;
-  height: 40px;
+  margin: 0 10px 0 0;
 }
-select:before, select:after,
-.select-menu:before,
-.select-menu:after,
+.select-menu:before, .select-menu:after,
 .gform-select-menu div:before,
 .gform-select-menu div:after {
   content: "";
@@ -458,32 +360,28 @@ select:before, select:after,
   pointer-events: none;
   width: 16px;
   height: 16px;
-  background-image: url("data:image/svg+xml,%3Csvg id%3D%22Layer_1%22 data-name%3D%22Layer 1%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 viewBox%3D%220 0 11 15%22%3E%3Cdefs%3E%3Cstyle%3E.cls-1{fill%3A%237f7f7f%3Bfill-rule%3Aevenodd}%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cpath class%3D%22cls-1%22 d%3D%22M11 9l-5.5 6L0 9h11zM5.5 0L11 6H0l5.5-6z%22%2F%3E%3C%2Fsvg%3E");
+  /* bg image */
 }
-select:hover,
 .select-menu:hover,
 .gform-select-menu div:hover {
-  /*border-color: #00f;*/
+  border-color: #00f;
 }
-select:hover:before,
 .select-menu:hover:before,
 .gform-select-menu div:hover:before {
   /* bg image */
 }
-select:hover:after,
 .select-menu:hover:after,
 .gform-select-menu div:hover:after {
   /* bg image */
 }
-select select,
 .select-menu select,
 .gform-select-menu div select {
-  padding: 0 10px 0 16px;
+  padding: 0 10px 0 20px;
   cursor: pointer;
-  color: #2E2D2B;
+  color: #0f0;
   background-color: #fff;
   width: 120%;
-  height: 100%;
+  height: 40px;
   line-height: 40px;
   border: 0;
   border-radius: 0;

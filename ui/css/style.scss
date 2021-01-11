@@ -59,127 +59,49 @@ $secondary_color: #333333;
 /* != LAYOUT STYLES ===== */
 
     h1 {
-        font: {
-            size: 96px;
-        }
-        margin-bottom: .5em;
     }
 
     h2 {
-        font: {
-            size: 48px;
-        }
-        margin-bottom: .5em;
     }
 
     h3 {
-        font: {
-            size: 36px;
-        }
-        margin-bottom: .5em;
     }
 
     h4 {
-        font: {
-            size: 24px;
-        }
-        margin-bottom: .5em;
     }
 
     h5 {
-        font: {
-            size: 20px;
-        }
-        margin-bottom: .5em;
     }
 
     h6 {
-        font: {
-            size: 18px;
-        }
-        margin-bottom: .5em;
     }
 
     /* BUTTONS */
     .btn {
         display: inline-block;
-        text-transform: uppercase;
         text-decoration: none;
-        font-size: 14px;
-        font-weight: bold;
         text-align: center;
-        line-height: 1;
-        padding: 13px 20px;
-        color: #fff;
-        background-color: $primary_color;
-        border-radius: 4px;
         transition: .2s;
-        border: 1px solid $primary_color;
         &:hover {
-            color: $primary_color;
-            background-color: #fff;
-        }
-        &__small {
-        }
-        &__white {
-        }
-        &__dark {
-        }
-        &__hero {
         }
     }
 
     table {
         thead {
-            background-color: #ffffff;
         }
         tbody {
-            background-color: #ffffff;
-            >:nth-child(2n) {
-                background-color: #ffffff
-            }
         }
         th, td {
-            padding: 10px;
         }
     }
 
     blockquote {
-        p {
-            padding-left: 20px;
-            position: relative;
-            &:before {
-                content: '\201c';
-                position: absolute;
-                left: 0;
-                font: normal 500 50px sans-serif;
-                color: $secondary_color;
-            }
-            &:after {
-                content: '\201d';
-                position: absolute;
-                font: normal 500 50px sans-serif;
-                color: $secondary_color;
-            }
-        }
-        cite {
-            display: inline-block;
-            margin-left: 20px;
-        }
     }
 
     figure, .wp-caption {
-        display: table;
         img {
-            display: block;
         }
         figcaption, .wp-caption-text {
-            padding: 10px;
-            margin: 10px 0;
-            border-top: 2px solid #000;
-            display: table-caption;
-            caption-side: bottom;
-            background-color: #eeeeee;
         }
     }
 
@@ -258,52 +180,47 @@ $secondary_color: #333333;
     }
 
 
-    /* != Select menus with a .select-menu container or gform-select-menu applied in gravity forms ===== */
-    select,
-    .select-menu,
-    .gform-select-menu div {
-        position: relative;
-        width: 260px;
-        border-radius: 4px;
-        border: 1px solid #C8C4BC;
-        vertical-align: middle;
-        display: inline-block;
-        overflow: hidden;
-        margin: 0 26px 0 0;
-        height: 40px;
-        &:before, &:after {
-            content: '';
-            position: absolute;
-            right: 14px;
-            top: calc(50% - 8px);
-            z-index: 1;
-            pointer-events: none;
-            @include size(16px);
-            background: {
-                image: inline-svg('<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 15"><defs><style>.cls-1{fill:#7f7f7f;fill-rule:evenodd}</style></defs><path class="cls-1" d="M11 9l-5.5 6L0 9h11zM5.5 0L11 6H0l5.5-6z"/></svg>')
-            }
-        }
-        &:hover {
-            /*border-color: #00f;*/
-            &:before {/* bg image */}
-            &:after {/* bg image */}
-        }
-        select {
-            padding: 0 10px 0 16px;
-            cursor: pointer;
-            color: #2E2D2B;
-            background-color: #fff;
-            width: 120%;
-            height: 100%;
-            line-height: 40px;
-            border: 0;
-            border-radius: 0;
-            text-indent: 0.01px;
-            text-overflow: '';
-            position: relative;
-            z-index: 1;
-        }
-    }
+   /* != Select menus with a .select-menu container or gform-select-menu applied in gravity forms ===== */
+   .select-menu,
+   .gform-select-menu div {
+       position: relative;
+       width: 100%;
+       border: 1px solid #f00;
+       vertical-align: middle;
+       display: inline-block;
+       overflow: hidden;
+       margin: 0 10px 0 0;
+       &:before, &:after {
+           content: '';
+           position: absolute;
+           right: 14px;
+           top: calc(50% - 8px);
+           z-index: 1;
+           pointer-events: none;
+           @include size(16px);
+           /* bg image */
+       }
+       &:hover {
+           border-color: #00f;
+           &:before {/* bg image */}
+           &:after {/* bg image */}
+       }
+       select {
+           padding: 0 10px 0 20px;
+           cursor: pointer;
+           color: #0f0;
+           background-color: #fff;
+           width: 120%;
+           height: 40px;
+           line-height: 40px;
+           border: 0;
+           border-radius: 0;
+           text-indent: 0.01px;
+           text-overflow: '';
+           position: relative;
+           z-index: 1;
+       }
+   }
 
     .validation {
         &_error {
