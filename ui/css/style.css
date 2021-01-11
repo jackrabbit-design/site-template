@@ -276,43 +276,37 @@ html, body {
 
 /* != LAYOUT STYLES ===== */
 h1 {
-  font-family: Helvetica, Arial, Helvetica, Arial, sans-serif;
   font-size: 96px;
   margin-bottom: 0.5em;
 }
 
 h2 {
-  font-family: Helvetica, Arial, Helvetica, Arial, sans-serif;
   font-size: 48px;
   margin-bottom: 0.5em;
 }
 
 h3 {
-  font-family: Helvetica, Arial, Helvetica, Arial, sans-serif;
   font-size: 36px;
   margin-bottom: 0.5em;
 }
 
 h4 {
-  font-family: Helvetica, Arial, Helvetica, Arial, sans-serif;
   font-size: 24px;
   margin-bottom: 0.5em;
 }
 
 h5 {
-  font-family: Helvetica, Arial, Helvetica, Arial, sans-serif;
   font-size: 20px;
   margin-bottom: 0.5em;
 }
 
 h6 {
-  font-family: Helvetica, Arial, Helvetica, Arial, sans-serif;
   font-size: 18px;
   margin-bottom: 0.5em;
 }
 
 /* BUTTONS */
-a.btn {
+.btn {
   display: inline-block;
   text-transform: uppercase;
   text-decoration: none;
@@ -327,7 +321,7 @@ a.btn {
   transition: 0.2s;
   border: 1px solid #000000;
 }
-a.btn:hover {
+.btn:hover {
   color: #000000;
   background-color: #fff;
 }
