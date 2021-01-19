@@ -360,11 +360,14 @@ add_shortcode( 'button', 'morelink' );
 /* TINYMCE SELECT DROPDOWN CLASS SETUP CODES */
 /* ========================================================================= */
 
+
 add_filter( 'mce_buttons_2', 'my_mce_buttons_2' );
 
 function my_mce_buttons_2( $buttons ) {
-	array_unshift( $buttons, 'styleselect' );
-	return $buttons;
+    array_unshift( $buttons, 'styleselect' );
+	$buttons[] = 'superscript';
+	$buttons[] = 'subscript';
+    return $buttons;
 }
 
 add_filter( 'tiny_mce_before_init', 'my_mce_before_init' );
@@ -510,4 +513,3 @@ function jrd_edit_post() {
 	echo $html;
 }
 add_action( 'wp_footer', 'jrd_edit_post' );
-
