@@ -51,12 +51,14 @@
 <noscript aria-hidden="true"><div style="text-align:center;background-color:#000;color:#fff;padding:5px;">It looks like JavaScript is disabled in your browser. Please enable JavaScript to view the full site.</div></noscript>
 
 <?php
-    if(get_field('_display_alert','options')){
+if ( get_field( '_display_alert', 'options' ) ) {
+	?>
+	<div id="alert" role="complementary" style="display:none;">
+		<a href="#" class="close">&times;</a>
+	</div>
+	<?php
+}
 ?>
-<div id="alert" role="complementary" style="display:none;">
-	<a href="#" class="close">&times;</a>
-</div>
-<?php } ?>
 
 <header id="header" role="banner">
 	<a id="skipnav" onclick="focusIt();" href="#jumptocontent" aria-label="Skip Navigation">Skip to Main Content</a>

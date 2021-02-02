@@ -13,12 +13,12 @@
 		return;
 	} // end post_password_required
 
-	if(comments_open()) {
+	if ( comments_open() ) {
 		?>
 		<div class="leaveComment clearfix">
 			<h3>Write a Comment</h3>
 			<?php
-			if ( get_option( 'comment_registration' ) && !$user_ID) {
+			if ( get_option( 'comment_registration' ) && ! $user_ID ) {
 				?>
 				<p>You must be <a href="#" class="loginlink">logged in</a> to post a comment.</p>
 				<?php
@@ -27,7 +27,7 @@
 				<form action="<?php echo get_option( 'siteurl' ); ?>/wp-comments-post.php" method="post" class="gform_wrapper" id="commentform">
 				<div class="contact-block">
 				<?php
-				if ( $user_ID) {
+				if ( $user_ID ) {
 					?>
 					<p style="margin-bottom:20px">Logged in as
 						<a href="<?php echo get_option( 'siteurl' ); ?>/wp-admin/profile.php"><?php echo $user_identity; ?></a>.
@@ -46,13 +46,19 @@
 							}
 							?>
 						</label>
-						<input type="text" class="input-text txt medium clearFieldBlurred" value="<?php
-							if ( !empty( $comment_author ) ) {
-								echo $comment_author;
-							}
-						?>" id="author_field" name="author" rel=">Name <?php
-							if ( $req ) echo "<span>*</span>";
-						?>" tabindex="51" />
+						<input type="text" class="input-text txt medium clearFieldBlurred" value="
+						<?php
+						if ( ! empty( $comment_author ) ) {
+							echo $comment_author;
+						}
+						?>
+						" id="author_field" name="author" rel=">Name
+						<?php
+						if ( $req ) {
+							echo '<span>*</span>';
+						}
+						?>
+						" tabindex="51" />
 					</p>
 					<p>
 						<label for="email_field">Email Address
@@ -64,26 +70,32 @@
 							}
 							?>
 						</label>
-						<input type="text" class="input-text txt medium clearFieldBlurred" value="<?php
-							if ( !empty( $comment_author_email ) ) {
-								echo $comment_author_email;
-							}
-						?>" id="email_field" name="email" rel="Email (not published) <?php
-							if ( $req ) echo "<span>*</span>";
-						?>" tabindex="52" />
+						<input type="text" class="input-text txt medium clearFieldBlurred" value="
+						<?php
+						if ( ! empty( $comment_author_email ) ) {
+							echo $comment_author_email;
+						}
+						?>
+						" id="email_field" name="email" rel="Email (not published)
+						<?php
+						if ( $req ) {
+							echo '<span>*</span>';
+						}
+						?>
+						" tabindex="52" />
 					</p>
 					<?php
 				}
 				?>
 				<p class="text-area comment">
 					<label for="comment_field">Your Comment
-					  <?php
-					  if ( $req ) {
-							?>
-							<span class="gfield_required">*</span>
-							<?php
-						}
+					<?php
+					if ( $req ) {
 						?>
+						<span class="gfield_required">*</span>
+						<?php
+					}
+					?>
 					</label>
 					<textarea class="textarea medium clearFieldBlurred" id="comment_field" name="comment" rel="Comment" tabindex="53"></textarea>
 				</p>
@@ -93,9 +105,9 @@
 						<button type="submit" class="link-common"><span>Submit</span></button>
 					</div>
 				  </div>
-				  <?php
-				  do_action( 'comment_form', $post->ID );
-				  ?>
+					<?php
+					do_action( 'comment_form', $post->ID );
+					?>
 				</form>
 				<?php
 			}
@@ -112,8 +124,12 @@
 		?>
 		<h4>
 			<?php
-			printf( _n( '1 Comment', '%1$s Comments', get_comments_number(), 'jrd_comments' ),
-			number_format_i18n( get_comments_number() ), '<em>' . get_the_title() . '</em>' );
+			$comments_number = get_comments_number();
+			printf(
+				_n( '%1$s Comment', '%1$s Comments', get_comments_number(), 'jrd_comments' ),
+				number_format_i18n( get_comments_number() ),
+				'<em>' . get_the_title() . '</em>'
+			);
 			?>
 		</h4>
 
@@ -145,7 +161,6 @@
 
 			<?php
 		}
-
 	} // end have_comments()
 	?>
 </div><!-- #comments -->

@@ -47,7 +47,7 @@ add_filter( 'big_image_size_threshold', '__return_false' );
 /* Post Thumbnail Sizes */
 add_theme_support( 'post-thumbnails' );
 set_post_thumbnail_size( 64, 64, true );
-//add_image_size( 'size-name', 100, 100, true);
+//add_image_size( 'size-name', 100, 100, true );
 
 /* Declare Nav Menu Areas */
 if ( function_exists( 'register_nav_menus' ) ) {
@@ -176,13 +176,12 @@ add_action( 'admin_head', 'my_custom_fonts' );
 /* ========================================================================= */
 /* GRAVITY FORM CUSTOMIZATIONS */
 /* ========================================================================= */
-
 /*
 add_filter( 'gform_submit_button', 'form_submit_button', 10, 2 );
 function form_submit_button( $button, $form ) {
-	$button_array = $form["button"];
-	$button_text = $button_array["text"];
-	return "<button type='submit' class='submit btn' id='gform_submit_button_{" . $form["id"] . "}'><span>$button_text</span></button>";
+	$button_array = $form['button'];
+	$button_text = $button_array['text'];
+	return "<button type='submit' class='submit btn' id='gform_submit_button_{" . $form['id'] . "}'><span>$button_text</span></button>";
 }
 add_filter( 'gform_confirmation_anchor', '__return_true' );
 */
@@ -346,14 +345,19 @@ add_filter( 'rank_math/metabox/priority', 'seo_to_bottom' );
 /* ========================================================================= */
 /*
 function morelink( $atts, $content = null ) {
-	extract( shortcode_atts( array(
-		"link" => '',
-		"target" => ''
-	), $atts ) );
-	return '<a href="' . $link . '" class="button btn-read-more" target="' . $target . '">' . $content . '</a>';
+	$a = shortcode_atts(
+		array(
+			'link' => '',
+			'target' => '',
+		),
+		$atts
+	);
+	$link = $a['link'];
+	$target = $a['target'];
+	return '<a href="' . $link . '" class="btn" target="' . $target . '">' . $content . '</a>';
 }
 add_shortcode( 'button', 'morelink' );
-*/
+ */
 
 
 /* ========================================================================= */
@@ -364,10 +368,10 @@ add_shortcode( 'button', 'morelink' );
 add_filter( 'mce_buttons_2', 'my_mce_buttons_2' );
 
 function my_mce_buttons_2( $buttons ) {
-    array_unshift( $buttons, 'styleselect' );
+	array_unshift( $buttons, 'styleselect' );
 	$buttons[] = 'superscript';
 	$buttons[] = 'subscript';
-    return $buttons;
+	return $buttons;
 }
 
 add_filter( 'tiny_mce_before_init', 'my_mce_before_init' );
@@ -378,8 +382,8 @@ function my_mce_before_init( $settings ) {
 		array(
 			'title' => 'Button Link',
 			'selector' => 'a',
-			'classes' => 'btn'
-		)
+			'classes' => 'btn',
+		),
 	);
 
 	$settings['style_formats'] = json_encode( $style_formats );
@@ -398,16 +402,16 @@ add_filter( 'previous_posts_link_attributes', 'posts_link_attributes' );
 
 function posts_link_attributes() {
 	return 'class="btn pink-purple"';
-}
-*/
+} */
+
 
 /* ========================================================================= */
 /* !CUSTOM CHILD SITE COLOR
 	Add a custom color strip to the header for child sites on a multisite
 	install. Helps differentiate them when jumping back and forth.
 /* ========================================================================= */
-
-/*add_action( 'admin_enqueue_scripts', 'my_admin_background' );
+/*
+add_action( 'admin_enqueue_scripts', 'my_admin_background' );
 function my_admin_background() {
 	wp_enqueue_style( 'custom-style', get_template_directory_uri() . '/css/custom_script.css' );
 	global $blog_id;
@@ -421,7 +425,7 @@ function my_admin_background() {
 	}
 	$custom_css = "#wpadminbar { border-top: 5px solid $color }";
 	wp_add_inline_style( 'custom-style', $custom_css );
-}*/
+} */
 
 
 /* ========================================================================= */
@@ -431,24 +435,28 @@ function my_admin_background() {
 add_filter( 'relevanssi_excerpt_content', 'custom_fields_to_excerpts', 10, 3 );
 function custom_fields_to_excerpts( $content, $post, $query ) {
 
-		$custom_fields = get_post_custom_keys( $post->ID );
-		$remove_underscore_fields = true;
+	$custom_fields = get_post_custom_keys( $post->ID );
+	$remove_underscore_fields = true;
 
-		if ( is_array( $custom_fields ) ) {
-			$custom_fields = array_unique( $custom_fields );
-			foreach ( $custom_fields as $field ) {
-				if ( $remove_underscore_fields ) {
-					if ( '_' == substr( $field, 0, 1 ) ) continue;
-				}
-				$values = get_post_meta( $post->ID, $field, false );
-				if ( "" == $values ) continue;
-				foreach ( $values as $value ) {
-					if ( !is_array ( $value ) ) {
-						$content .= " " . $value;
-					}
+	if ( is_array( $custom_fields ) ) {
+		$custom_fields = array_unique( $custom_fields );
+		foreach ( $custom_fields as $field ) {
+			if ( $remove_underscore_fields ) {
+				if ( '_' == substr( $field, 0, 1 ) ) {
+					continue
+				};
+			}
+			$values = get_post_meta( $post->ID, $field, false );
+			if ( '' == $values ) {
+				continue
+			};
+			foreach ( $values as $value ) {
+				if ( ! is_array( $value ) ) {
+					$content .= ' ' . $value;
 				}
 			}
 		}
+	}
 	return $content;
 }
 */
