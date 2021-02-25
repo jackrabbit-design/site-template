@@ -11,6 +11,18 @@ function change_graphic_lib( $array ) {
 }
 
 /* ========================================================================= */
+/* Define Additional HTTP Headers */
+/* ========================================================================= */
+
+function replace_wp_headers( $headers ) {
+	$headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'; // Forces the User Agent to use HTTPS
+	$headers['X-Frame-Options'] = 'SAMEORIGIN'; // Prevents a browser from framing your site and protects against attacks like clickjacking.
+	$headers['X-Content-Type-Options'] = 'nosniff'; // Stops a browser from trying to MIME-sniff the content type and forces it to stick with the declared content-type.
+	return $headers;
+}
+add_filter( 'wp_headers', 'replace_wp_headers' );
+
+/* ========================================================================= */
 /* WordPress External Files     */
 /* ========================================================================= */
 
