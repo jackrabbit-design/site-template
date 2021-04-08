@@ -160,15 +160,27 @@ $secondary_color: #333333;
         color: #aaa;
     }
 */
+	label {
+
+	}
 
     input {
         &[type=text],
-        &[type=password],
-        &[type=url],
-        &[type=number],
-        &[type=tel],
-        &[type=email] {
+		&[type=password],
+		&[type=url],
+		&[type=number],
+		&[type=tel],
+		&[type=email] {
 
+        }
+    }
+
+	input {
+        &[type=radio],
+        &[type=checkbox] {
+			+ label {
+
+			}
         }
     }
 
