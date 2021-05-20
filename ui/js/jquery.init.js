@@ -16,9 +16,9 @@ jQuery(function($){
 	    return false;
     });
 
-    // ORPHANIZER
-    function orphanize(){
-        $(".orphan").each(function() {
+    // UNRUNT
+    $.fn.unrunt = function(){
+        $(this).each(function(){
             let txt = $(this).html().trim().replace('&nbsp;',' ');
             let wordArray = txt.split(" ");
             if (wordArray.length > 1) {
@@ -28,7 +28,7 @@ jQuery(function($){
             }
         });
     }
-    orphanize();
+    $('.orphan').unrunt();
 
     // PARALLAX
     $.fn.plax = function(x, y){
