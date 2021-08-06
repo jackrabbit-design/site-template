@@ -533,3 +533,9 @@ function jrd_edit_post() {
 	echo $html;
 }
 add_action( 'wp_footer', 'jrd_edit_post' );
+
+// Remove 32px top margin from html tag
+function remove_admin_login_header() {
+	remove_action( 'wp_head', '_admin_bar_bump_cb' );
+}
+add_action( 'get_header', 'remove_admin_login_header' );
