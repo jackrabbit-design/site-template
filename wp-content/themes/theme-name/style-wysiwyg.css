@@ -42,6 +42,18 @@
     color:#00f;
     text-decoration:underline;
 }
+#tinymce a.btn {
+	color: #00f;
+	border: 1px solid #00f;
+	/*
+	border-radius: 50px;
+	background-color: #00f;
+	color: #fff;
+	*/
+	display: inline-block;
+	font-size: 16px;
+	padding: 10px 25px 10px 25px;
+}
 
 #tinymce h2 strong,
 #tinymce h3 strong,
@@ -50,32 +62,32 @@
     font-weight: inherit;
 }
 
-#tinymce ul { 
+#tinymce ul {
     padding:0;
 }
-#tinymce ul > li { 
+#tinymce ul > li {
     position: relative;
     padding-left: 26px;
     list-style:none;
     margin-bottom:1.07em;
 }
-#tinymce ul > li:before { 
+#tinymce ul > li:before {
     content: '\2022';
     position: absolute;
     left: 10px;
 }
 
-#tinymce ol { 
+#tinymce ol {
     counter-reset: li;
     padding:0;
 }
-#tinymce ol > li { 
+#tinymce ol > li {
     position: relative;
     padding-left: 26px;
     margin-bottom: 1.07em;
     list-style:none;
 }
-#tinymce ol > li:before { 
+#tinymce ol > li:before {
     content: counter(li) ". ";
     counter-increment: li;
     position: absolute;

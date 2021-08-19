@@ -369,7 +369,7 @@ function morelink( $atts, $content = null ) {
 	return '<a href="' . $link . '" class="btn" target="' . $target . '">' . $content . '</a>';
 }
 add_shortcode( 'button', 'morelink' );
- */
+*/
 
 
 /* ========================================================================= */
