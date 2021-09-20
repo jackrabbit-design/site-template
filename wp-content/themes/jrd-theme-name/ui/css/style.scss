@@ -194,7 +194,7 @@ $secondary_color: #333333;
 
    /* != Select menus with a .select-menu container or gform-select-menu applied in gravity forms ===== */
    .select-menu,
-   .gform-select-menu div {
+   .ginput_container_select {
        position: relative;
        width: 100%;
        border: 1px solid #f00;

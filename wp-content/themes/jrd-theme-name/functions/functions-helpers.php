@@ -243,7 +243,6 @@ function jrd_social_nav( $field_name, $icon_field, $url_field, $id = 'nav-social
  * SVG Use generator
  * @param string $symbol_id     the intended ID of the symbol in the SVG sprite file
  * @param string $classes       classes for the SVG file
- * @param string $title         title of the SVG
  * @param string $filename      the filename (minus the extension) of the SVG sprite file
  * @param string $parent_or_child    whether it should reach into the parent theme or active child. omit if it's not a multisite
  **/
@@ -272,9 +271,9 @@ function jrd_ui( $file_path = '', $parent_or_child = 'parent' ) {
 	} else {
 		$dir = get_template_directory_uri();
 	}
-	$full_path = trailingslashit( $dir ) . 'ui/';
+	$url = trailingslashit( $dir ) . 'ui/';
 	if ( $file_path ) {
-		$full_path .= $file_path;
+		$url .= $file_path;
 	}
-	return $full_path;
+	return $url;
 }

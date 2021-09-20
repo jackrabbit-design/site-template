@@ -1,0 +1,16 @@
+<!-- Call icons using this:  ===============================
+
+<svg class="WHATEVER"><use xlink:href="../ui/svg/social-sprites.svg#ID_FROM_SYMBOL"></use></svg>
+
+=========================================== -->
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+
+        <!--
+        <symbol id="your_symbol" viewBox="0 0 50 50">
+        </symbol>
+        -->
+
+    </defs>
+</svg>

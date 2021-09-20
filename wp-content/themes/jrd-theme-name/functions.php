@@ -16,8 +16,8 @@ function change_graphic_lib( $array ) {
 
 function replace_wp_headers( $headers ) {
 	$headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'; // Forces the User Agent to use HTTPS
-	$headers['X-Frame-Options'] = 'SAMEORIGIN'; // Prevents a browser from framing your site and protects against attacks like clickjacking.
-	$headers['X-Content-Type-Options'] = 'nosniff'; // Stops a browser from trying to MIME-sniff the content type and forces it to stick with the declared content-type.
+	$headers['X-Frame-Options']           = 'SAMEORIGIN'; // Prevents a browser from framing your site and protects against attacks like clickjacking.
+	$headers['X-Content-Type-Options']    = 'nosniff'; // Stops a browser from trying to MIME-sniff the content type and forces it to stick with the declared content-type.
 	return $headers;
 }
 add_filter( 'wp_headers', 'replace_wp_headers' );
@@ -149,11 +149,11 @@ add_action( 'login_headertext', 'jrd_login_title' );
 
 function enqueue_scripts() {
 	wp_deregister_script( 'jquery' );
-	wp_enqueue_script( 'jquery', '/ui/js/jquery.js', array(), '1.0.0', false );
-	wp_enqueue_script( 'modernizr', '/ui/js/modernizr.js', array(), '1.0.0', true );
-	wp_enqueue_script( 'svgxuse', '/ui/js/svgxuse.js', array(), '1.0.0', true );
-	wp_enqueue_script( 'plugins', '/ui/js/jquery.plugins.js', array( 'jquery' ), '1.0.0', true );
-	wp_enqueue_script( 'init', '/ui/js/jquery.init.js', array( 'jquery', 'plugins', 'modernizr' ), filemtime( 'ui/js/jquery.init.js' ), true );
+	wp_enqueue_script( 'jquery', jrd_ui( 'js/jquery.js' ), array(), '1.0.0', false );
+	wp_enqueue_script( 'modernizr', jrd_ui( 'js/modernizr.js' ), array(), '1.0.0', true );
+	wp_enqueue_script( 'svgxuse', jrd_ui( 'js/svgxuse.js' ), array(), '1.0.0', true );
+	wp_enqueue_script( 'plugins', jrd_ui( 'js/jquery.plugins.js' ), array( 'jquery' ), '1.0.0', true );
+	wp_enqueue_script( 'init', jrd_ui( 'js/jquery.init.js' ), array( 'jquery', 'plugins', 'modernizr' ), filemtime( jrd_ui( 'js/jquery.init.js' ) ), true );
 }
 add_action( 'wp_enqueue_scripts', 'enqueue_scripts' );
 
@@ -163,7 +163,7 @@ add_action( 'wp_enqueue_scripts', 'enqueue_scripts' );
 /* ========================================================================= */
 
 function enqueue_styles() {
-	wp_enqueue_style( 'style', '/ui/css/style.css', array(), filemtime( 'ui/css/style.css' ) );
+	wp_enqueue_style( 'style', jrd_ui( 'css/style.css' ), array(), filemtime( jrd_ui( 'css/style.css' ) ) );
 }
 // With Print Style Sheet
 // function enqueue_styles() {
@@ -180,7 +180,7 @@ function admin_font_setup() {
 add_action( 'after_setup_theme', 'admin_font_setup' );
 
 function my_custom_fonts() {
-	wp_enqueue_style( 'style', get_template_directory_uri() . '/style-wysiwyg.css', array(), '1.0.0' );
+	wp_enqueue_style( 'style', jrd_ui( 'style-wysiwyg.css' ), array(), '1.0.0' );
 }
 add_action( 'admin_head', 'my_custom_fonts' );
 
@@ -392,9 +392,9 @@ function my_mce_before_init( $settings ) {
 
 	$style_formats = array(
 		array(
-			'title' => 'Button Link',
+			'title'    => 'Button Link',
 			'selector' => 'a',
-			'classes' => 'btn',
+			'classes'  => 'btn',
 		),
 	);
 
@@ -439,29 +439,47 @@ function my_admin_background() {
 	wp_add_inline_style( 'custom-style', $custom_css );
 } */
 
-
 /* ========================================================================= */
 /* RELEVANSSI Add visible custom fields to the_excerpt when searching.
 /* ========================================================================= */
-/*
 add_filter( 'relevanssi_excerpt_content', 'custom_fields_to_excerpts', 10, 3 );
 function custom_fields_to_excerpts( $content, $post, $query ) {
 
-	$custom_fields = get_post_custom_keys( $post->ID );
+	$custom_fields            = get_post_custom_keys( $post->ID );
 	$remove_underscore_fields = true;
 
 	if ( is_array( $custom_fields ) ) {
 		$custom_fields = array_unique( $custom_fields );
 		foreach ( $custom_fields as $field ) {
 			if ( $remove_underscore_fields ) {
-				if ( '_' == substr( $field, 0, 1 ) ) {
-					continue
-				};
+				if ( '_' === substr( $field, 0, 1 ) ) {
+					continue;
+				}
 			}
+			if ( is_int( strpos( $field, 'rank_math' ) ) ) {
+				continue;
+			}
+			if ( '_image' === substr( $field, -6 ) ) {
+				continue;
+			}
+			if ( is_int( strpos( $field, 'featured' ) ) ) {
+				continue;
+			}
+
+			if ( in_array(
+				$field,
+				array(
+					// 'custom_fields', to exclude
+				),
+				true
+			) ) {
+				continue;
+			}
+
 			$values = get_post_meta( $post->ID, $field, false );
-			if ( '' == $values ) {
-				continue
-			};
+			if ( '' === $values ) {
+				continue;
+			}
 			foreach ( $values as $value ) {
 				if ( ! is_array( $value ) ) {
 					$content .= ' ' . $value;
@@ -471,7 +489,6 @@ function custom_fields_to_excerpts( $content, $post, $query ) {
 	}
 	return $content;
 }
-*/
 
 // Stay logged in for longer periods
 add_filter( 'auth_cookie_expiration', 'keep_me_logged_in' );
