@@ -192,47 +192,11 @@ $secondary_color: #333333;
     }
 
 
-   /* != Select menus with a .select-menu container or gform-select-menu applied in gravity forms ===== */
-   .select-menu,
-   .ginput_container_select {
-       position: relative;
-       width: 100%;
-       border: 1px solid #f00;
-       vertical-align: middle;
-       display: inline-block;
-       overflow: hidden;
-       margin: 0 10px 0 0;
-       &:before, &:after {
-           content: '';
-           position: absolute;
-           right: 14px;
-           top: calc(50% - 8px);
-           z-index: 1;
-           pointer-events: none;
-           @include size(16px);
-           /* bg image */
-       }
-       &:hover {
-           border-color: #00f;
-           &:before {/* bg image */}
-           &:after {/* bg image */}
-       }
-       select {
-           padding: 0 10px 0 20px;
-           cursor: pointer;
-           color: #0f0;
-           background-color: #fff;
-           width: 120%;
-           height: 40px;
-           line-height: 40px;
-           border: 0;
-           border-radius: 0;
-           text-indent: 0.01px;
-           text-overflow: '';
-           position: relative;
-           z-index: 1;
-       }
-   }
+	select {
+		-webkit-appearance: none;
+		background: #fff url('image_for_dropdown_arrow') no-repeat calc(100% - 10px) 50%;
+	}
+
 
     .validation {
         &_error {
