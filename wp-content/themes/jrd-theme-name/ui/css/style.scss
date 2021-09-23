@@ -194,7 +194,7 @@ $secondary_color: #333333;
 
 	select {
 		-webkit-appearance: none;
-		background: #fff url('image_for_dropdown_arrow') no-repeat calc(100% - 10px) 50%;
+		background: #fff inline_svg('<svg width="13" height="8" viewBox="0 0 13 8" xmlns="http://www.w3.org/2000/svg"><path d="M.293.293c.36-.36.928-.388 1.32-.083l.094.083L6.51 5.096 11.313.293c.36-.36.928-.388 1.32-.083l.094.083c.36.36.389.928.084 1.32l-.084.094-5.51 5.51c-.36.36-.927.388-1.32.083l-.094-.083-5.51-5.51c-.39-.39-.39-1.024 0-1.414z" fill="#f00" fill-rule="evenodd"/></svg>') no-repeat calc(100% - 10px) 50%;
 	}
 
 

@@ -340,7 +340,7 @@ input[type=submit], button {
 }
 select {
   -webkit-appearance: none;
-  background: #fff url("image_for_dropdown_arrow") no-repeat calc(100% - 10px) 50%;
+  background: #fff url("data:image/svg+xml,%3Csvg width%3D%2213%22 height%3D%228%22 viewBox%3D%220 0 13 8%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath d%3D%22M.293.293c.36-.36.928-.388 1.32-.083l.094.083L6.51 5.096 11.313.293c.36-.36.928-.388 1.32-.083l.094.083c.36.36.389.928.084 1.32l-.084.094-5.51 5.51c-.36.36-.927.388-1.32.083l-.094-.083-5.51-5.51c-.39-.39-.39-1.024 0-1.414z%22 fill%3D%22%23f00%22 fill-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E") no-repeat calc(100% - 10px) 50%;
 }
 
 .validation_error {
