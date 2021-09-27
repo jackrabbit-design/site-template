@@ -16,10 +16,20 @@ function jrd_comments( $comment, $args, $depth ) {
 	?>
 
 	<li>
-		<h4><span><?php echo $comment->comment_author; ?></span> wrote:</h4>
+		<h4><span>
+			<?php
+			// translators: USERNAME wrote:
+			printf( __( '%s wrote:' ), $comment->comment_author );
+			?>
+			</span>
+		</h4>
 		<?php comment_text(); ?>
 		<p class="commentDate">
-			Written on <?php printf( __( '%1$s at %2$s' ), get_comment_date( 'n/j/Y' ), get_comment_time( 'g:ia' ) ); ?> <?php edit_comment_link( __( 'Edit' ), '  ', '' ); ?>
+			<?php
+			// translators: Written on DATE at TIME
+			printf( __( 'Written on %1$s at %2$s' ), get_comment_date( 'n/j/Y' ), get_comment_time( 'g:ia' ) );
+			?>
+			<?php edit_comment_link( __( 'Edit' ), '  ', '' ); ?>
 		</p>
 	</li>
 
