@@ -28,6 +28,12 @@ Original Developer: **Your Name**
 
 ---
 
+### ACF Fields Practices
+1. Make ACF changes in staging GUI
+2. Copy PHP into staging `functions-acf-fields.php`
+3. Download `acf-export-YYYY-MM-DD.json` to repo, leave in Github and do not upload
+4. Upload staging `functions-acf-fields.php` to live
+
 ### Versioning
 Jackrabbit will be utilizing a three-point numbering system.
 - Point 1 (1.#.#) is used for site launches, phases, and site redesigns.
