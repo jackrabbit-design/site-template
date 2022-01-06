@@ -61,9 +61,8 @@ if ( get_field( '_display_alert', 'options' ) ) {
 ?>
 
 <header id="header" role="banner">
-	<a id="skipnav" onclick="focusIt();" href="#jumptocontent" aria-label="Skip Navigation">Skip to Main Content</a>
+	<a id="skipnav" onclick="focusIt();" href="#body-content" aria-label="Skip Navigation">Skip to Main Content</a>
 </header>
 
-<div id="body-content" role="main">
-	<a id="jumptocontent" name="jumptocontent"></a>
-</div>
+<main id="body-content">
+</main>
