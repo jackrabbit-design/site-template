@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<!-- ====================================================
-
+	<?php //phpcs:disable ?>
 													   33+,
 													   3333
 													  '3333
@@ -20,7 +20,7 @@
 	+.     ;33333
 	 +333333333:
 		+3+'
-
+	<?php //phpcs:enable ?>
 
 	Website created by Jackrabbit | jumpingjackrabbit.com
 	===================================================== -->
