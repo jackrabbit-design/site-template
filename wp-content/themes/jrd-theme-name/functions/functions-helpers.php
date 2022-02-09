@@ -133,10 +133,11 @@ function jrd_img( $field, $size = 'large', $classes = null, $id = null, $data = 
  */
 function jrd_link( $link, $class = '', $id = '' ) {
 	if ( $link ) {
-		$link_title = $link['title'] ? $link['title'] : $link['url'];
+		$link_title       = $link['title'] ? $link['title'] : $link['url'];
 		$link_title_clean = wp_strip_all_tags( $link_title );
-		$link_url   = esc_url( $link['url'] );
-		return "<a href='{$link_url}' title='{$link_title_clean}' target='{$link['target']}' class='$class' id='$id'><span>{$link['title']}</span></a>" . PHP_EOL;
+		$link_url         = esc_url( $link['url'] );
+		$target           = $link['target'] ?? '_self';
+		return "<a href='{$link_url}' title='{$link_title_clean}' target='{$target}' class='$class' id='$id'><span>{$link['title']}</span></a>" . PHP_EOL;
 	}
 }
 
