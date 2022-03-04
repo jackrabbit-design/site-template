@@ -16,18 +16,6 @@ jQuery(function($){
 	    return false;
     });
 
-    // UNRUNT
-    $.fn.unrunt = function(){
-        $(this).each(function(){
-            let txt = $(this).html().trim().replace('&nbsp;',' ');
-            let wordArray = txt.split(" ");
-            if (wordArray.length > 1) {
-                wordArray[wordArray.length-2] += "&nbsp;" + wordArray[wordArray.length-1];
-                wordArray.pop();
-                $(this).html(wordArray.join(" "));
-            }
-        });
-    }
     $('.orphan').unrunt();
 
     // PARALLAX
@@ -58,3 +46,40 @@ jQuery(function($){
 });
 
 function focusIt(){ document.getElementById("jumptocontent").focus(); }
+
+// UNRUNT
+$.fn.unrunt = function(){
+    $(this).each(function(){
+        var u = unruntify( $(this).html() );
+        $(this).html( u );
+    });
+};
+
+function unruntify( str ){
+    var pieces = str.split(' ');
+    var new_pieces = [];
+    pieces.forEach(function(x,i){
+        if ( x.indexOf('<') == 0 && x.indexOf('>') == -1 ) {
+            var element = x;
+            var remove_items = [];
+            for( ++i; i < pieces.length; i++ ) {
+                element += ' ' + pieces[i];
+                remove_items.push(i-1);
+                if ( pieces[i].indexOf('>') != -1 ) {
+                    remove_items.forEach(function(x){ // jshint ignore:line
+                        pieces.splice(x, 1);
+                    });
+                    break;
+                }
+            }
+            new_pieces.push(element);
+        } else {
+            new_pieces.push(x);
+        }
+    });
+    if (new_pieces.length > 1) {
+        new_pieces[new_pieces.length-2] += "&nbsp;" + new_pieces[new_pieces.length-1];
+        new_pieces.pop();
+    }
+    return new_pieces.join(' ');
+}
