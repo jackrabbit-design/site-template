@@ -28,8 +28,9 @@ add_filter( 'wp_headers', 'replace_wp_headers' );
 
 require_once 'functions/functions-post-types.php';
 require_once 'functions/functions-helpers.php';
-//require_once 'functions/functions-widgets.php';
-//require_once 'functions/functions-comments.php';
+// require_once 'functions/functions-widgets.php';
+// require_once 'functions/functions-comments.php';
+// require_once 'functions/functions-acf.php';
 
 
 /* ========================================================================= */

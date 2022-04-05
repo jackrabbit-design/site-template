@@ -211,9 +211,9 @@ function jrd_date_range( $start_date, $end_date = null, $date_format = 'Ymd' ) {
 /**
  * Social Media Nav Creator
  * @param string $field_name    parent field name
- * @param string $icon_fn       icon field name; I usually use a select field.
- * @param string $url_fn        url field
- * @param string $option        is it on the options page? default is true
+ * @param string $icon_field    icon field name; I usually use a select field.
+ * @param string $url_field     url field
+ * @param string $id            ID for the <nav> element
  * List of Options for easy copypasta
 	social_facebook : Facebook
 	social_instagram : Instagram
@@ -243,10 +243,10 @@ function jrd_social_nav( $field_name, $icon_field, $url_field, $id = 'nav-social
 
 /**
  * SVG Use generator
- * @param string $symbol_id     the intended ID of the symbol in the SVG sprite file
- * @param string $classes       classes for the SVG file
- * @param string $title         title of the SVG
- * @param string $filename      the filename (minus the extension) of the SVG sprite file
+ * @param string $symbol_id          the intended ID of the symbol in the SVG sprite file
+ * @param string $classes            classes for the SVG file
+ * @param string $title              title of the SVG
+ * @param string $filename           the filename (minus the extension) of the SVG sprite file
  * @param string $parent_or_child    whether it should reach into the parent theme or active child. omit if it's not a multisite
  **/
 function jrd_use( $symbol_id, $classes = '', $title = '', $filename = 'sprites', $parent_or_child = 'parent' ) {

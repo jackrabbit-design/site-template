@@ -21,23 +21,6 @@
     //     }
     // }
 
-    @mixin vCenter($left: true, $vertical: true, $right: true) {
-        position: absolute;
-        @if ($vertical) {
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%,-50%);
-        } @else if ($left) {
-            left: 0;
-            top: 50%;
-            transform: translate(0, -50%);
-        } @else if ($right) {
-            right: 0;
-            top: 50%;
-            transform: translate(0, -50%);
-        }
-    }
-
     // Breakpoint Mixin
     @mixin break($p, $b: 'max-width'){
         @media screen and ( $b: $p + px ){
