@@ -12,18 +12,9 @@
 
     @mixin size($w, $h: $w) { width: $w; height: $h; }
 
-    // VERTICALLY CENTER CONTAINERS
-    // EXAMPLE:
-    // .parent {
-    //     position: relative;
-    //     .child {
-    //         @include vCenter(false, true, false);
-    //     }
-    // }
-
     // Breakpoint Mixin
     @mixin break($p, $b: 'max-width'){
-        @media screen and ( $b: $p + px ){
+        @media screen and ( #{$b}: #{$p}px ){
             @content;
         }
     }
