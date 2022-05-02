@@ -13,70 +13,46 @@ $secondary_color: #333333;
 /* !STYLES */
 /* ========================================================================= */
 
+/* != DEFAULT STYLES ===== */
+
 	html, body {
         font: {
             family: $font_body;
         }
     }
 
-/* != SELECTION STYLES (Leaving these blank will show no indication of text selection) ===== */
-/*
-    ::selection         {
-        background: #aaa;
-        color: #fff;
-    }
-    ::-moz-selection    {
-        background: #aaa;
-        color: #fff;
-    }
-    ::-webkit-selection {
-        background: #aaa;
-        color: #fff;
-    }
-*/
-
-/* != DEFAULT WORDPRESS STYLES = USE AS NEEDED = .wp-caption = .wp-caption-dd = .wpGallery = .shutter = .shutterset ==== */
-
-    .aligncenter {
-        display: block;
-        margin: 25px auto;
+    h1, .title1 {
     }
 
-    .alignleft {
-        float: left;
-        margin: 0 25px 25px 0;
+    h2, .title2 {
     }
 
-    .alignright {
-        float: right;
-        margin: 0 0 25px 25px;
+    h3, .title3 {
     }
 
-    .alignnone {
-        display: inline-block;
+    h4, .title4 {
     }
 
-/* != LAYOUT STYLES ===== */
-
-    h1 {
+    h5, .title5 {
     }
 
-    h2 {
+    h6, .title6 {
     }
 
-    h3 {
-    }
+	p {
+	}
 
-    h4 {
-    }
+	blockquote {
+	}
 
-    h5 {
-    }
+	cite {
+	}
 
-    h6 {
-    }
+	a {
+		&:hover {
+		}
+	}
 
-    /* BUTTONS */
     .btn {
         display: inline-block;
         text-decoration: none;
@@ -86,22 +62,19 @@ $secondary_color: #333333;
         }
     }
 
-    table {
+	figure, .wp-caption {
+		img {
+		}
+		figcaption, .wp-caption-text {
+		}
+	}
+
+	table {
         thead {
         }
         tbody {
         }
         th, td {
-        }
-    }
-
-    blockquote {
-    }
-
-    figure, .wp-caption {
-        img {
-        }
-        figcaption, .wp-caption-text {
         }
     }
 
@@ -132,23 +105,67 @@ $secondary_color: #333333;
         }
     }
 
-    .wrap {
+
+
+/* != DEFAULT WORDPRESS STYLES = USE AS NEEDED = .wp-caption = .wp-caption-dd = .wpGallery = .shutter = .shutterset ==== */
+
+    .aligncenter {
+        display: block;
+        margin: 25px auto;
+    }
+
+    .alignleft {
+        float: left;
+        margin: 0 25px 25px 0;
+    }
+
+    .alignright {
+        float: right;
+        margin: 0 0 25px 25px;
+    }
+
+    .alignnone {
+        display: inline-block;
+    }
+
+
+
+/* != SELECTION STYLES (Leaving these blank will show no indication of text selection) ===== */
+/*
+    ::selection         {
+        background: #aaa;
+        color: #fff;
+    }
+    ::-moz-selection    {
+        background: #aaa;
+        color: #fff;
+    }
+    ::-webkit-selection {
+        background: #aaa;
+        color: #fff;
+    }
+*/
+
+
+/* != LAYOUT STYLES ===== */
+
+	#skipnav { position: absolute; left: -50000px; }
+	#jumptocontent {font-size:0;line-height:0;height:0;width:0;}
+
+	.wrap {
         max-width: 1180px;
         width: 100%;
         margin: 0 auto;
         padding: 0 20px;
     }
 
-	#skipnav { position: absolute; left: -50000px; }
-	#jumptocontent {font-size:0;line-height:0;height:0;width:0;}
-
     #header {
-
     }
 
     #footer {
-
     }
+
+
 
 /* != PLACEHOLDER ATTRIBUTE STYLES = input or textarea - placeholder="whatever" ===== */
 /*
@@ -160,8 +177,11 @@ $secondary_color: #333333;
         color: #aaa;
     }
 */
-	label {
 
+
+/* != FORM STYLES ===== */
+
+	label {
 	}
 
     input {
@@ -171,15 +191,16 @@ $secondary_color: #333333;
 		&[type=number],
 		&[type=tel],
 		&[type=email] {
-
         }
     }
+
+	textarea {
+	}
 
 	input {
         &[type=radio],
         &[type=checkbox] {
 			+ label {
-
 			}
         }
     }
@@ -191,12 +212,10 @@ $secondary_color: #333333;
         }
     }
 
-
 	select {
 		-webkit-appearance: none;
 		background: #fff inline_svg('<svg width="13" height="8" viewBox="0 0 13 8" xmlns="http://www.w3.org/2000/svg"><path d="M.293.293c.36-.36.928-.388 1.32-.083l.094.083L6.51 5.096 11.313.293c.36-.36.928-.388 1.32-.083l.094.083c.36.36.389.928.084 1.32l-.084.094-5.51 5.51c-.36.36-.927.388-1.32.083l-.094-.083-5.51-5.51c-.39-.39-.39-1.024 0-1.414z" fill="#f00" fill-rule="evenodd"/></svg>') no-repeat calc(100% - 10px) 50%;
 	}
-
 
     .validation {
         &_error {

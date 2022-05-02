@@ -235,47 +235,11 @@ input[type=text]::-ms-clear {
 /* ========================================================================= */
 /* !STYLES */
 /* ========================================================================= */
+/* != DEFAULT STYLES ===== */
 html, body {
   font-family: Helvetica, Arial, sans-serif;
 }
 
-/* != SELECTION STYLES (Leaving these blank will show no indication of text selection) ===== */
-/*
-    ::selection         {
-        background: #aaa;
-        color: #fff;
-    }
-    ::-moz-selection    {
-        background: #aaa;
-        color: #fff;
-    }
-    ::-webkit-selection {
-        background: #aaa;
-        color: #fff;
-    }
-*/
-/* != DEFAULT WORDPRESS STYLES = USE AS NEEDED = .wp-caption = .wp-caption-dd = .wpGallery = .shutter = .shutterset ==== */
-.aligncenter {
-  display: block;
-  margin: 25px auto;
-}
-
-.alignleft {
-  float: left;
-  margin: 0 25px 25px 0;
-}
-
-.alignright {
-  float: right;
-  margin: 0 0 25px 25px;
-}
-
-.alignnone {
-  display: inline-block;
-}
-
-/* != LAYOUT STYLES ===== */
-/* BUTTONS */
 .btn {
   display: inline-block;
   text-decoration: none;
@@ -305,13 +269,42 @@ html, body {
   right: calc(100% - 15px);
 }
 
-.wrap {
-  max-width: 1180px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 20px;
+/* != DEFAULT WORDPRESS STYLES = USE AS NEEDED = .wp-caption = .wp-caption-dd = .wpGallery = .shutter = .shutterset ==== */
+.aligncenter {
+  display: block;
+  margin: 25px auto;
 }
 
+.alignleft {
+  float: left;
+  margin: 0 25px 25px 0;
+}
+
+.alignright {
+  float: right;
+  margin: 0 0 25px 25px;
+}
+
+.alignnone {
+  display: inline-block;
+}
+
+/* != SELECTION STYLES (Leaving these blank will show no indication of text selection) ===== */
+/*
+    ::selection         {
+        background: #aaa;
+        color: #fff;
+    }
+    ::-moz-selection    {
+        background: #aaa;
+        color: #fff;
+    }
+    ::-webkit-selection {
+        background: #aaa;
+        color: #fff;
+    }
+*/
+/* != LAYOUT STYLES ===== */
 #skipnav {
   position: absolute;
   left: -50000px;
@@ -324,6 +317,13 @@ html, body {
   width: 0;
 }
 
+.wrap {
+  max-width: 1180px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
 /* != PLACEHOLDER ATTRIBUTE STYLES = input or textarea - placeholder="whatever" ===== */
 /*
     ::-webkit-input-placeholder {
@@ -334,6 +334,7 @@ html, body {
         color: #aaa;
     }
 */
+/* != FORM STYLES ===== */
 input[type=submit], button {
   display: inline-block;
   cursor: pointer;
