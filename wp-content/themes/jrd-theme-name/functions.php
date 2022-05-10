@@ -124,7 +124,7 @@ add_action( 'wp_dashboard_setup', 'remove_dashboard_widgets' );
 /* ========================================================================= */
 
 function my_login_stylesheet() {
-	wp_enqueue_style( 'custom-login', '/ui/css/login.css', array(), '1.0.0' );
+	wp_enqueue_style( 'custom-login', jrd_ui( 'css/login.css' ), array(), '1.0.0' );
 }
 add_action( 'login_enqueue_scripts', 'my_login_stylesheet' );
 
