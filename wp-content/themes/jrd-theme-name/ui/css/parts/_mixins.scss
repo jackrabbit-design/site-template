@@ -10,7 +10,16 @@
 		flex-direction: $flexdirection;
     }
 
-    @mixin size($w, $h: $w) { width: $w; height: $h; }
+    @mixin size($w, $h: $w) {
+        @if ( unitless( $w ) ) {
+            $w: $w + px;
+        }
+        @if ( unitless( $h ) ) {
+            $h: $h + px;
+        }
+        width: $w;
+        height: $h;
+    }
 
     // Breakpoint Mixin
     @mixin break($p, $b: 'max-width'){
