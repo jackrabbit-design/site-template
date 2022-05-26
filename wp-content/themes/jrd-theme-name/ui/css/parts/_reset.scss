@@ -90,6 +90,7 @@
     input[type=number],
     input[type=tel],
     input[type=email],
+    input[type=button],
     input[type=submit],
     button, textarea, select {
         -webkit-appearance: none;
@@ -99,12 +100,14 @@
         resize:none;
         overflow:auto;
     }
-    button, a span {
-        cursor:pointer;
-    }
-    button {
+    button, input[type=submit], input[type=button] {
+		cursor:pointer;
         border:0;
         text-align:center;
+		background: transparent;
+		color: inherit;
+		padding: 0;
+		margin: 0;
     }
     button::-moz-focus-inner {
         padding:0;
