@@ -100,7 +100,7 @@
         resize:none;
         overflow:auto;
     }
-    button, input[type=submit], input[type=button] {
+    button, [type=submit], [type=button], [type=reset] {
 		cursor:pointer;
         border:0;
         text-align:center;
