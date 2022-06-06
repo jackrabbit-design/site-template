@@ -280,3 +280,18 @@ function jrd_ui( $file_path = '', $parent_or_child = 'parent' ) {
 	}
 	return $full_path;
 }
+
+/**
+ * Gravity Forms shortcode generator
+ * @param int $gf_id             the id of the gravity form
+ * @param string $title          defaults to false
+ * @param string $description    defaults to false
+ * @param string $ajax           defaults to true
+ **/
+function jrd_gf( $gf_id, $title = 'false', $description = 'false', $ajax = 'true' ) {
+	$shortcode = '';
+	if ( $gf_id ) {
+		$shortcode = do_shortcode( "[gravityform id='{$gf_id}' title='{$title}' description='{$description}' ajax='{$ajax}']" );
+	}
+	return $shortcode;
+}
