@@ -86,7 +86,7 @@ function clean( $string ) {
 	$string = wp_strip_all_tags( $string );
 	$string = strtolower( $string );
 	$string = str_replace( ' ', '-', $string );
-	return preg_replace( '/[^A-Za-z0-9\-]/', '', $string );
+	return preg_replace( '/[\W]/', '', $string );
 }
 
 /**
