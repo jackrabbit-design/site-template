@@ -132,7 +132,7 @@ function jrd_img( $field, $size = 'large', $classes = null, $id = null, $data = 
  * @return string        HTML for the link
  */
 function jrd_link( $link, $class = '', $id = '' ) {
-	if ( $link ) {
+	if ( isset( $link['url'] ) && '' !== (string) $link['url'] ) {
 		$link_label = isset( $link['label'] ) && '' !== (string) $link['label'] ? $link['label'] : $link['title'];
 		$link_url   = esc_url( $link['url'] );
 		$target     = $link['target'] ?? '_self';
