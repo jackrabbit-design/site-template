@@ -16,6 +16,17 @@ jQuery(function($){
 	    return false;
     });
 
+	// Toggle Menu
+	$("#menu-toggle").on('click', function () {
+		$('html, body').animate({
+			scrollTop: 0
+		}, 200);
+        $("#header").toggleClass("active");
+        $("body").stop().toggleClass("no-scroll");
+        $(this).toggleClass("active");
+        $('#main-nav').focus();
+    });
+
     $('.orphan').unrunt();
 
     // PARALLAX
@@ -44,8 +55,6 @@ jQuery(function($){
     */
 
 });
-
-function focusIt(){ document.getElementById("jumptocontent").focus(); }
 
 // UNRUNT
 $.fn.unrunt = function(){

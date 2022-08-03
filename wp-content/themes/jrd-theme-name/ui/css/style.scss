@@ -129,6 +129,39 @@ $secondary_color: #333333;
     }
 
 
+/* != ACCESSIBILITY STYLES ===== */
+
+	.sr-only, .slick-sr-only {
+		/* Styles below are so elements are shown to screen readers only */
+		border: none !important;
+		clip: rect(0, 0, 0, 0) !important;
+		height: 0.01em !important;
+		overflow: hidden !important;
+		padding: 0 !important;
+		position: absolute !important;
+		white-space: nowrap !important;
+		width: 0.01em !important;
+	}
+
+	*:focus {
+		outline: 3px solid rgba(0,0,0,0.5);
+	}
+
+	#skipnav {
+		background: rgba(0,0,0,0.8);
+		color:#fff;
+		height: 30px;
+		left: 50%;
+		padding: 8px;
+		position: absolute;
+		transform: translateY(-100%);
+		transition: transform 0.3s;
+		&:focus {
+			transform: translateY(0%);
+		}
+	}
+
+
 
 /* != SELECTION STYLES (Leaving these blank will show no indication of text selection) ===== */
 /*
@@ -149,9 +182,6 @@ $secondary_color: #333333;
 
 /* != LAYOUT STYLES ===== */
 
-	#skipnav { position: absolute; left: -50000px; }
-	#jumptocontent {font-size:0;line-height:0;height:0;width:0;}
-
 	.wrap {
         max-width: 1180px;
         width: 100%;
@@ -160,9 +190,92 @@ $secondary_color: #333333;
     }
 
     #header {
-    }
+    	#main-nav {
+            @include break(768){
+                display:none;
+            }
+		}
+		&.active {
+			#main-nav {
+	            @include break(768){
+	                display:block;
+	            }
+			}
+		}
+		#menu-toggle {
+	        display: none;
+	        position: relative;
+	        width: 30px;
+	        height:44px;
+	        cursor: pointer;
+	        z-index: 10;
+	        padding:0 30px;
+	        background-color:transparent;
+	        @include break(768){
+	            display:inline-block;
+	        }
+	        span {
+	            position: absolute;
+	            width: 30px;
+	            height: 3px;
+	            top: 50%;
+	            right: 15px;
+	            background-color: #000;
+	            transform: translate(0, -50%);
+	            transition: transform 0.3s;
+	            &::before {
+					content: '';
+	                position: absolute;
+	                display: block;
+	                width: 30px;
+	                height: 3px;
+	                top: -9px;
+	                background-color:#000;
+	                transition: transform 0s 0s, top 0.3s 0.3s;
+	            }
+	            &::after {
+					content: '';
+	                position: absolute;
+	                display: block;
+	                width: 30px;
+	                height: 3px;
+	                top: 9px;
+	                background-color:#000;
+	                transition: transform 0s 0s, top 0.3s 0.3s;
+	            }
+	        }
+	        &.active {
+	            span {
+	                height: 0;
+	                transform: rotate(180deg);
+	                transition: transform 0.3s 0.3s, height 0s 0s;
+	                background-color:#000;
+	                &::before {
+	                    top: 0;
+	                    transform: rotate(-45deg);
+	                    transition: top 0.3s 0s, transform 0.3s 0.3s;
+	                    background-color:#000;
+	                }
+	                &::after {
+	                    top: 0;
+	                    transform: rotate(45deg);
+	                    transition: top 0.3s 0s, transform 0.3s 0.3s;
+	                    background-color:#000;
+	                }
+	            }
+	        }
+		}
+	}
 
     #footer {
+		.jackrabbit {
+			a {
+				text-decoration:underline;
+				&:hover {
+					text-decoration:none;
+				}
+			}
+		}
     }
 
 

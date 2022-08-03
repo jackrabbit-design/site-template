@@ -14,8 +14,29 @@
 
 <body>
 
-	<header id="header"></header>
-	<main></main>
+	<header id="header" role="banner">
+		<a id="skipnav" href="#body-content">Skip to Main Content</a>
+		<div id="alert" role="complementary" style="display:none;">
+			<a href="#" class="close">&times;</a>
+		</div>
+		<div class="wrap">
+			<nav id="main-nav" aria-label="Primary Site Navigation" tabindex="-1">
+				<ul>
+					<li>
+						<a href="#">Menu Item 1</a>
+					</li>
+					<li>
+						<a href="#">Menu Item 2</a>
+					</li>
+					<li>
+						<a href="#">Menu Item 3</a>
+					</li>
+				</ul>
+			</nav>
+			<button id="menu-toggle"><span></span></button>
+		</div>
+	</header>
+	<main id="body-content"></main>
 	<footer id="footer">
 		<span class="jackrabbit"><a href="https://www.jumpingjackrabbit.com" title="Website Design by Jackrabbit" target="_blank">Website Design</a> by <a href="https://www.jumpingjackrabbit.com" title="Website Design by Jackrabbit" target="_blank">Jackrabbit</a></span>
 	</footer>
@@ -26,4 +47,3 @@
 	<script src="../ui/js/jquery.init.js"></script>
 </body>
 </html>
-

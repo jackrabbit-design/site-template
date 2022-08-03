@@ -51,7 +51,7 @@
 <noscript aria-hidden="true"><div style="text-align:center;background-color:#000;color:#fff;padding:5px;">It looks like JavaScript is disabled in your browser. Please enable JavaScript to view the full site.</div></noscript>
 
 <header id="header" role="banner">
-	<a id="skipnav" onclick="focusIt();" href="#body-content" aria-label="Skip Navigation">Skip to Main Content</a>
+	<a id="skipnav" href="#body-content">Skip to Main Content</a>
 	<?php
 	if ( get_field( '_display_alert', 'options' ) ) {
 		?>
@@ -61,4 +61,20 @@
 		<?php
 	}
 	?>
+	<div class="wrap">
+		<nav id="main-nav" aria-label="Primary Site Navigation" tabindex="-1">
+			<ul>
+				<li>
+					<a href="#">Menu Item 1</a>
+				</li>
+				<li>
+					<a href="#">Menu Item 2</a>
+				</li>
+				<li>
+					<a href="#">Menu Item 3</a>
+				</li>
+			</ul>
+		</nav>
+		<button id="menu-toggle"><span></span></button>
+	</div>
 </header>
