@@ -137,7 +137,7 @@ function jrd_link( $link, $class = '', $id = '' ) {
 		$link_url   = esc_url( $link['url'] );
 		$target     = $link['target'] ?? '_self';
 		$nofollow   = isset( $link['nofollow'] ) && 'nofollow' === $link['nofollow'] ? "rel='nofollow'" : '';
-		return "<a href='{$link_url}' title='{$link_label}' target='{$target}' class='$class' id='$id' $nofollow><span>{$link['title']}</span></a>" . PHP_EOL;
+		return "<a href='{$link_url}' aria-label='{$link_label}' target='{$target}' class='$class' id='$id' $nofollow><span>{$link['title']}</span></a>" . PHP_EOL;
 	}
 }
 
