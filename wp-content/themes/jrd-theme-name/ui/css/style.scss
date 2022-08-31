@@ -53,6 +53,9 @@ $secondary_color: #333333;
 		}
 	}
 
+	hr {
+	}
+
     .btn {
         display: inline-block;
         text-decoration: none;
@@ -129,6 +132,7 @@ $secondary_color: #333333;
     }
 
 
+
 /* != ACCESSIBILITY STYLES ===== */
 
 	.sr-only, .slick-sr-only {
@@ -180,6 +184,7 @@ $secondary_color: #333333;
 */
 
 
+
 /* != LAYOUT STYLES ===== */
 
 	.wrap {
@@ -190,80 +195,14 @@ $secondary_color: #333333;
     }
 
     #header {
-    	#main-nav {
-            @include break(768){
-                display:none;
-            }
-		}
+	}
+
+	#main-nav {
+	}
+
+	#menu-toggle {
+		display: none;
 		&.active {
-			#main-nav {
-	            @include break(768){
-	                display:block;
-	            }
-			}
-		}
-		#menu-toggle {
-	        display: none;
-	        position: relative;
-	        width: 30px;
-	        height:44px;
-	        cursor: pointer;
-	        z-index: 10;
-	        padding:0 30px;
-	        background-color:transparent;
-	        @include break(768){
-	            display:inline-block;
-	        }
-	        span {
-	            position: absolute;
-	            width: 30px;
-	            height: 3px;
-	            top: 50%;
-	            right: 15px;
-	            background-color: #000;
-	            transform: translate(0, -50%);
-	            transition: transform 0.3s;
-	            &::before {
-					content: '';
-	                position: absolute;
-	                display: block;
-	                width: 30px;
-	                height: 3px;
-	                top: -9px;
-	                background-color:#000;
-	                transition: transform 0s 0s, top 0.3s 0.3s;
-	            }
-	            &::after {
-					content: '';
-	                position: absolute;
-	                display: block;
-	                width: 30px;
-	                height: 3px;
-	                top: 9px;
-	                background-color:#000;
-	                transition: transform 0s 0s, top 0.3s 0.3s;
-	            }
-	        }
-	        &.active {
-	            span {
-	                height: 0;
-	                transform: rotate(180deg);
-	                transition: transform 0.3s 0.3s, height 0s 0s;
-	                background-color:#000;
-	                &::before {
-	                    top: 0;
-	                    transform: rotate(-45deg);
-	                    transition: top 0.3s 0s, transform 0.3s 0.3s;
-	                    background-color:#000;
-	                }
-	                &::after {
-	                    top: 0;
-	                    transform: rotate(45deg);
-	                    transition: top 0.3s 0s, transform 0.3s 0.3s;
-	                    background-color:#000;
-	                }
-	            }
-	        }
 		}
 	}
 
@@ -290,6 +229,7 @@ $secondary_color: #333333;
         color: #aaa;
     }
 */
+
 
 
 /* != FORM STYLES ===== */

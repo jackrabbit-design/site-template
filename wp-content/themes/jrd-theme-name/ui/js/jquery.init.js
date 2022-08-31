@@ -5,24 +5,18 @@
 
 jQuery(function($){
 
-	// Alert
+	// ALERT
 	if(Cookies.get('alert_cookie') != 'hide'){
 		$('#alert').css('display','block');
 	}
-	$('#alert .close').on('click',function(e){
-		e.preventDefault();
+	$('#alert .close').on('click',function(){
 		$('#alert').slideUp(100);
 		Cookies.set('alert_cookie', 'hide', { expires: 1, path: '/' });
-	    return false;
     });
 
-	// Toggle Menu
+	// TOGGLE MENU
 	$("#menu-toggle").on('click', function () {
-		$('html, body').animate({
-			scrollTop: 0
-		}, 200);
-        $("#header").toggleClass("active");
-        $("body").stop().toggleClass("no-scroll");
+		$("#header").toggleClass("active");
         $(this).toggleClass("active");
         $('#main-nav').focus();
     });
