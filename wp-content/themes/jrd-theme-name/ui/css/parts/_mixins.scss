@@ -11,11 +11,15 @@
     }
 
     @mixin size($w, $h: $w) {
-        @if ( unitless( $w ) ) {
-            $w: $w + px;
+        @if ( type-of($w) == 'number' ) {
+            @if ( unitless($w) ) {
+                $w: $w + px;
+            }
         }
-        @if ( unitless( $h ) ) {
-            $h: $h + px;
+        @if ( type-of($h) == 'number' ) {
+            @if ( unitless($h) ) {
+                $h: $h + px;
+            }
         }
         width: $w;
         height: $h;
