@@ -593,4 +593,7 @@ function remove_admin_login_header() {
 add_action( 'get_header', 'remove_admin_login_header' );
 
 // Change admin verification screen to only show up once a year.
-add_filter( 'admin_email_check_interval', YEAR_IN_SECONDS );
+function year_in_seconds() {
+	return YEAR_IN_SECONDS;
+}
+add_filter( 'admin_email_check_interval', 'year_in_seconds' );
