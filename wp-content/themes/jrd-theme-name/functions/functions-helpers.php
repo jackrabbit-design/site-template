@@ -69,7 +69,7 @@ function tag_wrap( $string, $wrapper ) {
 		$element = explode( ' ', $wrapper );
 		$element = $element[0];
 		$return .= "</{$element}>" . PHP_EOL;
-		return wp_kses_post( $return );
+		return $return;
 	}
 }
 /* Example Usage:
@@ -121,7 +121,7 @@ function jrd_img( $field, $size = 'large', $classes = null, $id = null, $data = 
 	} else {
 		$image_id = $field['ID'];
 	}
-	return wp_kses_post( wp_get_attachment_image( $image_id, $size, false, $atts ) ) . PHP_EOL;
+	return wp_get_attachment_image( $image_id, $size, false, $atts ) . PHP_EOL;
 }
 
 /**
