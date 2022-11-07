@@ -51,10 +51,10 @@ jQuery(function($){
 });
 
 // UNRUNT
-$.fn.unrunt = function(){
-    $(this).each(function(){
-        var u = unruntify( $(this).html() );
-        $(this).html( u );
+jQuery.fn.unrunt = function(){
+    jQuery(this).each(function(){
+        var u = unruntify( jQuery(this).html() );
+        jQuery(this).html( u );
     });
 };
 

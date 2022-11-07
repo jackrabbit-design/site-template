@@ -74,6 +74,8 @@ if ( function_exists( 'register_nav_menus' ) ) {
 	);
 }
 
+add_theme_support( 'title-tag' ); // Add support for title tag in wp_head
+
 /* ========================================================================= */
 /* DISABLE EMOJIS */
 /* ========================================================================= */
@@ -136,12 +138,12 @@ function jrd_login() {
 add_action( 'login_footer', 'jrd_login' );
 
 function jrd_login_url() {
-	return get_bloginfo( 'url' );
+	return home_url();
 }
 add_action( 'login_headerurl', 'jrd_login_url' );
 
 function jrd_login_title() {
-	return get_bloginfo( 'name' );
+	return home_url();
 }
 add_action( 'login_headertext', 'jrd_login_title' );
 
@@ -151,8 +153,7 @@ add_action( 'login_headertext', 'jrd_login_title' );
 /* ========================================================================= */
 
 function enqueue_scripts() {
-	wp_deregister_script( 'jquery' );
-	wp_enqueue_script( 'jquery', jrd_ui( 'js/jquery.js' ), array(), '1.0.0', false );
+	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'modernizr', jrd_ui( 'js/modernizr.js' ), array(), '1.0.0', true );
 	wp_enqueue_script( 'svgxuse', jrd_ui( 'js/svgxuse.js' ), array(), '1.0.0', true );
 	wp_enqueue_script( 'plugins', jrd_ui( 'js/jquery.plugins.js' ), array( 'jquery' ), '1.0.0', true );
@@ -357,7 +358,7 @@ add_filter( 'the_content', 'filter_ptags_on_images' );
 
 function modify_post_mime_types( $post_mime_types ) {
 	// translators: PDF
-	$post_mime_types['application/pdf'] = array( __( 'PDFs' ), __( 'Manage PDF' ), _n_noop( 'PDF <span class="count">(%s)</span>', 'PDFs <span class="count">(%s)</span>' ) );
+	$post_mime_types['application/pdf'] = array( __( 'PDFs', 'jrd-theme-name' ), __( 'Manage PDF', 'jrd-theme-name' ), _n_noop( 'PDF <span class="count">(%s)</span>', 'PDFs <span class="count">(%s)</span>', 'jrd-theme-name' ) );
 	return $post_mime_types;
 }
 add_filter( 'post_mime_types', 'modify_post_mime_types' );

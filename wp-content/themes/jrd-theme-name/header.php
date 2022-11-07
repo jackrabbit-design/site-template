@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US" prefix="og: http://ogp.me/ns#">
+<html <?php language_attributes(); ?> prefix="og: http://ogp.me/ns#">
 <head>
 	<meta charset="utf-8" />
 	<!-- ====================================================
@@ -26,7 +26,6 @@
 	===================================================== -->
 	<meta name="MSSmartTagsPreventParsing" content="true" /><!--[if lte IE 9]><meta http-equiv="X-UA-Compatible" content="IE=Edge"/><![endif]-->
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title><?php wp_title(); ?></title>
 	<link type="text/plain" rel="author" href="/authors.txt" />
 	<link type="image/x-icon" rel="shortcut icon" href="/favicon.ico" />
 	<?php
@@ -47,6 +46,8 @@
 	?>
 </head>
 <body <?php body_class(); ?>>
+
+<?php wp_body_open(); ?>
 
 <noscript aria-hidden="true"><div style="text-align:center;background-color:#000;color:#fff;padding:5px;">It looks like JavaScript is disabled in your browser. Please enable JavaScript to view the full site.</div></noscript>
 

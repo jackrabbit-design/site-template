@@ -3,7 +3,7 @@
 	<?php
 	if ( post_password_required() ) {
 		?>
-		<p class="nopassword"><?php _e( 'This post is password protected. Enter the password to view any comments.' ); ?></p>
+		<p class="nopassword"><?php _e( 'This post is password protected. Enter the password to view any comments.', 'jrd-theme-name' ); ?></p>
 		</div><!-- #comments -->
 		<?php
 		/* Stop the rest of comments.php from being processed,
@@ -126,7 +126,7 @@
 			<?php
 			$comments_number = get_comments_number();
 			printf(
-				_n( '%1$s Comment', '%1$s Comments', get_comments_number(), 'jrd_comments' ),
+				_n( '%1$s Comment', '%1$s Comments', get_comments_number(), 'jrd-theme-name' ),
 				number_format_i18n( get_comments_number() ),
 				'<em>' . get_the_title() . '</em>'
 			);
@@ -150,8 +150,8 @@
 		if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) { // Are there comments to navigate through?
 			?>
 			<div class="navigation">
-				<div class="nav-previous"><?php previous_comments_link( __( '<span class="meta-nav">&larr;</span> Older Comments', 'jrd_comments' ) ); ?></div>
-				<div class="nav-next"><?php next_comments_link( __( 'Newer Comments <span class="meta-nav">&rarr;</span>', 'jrd_comments' ) ); ?></div>
+				<div class="nav-previous"><?php previous_comments_link( __( '<span class="meta-nav">&larr;</span> Older Comments', 'jrd-theme-name' ) ); ?></div>
+				<div class="nav-next"><?php next_comments_link( __( 'Newer Comments <span class="meta-nav">&rarr;</span>', 'jrd-theme-name' ) ); ?></div>
 			</div><!-- .navigation -->
 			<?php
 		} else { // or, if we don't have comments:

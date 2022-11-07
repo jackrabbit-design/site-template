@@ -19,7 +19,7 @@ function jrd_comments( $comment, $args, $depth ) {
 		<h4><span>
 			<?php
 			// translators: USERNAME wrote:
-			printf( __( '%s wrote:' ), $comment->comment_author );
+			printf( __( '%s wrote:', 'jrd-theme-name' ), $comment->comment_author );
 			?>
 			</span>
 		</h4>
@@ -27,9 +27,9 @@ function jrd_comments( $comment, $args, $depth ) {
 		<p class="commentDate">
 			<?php
 			// translators: Written on DATE at TIME
-			printf( __( 'Written on %1$s at %2$s' ), get_comment_date( 'n/j/Y' ), get_comment_time( 'g:ia' ) );
+			printf( __( 'Written on %1$s at %2$s', 'jrd-theme-name' ), get_comment_date( 'n/j/Y' ), get_comment_time( 'g:ia' ) );
 			?>
-			<?php edit_comment_link( __( 'Edit' ), '  ', '' ); ?>
+			<?php edit_comment_link( __( 'Edit', 'jrd-theme-name' ), '  ', '' ); ?>
 		</p>
 	</li>
 
