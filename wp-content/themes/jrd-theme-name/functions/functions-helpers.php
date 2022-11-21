@@ -10,10 +10,11 @@
 	TAG WRAP
 	CLEAN FUNCTION
 	JRD_IMG
+	JRD_ADD_IMG_SIZES
 	JRD_LINK
 	JRD_TERMS_DROPDOWN
 	JRD_SOCIAL_NAV
-
+	JRD_GF
 */
 
 
@@ -122,6 +123,19 @@ function jrd_img( $field, $size = 'large', $classes = null, $id = null, $data = 
 		$image_id = $field['ID'];
 	}
 	return wp_get_attachment_image( $image_id, $size, false, $atts ) . PHP_EOL;
+}
+
+/**
+ * Returns image crops for the supplied dimension .5x, 1x, and 2x
+ * @param  string $size The name of the image crop
+ * @param  int $width   The width of the image at 1x
+ * @param  int $height  The height of the image at 1x
+ * @param  bool $crop   Choose whether the image crops or not
+ */
+function jrd_add_img_sizes( $size, $width, $height, $crop = true ) {
+	add_image_size( $size, $width, $height, $crop );
+	add_image_size( "$size-2x", $width * 2, $height * 2, $crop );
+	add_image_size( "$size-m", $width / 2, $height / 2, $crop );
 }
 
 /**
