@@ -60,9 +60,22 @@ add_filter( 'login_errors', '__return_null' );
 add_filter( 'big_image_size_threshold', '__return_false' );
 
 /* Post Thumbnail Sizes */
+/**
+ * Returns image crops for the supplied dimension .5x, 1x, and 2x
+ * @param  string $size The name of the image crop
+ * @param  int $width   The width of the image at 1x
+ * @param  int $height  The height of the image at 1x
+ * @param  bool $crop   Choose whether the image crops or not
+ */
+function jrd_add_img_sizes( $size, $width, $height, $crop = true ) {
+	add_image_size( $size, $width, $height, $crop );
+	add_image_size( "$size-2x", $width * 2, $height * 2, $crop );
+	add_image_size( "$size-m", $width / 2, $height / 2, $crop );
+}
 add_theme_support( 'post-thumbnails' );
 set_post_thumbnail_size( 64, 64, true );
 //add_image_size( 'size-name', 100, 100, true );
+//jrd_add_image_sizes( 'size-name', 100, 100 );
 
 /* Declare Nav Menu Areas */
 if ( function_exists( 'register_nav_menus' ) ) {
