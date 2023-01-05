@@ -318,8 +318,8 @@ function body_class_adjustments( $classes1 ) {
 		$classes[] = $browser;
 		$classes[] = 'chrome';
 	} elseif ( $is_gecko ) {
-		$browser   = explode( ' ', $browser );
-		$browser   = $browser[9];
+		$browser   = explode( 'Gecko', $browser )[1];
+		$browser   = explode( ' ', $browser )[1];
 		$browser   = strtolower( $browser );
 		$browser   = str_replace( '/', '-', str_replace( '.0', '', $browser ) );
 		$classes[] = $browser;
