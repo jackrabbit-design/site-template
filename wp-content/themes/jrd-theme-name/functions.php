@@ -75,7 +75,7 @@ function jrd_add_img_sizes( $size, $width, $height, $crop = true ) {
 add_theme_support( 'post-thumbnails' );
 set_post_thumbnail_size( 64, 64, true );
 //add_image_size( 'size-name', 100, 100, true );
-//jrd_add_image_sizes( 'size-name', 100, 100 );
+//jrd_add_img_sizes( 'size-name', 100, 100 );
 
 /* Declare Nav Menu Areas */
 if ( function_exists( 'register_nav_menus' ) ) {
