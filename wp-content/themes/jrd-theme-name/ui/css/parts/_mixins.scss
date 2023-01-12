@@ -32,9 +32,13 @@
         }
     }
 
+    @function em( $value, $fontsize ) {
+        @return math.div($value, $fontsize) * 1em;
+    }
+
     // make sure you change "16" to whatever your main content's font size
     @function rem($px) {
-        @return $px/16*1rem;
+        @return math.div($px,16)*1rem;
     }
 
 /*
