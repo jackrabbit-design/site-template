@@ -59,7 +59,7 @@ jQuery.fn.unrunt = function(){
 };
 
 function unruntify( str ){
-    var pieces = str.split(' ');
+    var pieces = str.trim().split(' ');
     var new_pieces = [];
     pieces.forEach(function(x,i){
         if ( x.indexOf('<') == 0 && x.indexOf('>') == -1 ) {
