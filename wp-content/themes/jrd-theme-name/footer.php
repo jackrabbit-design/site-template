@@ -1,4 +1,4 @@
-<footer id="footer" role="contentinfo">
+<footer id="footer">
 
 	&copy; <?php echo current_time( 'Y ' ) . get_bloginfo( 'name' ); ?>
 
