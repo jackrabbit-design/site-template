@@ -32,21 +32,28 @@
 	wp_head();
 	?>
 	<?php
-	/* Uncomment and replace UA-XXX-Y
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXX-Y"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-
-		gtag('config', 'UA-XXX-Y');
-	</script>
+	/* Uncomment and replace GTM-ABCDEFG with your GTM to enable Google Tag Manager
+	/*Remember to also add in the GTM ID to the body tag below
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-ABCDEFG');</script>
+	<!-- End Google Tag Manager -->
 	*/
 	?>
 </head>
 <body <?php body_class(); ?>>
-
+<?php
+/* Uncomment and replace GTM-ABCDEFG with your GTM to enable Google Tag Manager
+/*Remember to also add in the GTM ID to the head tag above
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-ABCDEFG"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+*/
+?>
 <?php wp_body_open(); ?>
 
 <noscript aria-hidden="true"><div style="text-align:center;background-color:#000;color:#fff;padding:5px;">It looks like JavaScript is disabled in your browser. Please enable JavaScript to view the full site.</div></noscript>
