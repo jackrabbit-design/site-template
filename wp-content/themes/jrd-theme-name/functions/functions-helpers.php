@@ -58,23 +58,47 @@ function limit_excerpt( $string, $word_limit ) {
 }
 
 /**
- * Wrap a variable in a tag
- * @param  string $string   The text to be wrapped
- * @param  string $wrapper  The wrapper element
+ * Wrap a variable in a tag with custom attributes
+ * @param  string $string    The text to be wrapped
+ * @param  string $notation  CSS notation for the tag
  * @return string           The returned HTML
  */
-function tag_wrap( $string, $wrapper ) {
-	if ( $string ) {
-		$return  = "<{$wrapper}>{$string}";
-		$element = explode( ' ', $wrapper );
-		$element = $element[0];
-		$return .= "</{$element}>" . PHP_EOL;
-		return $return;
+function tag_wrap( $string, $notation ) {
+	$element = preg_split( '/[\.\#\[]/', $notation )[0];
+	$classes = array();
+	preg_match_all( '(\.[\w\d-]+)', $notation, $raw_classes );
+	if ( ! empty( $raw_classes[0] ) ) {
+		foreach ( $raw_classes[0] as $class ) {
+			$class     = str_replace( '.', '', $class );
+			$classes[] = $class;
+		}
+		$classes = ' class="' . implode( ' ', $classes ) . '"';
+	} else {
+		$classes = '';
 	}
+	$id = '';
+	preg_match_all( '(\#[\w\d-]+)', $notation, $raw_id );
+	if ( ! empty( $raw_id[0] ) ) {
+		$id = ' id="' . str_replace( '#', '', $raw_id[0][0] ) . '"';
+	}
+
+	$atts = array();
+	preg_match_all( '(\[[^\[\]]+\])', $notation, $raw_atts );
+	if ( ! empty( $raw_atts[0] ) ) {
+		foreach ( $raw_atts[0] as $att ) {
+			$att    = str_replace( array( '[', ']' ), '', $att );
+			$atts[] = $att;
+		}
+		$atts = ' ' . implode( ' ', $atts );
+	} else {
+		$atts = '';
+	}
+	$html = "<{$element}{$classes}{$id}{$atts}>{$string}</{$element}>";
+	return $html;
 }
 /* Example Usage:
-	echo tag_wrap(get_field('field_name'), 'h3 class="something"');
-	output: <h3 class="something">[contents]</h3>
+	echo tag_wrap(get_field('field_name'), 'h3.something#id[data-attr="value"]');
+	output: <h3 class="something" id="identifier" data-attr="value">[field contents]</h3>
 */
 
 /**
