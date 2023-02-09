@@ -153,15 +153,17 @@ function jrd_img( $field, $size = 'large', $classes = null, $id = null, $data = 
  * @param  array $link  The ACF link object
  * @param  string $class The desired HTML element class for the link
  * @param  string $id    The desired HTML ID for the link
+ * @param  bool $span    Wrap the link text in a span tag (default: true)
  * @return string        HTML for the link
  */
-function jrd_link( $link, $class = '', $id = '' ) {
+function jrd_link( $link, $class = '', $id = '', $span = true ) {
 	if ( isset( $link['url'] ) && '' !== (string) $link['url'] ) {
 		$link_label = isset( $link['label'] ) && '' !== (string) $link['label'] ? $link['label'] : $link['title'];
 		$link_url   = esc_url( $link['url'] );
 		$target     = $link['target'] ?? '_self';
 		$nofollow   = isset( $link['nofollow'] ) && 'nofollow' === $link['nofollow'] ? "rel='nofollow'" : '';
-		return "<a href='{$link_url}' aria-label='{$link_label}' target='{$target}' class='$class' id='$id' $nofollow><span>{$link['title']}</span></a>" . PHP_EOL;
+		$title      = $span ? tag_wrap( $link['title'], 'span' ) : $link['title'];
+		return "<a href='{$link_url}' aria-label='{$link_label}' target='{$target}' class='$class' id='$id' $nofollow>$title</a>" . PHP_EOL;
 	}
 }
 
