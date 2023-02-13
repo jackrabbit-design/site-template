@@ -32,6 +32,12 @@
         }
     }
 
+    @mixin range($minVal, $maxVal ){
+        @media only screen and ( min-width: #{$minVal}px ) and ( max-width: #{$maxVal}px ){
+            @content;
+        }
+    }
+
     @function em( $value, $fontsize ) {
         @return math.div($value, $fontsize) * 1em;
     }
