@@ -14,6 +14,7 @@
 	JRD_TERMS_DROPDOWN
 	JRD_SOCIAL_NAV
 	JRD_GF
+	JRD_EMBED_URL
 */
 
 
@@ -324,4 +325,31 @@ function jrd_gf( $gf_id, $title = 'false', $description = 'false', $ajax = 'true
 		$shortcode = do_shortcode( "[gravityform id='{$gf_id}' title='{$title}' description='{$description}' ajax='{$ajax}']" );
 	}
 	return $shortcode;
+}
+
+/**
+ * Video Embed URL generator
+ * @param string $video_link          the URL of the video
+ **/
+function jrd_embed_url( $video_link ) {
+	$video_id = '';
+	$host     = parse_url( $video_link, PHP_URL_HOST );
+	if ( 'youtu.be' === $host ) {
+		//YouTube short URL
+		$path            = parse_url( $video_link, PHP_URL_PATH );
+		$video_id        = substr( $path, 1 );
+		$video_embed_url = "https://www.youtube.com/embed/$video_id";
+	} elseif ( 'www.youtube.com' === $host || 'youtube.com' === $host ) {
+		//YouTube long URL
+		$query = parse_url( $video_link, PHP_URL_QUERY );
+		parse_str( $query, $params );
+		$video_id        = $params['v'];
+		$video_embed_url = "https://www.youtube.com/embed/$video_id";
+	} elseif ( 'vimeo.com' === $host || 'www.vimeo.com' === $host ) {
+		//Vimeo URL
+		$path            = parse_url( $video_link, PHP_URL_PATH );
+		$video_id        = substr( $path, 1 );
+		$video_embed_url = "https://player.vimeo.com/video/$video_id";
+	}
+	return $video_embed_url;
 }
