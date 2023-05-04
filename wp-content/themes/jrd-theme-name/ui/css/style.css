@@ -143,10 +143,6 @@ select {
   -ms-appearance: none;
 }
 
-select:-moz-focusring {
-  color: transparent;
-}
-
 select::-ms-expand {
   display: none;
 }
@@ -269,6 +265,30 @@ html, body {
   counter-increment: li;
   position: absolute;
   right: calc(100% - 15px);
+}
+
+.socials {
+  display: flex;
+  gap: 16px;
+}
+.socials .social {
+  height: 27px;
+}
+.socials .social:hover svg {
+  fill: #000;
+  background-color: #eaeaea;
+}
+.socials .social svg {
+  fill: #fff;
+  background-color: #000;
+  padding: 2px;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+.socials .social svg:hover {
+  fill: #000;
 }
 
 /* != DEFAULT WORDPRESS STYLES = USE AS NEEDED = .wp-caption = .wp-caption-dd = .wpGallery = .shutter = .shutterset ==== */

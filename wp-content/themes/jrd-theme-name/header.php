@@ -61,7 +61,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header id="header" role="banner">
 	<a id="skipnav" href="#body-content">Skip to Main Content</a>
 	<?php
-	if ( get_field( '_display_alert', 'options' ) ) {
+	if ( get_field( 'display_alert', 'options' ) ) {
 		?>
 		<div id="alert" role="complementary" style="display:none;">
 			<a href="#" class="close">&times;</a>
