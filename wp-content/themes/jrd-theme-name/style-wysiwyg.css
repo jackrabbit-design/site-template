@@ -1,34 +1,40 @@
 @import url("ui/css/parts/fonts.css");
 
 #tinymce h1,
+#tinymce .title1,
 .mce-container-body .mce-menu-item:nth-child(2) .mce-text {
-    font: 700 50px/1.1 sans-serif;
-    color: #000;
+    font: 700 50px/1.1 sans-serif !important;
+    color: #000 !important;
 }
 #tinymce h2,
+#tinymce .title2,
 .mce-container-body .mce-menu-item:nth-child(3) .mce-text {
-    font: normal 36px/1.2 sans-serif;
-    color: #000;
+    font: normal 36px/1.2 sans-serif !important;
+    color: #000 !important;
 }
 #tinymce h3,
+#tinymce .title3,
 .mce-container-body .mce-menu-item:nth-child(4) .mce-text {
-    font: 600 18px/1.2 sans-serif;
-    color: #000;
+    font: 600 18px/1.2 sans-serif !important;
+    color: #000 !important;
 }
 #tinymce h4,
+#tinymce .title4,
 .mce-container-body .mce-menu-item:nth-child(5) .mce-text {
-    font: normal 18px/1.2 sans-serif;
-    color: #000;
+    font: normal 18px/1.2 sans-serif !important;
+    color: #000 !important;
 }
 #tinymce h5,
+#tinymce .title5,
 .mce-container-body .mce-menu-item:nth-child(6) .mce-text {
-    font: normal 14px/1.2 sans-serif;
-    color: #000;
+    font: normal 14px/1.2 sans-serif !important;
+    color: #000 !important;
 }
 #tinymce h6,
+#tinymce .title6,
 .mce-container-body .mce-menu-item:nth-child(7) .mce-text {
-    font: normal 14px/1.2 sans-serif;
-    color: #000;
+    font: normal 14px/1.2 sans-serif !important;
+    color: #000 !important;
 }
 #tinymce p,
 #tinymce li,

@@ -425,7 +425,6 @@ add_shortcode( 'button', 'morelink' );
 /* TINYMCE SELECT DROPDOWN CLASS SETUP CODES */
 /* ========================================================================= */
 
-
 add_filter( 'mce_buttons_2', 'my_mce_buttons_2' );
 
 function my_mce_buttons_2( $buttons ) {
@@ -442,17 +441,34 @@ function my_mce_before_init( $settings ) {
 	$style_formats = array(
 		array(
 			'title'    => 'Button Link',
-			'selector' => 'a',
+			'inline  ' => 'a',
 			'classes'  => 'btn',
 		),
 	);
 
+	for ( $i = 1; $i <= 6; $i++ ) {
+		$style_formats[] = array(
+			'title'      => "Title $i",
+			'selector'   => 'h1, h2, h3, h4, h5, h6, p',
+			'attributes' => array(
+				'class' => "title{$i}",
+			),
+		);
+	}
+
+	// additional styles go below. be sure to uncomment first
+	/*
+	$style_formats[] = array(
+		'title'    => 'Style Name',
+		'selector' => 'p',
+		'classes'  => '.style-name',
+	);
+	*/
+
 	$settings['style_formats'] = json_encode( $style_formats );
 
 	return $settings;
-
 }
-
 
 /* ========================================================================= */
 /* Add Classes to next_posts_link and prev_posts_link. */
