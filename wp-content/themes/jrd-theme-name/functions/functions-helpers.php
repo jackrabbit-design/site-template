@@ -159,7 +159,7 @@ function jrd_img( $field, $size = 'large', $classes = null, $id = null, $data = 
  */
 function jrd_link( $link, $class = '', $id = '', $span = true ) {
 	if ( isset( $link['url'] ) && '' !== (string) $link['url'] ) {
-		$link_label = isset( $link['label'] ) && '' !== (string) $link['label'] ? $link['label'] : $link['title'];
+		$link_label = isset( $link['label'] ) && '' !== (string) $link['label'] ? $link['label'] : esc_attr( $link['title'] );
 		$link_url   = esc_url( $link['url'] );
 		$target     = $link['target'] ?? '_self';
 		$nofollow   = isset( $link['nofollow'] ) && 'nofollow' === $link['nofollow'] ? "rel='nofollow'" : '';
