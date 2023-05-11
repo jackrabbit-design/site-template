@@ -110,7 +110,7 @@ function tag_wrap( $string, $notation ) {
 function clean( $string ) {
 	$string = wp_strip_all_tags( $string );
 	$string = strtolower( $string );
-	$string = str_replace( ' ', '-', $string );
+	$string = preg_replace( '/\s+/', '-', $string );
 	$string = sanitize_html_class( $string );
 	return $string;
 }
