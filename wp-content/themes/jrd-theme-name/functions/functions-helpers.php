@@ -111,7 +111,8 @@ function clean( $string ) {
 	$string = wp_strip_all_tags( $string );
 	$string = strtolower( $string );
 	$string = str_replace( ' ', '-', $string );
-	return preg_replace( '/[\W]/', '', $string );
+	$string = sanitize_html_class( $string );
+	return $string;
 }
 
 /**
