@@ -1,3 +1,5 @@
+$rem_size: 16;
+
 @use 'sass:math';
 @import 'parts/reset';
 @import 'parts/fonts';
@@ -17,9 +19,15 @@ $secondary_color: #333333;
 /* != DEFAULT STYLES ===== */
 
 	html, body {
+        scroll-behavior: smooth;
         font: {
             family: $font_body;
+            size: $rem_size * 1px;
         }
+    }
+
+    [id] {
+        scroll-margin-top: 100px; // set this to the height of your fixed header, plus some extra
     }
 
     h1, .title1 {
@@ -242,12 +250,6 @@ $secondary_color: #333333;
 			}
 		}
     }
-
-    [id] {
-        scroll-margin-top: 100px;
-    }
-
-
 
 /* != PLACEHOLDER ATTRIBUTE STYLES = input or textarea - placeholder="whatever" ===== */
 /*
