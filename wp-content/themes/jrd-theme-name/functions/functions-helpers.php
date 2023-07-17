@@ -142,7 +142,7 @@ function jrd_img( $field, $size = 'large', $classes = null, $id = null, $data = 
 			$atts[ 'data-' . $key ] = $val;
 		}
 	}
-	if ( is_int( $field ) ) {
+	if ( is_numeric( $field ) ) {
 		$image_id = $field;
 	} else {
 		$image_id = $field['ID'];
