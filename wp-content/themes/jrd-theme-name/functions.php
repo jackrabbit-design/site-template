@@ -1,5 +1,10 @@
 <?php
 
+// Use this as a conditional instead of is_user_logged_in(). This function is more strict, as long as your wp username is admin_jackrabbit
+function is_jrd() {
+	return 'admin_jackrabbit' === wp_get_current_user()->user_login;
+}
+
 /* ========================================================================= */
 /* Favor GD over Imagick (prevent HTTP Error) */
 /* ========================================================================= */
