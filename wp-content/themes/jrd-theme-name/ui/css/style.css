@@ -236,7 +236,7 @@ input[type=text]::-ms-clear {
 /* != DEFAULT STYLES ===== */
 html, body {
   scroll-behavior: smooth;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, Helvetica, Arial, sans-serif;
   font-size: 16px;
 }
 

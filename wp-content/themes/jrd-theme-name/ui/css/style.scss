@@ -6,11 +6,11 @@ $rem_size: 16;
 @import 'parts/mixins';
 @import 'parts/vendor';
 
-$font_body: Helvetica, Arial, sans-serif;
-$font_heading: Helvetica, Arial, $font_body;
+$font_family_one: Helvetica, Arial, sans-serif;
+$font_family_two: Helvetica, Arial, $font_family_one;
 
-$primary_color: #000000;
-$secondary_color: #333333;
+$color_one: #000000;
+$color_one_two: #333333;
 
 /* ========================================================================= */
 /* !STYLES */
@@ -21,7 +21,7 @@ $secondary_color: #333333;
 	html, body {
         scroll-behavior: smooth;
         font: {
-            family: $font_body;
+            family: $font_family_two;
             size: $rem_size * 1px;
         }
     }
