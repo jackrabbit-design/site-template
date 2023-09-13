@@ -1,0 +1,337 @@
+@charset "UTF-8";
+/* ========================================================================= */
+/* !FONTS (@fontface generated with FontSpring Syntax formatting */
+/* ========================================================================= */
+/* ========================================================================= */
+/* !SASS VARIABLES & MIXINS */
+/* ========================================================================= */
+/*
+    // Use Case: $b (second) variable is optional and defaults to 'max-width'
+
+    @include break(1100){
+        h1{
+            background: red;
+        }
+    }
+
+    // Output
+    @media screen and (max-width: 1100px) {
+        h1 { background: red; }
+    }
+
+    // Also, if you want to specify the 2nd variable for break type (i.e., min-height)
+
+    @include break(1100, 'min-height'){
+        h1 {
+            background:red;
+        }
+    }
+
+    // Output
+    @media screen and (min-height: 1100px) {
+        h1 { background: red; }
+    }
+*/
+/*
+    // inline SVGs
+    // usage: background-image: inline-svg('<svg><!-- your svg code --></svg>');
+*/
+html .wp-block {
+  max-width: 1140px;
+  width: calc(100% - 80px);
+  container-type: inline-size;
+  /* ========================================================================= */
+  /* !RESETS AND DEFAULTS */
+  /* ========================================================================= */
+  /*
+  a:focus {
+      outline:0;
+  }
+  :focus, :active {
+      outline:none; outline:0;
+  } ::-moz-focus-inner {
+      outline:none;
+  }
+  */
+  /* != FONT SMOOTHING */
+  /* != ms-clear */
+  /* != BACKGROUND POSITION AND BOX SIZING */
+  /* != .clearfix - CLEAR ELEMENTS */
+  /* != .wordwrap - CONTINUE LONG URLS/WORDS ON NEXT LINE */
+  /* != DEFAULT WORDPRESS STYLES = USE AS NEEDED = .wp-caption = .wp-caption-dd = .wpGallery = .shutter = .shutterset ==== */
+  /* != ACCESSIBILITY STYLES ===== */
+  /* != FORM STYLES ===== */
+}
+html .wp-block html, html .wp-block body, html .wp-block div, html .wp-block object, html .wp-block iframe, html .wp-block h1, html .wp-block h2, html .wp-block h3, html .wp-block h4, html .wp-block h5, html .wp-block h6, html .wp-block p,
+html .wp-block blockquote, html .wp-block pre, html .wp-block abbr, html .wp-block address, html .wp-block cite, html .wp-block code, html .wp-block del, html .wp-block dfn, html .wp-block img,
+html .wp-block ins, html .wp-block kbd, html .wp-block q, html .wp-block samp, html .wp-block var, html .wp-block hr, html .wp-block acronym, html .wp-block dl, html .wp-block dt, html .wp-block dd, html .wp-block ol, html .wp-block ul, html .wp-block li,
+html .wp-block pre, html .wp-block fieldset, html .wp-block form, html .wp-block label, html .wp-block legend, html .wp-block table, html .wp-block caption, html .wp-block tbody,
+html .wp-block tfoot, html .wp-block thead, html .wp-block tr, html .wp-block th, html .wp-block td, html .wp-block article, html .wp-block aside, html .wp-block canvas, html .wp-block details,
+html .wp-block figcaption, html .wp-block figure, html .wp-block footer, html .wp-block header, html .wp-block hgroup, html .wp-block menu, html .wp-block nav,
+html .wp-block section, html .wp-block summary, html .wp-block time, html .wp-block mark, html .wp-block audio, html .wp-block video {
+  border: 0;
+  outline: 0;
+  font-style: normal;
+  font-size: 100%;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  -webkit-text-size-adjust: 100%;
+}
+html .wp-block em, html .wp-block strong, html .wp-block b, html .wp-block i, html .wp-block a, html .wp-block span, html .wp-block sub, html .wp-block sup, html .wp-block small {
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+}
+html .wp-block article, html .wp-block aside, html .wp-block details, html .wp-block figcaption, html .wp-block figure, html .wp-block footer,
+html .wp-block header, html .wp-block hgroup, html .wp-block menu, html .wp-block nav, html .wp-block section {
+  display: block;
+}
+html .wp-block li {
+  list-style: none;
+}
+html .wp-block a {
+  text-decoration: none;
+}
+html .wp-block blockquote:before, html .wp-block blockquote:after, html .wp-block q:before, html .wp-block q:after {
+  content: "";
+}
+html .wp-block table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+html .wp-block hr {
+  display: block;
+  height: 1px;
+  border-top: 1px solid #000;
+  color: #000;
+}
+html .wp-block input, html .wp-block select {
+  vertical-align: middle;
+}
+html .wp-block sub {
+  vertical-align: sub;
+  font-size: smaller;
+  line-height: 0px;
+}
+html .wp-block sup {
+  vertical-align: super;
+  font-size: smaller;
+  line-height: 0px;
+}
+html .wp-block input, html .wp-block button, html .wp-block textarea, html .wp-block select, html .wp-block label, html .wp-block img {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+html .wp-block input, html .wp-block button, html .wp-block textarea, html .wp-block select, html .wp-block optgroup, html .wp-block option {
+  font-family: inherit;
+  font-size: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+}
+html .wp-block input[type=text],
+html .wp-block input[type=password],
+html .wp-block input[type=url],
+html .wp-block input[type=number],
+html .wp-block input[type=tel],
+html .wp-block input[type=email],
+html .wp-block input[type=button],
+html .wp-block input[type=submit],
+html .wp-block button, html .wp-block textarea, html .wp-block select {
+  -webkit-appearance: none;
+  outline: 1px solid transparent;
+}
+html .wp-block textarea {
+  resize: none;
+  overflow: auto;
+}
+html .wp-block button, html .wp-block [type=submit], html .wp-block [type=button], html .wp-block [type=reset] {
+  cursor: pointer;
+  border: 0;
+  text-align: center;
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+}
+html .wp-block button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+html .wp-block table {
+  table-layout: fixed;
+}
+html .wp-block a[href^=tel] {
+  color: inherit;
+}
+html .wp-block select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+}
+html .wp-block select::-ms-expand {
+  display: none;
+}
+html .wp-block body, html .wp-block input, html .wp-block button, html .wp-block textarea {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+html .wp-block input[type=text]::-ms-clear {
+  display: none;
+}
+html .wp-block *, html .wp-block *:before, html .wp-block *:after {
+  box-sizing: border-box;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+html .wp-block .clear {
+  clear: both;
+}
+html .wp-block .clearfix {
+  display: block;
+}
+html .wp-block .clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+html .wp-block .wordwrap {
+  white-space: pre;
+  white-space: pre-wrap;
+  white-space: pre-line;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: -moz-pre-wrap;
+  word-wrap: break-word;
+}
+html .wp-block .btn {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  transition: 0.2s;
+}
+html .wp-block .content-main ul:not([class*=gf]) > li {
+  position: relative;
+  padding-left: 10px;
+}
+html .wp-block .content-main ul:not([class*=gf]) > li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+}
+html .wp-block .content-main ol {
+  counter-reset: li;
+}
+html .wp-block .content-main ol > li {
+  position: relative;
+  padding-left: 20px;
+}
+html .wp-block .content-main ol > li:before {
+  content: counter(li) ". ";
+  counter-increment: li;
+  position: absolute;
+  right: calc(100% - 15px);
+}
+html .wp-block .socials {
+  display: flex;
+  gap: 16px;
+}
+html .wp-block .socials .social {
+  height: 27px;
+}
+html .wp-block .socials .social:hover svg {
+  fill: #000;
+  background-color: #eaeaea;
+}
+html .wp-block .socials .social svg {
+  fill: #fff;
+  background-color: #000;
+  padding: 2px;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+html .wp-block .socials .social svg:hover {
+  fill: #000;
+}
+html .wp-block .aligncenter {
+  display: block;
+  margin: 25px auto;
+}
+html .wp-block .alignleft {
+  float: left;
+  margin: 0 25px 25px 0;
+}
+html .wp-block .alignright {
+  float: right;
+  margin: 0 0 25px 25px;
+}
+html .wp-block .alignnone {
+  display: inline-block;
+}
+html .wp-block .sr-only, html .wp-block .slick-sr-only {
+  /* Styles below are so elements are shown to screen readers only */
+  border: none !important;
+  clip: rect(0, 0, 0, 0) !important;
+  height: 0.01em !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 0.01em !important;
+}
+html .wp-block *:focus {
+  outline: 3px solid rgba(0, 0, 0, 0.5);
+}
+html .wp-block .wrap {
+  max-width: 1180px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+html .wp-block input[type=submit], html .wp-block button {
+  display: inline-block;
+  cursor: pointer;
+}
+html .wp-block select {
+  -webkit-appearance: none;
+  background: #fff url("data:image/svg+xml,%3Csvg width%3D%2213%22 height%3D%228%22 viewBox%3D%220 0 13 8%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath d%3D%22M.293.293c.36-.36.928-.388 1.32-.083l.094.083L6.51 5.096 11.313.293c.36-.36.928-.388 1.32-.083l.094.083c.36.36.389.928.084 1.32l-.084.094-5.51 5.51c-.36.36-.927.388-1.32.083l-.094-.083-5.51-5.51c-.39-.39-.39-1.024 0-1.414z%22 fill%3D%22%23f00%22 fill-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E") no-repeat calc(100% - 10px) 50%;
+}
+html .wp-block .validation_error {
+  padding: 15px;
+  color: #fff;
+  background: #c00;
+  margin: 20px 0;
+}
+html .wp-block .validation_message {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #c00;
+  font-weight: 600;
+}
+html .wp-block .gform_validation_container {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  pointer-events: none;
+  opacity: 0;
+}
+html .wp-block .wrap {
+  padding-left: 0;
+  padding-right: 0;
+}
+html .wp-block:hover {
+  outline: 2px solid gray;
+}
+
+.components-button {
+  padding: 6px 12px;
+}

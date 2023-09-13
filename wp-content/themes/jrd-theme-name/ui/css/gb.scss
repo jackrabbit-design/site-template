@@ -1,0 +1,22 @@
+@use 'sass:math';
+@import 'parts/variables';
+
+html .wp-block {
+	max-width: 1140px;
+	width: calc(100% - 80px);
+	container-type: inline-size;
+	@import 'parts/elements';
+	.wrap {
+		padding: {
+			left: 0;
+			right: 0;
+		}
+	}
+	&:hover {
+		outline: 2px solid gray;
+	}
+}
+
+.components-button {
+	padding: 6px 12px;
+}

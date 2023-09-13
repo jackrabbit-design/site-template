@@ -632,3 +632,90 @@ function year_in_seconds() {
 	return YEAR_IN_SECONDS;
 }
 add_filter( 'admin_email_check_interval', 'year_in_seconds' );
+
+
+
+/* ================================================================================ */
+/* SETUP ACF BLOCKS */
+/* ================================================================================ */
+
+add_action( 'admin_head', 'jrd_custom_css' );
+
+function jrd_custom_css() {
+	echo <<<HTML
+  	<style>
+	</style>
+HTML;
+}
+
+function enqueue_block_scripts() {
+	wp_enqueue_script( 'modernizr', jrd_ui( 'js/modernizr.js' ), array(), '1.0.0', true );
+	wp_enqueue_script( 'svgxuse', jrd_ui( 'js/svgxuse.js' ), array(), '1.0.0', true );
+	wp_enqueue_script( 'plugins', jrd_ui( 'js/jquery.plugins.js' ), array( 'jquery' ), '1.0.0', true );
+	wp_enqueue_script( 'init', jrd_ui( 'js/jquery.init.js' ), array( 'jquery', 'acf', 'plugins', 'modernizr' ), filemtime( get_template_directory() . '/ui/js/jquery.init.js' ), true );
+}
+add_action( 'enqueue_block_editor_assets', 'enqueue_block_scripts' );
+function enqueue_block_styles() {
+	wp_enqueue_style( 'style', jrd_ui( 'css/gb.css' ), array(), filemtime( get_template_directory() . '/ui/css/gb.css' ) );
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_styles' );
+add_action( 'enqueue_block_editor_assets', 'enqueue_block_styles' );
+
+
+
+$jrd_blocks = array(
+	'affiliates',
+);
+
+function register_acf_blocks() {
+	if ( function_exists( 'acf_register_block_type' ) ) {
+		global $jrd_blocks;
+		foreach ( $jrd_blocks as $block ) {
+			register_block_type( __DIR__ . "/blocks/$block" );
+		}
+	}
+}
+add_action( 'init', 'register_acf_blocks' );
+
+function jrd_allowed_block_types() {
+	global $jrd_blocks;
+	function prepend_jrd( $block ) {
+		return 'jrd/' . $block;
+	}
+	return array_map( 'prepend_jrd', $jrd_blocks );
+}
+add_filter( 'allowed_block_types_all', 'jrd_allowed_block_types' );
+
+function acf_block_templates() {
+
+	// POSTS
+	$page_type_object = get_post_type_object( 'post' );
+
+	$page_type_object->template = array(
+		/*
+		array(
+			'jrd/example',
+			array(
+				'lock' => array(
+					'move'   => true,
+					'remove' => true,
+				),
+			),
+		),
+		*/
+	);
+}
+add_action( 'init', 'acf_block_templates' );
+
+function find_block( $block_name, $post_id = false ) {
+	$found      = false;
+	$post_id    = $post_id ? $post_id : get_the_ID();
+	$all_blocks = parse_blocks( get_the_content( '', false, $post_id ) );
+	foreach ( $all_blocks as $block ) {
+		if ( $block_name === $block['blockName'] ) {
+			$found = $block['attrs']['data'];
+			return $found;
+		}
+	}
+	return false;
+}

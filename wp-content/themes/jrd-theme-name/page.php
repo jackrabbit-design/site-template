@@ -6,6 +6,8 @@ the_post();
 
 <main id="body-content">
 
+	<?php the_content(); ?>
+
 </main>
 
 <?php

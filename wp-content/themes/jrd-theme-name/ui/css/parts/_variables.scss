@@ -1,0 +1,10 @@
+$rem_size: 16;
+
+$font_family_one: Helvetica, Arial, sans-serif;
+$font_family_two: Helvetica, Arial, $font_family_one;
+
+$color_one: #000000;
+$color_two: #333333;
+
+@import 'parts/fonts';
+@import 'parts/mixins';

@@ -1,0 +1,231 @@
+@use 'sass:math';
+@import 'parts/reset';
+@import 'parts/vendor';
+
+h1, .title1 {
+}
+
+h2, .title2 {
+}
+
+h3, .title3 {
+}
+
+h4, .title4 {
+}
+
+h5, .title5 {
+}
+
+h6, .title6 {
+}
+
+p {
+}
+
+blockquote {
+}
+
+cite {
+}
+
+a {
+	&:hover {
+	}
+}
+
+hr {
+}
+
+.btn {
+	display: inline-block;
+	text-decoration: none;
+	text-align: center;
+	transition: .2s;
+	&:hover {
+	}
+}
+
+figure, .wp-caption {
+	img {
+	}
+	figcaption, .wp-caption-text {
+	}
+}
+
+table {
+	thead {
+	}
+	tbody {
+	}
+	th, td {
+	}
+}
+
+.content-main {
+	ul:not([class*="gf"]) {
+		> li {
+			position: relative;
+			padding-left: 10px;
+			&:before {
+				content: '\2022';
+				position: absolute;
+				left: 0;
+			}
+		}
+	}
+	ol {
+		counter-reset:li;
+		> li {
+			position: relative;
+			padding-left: 20px;
+			&:before {
+				content:counter(li) '. ';
+				counter-increment: li;
+				position: absolute;
+				right: calc(100% - 15px);
+			}
+		}
+	}
+}
+
+.socials {
+	display: flex;
+	gap: 16px;
+	.social {
+		height: 27px;
+		&:hover {
+			svg {
+				fill: #000;
+				background-color: #eaeaea;
+			}
+		}
+		svg {
+			fill: #fff;
+			background-color: #000;
+			padding: 2px;
+			@include size(27px);
+			border-radius: 50%;
+			transition: all 0.2s;
+			&:hover {
+				fill: #000;
+			}
+		}
+	}
+}
+
+
+
+/* != DEFAULT WORDPRESS STYLES = USE AS NEEDED = .wp-caption = .wp-caption-dd = .wpGallery = .shutter = .shutterset ==== */
+
+.aligncenter {
+	display: block;
+	margin: 25px auto;
+}
+
+.alignleft {
+	float: left;
+	margin: 0 25px 25px 0;
+}
+
+.alignright {
+	float: right;
+	margin: 0 0 25px 25px;
+}
+
+.alignnone {
+	display: inline-block;
+}
+
+
+
+/* != ACCESSIBILITY STYLES ===== */
+
+.sr-only, .slick-sr-only {
+	/* Styles below are so elements are shown to screen readers only */
+	border: none !important;
+	clip: rect(0, 0, 0, 0) !important;
+	height: 0.01em !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+	position: absolute !important;
+	white-space: nowrap !important;
+	width: 0.01em !important;
+}
+
+*:focus {
+	outline: 3px solid rgba(0,0,0,0.5);
+}
+
+.wrap {
+	max-width: 1180px;
+	width: 100%;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+
+
+/* != FORM STYLES ===== */
+
+label {
+}
+
+input {
+	&[type=text],
+	&[type=password],
+	&[type=url],
+	&[type=number],
+	&[type=tel],
+	&[type=email] {
+	}
+}
+
+textarea {
+}
+
+input {
+	&[type=radio],
+	&[type=checkbox] {
+		+ label {
+		}
+	}
+}
+
+input[type=submit], button {
+	display: inline-block;
+	cursor: pointer;
+	&:hover {
+	}
+}
+
+select {
+	-webkit-appearance: none;
+	background: #fff inline_svg('<svg width="13" height="8" viewBox="0 0 13 8" xmlns="http://www.w3.org/2000/svg"><path d="M.293.293c.36-.36.928-.388 1.32-.083l.094.083L6.51 5.096 11.313.293c.36-.36.928-.388 1.32-.083l.094.083c.36.36.389.928.084 1.32l-.084.094-5.51 5.51c-.36.36-.927.388-1.32.083l-.094-.083-5.51-5.51c-.39-.39-.39-1.024 0-1.414z" fill="#f00" fill-rule="evenodd"/></svg>') no-repeat calc(100% - 10px) 50%;
+}
+
+.validation {
+	&_error {
+		padding: 15px;
+		color: #fff;
+		background: #c00;
+		margin: 20px 0;
+	}
+	&_message {
+		text-transform: uppercase;
+		font-size: 12px;
+		color: #c00;
+		font-weight: 600;
+	}
+}
+
+.gform_validation_container {
+	// display: none;
+	// visibility: hidden;
+	// uncomment the above if the below doesn't work.
+	position:absolute;
+	top:-9999px;
+	left:-9999px;
+	pointer-events:none;
+	opacity:0;
+}

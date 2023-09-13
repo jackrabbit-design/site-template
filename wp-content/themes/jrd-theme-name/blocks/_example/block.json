@@ -1,0 +1,30 @@
+{
+    "name": "jrd/example",
+    "title": "Example",
+    "description": "",
+    "category": "",
+    "icon": "block-default",
+    "keywords": [],
+    "post_types": [],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "example.php"
+    },
+    "align": "full",
+    "supports": {
+        "align": false,
+        "align_text": false,
+        "align_content": false,
+        "full_height": false,
+        "mode": false,
+        "multiple": true
+    },
+    "example": {
+        "attributes": {
+            "mode": "preview",
+            "data": {
+                "_is_preview": true
+            }
+        }
+    }
+}

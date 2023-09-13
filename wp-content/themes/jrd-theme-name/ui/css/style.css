@@ -1,5 +1,89 @@
 @charset "UTF-8";
 /* ========================================================================= */
+/* !FONTS (@fontface generated with FontSpring Syntax formatting */
+/* ========================================================================= */
+/* ========================================================================= */
+/* !SASS VARIABLES & MIXINS */
+/* ========================================================================= */
+/*
+    // Use Case: $b (second) variable is optional and defaults to 'max-width'
+
+    @include break(1100){
+        h1{
+            background: red;
+        }
+    }
+
+    // Output
+    @media screen and (max-width: 1100px) {
+        h1 { background: red; }
+    }
+
+    // Also, if you want to specify the 2nd variable for break type (i.e., min-height)
+
+    @include break(1100, 'min-height'){
+        h1 {
+            background:red;
+        }
+    }
+
+    // Output
+    @media screen and (min-height: 1100px) {
+        h1 { background: red; }
+    }
+*/
+/*
+    // inline SVGs
+    // usage: background-image: inline-svg('<svg><!-- your svg code --></svg>');
+*/
+/* ========================================================================= */
+/* !STYLES */
+/* ========================================================================= */
+/* != DEFAULT STYLES ===== */
+html, body {
+  scroll-behavior: smooth;
+  font-family: Helvetica, Arial, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+[id] {
+  scroll-margin-top: 100px;
+}
+
+#skipnav {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  height: 30px;
+  left: 50%;
+  padding: 8px;
+  position: absolute;
+  transform: translateY(-100%);
+  transition: transform 0.3s;
+}
+#skipnav:focus {
+  transform: translateY(0%);
+}
+
+/* != SELECTION STYLES (Leaving these blank will show no indication of text selection) ===== */
+/*
+    ::selection         {
+        background: #aaa;
+        color: #fff;
+    }
+    ::-moz-selection    {
+        background: #aaa;
+        color: #fff;
+    }
+    ::-webkit-selection {
+        background: #aaa;
+        color: #fff;
+    }
+*/
+/* != LAYOUT STYLES ===== */
+#menu-toggle {
+  display: none;
+}
+/* ========================================================================= */
 /* !RESETS AND DEFAULTS */
 /* ========================================================================= */
 html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p,
@@ -193,57 +277,6 @@ input[type=text]::-ms-clear {
   word-wrap: break-word;
 }
 
-/* ========================================================================= */
-/* !FONTS (@fontface generated with FontSpring Syntax formatting */
-/* ========================================================================= */
-/* ========================================================================= */
-/* !SASS VARIABLES & MIXINS */
-/* ========================================================================= */
-/*
-    // Use Case: $b (second) variable is optional and defaults to 'max-width'
-
-    @include break(1100){
-        h1{
-            background: red;
-        }
-    }
-
-    // Output
-    @media screen and (max-width: 1100px) {
-        h1 { background: red; }
-    }
-
-    // Also, if you want to specify the 2nd variable for break type (i.e., min-height)
-
-    @include break(1100, 'min-height'){
-        h1 {
-            background:red;
-        }
-    }
-
-    // Output
-    @media screen and (min-height: 1100px) {
-        h1 { background: red; }
-    }
-*/
-/*
-    // inline SVGs
-    // usage: background-image: inline-svg('<svg><!-- your svg code --></svg>');
-*/
-/* ========================================================================= */
-/* !STYLES */
-/* ========================================================================= */
-/* != DEFAULT STYLES ===== */
-html, body {
-  scroll-behavior: smooth;
-  font-family: Helvetica, Arial, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-}
-
-[id] {
-  scroll-margin-top: 100px;
-}
-
 .btn {
   display: inline-block;
   text-decoration: none;
@@ -334,36 +367,6 @@ html, body {
   outline: 3px solid rgba(0, 0, 0, 0.5);
 }
 
-#skipnav {
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  height: 30px;
-  left: 50%;
-  padding: 8px;
-  position: absolute;
-  transform: translateY(-100%);
-  transition: transform 0.3s;
-}
-#skipnav:focus {
-  transform: translateY(0%);
-}
-
-/* != SELECTION STYLES (Leaving these blank will show no indication of text selection) ===== */
-/*
-    ::selection         {
-        background: #aaa;
-        color: #fff;
-    }
-    ::-moz-selection    {
-        background: #aaa;
-        color: #fff;
-    }
-    ::-webkit-selection {
-        background: #aaa;
-        color: #fff;
-    }
-*/
-/* != LAYOUT STYLES ===== */
 .wrap {
   max-width: 1180px;
   width: 100%;
@@ -371,26 +374,6 @@ html, body {
   padding: 0 20px;
 }
 
-#menu-toggle {
-  display: none;
-}
-#footer .jackrabbit a {
-  text-decoration: underline;
-}
-#footer .jackrabbit a:hover {
-  text-decoration: none;
-}
-
-/* != PLACEHOLDER ATTRIBUTE STYLES = input or textarea - placeholder="whatever" ===== */
-/*
-    ::-webkit-input-placeholder {
-        color: #aaa;
-    }
-
-    ::-moz-placeholder {
-        color: #aaa;
-    }
-*/
 /* != FORM STYLES ===== */
 input[type=submit], button {
   display: inline-block;
@@ -421,3 +404,21 @@ select {
   pointer-events: none;
   opacity: 0;
 }
+
+#footer .jackrabbit a {
+  text-decoration: underline;
+}
+#footer .jackrabbit a:hover {
+  text-decoration: none;
+}
+
+/* != PLACEHOLDER ATTRIBUTE STYLES = input or textarea - placeholder="whatever" ===== */
+/*
+    ::-webkit-input-placeholder {
+        color: #aaa;
+    }
+
+    ::-moz-placeholder {
+        color: #aaa;
+    }
+*/
