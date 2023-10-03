@@ -1,5 +1,7 @@
 <?php
 /*
+	Site template version: 7.0.2
+
 	Add helper functions, methods, and classes here. Helphers are for templating and not for adjusting body_class and functionaility.
 
 	TABLE OF CONTENTS
@@ -20,10 +22,11 @@
 
 /**
  * Easily echo a preformatted print_r
- * @param  mixed $var Variable to examine
+ * @param  mixed $thing Thing to examine
  * @return array      Array to be returned
+ * @since  7.0.0
  */
-function printr( $var ) {
+function printr( $thing ) {
 	echo '<pre>' . PHP_EOL;
 	print_r( $var );
 	echo '</pre>' . PHP_EOL;
@@ -32,6 +35,7 @@ function printr( $var ) {
 /**
  * Get the slug of a post
  * @return int The posts's slug
+ * @since  7.0.0
  */
 function get_the_slug() {
 	global $post;
@@ -42,6 +46,7 @@ function get_the_slug() {
 /**
  * Echo the slug of a post
  * @return int The post's slug
+ * @since  7.0.0
  */
 function the_slug() {
 	echo esc_html( get_the_slug() );
@@ -49,22 +54,24 @@ function the_slug() {
 
 /**
  * Limit the amount of words in a given string
- * @param  string $string     The string to limit
+ * @param  string $str     The string to limit
  * @param  int $word_limit    The max word length
  * @return string             The delimited string
+ * @since  7.0.0
  */
-function limit_excerpt( $string, $word_limit ) {
-	$words = explode( ' ', $string );
+function limit_excerpt( $str, $word_limit ) {
+	$words = explode( ' ', $str );
 	return implode( ' ', array_slice( $words, 0, $word_limit ) );
 }
 
 /**
  * Wrap a variable in a tag with custom attributes
- * @param  string $string    The text to be wrapped
+ * @param  string $str    The text to be wrapped
  * @param  string $notation  CSS notation for the tag
  * @return string           The returned HTML
+ * @since  7.0.0
  */
-function tag_wrap( $string, $notation ) {
+function tag_wrap( $str, $notation ) {
 	$element = preg_split( '/[\.\#\[]/', $notation )[0];
 	$classes = array();
 	preg_match_all( '(\.[\w\d-]+)', $notation, $raw_classes );
@@ -104,11 +111,12 @@ function tag_wrap( $string, $notation ) {
 
 /**
  * CLEAN FUNCTION - Helpful making better hash links out of repeating fields.
- * @param  string $string The string to be clenaed
+ * @param  string $str The string to be clenaed
  * @return string         The sanitized string
+ * @since  7.0.0
  */
-function clean( $string ) {
-	$string = wp_strip_all_tags( $string );
+function clean( $str ) {
+	$string = wp_strip_all_tags( $str );
 	$string = strtolower( $string );
 	$string = preg_replace( '/\s+/', '-', $string );
 	$string = sanitize_html_class( $string );
@@ -123,6 +131,7 @@ function clean( $string ) {
  * @param  string $id      The desired HTML element ID for the image
  * @param  array  $data    key=>val pairs for data attributes for the image
  * @return string          The HTML for the image
+ * @since  7.0.0
  */
 function jrd_img( $field, $size = 'large', $classes = null, $id = null, $data = array() ) {
 	if ( ! $field ) {
@@ -157,15 +166,16 @@ function jrd_img( $field, $size = 'large', $classes = null, $id = null, $data = 
  * @param  string $id    The desired HTML ID for the link
  * @param  bool $span    Wrap the link text in a span tag (default: true)
  * @return string        HTML for the link
+ * @since  7.0.0
  */
-function jrd_link( $link, $class = '', $id = '', $span = true ) {
+function jrd_link( $link, $classes = '', $id = '', $span = true ) {
 	if ( isset( $link['url'] ) && '' !== (string) $link['url'] ) {
 		$link_label = isset( $link['label'] ) && '' !== (string) $link['label'] ? $link['label'] : esc_attr( $link['title'] );
 		$link_url   = esc_url( $link['url'] );
 		$target     = $link['target'] ?? '_self';
 		$nofollow   = isset( $link['nofollow'] ) && 'nofollow' === $link['nofollow'] ? "rel='nofollow'" : '';
 		$title      = $span ? tag_wrap( $link['title'], 'span' ) : $link['title'];
-		return "<a href='{$link_url}' aria-label='{$link_label}' target='{$target}' class='$class' id='$id' $nofollow>$title</a>" . PHP_EOL;
+		return "<a href='{$link_url}' aria-label='{$link_label}' target='{$target}' class='$classes' id='$id' $nofollow>$title</a>" . PHP_EOL;
 	}
 }
 
@@ -176,6 +186,7 @@ function jrd_link( $link, $class = '', $id = '', $span = true ) {
  * @param  string $default_value  The default value for the select menu (ex. the landing page's permalink)
  * @param  string $id             The desired HTML element ID for the dropdown
  * @return string                 HTML for the select menu
+ * @since  7.0.0
  */
 function jrd_terms_dropdown( $tax, $default_text = 'Select Category', $default_value = '', $id = '', $label_id = '' ) {
 	$terms = get_terms(
@@ -206,6 +217,8 @@ function jrd_terms_dropdown( $tax, $default_text = 'Select Category', $default_v
  * @param  string $start_date, in whatever format $date_format is set to
  * @param  string $end_date, in whatever format $date_format is set to
  * @param  string $date_format, the format of the above 2 parameters, defaulting to Ymd
+ * @return string $date_range, the formatted date range
+ * @since  7.0.0
  */
 function jrd_date_range( $start_date, $end_date = null, $date_format = 'Ymd' ) {
 	if ( $start_date ) {
@@ -239,40 +252,6 @@ function jrd_date_range( $start_date, $end_date = null, $date_format = 'Ymd' ) {
 }
 
 
-
-/**
- * Social Media Nav Creator
- * @param string $field_name    parent field name
- * @param string $icon_field    icon field name; I usually use a select field.
- * @param string $url_field     url field
- * @param string $id            ID for the <nav> element
- * List of Options for easy copypasta
-	social_facebook : Facebook
-	social_instagram : Instagram
-	social_linkedin : LinkedIn
-	social_pinterest : Pinterest
-	social_rss : RSS
-	social_sharethis : ShareThis
-	social_twitter : Twitter
-	social_vimeo : Vimeo
-	social_youtube : YouTube
- */
-function jrd_social_nav( $field_name, $icon_field, $url_field, $id = 'nav-social' ) {
-	$html = '';
-	if ( have_rows( $field_name, 'option' ) ) {
-		$html .= "<nav id=\"{$id}\" class=\"social-media\"><ul>";
-		while ( have_rows( $field_name, 'option' ) ) {
-			the_row();
-			$icon  = get_sub_field( $icon_field );
-			$url   = get_sub_field( $url_field );
-			$html .= "<li><a href=\"{$url}\" target=\"_blank\"><svg class=\"{$icon}\"><use xlink:href=\"/ui/svg/social-sprites.svg#{$icon}\"></use></svg></a></li> ";
-		}
-		$html .= '</ul></nav>';
-	}
-	return $html;
-}
-
-
 /**
  * SVG Use generator
  * @param string $symbol_id          the intended ID of the symbol in the SVG sprite file
@@ -280,6 +259,7 @@ function jrd_social_nav( $field_name, $icon_field, $url_field, $id = 'nav-social
  * @param string $title              title of the SVG
  * @param string $filename           the filename (minus the extension) of the SVG sprite file
  * @param string $parent_or_child    whether it should reach into the parent theme or active child. omit if it's not a multisite
+ * @return string                    HTML for the SVG
  **/
 function jrd_use( $symbol_id, $classes = '', $title = '', $filename = 'sprites', $parent_or_child = 'parent' ) {
 	if ( 'child' === $parent_or_child ) {
@@ -299,6 +279,8 @@ function jrd_use( $symbol_id, $classes = '', $title = '', $filename = 'sprites',
  * UI path generator
  * @param string $file_path          the path and filename relative to the ui directory inside the theme
  * @param string $parent_or_child    whether it should reach into the parent theme or active child. omit if it's not a multisite
+ * @return string                    the full path to the file
+ * @since  7.0.0
  **/
 function jrd_ui( $file_path = '', $parent_or_child = 'parent' ) {
 	if ( 'child' === $parent_or_child ) {
@@ -314,11 +296,48 @@ function jrd_ui( $file_path = '', $parent_or_child = 'parent' ) {
 }
 
 /**
+ * Social Media Nav Creator
+ * @param string $field_name    parent field name
+ * @param string $icon_field    icon field name; I usually use a select field.
+ * @param string $url_field     url field
+ * @param string $id            ID for the <nav> element
+ * @return string               HTML for the social nav
+ * @since  7.0.2
+ * List of Options for easy copypasta
+	social_facebook : Facebook
+	social_instagram : Instagram
+	social_linkedin : LinkedIn
+	social_pinterest : Pinterest
+	social_rss : RSS
+	social_sharethis : ShareThis
+	social_twitter : Twitter
+	social_vimeo : Vimeo
+	social_youtube : YouTube
+ */
+function jrd_social_nav( $field_name, $icon_field, $url_field, $id = 'nav-social' ) {
+	$html = '';
+	if ( have_rows( $field_name, 'option' ) ) {
+		$html .= "<nav id=\"{$id}\" class=\"social-media\"><ul>";
+		while ( have_rows( $field_name, 'option' ) ) {
+			the_row();
+			$icon  = get_sub_field( $icon_field );
+			$url   = get_sub_field( $url_field );
+			$svg   = jrd_use( $icon, $icon, $icon );
+			$html .= "<li><a href=\"{$url}\" target=\"_blank\">$svg</a></li> ";
+		}
+		$html .= '</ul></nav>';
+	}
+	return $html;
+}
+
+/**
  * Gravity Forms shortcode generator
  * @param int $gf_id             the id of the gravity form
  * @param string $title          defaults to false
  * @param string $description    defaults to false
  * @param string $ajax           defaults to true
+ * @return string                the gravityform shortcode
+ * @since  7.0.0
  **/
 function jrd_gf( $gf_id, $title = 'false', $description = 'false', $ajax = 'true' ) {
 	$shortcode = '';
@@ -330,7 +349,9 @@ function jrd_gf( $gf_id, $title = 'false', $description = 'false', $ajax = 'true
 
 /**
  * Video Embed URL generator
- * @param string $video_link          the URL of the video
+ * @param string $video_link     the URL of the video
+ * @return string                the embed URL for the video
+ * @since  7.0.0
  **/
 function jrd_embed_url( $video_link ) {
 	$video_id = '';

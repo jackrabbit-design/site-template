@@ -11,7 +11,7 @@ function is_jrd() {
 
 add_filter( 'wp_image_editors', 'change_graphic_lib' );
 
-function change_graphic_lib( $array ) {
+function change_graphic_lib( $arr ) {
 	return array( 'WP_Image_Editor_GD', 'WP_Image_Editor_Imagick' );
 }
 
@@ -395,7 +395,7 @@ add_filter( 'upload_mimes', 'cc_mime_types' );
 
 /* ========================================================================= */
 /* Move SEO to Bottom of Edit Page
-   Shove Yoast/Rank Math to the bottom of the edit page where it belongs. */
+/* Shove Yoast/Rank Math to the bottom of the edit page where it belongs.
 /* ========================================================================= */
 
 function seo_to_bottom() {
