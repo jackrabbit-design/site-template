@@ -202,7 +202,7 @@ function admin_font_setup() {
 add_action( 'after_setup_theme', 'admin_font_setup' );
 
 function my_custom_fonts() {
-	wp_enqueue_style( 'style', get_template_directory_uri() . '/style-wysiwyg.css', array(), '1.0.0' );
+	wp_enqueue_style( 'style-wysiwyg', get_template_directory_uri() . '/style-wysiwyg.css', array(), '1.0.0' );
 }
 add_action( 'admin_head', 'my_custom_fonts' );
 
