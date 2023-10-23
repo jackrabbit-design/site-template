@@ -661,11 +661,12 @@ function enqueue_block_styles() {
 add_action( 'wp_enqueue_scripts', 'enqueue_styles' );
 add_action( 'enqueue_block_editor_assets', 'enqueue_block_styles' );
 
-
-
-$jrd_blocks = array(
-	'affiliates',
-);
+$jrd_blocks = array();
+foreach ( scandir( __DIR__ . '/blocks' ) as $dir ) {
+	if ( '.' !== $dir && '..' !== $dir && '_example' !== $dir ) {
+		$jrd_blocks[] = $dir;
+	}
+}
 
 function register_acf_blocks() {
 	if ( function_exists( 'acf_register_block_type' ) ) {

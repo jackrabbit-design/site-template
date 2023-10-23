@@ -340,7 +340,10 @@ function jrd_social_nav( $field_name, $icon_field, $url_field, $id = 'nav-social
  * @since  7.0.0
  **/
 function jrd_gf( $gf_id, $title = 'false', $description = 'false', $ajax = 'true' ) {
-	$shortcode = '';
+	$shortcode   = '';
+	$title       = json_encode( $title );
+	$description = json_encode( $description );
+	$ajax        = json_encode( $ajax );
 	if ( $gf_id ) {
 		$shortcode = do_shortcode( "[gravityform id='{$gf_id}' title='{$title}' description='{$description}' ajax='{$ajax}']" );
 	}
