@@ -321,7 +321,10 @@ function jrd_ui( $file_path = '', $parent_or_child = 'parent' ) {
  * @param string $ajax           defaults to true
  **/
 function jrd_gf( $gf_id, $title = 'false', $description = 'false', $ajax = 'true' ) {
-	$shortcode = '';
+	$shortcode   = '';
+	$title       = json_encode( $title );
+	$description = json_encode( $description );
+	$ajax        = json_encode( $ajax );
 	if ( $gf_id ) {
 		$shortcode = do_shortcode( "[gravityform id='{$gf_id}' title='{$title}' description='{$description}' ajax='{$ajax}']" );
 	}
