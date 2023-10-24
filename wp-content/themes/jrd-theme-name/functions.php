@@ -445,9 +445,9 @@ function my_mce_before_init( $settings ) {
 
 	$style_formats = array(
 		array(
-			'title'    => 'Button Link',
-			'inline  ' => 'a',
-			'classes'  => 'btn',
+			'title'   => 'Button Link',
+			'inline'  => 'a',
+			'classes' => 'btn',
 		),
 	);
 
