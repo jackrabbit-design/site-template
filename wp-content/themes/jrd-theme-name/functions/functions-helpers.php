@@ -72,6 +72,9 @@ function limit_excerpt( $str, $word_limit ) {
  * @since  7.0.0
  */
 function tag_wrap( $str, $notation ) {
+	if ( ! $str ) {
+		return false;
+	}
 	$element = preg_split( '/[\.\#\[]/', $notation )[0];
 	$classes = array();
 	preg_match_all( '(\.[\w\d-]+)', $notation, $raw_classes );
@@ -101,7 +104,7 @@ function tag_wrap( $str, $notation ) {
 	} else {
 		$atts = '';
 	}
-	$html = "<{$element}{$classes}{$id}{$atts}>{$string}</{$element}>";
+	$html = "<{$element}{$classes}{$id}{$atts}>{$str}</{$element}>";
 	return $html;
 }
 /* Example Usage:
