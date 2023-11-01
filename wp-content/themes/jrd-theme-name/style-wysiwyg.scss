@@ -1,0 +1,142 @@
+@import url("ui/css/parts/fonts.css");
+@import url("ui/css/parts/variables");
+
+#tinymce h1, #tinymce h2, #tinymce h3, #tinymce h4, #tinymce h5, #tinymce h6 {
+	border-bottom: 2px dotted #ddd;
+	padding-bottom: 2px;
+	position: relative;
+}
+
+#tinymce h1:after, #tinymce h2:after, #tinymce h3:after, #tinymce h4:after, #tinymce h5:after, #tinymce h6:after {
+	content: "heading 2";
+	display: inline-block;
+	background: #ddd;
+	color: #222;
+	font-size: 14px;
+	line-height: 1.4;
+	padding: 5px;
+	margin-left: 10px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	opacity: 0.6;
+	font-family: Arial;
+}
+
+#tinymce h1:after {
+	content: "heading 1";
+}
+
+#tinymce h2:after {
+	content: "heading 2";
+}
+
+#tinymce h3:after {
+	content: "heading 3";
+}
+
+#tinymce h4:after {
+	content: "heading 4";
+}
+
+#tinymce h5:after {
+	content: "heading 5";
+}
+
+#tinymce h6:after {
+	content: "heading 6";
+}
+
+#tinymce .title1,
+.mce-container-body .mce-menu-item:nth-child(1):not(.mce-menu-item-expand) .mce-text {
+    font: 700 50px/1.1 sans-serif !important;
+    color: #000 !important;
+}
+#tinymce .title2,
+.mce-container-body .mce-menu-item:nth-child(2):not(.mce-menu-item-expand) .mce-text {
+    font: normal 36px/1.2 sans-serif !important;
+    color: #000 !important;
+}
+#tinymce .title3,
+.mce-container-body .mce-menu-item:nth-child(3):not(.mce-menu-item-expand) .mce-text {
+    font: 600 18px/1.2 sans-serif !important;
+    color: #000 !important;
+}
+#tinymce .title4,
+.mce-container-body .mce-menu-item:nth-child(4):not(.mce-menu-item-expand) .mce-text {
+    font: normal 18px/1.2 sans-serif !important;
+    color: #000 !important;
+}
+#tinymce .title5,
+.mce-container-body .mce-menu-item:nth-child(5):not(.mce-menu-item-expand) .mce-text {
+    font: normal 14px/1.2 sans-serif !important;
+    color: #000 !important;
+}
+#tinymce .title6,
+.mce-container-body .mce-menu-item:nth-child(6):not(.mce-menu-item-expand) .mce-text {
+    font: normal 14px/1.2 sans-serif !important;
+    color: #000 !important;
+}
+#tinymce p,
+#tinymce li,
+.mce-container-body .mce-menu-item:nth-child(1) .mce-text {
+    font-size:14px;
+    line-height:1.5;
+    color:#000;
+    font-family: sans-serif;
+}
+#tinymce a {
+    color:#00f;
+    text-decoration:underline;
+}
+#tinymce a.btn {
+	color: #00f;
+	border: 1px solid #00f;
+	/*
+	border-radius: 50px;
+	background-color: #00f;
+	color: #fff;
+	*/
+	display: inline-block;
+	font-size: 16px;
+	padding: 10px 25px 10px 25px;
+}
+
+#tinymce h2 strong,
+#tinymce h3 strong,
+#tinymce h4 strong,
+#tinymce h5 strong {
+    font-weight: inherit;
+}
+
+#tinymce ul {
+    padding:0;
+}
+#tinymce ul > li {
+    position: relative;
+    padding-left: 26px;
+    list-style:none;
+    margin-bottom:1.07em;
+}
+#tinymce ul > li:before {
+    content: '\2022';
+    position: absolute;
+    left: 10px;
+}
+
+#tinymce ol {
+    counter-reset: li;
+    padding:0;
+}
+#tinymce ol > li {
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 1.07em;
+    list-style:none;
+}
+#tinymce ol > li:before {
+    content: counter(li) ". ";
+    counter-increment: li;
+    position: absolute;
+    left: 10px;
+}
