@@ -1,7 +1,5 @@
 <?php
 /*
-	Site template version: 7.0.2
-
 	Add helper functions, methods, and classes here. Helphers are for templating and not for adjusting body_class and functionaility.
 
 	TABLE OF CONTENTS
@@ -22,20 +20,18 @@
 
 /**
  * Easily echo a preformatted print_r
- * @param  mixed $thing Thing to examine
+ * @param  mixed $thing Variable to examine
  * @return array      Array to be returned
- * @since  7.0.0
  */
 function printr( $thing ) {
 	echo '<pre>' . PHP_EOL;
-	print_r( $var );
+	print_r( $thing );
 	echo '</pre>' . PHP_EOL;
 }
 
 /**
  * Get the slug of a post
  * @return int The posts's slug
- * @since  7.0.0
  */
 function get_the_slug() {
 	global $post;
@@ -46,7 +42,6 @@ function get_the_slug() {
 /**
  * Echo the slug of a post
  * @return int The post's slug
- * @since  7.0.0
  */
 function the_slug() {
 	echo esc_html( get_the_slug() );
@@ -57,7 +52,6 @@ function the_slug() {
  * @param  string $str     The string to limit
  * @param  int $word_limit    The max word length
  * @return string             The delimited string
- * @since  7.0.0
  */
 function limit_excerpt( $str, $word_limit ) {
 	$words = explode( ' ', $str );
@@ -69,12 +63,8 @@ function limit_excerpt( $str, $word_limit ) {
  * @param  string $str    The text to be wrapped
  * @param  string $notation  CSS notation for the tag
  * @return string           The returned HTML
- * @since  7.0.0
  */
 function tag_wrap( $str, $notation ) {
-	if ( ! $str ) {
-		return false;
-	}
 	$element = preg_split( '/[\.\#\[]/', $notation )[0];
 	$classes = array();
 	preg_match_all( '(\.[\w\d-]+)', $notation, $raw_classes );
@@ -116,10 +106,9 @@ function tag_wrap( $str, $notation ) {
  * CLEAN FUNCTION - Helpful making better hash links out of repeating fields.
  * @param  string $str The string to be clenaed
  * @return string         The sanitized string
- * @since  7.0.0
  */
 function clean( $str ) {
-	$string = wp_strip_all_tags( $str );
+	$string = wp_strip_all_tags( $string );
 	$string = strtolower( $string );
 	$string = preg_replace( '/\s+/', '-', $string );
 	$string = sanitize_html_class( $string );
@@ -134,9 +123,8 @@ function clean( $str ) {
  * @param  string $id      The desired HTML element ID for the image
  * @param  array  $data    key=>val pairs for data attributes for the image
  * @return string          The HTML for the image
- * @since  7.0.0
  */
-function jrd_img( $field, $size = 'large', $classes = null, $id = null, $data = array() ) {
+function jrd_img( $field, $size = 'large', $classes = null, $id = null, $attrs = array() ) {
 	if ( ! $field ) {
 		return false;
 	}
@@ -147,11 +135,9 @@ function jrd_img( $field, $size = 'large', $classes = null, $id = null, $data = 
 	if ( $classes ) {
 		$atts['class'] = $classes;
 	}
-	if ( ! empty( $data ) ) {
-		foreach ( $data as $key => $val ) {
-			$key = str_replace( 'data-', '', $key );
-
-			$atts[ 'data-' . $key ] = $val;
+	if ( ! empty( $attrs ) ) {
+		foreach ( $attrs as $key => $val ) {
+			$atts[ esc_attr( $key ) ] = esc_attr( $val );
 		}
 	}
 	if ( is_numeric( $field ) ) {
@@ -169,16 +155,56 @@ function jrd_img( $field, $size = 'large', $classes = null, $id = null, $data = 
  * @param  string $id    The desired HTML ID for the link
  * @param  bool $span    Wrap the link text in a span tag (default: true)
  * @return string        HTML for the link
- * @since  7.0.0
  */
-function jrd_link( $link, $classes = '', $id = '', $span = true ) {
+function jrd_link( $link, $classes = '', $id = '', $span = true, $atts = array() ) {
 	if ( isset( $link['url'] ) && '' !== (string) $link['url'] ) {
 		$link_label = isset( $link['label'] ) && '' !== (string) $link['label'] ? $link['label'] : esc_attr( $link['title'] );
 		$link_url   = esc_url( $link['url'] );
 		$target     = $link['target'] ?? '_self';
 		$nofollow   = isset( $link['nofollow'] ) && 'nofollow' === $link['nofollow'] ? "rel='nofollow'" : '';
 		$title      = $span ? tag_wrap( $link['title'], 'span' ) : $link['title'];
-		return "<a href='{$link_url}' aria-label='{$link_label}' target='{$target}' class='$classes' id='$id' $nofollow>$title</a>" . PHP_EOL;
+		$class      = esc_attr( $class );
+		$id         = esc_attr( $id );
+		if ( ! empty( $atts ) ) {
+			$atts = '';
+			foreach ( $atts as $key => $val ) {
+				$key   = esc_attr( $key );
+				$val   = esc_attr( $val );
+				$atts .= " $key='$val'";
+			}
+		} else {
+			$atts = '';
+		}
+		return "<a href='{$link_url}' aria-label='{$link_label}' target='{$target}' class='$classes' id='$id' $nofollow $atts>$title</a>" . PHP_EOL;
+	}
+}
+
+/**
+ * ADA Link - Use with clone field (fields must be named "link", "aria_label", and "nofollow")
+ * @param  array $link   The ACF Clone field
+ * @param  string $class The desired HTML element class for the link
+ * @param  string $id    The desired HTML ID for the link
+ * @param  bool $span    Wrap the link text in a span tag (default: true)
+ * @return string        HTML for the link
+ */
+function ada_link( $link, $classes = '', $id = '', $span = true, $atts = array() ) {
+	if ( isset( $link['link']['url'] ) && '' !== (string) $link['link']['url'] ) {
+		$link_label = isset( $link['aria_label'] ) && '' !== (string) $link['aria_label'] ? $link['aria_label'] : esc_attr( $link['link']['title'] );
+		$link_url   = esc_url( $link['link']['url'] );
+		$target     = $link['link']['target'] ?? '_self';
+		$nofollow   = $link['nofollow'] ? "rel='nofollow'" : '';
+		$title      = $span ? tag_wrap( $link['link']['title'], 'span' ) : $link['link']['title'];
+		if ( ! empty( $atts ) ) {
+			$atts = '';
+			foreach ( $atts as $key => $val ) {
+				$key   = esc_attr( $key );
+				$val   = esc_attr( $val );
+				$atts .= " $key='$val'";
+			}
+		} else {
+			$atts = '';
+		}
+		return "<a href='{$link_url}' aria-label='{$link_label}' target='{$target}' class='$classes' id='$id' $nofollow $atts>$title</a>" . PHP_EOL;
 	}
 }
 
@@ -189,7 +215,6 @@ function jrd_link( $link, $classes = '', $id = '', $span = true ) {
  * @param  string $default_value  The default value for the select menu (ex. the landing page's permalink)
  * @param  string $id             The desired HTML element ID for the dropdown
  * @return string                 HTML for the select menu
- * @since  7.0.0
  */
 function jrd_terms_dropdown( $tax, $default_text = 'Select Category', $default_value = '', $id = '', $label_id = '' ) {
 	$terms = get_terms(
@@ -220,8 +245,6 @@ function jrd_terms_dropdown( $tax, $default_text = 'Select Category', $default_v
  * @param  string $start_date, in whatever format $date_format is set to
  * @param  string $end_date, in whatever format $date_format is set to
  * @param  string $date_format, the format of the above 2 parameters, defaulting to Ymd
- * @return string $date_range, the formatted date range
- * @since  7.0.0
  */
 function jrd_date_range( $start_date, $end_date = null, $date_format = 'Ymd' ) {
 	if ( $start_date ) {
@@ -255,48 +278,6 @@ function jrd_date_range( $start_date, $end_date = null, $date_format = 'Ymd' ) {
 }
 
 
-/**
- * SVG Use generator
- * @param string $symbol_id          the intended ID of the symbol in the SVG sprite file
- * @param string $classes            classes for the SVG file
- * @param string $title              title of the SVG
- * @param string $filename           the filename (minus the extension) of the SVG sprite file
- * @param string $parent_or_child    whether it should reach into the parent theme or active child. omit if it's not a multisite
- * @return string                    HTML for the SVG
- **/
-function jrd_use( $symbol_id, $classes = '', $title = '', $filename = 'sprites', $parent_or_child = 'parent' ) {
-	if ( 'child' === $parent_or_child ) {
-		$dir = get_stylesheet_directory_uri();
-	} else {
-		$dir = get_template_directory_uri();
-	}
-	$html = "<svg class='$classes'>";
-	if ( $title ) {
-		$html .= "<title>$title</title>";
-	}
-	$html .= "<use xlink:href='$dir/ui/svg/$filename.svg#$symbol_id'></use></svg>";
-	return $html;
-}
-
-/**
- * UI path generator
- * @param string $file_path          the path and filename relative to the ui directory inside the theme
- * @param string $parent_or_child    whether it should reach into the parent theme or active child. omit if it's not a multisite
- * @return string                    the full path to the file
- * @since  7.0.0
- **/
-function jrd_ui( $file_path = '', $parent_or_child = 'parent' ) {
-	if ( 'child' === $parent_or_child ) {
-		$dir = get_stylesheet_directory_uri();
-	} else {
-		$dir = get_template_directory_uri();
-	}
-	$full_path = trailingslashit( $dir ) . 'ui/';
-	if ( $file_path ) {
-		$full_path .= $file_path;
-	}
-	return $full_path;
-}
 
 /**
  * Social Media Nav Creator
@@ -304,8 +285,6 @@ function jrd_ui( $file_path = '', $parent_or_child = 'parent' ) {
  * @param string $icon_field    icon field name; I usually use a select field.
  * @param string $url_field     url field
  * @param string $id            ID for the <nav> element
- * @return string               HTML for the social nav
- * @since  7.0.2
  * List of Options for easy copypasta
 	social_facebook : Facebook
 	social_instagram : Instagram
@@ -325,12 +304,52 @@ function jrd_social_nav( $field_name, $icon_field, $url_field, $id = 'nav-social
 			the_row();
 			$icon  = get_sub_field( $icon_field );
 			$url   = get_sub_field( $url_field );
-			$svg   = jrd_use( $icon, $icon, $icon );
-			$html .= "<li><a href=\"{$url}\" target=\"_blank\">$svg</a></li> ";
+			$html .= "<li><a href=\"{$url}\" target=\"_blank\"><svg class=\"{$icon}\"><use xlink:href=\"/ui/svg/social-sprites.svg#{$icon}\"></use></svg></a></li> ";
 		}
 		$html .= '</ul></nav>';
 	}
 	return $html;
+}
+
+
+/**
+ * SVG Use generator
+ * @param string $symbol_id          the intended ID of the symbol in the SVG sprite file
+ * @param string $classes            classes for the SVG file
+ * @param string $title              title of the SVG
+ * @param string $filename           the filename (minus the extension) of the SVG sprite file
+ * @param string $parent_or_child    whether it should reach into the parent theme or active child. omit if it's not a multisite
+ **/
+function jrd_use( $symbol_id, $classes = '', $title = '', $filename = 'sprites', $parent_or_child = 'parent' ) {
+	if ( 'child' === $parent_or_child ) {
+		$dir = get_stylesheet_directory_uri();
+	} else {
+		$dir = get_template_directory_uri();
+	}
+	$html = "<svg class='$classes'>";
+	if ( $title ) {
+		$html .= "<title>$title</title>";
+	}
+	$html .= "<use xlink:href='$dir/ui/svg/$filename.svg#$symbol_id'></use></svg>";
+	return $html;
+}
+
+/**
+ * UI path generator
+ * @param string $file_path          the path and filename relative to the ui directory inside the theme
+ * @param string $parent_or_child    whether it should reach into the parent theme or active child. omit if it's not a multisite
+ **/
+function jrd_ui( $file_path = '', $parent_or_child = 'parent' ) {
+	if ( 'child' === $parent_or_child ) {
+		$dir = get_stylesheet_directory_uri();
+	} else {
+		$dir = get_template_directory_uri();
+	}
+	$full_path = trailingslashit( $dir ) . 'ui/';
+	if ( $file_path ) {
+		$full_path .= $file_path;
+	}
+	return $full_path;
 }
 
 /**
@@ -339,8 +358,6 @@ function jrd_social_nav( $field_name, $icon_field, $url_field, $id = 'nav-social
  * @param string $title          defaults to false
  * @param string $description    defaults to false
  * @param string $ajax           defaults to true
- * @return string                the gravityform shortcode
- * @since  7.0.0
  **/
 function jrd_gf( $gf_id, $title = 'false', $description = 'false', $ajax = 'true' ) {
 	$shortcode   = '';
@@ -355,9 +372,7 @@ function jrd_gf( $gf_id, $title = 'false', $description = 'false', $ajax = 'true
 
 /**
  * Video Embed URL generator
- * @param string $video_link     the URL of the video
- * @return string                the embed URL for the video
- * @since  7.0.0
+ * @param string $video_link          the URL of the video
  **/
 function jrd_embed_url( $video_link ) {
 	$video_id = '';
