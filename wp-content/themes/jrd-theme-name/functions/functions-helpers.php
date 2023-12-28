@@ -20,12 +20,12 @@
 
 /**
  * Easily echo a preformatted print_r
- * @param  mixed $var Variable to examine
+ * @param  mixed $thing Variable to examine
  * @return array      Array to be returned
  */
-function printr( $var ) {
+function printr( $thing ) {
 	echo '<pre>' . PHP_EOL;
-	print_r( $var );
+	print_r( $thing );
 	echo '</pre>' . PHP_EOL;
 }
 
@@ -49,22 +49,22 @@ function the_slug() {
 
 /**
  * Limit the amount of words in a given string
- * @param  string $string     The string to limit
+ * @param  string $str     The string to limit
  * @param  int $word_limit    The max word length
  * @return string             The delimited string
  */
-function limit_excerpt( $string, $word_limit ) {
-	$words = explode( ' ', $string );
+function limit_excerpt( $str, $word_limit ) {
+	$words = explode( ' ', $str );
 	return implode( ' ', array_slice( $words, 0, $word_limit ) );
 }
 
 /**
  * Wrap a variable in a tag with custom attributes
- * @param  string $string    The text to be wrapped
+ * @param  string $str    The text to be wrapped
  * @param  string $notation  CSS notation for the tag
  * @return string           The returned HTML
  */
-function tag_wrap( $string, $notation ) {
+function tag_wrap( $str, $notation ) {
 	$element = preg_split( '/[\.\#\[]/', $notation )[0];
 	$classes = array();
 	preg_match_all( '(\.[\w\d-]+)', $notation, $raw_classes );
@@ -94,7 +94,7 @@ function tag_wrap( $string, $notation ) {
 	} else {
 		$atts = '';
 	}
-	$html = "<{$element}{$classes}{$id}{$atts}>{$string}</{$element}>";
+	$html = "<{$element}{$classes}{$id}{$atts}>{$str}</{$element}>";
 	return $html;
 }
 /* Example Usage:
@@ -104,10 +104,10 @@ function tag_wrap( $string, $notation ) {
 
 /**
  * CLEAN FUNCTION - Helpful making better hash links out of repeating fields.
- * @param  string $string The string to be clenaed
+ * @param  string $str The string to be clenaed
  * @return string         The sanitized string
  */
-function clean( $string ) {
+function clean( $str ) {
 	$string = wp_strip_all_tags( $string );
 	$string = strtolower( $string );
 	$string = preg_replace( '/\s+/', '-', $string );
@@ -124,7 +124,7 @@ function clean( $string ) {
  * @param  array  $data    key=>val pairs for data attributes for the image
  * @return string          The HTML for the image
  */
-function jrd_img( $field, $size = 'large', $classes = null, $id = null, $data = array() ) {
+function jrd_img( $field, $size = 'large', $classes = null, $id = null, $attrs = array() ) {
 	if ( ! $field ) {
 		return false;
 	}
@@ -135,11 +135,9 @@ function jrd_img( $field, $size = 'large', $classes = null, $id = null, $data = 
 	if ( $classes ) {
 		$atts['class'] = $classes;
 	}
-	if ( ! empty( $data ) ) {
-		foreach ( $data as $key => $val ) {
-			$key = str_replace( 'data-', '', $key );
-
-			$atts[ 'data-' . $key ] = $val;
+	if ( ! empty( $attrs ) ) {
+		foreach ( $attrs as $key => $val ) {
+			$atts[ esc_attr( $key ) ] = esc_attr( $val );
 		}
 	}
 	if ( is_numeric( $field ) ) {
@@ -158,14 +156,55 @@ function jrd_img( $field, $size = 'large', $classes = null, $id = null, $data = 
  * @param  bool $span    Wrap the link text in a span tag (default: true)
  * @return string        HTML for the link
  */
-function jrd_link( $link, $class = '', $id = '', $span = true ) {
+function jrd_link( $link, $classes = '', $id = '', $span = true, $atts = array() ) {
 	if ( isset( $link['url'] ) && '' !== (string) $link['url'] ) {
 		$link_label = isset( $link['label'] ) && '' !== (string) $link['label'] ? $link['label'] : esc_attr( $link['title'] );
 		$link_url   = esc_url( $link['url'] );
 		$target     = $link['target'] ?? '_self';
 		$nofollow   = isset( $link['nofollow'] ) && 'nofollow' === $link['nofollow'] ? "rel='nofollow'" : '';
 		$title      = $span ? tag_wrap( $link['title'], 'span' ) : $link['title'];
-		return "<a href='{$link_url}' aria-label='{$link_label}' target='{$target}' class='$class' id='$id' $nofollow>$title</a>" . PHP_EOL;
+		$class      = esc_attr( $class );
+		$id         = esc_attr( $id );
+		if ( ! empty( $atts ) ) {
+			$atts = '';
+			foreach ( $atts as $key => $val ) {
+				$key   = esc_attr( $key );
+				$val   = esc_attr( $val );
+				$atts .= " $key='$val'";
+			}
+		} else {
+			$atts = '';
+		}
+		return "<a href='{$link_url}' aria-label='{$link_label}' target='{$target}' class='$classes' id='$id' $nofollow $atts>$title</a>" . PHP_EOL;
+	}
+}
+
+/**
+ * ADA Link - Use with clone field (fields must be named "link", "aria_label", and "nofollow")
+ * @param  array $link   The ACF Clone field
+ * @param  string $class The desired HTML element class for the link
+ * @param  string $id    The desired HTML ID for the link
+ * @param  bool $span    Wrap the link text in a span tag (default: true)
+ * @return string        HTML for the link
+ */
+function ada_link( $link, $classes = '', $id = '', $span = true, $atts = array() ) {
+	if ( isset( $link['link']['url'] ) && '' !== (string) $link['link']['url'] ) {
+		$link_label = isset( $link['aria_label'] ) && '' !== (string) $link['aria_label'] ? $link['aria_label'] : esc_attr( $link['link']['title'] );
+		$link_url   = esc_url( $link['link']['url'] );
+		$target     = $link['link']['target'] ?? '_self';
+		$nofollow   = $link['nofollow'] ? "rel='nofollow'" : '';
+		$title      = $span ? tag_wrap( $link['link']['title'], 'span' ) : $link['link']['title'];
+		if ( ! empty( $atts ) ) {
+			$atts = '';
+			foreach ( $atts as $key => $val ) {
+				$key   = esc_attr( $key );
+				$val   = esc_attr( $val );
+				$atts .= " $key='$val'";
+			}
+		} else {
+			$atts = '';
+		}
+		return "<a href='{$link_url}' aria-label='{$link_label}' target='{$target}' class='$classes' id='$id' $nofollow $atts>$title</a>" . PHP_EOL;
 	}
 }
 
