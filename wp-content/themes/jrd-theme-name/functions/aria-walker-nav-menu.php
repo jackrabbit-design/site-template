@@ -88,6 +88,7 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$atts['aria-label'] = ! empty( $item->target )     ? __( 'Opens in new window', 'jrd' ) : '';
 		if ( '#' === $atts['href'] ) {
 			$atts['data-link'] = 'nonactive';
+			$atts['aria-label'] = __( 'This link goes no where and is only for presentation', 'jrd' );
 		} else {
 			$atts['data-link'] = 'active';
 		}
