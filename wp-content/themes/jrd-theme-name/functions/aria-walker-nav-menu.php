@@ -63,14 +63,20 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 		 * @param int    $depth   Depth of menu item. Used for padding.
 		 */
 		$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args, $depth );
-		$id = $id ? ' id="' . $args->menu_id . '-' . esc_attr( $id ) . '"' : '';
-		$roles = ' role="none"';
+		$id = $id ? ' id="' . $args->menu->slug . '-' . esc_attr( $id ) . '"' : '';
+		//$roles = ' role="none"';
 
-		$output .= sprintf( '%s<li%s%s%s>',
+		// $output .= sprintf( '%s<li%s%s%s>',
+		// 	$indent,
+		// 	$id,
+		// 	$class_names,
+		// 	$roles
+		// );
+
+		$output .= sprintf( '%s<li%s%s>',
 			$indent,
 			$id,
 			$class_names,
-			$roles
 		);
 
 		$atts = array();
@@ -78,10 +84,11 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$atts['target'] = ! empty( $item->target )     ? $item->target     : '';
 		$atts['rel']    = ! empty( $item->xfn )        ? $item->xfn        : '';
 		$atts['href']   = ! empty( $item->url )        ? $item->url        : '';
-		$atts['tabindex']   = "0";
-		$atts['aria-label'] = ! empty( $item->target )     ? 'Opens link in new window'     : '';
+		$atts['aria-current'] = $menu_item->current ? 'page' : '';
+		$atts['aria-label'] = ! empty( $item->target )     ? __( 'Opens in new window', 'jrd' ) : '';
 		if ( '#' === $atts['href'] ) {
 			$atts['data-link'] = 'nonactive';
+			$atts['aria-label'] = __( 'This link goes no where and is only for presentation', 'jrd' );
 		} else {
 			$atts['data-link'] = 'active';
 		}
@@ -136,26 +143,26 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 		if( $depth == 0 && in_array( 'menu-item-has-children', $item->classes )){
 			$item_output = $args->before;
 			if ( str_contains( $attributes, 'data-link="active"' ) ) {
-				$item_output .= '<a'. $attributes .' role="menuitem">';
+				$item_output .= '<a'. $attributes .'>';
 				$item_output .= $args->link_before . $title . $args->link_after;
 				$item_output .= '</a>';
-				$item_output .= '<button id="' . $args->menu_id . '-menu-item-'.$item->ID.'B" class="menu-toggle-button" aria-controls="' . $args->menu_id . '-menu-item-'.$item->ID.'C" data-toggle="true" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-label="Press enter to toggle the ' . $title . ' sub menu"></button>';
+				$item_output .= '<button id="' . $args->menu->slug . '-menu-item-'.$item->ID.'B" class="menu-toggle-button" aria-controls="' . $args->menu->slug . '-menu-item-'.$item->ID.'C" data-toggle="true" aria-expanded="false"><span class="sr-only">Show submenu for "' . $title . '"</span></button>';
 			} else {
-				$item_output .= '<a'. $attributes .' id="' . $args->menu_id . '-menu-item-'.$item->ID.'B" aria-controls="' . $args->menu_id . '-menu-item-'.$item->ID.'C" data-toggle="true" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-label="Press enter to toggle the ' . $title . ' sub menu">';
+				$item_output .= '<a'. $attributes .' id="' . $args->menu->slug . '-menu-item-'.$item->ID.'B" data-toggle="true" aria-expanded="false">';
 				$item_output .= $args->link_before . $title . $args->link_after;
 				$item_output .= '</a>';
 			}
 			$item_output .= $args->after;
 		} else if( $depth > 0 ) {
 			$item_output = $args->before;
-			$item_output .= '<a'. $attributes .' role="menuitem" tabindex="-1">';
+			$item_output .= '<a'. $attributes .'>';
 			$item_output .= $args->link_before . $title . $args->link_after;
 			$item_output .= '</a>';
 			$item_output .= $args->after;
 		}
 		else {
 			$item_output = $args->before;
-			$item_output .= '<a'. $attributes .' role="menuitem" tabindex="0">';
+			$item_output .= '<a'. $attributes .'>';
 			$item_output .= $args->link_before . $title . $args->link_after;
 			$item_output .= '</a>';
 			$item_output .= $args->after;
@@ -192,8 +199,7 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 			$indent = str_repeat( $t, $depth );
 
 			// Default class.
-			$classes = array(
-				'sub-menu' );
+			$classes = array( 'sub-menu' );
 
 			/**
 			 * Filters the CSS class(es) applied to a menu list element.
@@ -207,10 +213,9 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 			$class_names = join( ' ', apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth ) );
 			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
-			// Lea 2017/10 - Add role=menu to ul of submenu
-			$role = ' role="menu" aria-label="Sub Menu" tabindex="-1" aria-hidden="true"';
+			$role = ' aria-label="Sub Menu for '.$this->curItem->post_title.'" aria-hidden="true"';
 			$parentlink = $this->curItem->ID;
-			$output .= "{$n}{$indent}<div class='sub-menu-wrap'><ul id=\"{$args->menu_id}-menu-item-{$parentlink}C\" $class_names $role>{$n}";
+			$output .= "{$n}{$indent}<div class='sub-menu-wrap'><ul id=\"{$args->menu->slug}-menu-item-{$parentlink}C\" $class_names $role>{$n}";
 		}
 
 		function end_lvl( &$output, $depth = 0, $args = array() ) {
