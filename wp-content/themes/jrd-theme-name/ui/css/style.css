@@ -334,15 +334,31 @@ html, body {
   outline: 3px solid rgba(0, 0, 0, 0.5);
 }
 
+*:focus {
+  outline: 3px solid rgba(0, 0, 0, 0.5);
+  outline-offset: 3px;
+}
+
+@supports selector(:focus-visible) {
+  *:focus {
+    outline: none;
+  }
+  *:focus-visible {
+    outline: 3px solid rgba(0, 0, 0, 0.5);
+    outline-offset: 3px;
+  }
+}
 #skipnav {
   background: rgba(0, 0, 0, 0.8);
   color: #fff;
   height: 30px;
+  top: 0;
   left: 50%;
   padding: 8px;
-  position: absolute;
+  position: fixed;
   transform: translateY(-100%);
   transition: transform 0.3s;
+  z-index: 9999999999;
 }
 #skipnav:focus {
   transform: translateY(0%);

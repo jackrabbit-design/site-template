@@ -7,12 +7,6 @@ $rem_size: 16;
 @import 'parts/mixins';
 @import 'parts/vendor';
 
-$font_family_one: Helvetica, Arial, sans-serif;
-$font_family_two: Helvetica, Arial, $font_family_one;
-
-$color_one: #000000;
-$color_two: #333333;
-
 /* ========================================================================= */
 /* !STYLES */
 /* ========================================================================= */
@@ -186,15 +180,32 @@ $color_two: #333333;
 		outline: 3px solid rgba(0,0,0,0.5);
 	}
 
+	*:focus {
+		outline: 3px solid $focus_color;
+        outline-offset: 3px;
+	}
+
+    @supports selector(:focus-visible) {
+        *:focus {
+            outline:none;
+        }
+        *:focus-visible {
+            outline: 3px solid $focus_color;
+            outline-offset: 3px;
+        }
+    }
+
 	#skipnav {
 		background: rgba(0,0,0,0.8);
 		color:#fff;
 		height: 30px;
+        top:0;
 		left: 50%;
 		padding: 8px;
-		position: absolute;
+		position: fixed;
 		transform: translateY(-100%);
 		transition: transform 0.3s;
+        z-index:9999999999;
 		&:focus {
 			transform: translateY(0%);
 		}
