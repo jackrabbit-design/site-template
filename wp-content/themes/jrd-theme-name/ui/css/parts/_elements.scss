@@ -154,8 +154,20 @@ table {
 }
 
 *:focus {
-	outline: 3px solid rgba(0,0,0,0.5);
+	outline: 3px solid $focus_color;
+	outline-offset: 3px;
 }
+
+@supports selector(:focus-visible) {
+	*:focus {
+		outline:none;
+	}
+	*:focus-visible {
+		outline: 3px solid $focus_color;
+		outline-offset: 3px;
+	}
+}
+
 
 .wrap {
 	max-width: 1180px;
@@ -168,7 +180,16 @@ table {
 
 /* != FORM STYLES ===== */
 
-label {
+
+label:not(fieldset label), //targets default labels without the need to override fieldset labels. See below for checkbox and radio button labels
+fieldset legend {
+}
+
+fieldset {
+	legend { //checkbox and radio button labels
+	}
+	label {
+	}
 }
 
 input {
@@ -178,19 +199,112 @@ input {
 	&[type=number],
 	&[type=tel],
 	&[type=email] {
+		width: 100%;
+		padding: 10px 15px;
+		box-shadow: inset 0 1px 2px rgba(#000,0.2);
+		background-color: #fff;
+		border: 1px solid #f00;
 	}
 }
 
 textarea {
+	width: 100%;
+	padding: 10px 15px;
+	background-color: #fff;
+	box-shadow: inset 0 1px 2px rgba(#000,0.2);
+	border: 1px solid #f00;
 }
 
-input {
-	&[type=radio],
-	&[type=checkbox] {
-		+ label {
+// Uncomment the below to style checkboxes and radio buttons
+/* .ginput_container_checkbox {
+	.gfield_checkbox {
+		.gchoice {
+			label {
+				padding: 0 0 0 2px;
+				cursor: pointer;
+				position: relative;
+				&:before {
+					border: 1px solid #00f;
+					@include size(15px);
+					border-radius: 2px;
+					left: -17px;
+					top: 1px;
+					content: '';
+					position: absolute;
+					opacity: 1;
+				}
+				&:after {
+					border-left: 3px solid #f00;
+					border-bottom: 3px solid #f00;
+					@include size(17px, 6px);
+					transform: rotate(-45deg);
+					top: 5px;
+					left: -14px;
+					content: '';
+					position: absolute;
+					opacity: 0;
+				}
+				&:hover {
+					&:after {
+						opacity: 0.3;
+					}
+				}
+			}
+			input[type=checkbox] {
+				visibility: hidden;
+				&:checked + label:after {
+					opacity: 1;
+				}
+			}
 		}
 	}
 }
+.ginput_container_radio {
+	.gfield_radio {
+		.gchoice {
+			label {
+				padding: 0 0 0 2px;
+				cursor: pointer;
+				position: relative;
+				&:before {
+					border: 1px solid #00f;
+					@include size(15px);
+					border-radius: 50%;
+					left: -17px;
+					top: 1px;
+					content: '';
+					position: absolute;
+					opacity: 1;
+				}
+				&:after {
+					@include size(5px);
+					border-radius: 50%;
+					left: -12px;
+					top: 6px;
+					content: '';
+					position: absolute;
+					opacity: 0;
+				}
+				&:hover {
+					&:after {
+						opacity: 0.3;
+					}
+				}
+			}
+			input[type=radio] {
+				visibility: hidden;
+				&:checked + label:before {
+					background: #f00;
+					border: 1px solid #f00;
+				}
+				&:checked + label:after {
+					background: #fff;
+					opacity: 1;
+				}
+			}
+		}
+	}
+} */
 
 input[type=submit], button {
 	display: inline-block;
@@ -200,22 +314,18 @@ input[type=submit], button {
 }
 
 select {
-	-webkit-appearance: none;
+	padding: 10px 35px 10px 15px;
+	width: 100%;
 	background: #fff inline_svg('<svg width="13" height="8" viewBox="0 0 13 8" xmlns="http://www.w3.org/2000/svg"><path d="M.293.293c.36-.36.928-.388 1.32-.083l.094.083L6.51 5.096 11.313.293c.36-.36.928-.388 1.32-.083l.094.083c.36.36.389.928.084 1.32l-.084.094-5.51 5.51c-.36.36-.927.388-1.32.083l-.094-.083-5.51-5.51c-.39-.39-.39-1.024 0-1.414z" fill="#f00" fill-rule="evenodd"/></svg>') no-repeat calc(100% - 10px) 50%;
+	border: 1px solid #f00;
 }
 
-.validation {
-	&_error {
-		padding: 15px;
+.gform_validation_errors {
+	background-color: #c00;
+	color: #fff;
+	padding: 20px;
+	h2 {
 		color: #fff;
-		background: #c00;
-		margin: 20px 0;
-	}
-	&_message {
-		text-transform: uppercase;
-		font-size: 12px;
-		color: #c00;
-		font-weight: 600;
 	}
 }
 

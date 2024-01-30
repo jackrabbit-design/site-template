@@ -1,89 +1,5 @@
 @charset "UTF-8";
 /* ========================================================================= */
-/* !FONTS (@fontface generated with FontSpring Syntax formatting */
-/* ========================================================================= */
-/* ========================================================================= */
-/* !SASS VARIABLES & MIXINS */
-/* ========================================================================= */
-/*
-    // Use Case: $b (second) variable is optional and defaults to 'max-width'
-
-    @include break(1100){
-        h1{
-            background: red;
-        }
-    }
-
-    // Output
-    @media screen and (max-width: 1100px) {
-        h1 { background: red; }
-    }
-
-    // Also, if you want to specify the 2nd variable for break type (i.e., min-height)
-
-    @include break(1100, 'min-height'){
-        h1 {
-            background:red;
-        }
-    }
-
-    // Output
-    @media screen and (min-height: 1100px) {
-        h1 { background: red; }
-    }
-*/
-/*
-    // inline SVGs
-    // usage: background-image: inline-svg('<svg><!-- your svg code --></svg>');
-*/
-/* ========================================================================= */
-/* !STYLES */
-/* ========================================================================= */
-/* != DEFAULT STYLES ===== */
-html, body {
-  scroll-behavior: smooth;
-  font-family: Helvetica, Arial, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-}
-
-[id] {
-  scroll-margin-top: 100px;
-}
-
-#skipnav {
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  height: 30px;
-  left: 50%;
-  padding: 8px;
-  position: absolute;
-  transform: translateY(-100%);
-  transition: transform 0.3s;
-}
-#skipnav:focus {
-  transform: translateY(0%);
-}
-
-/* != SELECTION STYLES (Leaving these blank will show no indication of text selection) ===== */
-/*
-    ::selection         {
-        background: #aaa;
-        color: #fff;
-    }
-    ::-moz-selection    {
-        background: #aaa;
-        color: #fff;
-    }
-    ::-webkit-selection {
-        background: #aaa;
-        color: #fff;
-    }
-*/
-/* != LAYOUT STYLES ===== */
-#menu-toggle {
-  display: none;
-}
-/* ========================================================================= */
 /* !RESETS AND DEFAULTS */
 /* ========================================================================= */
 html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p,
@@ -112,16 +28,6 @@ em, strong, b, i, a, span, sub, sup, small {
   padding: 0;
 }
 
-/*
-a:focus {
-    outline:0;
-}
-:focus, :active {
-    outline:none; outline:0;
-} ::-moz-focus-inner {
-    outline:none;
-}
-*/
 article, aside, details, figcaption, figure, footer,
 header, hgroup, menu, nav, section {
   display: block;
@@ -190,7 +96,6 @@ input[type=button],
 input[type=submit],
 button, textarea, select {
   -webkit-appearance: none;
-  outline: 1px solid transparent;
 }
 
 textarea {
@@ -277,6 +182,127 @@ input[type=text]::-ms-clear {
   word-wrap: break-word;
 }
 
+/* ========================================================================= */
+/* !SASS VARIABLES & MIXINS */
+/* ========================================================================= */
+/*
+    // Use Case: $b (second) variable is optional and defaults to 'max-width'
+
+    @include break(1100){
+        h1{
+            background: red;
+        }
+    }
+
+    // Output
+    @media screen and (max-width: 1100px) {
+        h1 { background: red; }
+    }
+
+    // Also, if you want to specify the 2nd variable for break type (i.e., min-height)
+
+    @include break(1100, 'min-height'){
+        h1 {
+            background:red;
+        }
+    }
+
+    // Output
+    @media screen and (min-height: 1100px) {
+        h1 { background: red; }
+    }
+*/
+/*
+    // inline SVGs
+    // usage: background-image: inline-svg('<svg><!-- your svg code --></svg>');
+*/
+/* ========================================================================= */
+/* !FONTS (@fontface generated with FontSpring Syntax formatting */
+/* ========================================================================= */
+/* ========================================================================= */
+/* !STYLES */
+/* ========================================================================= */
+/* != DEFAULT STYLES ===== */
+html, body {
+  scroll-behavior: smooth;
+  font-family: Helvetica, Arial, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+[id] {
+  scroll-margin-top: 100px;
+}
+
+#skipnav {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  height: 30px;
+  left: 50%;
+  padding: 8px;
+  position: absolute;
+  transform: translateY(-100%);
+  transition: transform 0.3s;
+}
+#skipnav:focus {
+  transform: translateY(0%);
+}
+
+/* != SELECTION STYLES (Leaving these blank will show no indication of text selection) ===== */
+/*
+    ::selection         {
+        background: #aaa;
+        color: #fff;
+    }
+    ::-moz-selection    {
+        background: #aaa;
+        color: #fff;
+    }
+    ::-webkit-selection {
+        background: #aaa;
+        color: #fff;
+    }
+*/
+/* != LAYOUT STYLES ===== */
+#menu-toggle {
+  display: none;
+}
+/* ========================================================================= */
+/* !SASS VARIABLES & MIXINS */
+/* ========================================================================= */
+/*
+    // Use Case: $b (second) variable is optional and defaults to 'max-width'
+
+    @include break(1100){
+        h1{
+            background: red;
+        }
+    }
+
+    // Output
+    @media screen and (max-width: 1100px) {
+        h1 { background: red; }
+    }
+
+    // Also, if you want to specify the 2nd variable for break type (i.e., min-height)
+
+    @include break(1100, 'min-height'){
+        h1 {
+            background:red;
+        }
+    }
+
+    // Output
+    @media screen and (min-height: 1100px) {
+        h1 { background: red; }
+    }
+*/
+/*
+    // inline SVGs
+    // usage: background-image: inline-svg('<svg><!-- your svg code --></svg>');
+*/
+/* ========================================================================= */
+/* !FONTS (@fontface generated with FontSpring Syntax formatting */
+/* ========================================================================= */
 .btn {
   display: inline-block;
   text-decoration: none;
@@ -365,8 +391,18 @@ input[type=text]::-ms-clear {
 
 *:focus {
   outline: 3px solid rgba(0, 0, 0, 0.5);
+  outline-offset: 3px;
 }
 
+@supports selector(:focus-visible) {
+  *:focus {
+    outline: none;
+  }
+  *:focus-visible {
+    outline: 3px solid rgba(0, 0, 0, 0.5);
+    outline-offset: 3px;
+  }
+}
 .wrap {
   max-width: 1180px;
   width: 100%;
@@ -375,26 +411,129 @@ input[type=text]::-ms-clear {
 }
 
 /* != FORM STYLES ===== */
+input[type=text], input[type=password], input[type=url], input[type=number], input[type=tel], input[type=email] {
+  width: 100%;
+  padding: 10px 15px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  border: 1px solid #f00;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px 15px;
+  background-color: #fff;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+  border: 1px solid #f00;
+}
+
+/* .ginput_container_checkbox {
+	.gfield_checkbox {
+		.gchoice {
+			label {
+				padding: 0 0 0 2px;
+				cursor: pointer;
+				position: relative;
+				&:before {
+					border: 1px solid #00f;
+					@include size(15px);
+					border-radius: 2px;
+					left: -17px;
+					top: 1px;
+					content: '';
+					position: absolute;
+					opacity: 1;
+				}
+				&:after {
+					border-left: 3px solid #f00;
+					border-bottom: 3px solid #f00;
+					@include size(17px, 6px);
+					transform: rotate(-45deg);
+					top: 5px;
+					left: -14px;
+					content: '';
+					position: absolute;
+					opacity: 0;
+				}
+				&:hover {
+					&:after {
+						opacity: 0.3;
+					}
+				}
+			}
+			input[type=checkbox] {
+				visibility: hidden;
+				&:checked + label:after {
+					opacity: 1;
+				}
+			}
+		}
+	}
+}
+.ginput_container_radio {
+	.gfield_radio {
+		.gchoice {
+			label {
+				padding: 0 0 0 2px;
+				cursor: pointer;
+				position: relative;
+				&:before {
+					border: 1px solid #00f;
+					@include size(15px);
+					border-radius: 50%;
+					left: -17px;
+					top: 1px;
+					content: '';
+					position: absolute;
+					opacity: 1;
+				}
+				&:after {
+					@include size(5px);
+					border-radius: 50%;
+					left: -12px;
+					top: 6px;
+					content: '';
+					position: absolute;
+					opacity: 0;
+				}
+				&:hover {
+					&:after {
+						opacity: 0.3;
+					}
+				}
+			}
+			input[type=radio] {
+				visibility: hidden;
+				&:checked + label:before {
+					background: #f00;
+					border: 1px solid #f00;
+				}
+				&:checked + label:after {
+					background: #fff;
+					opacity: 1;
+				}
+			}
+		}
+	}
+} */
 input[type=submit], button {
   display: inline-block;
   cursor: pointer;
 }
 select {
-  -webkit-appearance: none;
+  padding: 10px 35px 10px 15px;
+  width: 100%;
   background: #fff url("data:image/svg+xml,%3Csvg width%3D%2213%22 height%3D%228%22 viewBox%3D%220 0 13 8%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath d%3D%22M.293.293c.36-.36.928-.388 1.32-.083l.094.083L6.51 5.096 11.313.293c.36-.36.928-.388 1.32-.083l.094.083c.36.36.389.928.084 1.32l-.084.094-5.51 5.51c-.36.36-.927.388-1.32.083l-.094-.083-5.51-5.51c-.39-.39-.39-1.024 0-1.414z%22 fill%3D%22%23f00%22 fill-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E") no-repeat calc(100% - 10px) 50%;
+  border: 1px solid #f00;
 }
 
-.validation_error {
-  padding: 15px;
+.gform_validation_errors {
+  background-color: #c00;
   color: #fff;
-  background: #c00;
-  margin: 20px 0;
+  padding: 20px;
 }
-.validation_message {
-  text-transform: uppercase;
-  font-size: 12px;
-  color: #c00;
-  font-weight: 600;
+.gform_validation_errors h2 {
+  color: #fff;
 }
 
 .gform_validation_container {

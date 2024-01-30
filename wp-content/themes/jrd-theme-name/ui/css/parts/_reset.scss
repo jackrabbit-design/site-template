@@ -26,17 +26,6 @@
         margin:0;
         padding:0;
     }
-    /*
-    a:focus {
-        outline:0;
-    }
-    :focus, :active {
-        outline:none; outline:0;
-    } ::-moz-focus-inner {
-        outline:none;
-    }
-    */
-
     article, aside, details, figcaption, figure, footer,
     header, hgroup, menu, nav, section {
         display:block;
@@ -94,7 +83,6 @@
     input[type=submit],
     button, textarea, select {
         -webkit-appearance: none;
-        outline:1px solid transparent;
     }
     textarea {
         resize:none;
