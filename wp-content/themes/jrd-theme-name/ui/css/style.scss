@@ -20,15 +20,46 @@
         scroll-margin-top: 100px; // set this to the height of your fixed header, plus some extra
     }
 
+/* != ACCESSIBILITY STYLES ===== */
+
+	.sr-only, .slick-sr-only {
+		/* Styles below are so elements are shown to screen readers only */
+		border: none !important;
+		clip: rect(0, 0, 0, 0) !important;
+		height: 0.01em !important;
+		overflow: hidden !important;
+		padding: 0 !important;
+		position: absolute !important;
+		white-space: nowrap !important;
+		width: 0.01em !important;
+	}
+
+	*:focus {
+		outline: 3px solid $focus_color;
+		outline-offset: 3px;
+	}
+
+	@supports selector(:focus-visible) {
+		*:focus {
+			outline:none;
+		}
+		*:focus-visible {
+			outline: 3px solid $focus_color;
+			outline-offset: 3px;
+		}
+	}
+
 	#skipnav {
 		background: rgba(0,0,0,0.8);
 		color:#fff;
 		height: 30px;
+		top:0;
 		left: 50%;
 		padding: 8px;
-		position: absolute;
+		position: fixed;
 		transform: translateY(-100%);
 		transition: transform 0.3s;
+		z-index:9999999999;
 		&:focus {
 			transform: translateY(0%);
 		}

@@ -70,7 +70,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	}
 	?>
 	<div class="wrap">
-		<nav id="main-nav" aria-label="Primary Site Navigation" tabindex="-1">
+		<nav id="main-nav" aria-label="Main" tabindex="-1">
 			<ul>
 				<li>
 					<a href="#">Menu Item 1</a>
