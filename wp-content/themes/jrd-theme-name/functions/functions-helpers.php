@@ -288,6 +288,8 @@ function jrd_date_range( $start_date, $end_date = null, $date_format = 'Ymd' ) {
  * @param string $icon_field    icon field name; I usually use a select field.
  * @param string $url_field     url field
  * @param string $id            ID for the <nav> element
+ * @param boolean $option_menu  whether pulling social options from options area
+ * @param boolean $wrap_nav     whether to wrap icon list in a <nav> element
  * List of Options for easy copypasta
 	social_facebook : Facebook
 	social_instagram : Instagram
@@ -299,17 +301,25 @@ function jrd_date_range( $start_date, $end_date = null, $date_format = 'Ymd' ) {
 	social_vimeo : Vimeo
 	social_youtube : YouTube
  */
-function jrd_social_nav( $field_name, $icon_field, $url_field, $id = 'nav-social' ) {
+function jrd_social_nav( $field_name, $icon_field, $url_field, $id = 'nav-social', $option_menu = true, $wrap_nav = true ) {
 	$html = '';
-	if ( have_rows( $field_name, 'option' ) ) {
-		$html .= "<nav id=\"{$id}\" class=\"social-media\"><ul>";
-		while ( have_rows( $field_name, 'option' ) ) {
+	$option = '';
+	if ( $option_menu ) {
+		$option = 'option';
+	}
+	if ( have_rows( $field_name, $option ) ) {
+		if ( $wrap_nav ) {
+			$html .= "<nav id=\"{$id}\" class=\"social-media\" aria-label='Social Media'><ul>";
+		}
+		while ( have_rows( $field_name, $option ) ) {
 			the_row();
 			$icon  = get_sub_field( $icon_field );
 			$url   = get_sub_field( $url_field );
-			$html .= "<li><a href=\"{$url}\" target=\"_blank\"><svg class=\"{$icon}\"><use xlink:href=\"/ui/svg/social-sprites.svg#{$icon}\"></use></svg></a></li> ";
+			$html .= "<li class=\"social\"><a href=\"{$url}\" target=\"_blank\" aria-label=\"{$icon['label']}\"><svg class=\"{$icon['value']}\"><use xlink:href=\"" . jrd_ui( 'svg/sprites.svg') . "#{$icon['value']}\"></use></svg></a></li>";
 		}
-		$html .= '</ul></nav>';
+		if ( $wrap_nav ) {
+			$html .= '</ul></nav>';
+		}
 	}
 	return $html;
 }
