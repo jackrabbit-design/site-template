@@ -65,6 +65,9 @@ function limit_excerpt( $str, $word_limit ) {
  * @return string           The returned HTML
  */
 function tag_wrap( $str, $notation ) {
+	if ( ! $str ) {
+		return '';
+	}
 	$element = preg_split( '/[\.\#\[]/', $notation )[0];
 	$classes = array();
 	preg_match_all( '(\.[\w\d-]+)', $notation, $raw_classes );
