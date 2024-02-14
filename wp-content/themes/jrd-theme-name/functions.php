@@ -662,6 +662,7 @@ add_action( 'wp_ajax_nopriv_my_function_name', 'my_function_name' );
 function my_function_name() {
 	// use $_POST variables to pull in data
 	$foo = $_POST['foo'];
+	// if output is an array, make sure you json_encode() the variable being echoed
 	echo $foo;
 	wp_die();
 }
