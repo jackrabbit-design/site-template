@@ -35,6 +35,24 @@ jQuery(function($){
     };
 
     /*
+    $.ajax({
+        type: "POST",
+        url: jrd.ajax_url,
+        data: {
+            action : 'my_function_name',
+            foo : variableName
+        },
+        success:function(data) {
+            // do stuff with data var
+        },
+        error: function(errorThrown){
+            console.log("ERROR");
+            console.log(errorThrown); // error
+        }
+    });
+    */
+
+    /*
     $(document).scroll(function(){
         var nm = $("html").scrollTop();
         var nw = $("body").scrollTop();

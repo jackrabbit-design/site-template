@@ -176,6 +176,14 @@ function enqueue_scripts() {
 	wp_enqueue_script( 'svgxuse', jrd_ui( 'js/svgxuse.js' ), array(), '1.0.0', true );
 	wp_enqueue_script( 'plugins', jrd_ui( 'js/jquery.plugins.js' ), array( 'jquery' ), '1.0.0', true );
 	wp_enqueue_script( 'init', jrd_ui( 'js/jquery.init.js' ), array( 'jquery', 'plugins', 'modernizr' ), filemtime( get_template_directory() . '/ui/js/jquery.init.js' ), true );
+	wp_localize_script(
+		'init',
+		'jrd',
+		array(
+			'ajax_url' => admin_url( 'admin-ajax.php', 'https' ),
+			'nonce'    => wp_create_nonce( 'ajax-nonce' ),
+		)
+	);
 }
 add_action( 'wp_enqueue_scripts', 'enqueue_scripts' );
 
@@ -735,4 +743,13 @@ function find_block( $block_name, $post_id = false ) {
 		}
 	}
 	return false;
+}
+
+add_action( 'wp_ajax_function_name', 'my_function_name' );
+add_action( 'wp_ajax_nopriv_my_function_name', 'my_function_name' );
+function my_function_name() {
+	// use $_POST variables to pull in data
+	$foo = $_POST['foo'];
+	return $foo;
+	wp_die();
 }
