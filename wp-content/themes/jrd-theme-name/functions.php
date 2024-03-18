@@ -369,24 +369,24 @@ function body_class_adjustments( $classes1 ) {
 }
 add_filter( 'body_class', 'body_class_adjustments' );
 
+/* Apply various additional filters to the_content() and anything with 'the_content' filtering */
+add_filter( 'the_content', 'jrd_content_filters' );
+function jrd_content_filters( $content ) {
 
-/* REMOVE <P> WRAPPER WHEN ONLY <IMG /> IS CONTAINED WITHIN */
-function filter_ptags_on_images( $content ) {
-	return preg_replace( '/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content );
-}
-add_filter( 'the_content', 'filter_ptags_on_images' );
+	/* REMOVE <P> WRAPPER WHEN ONLY <IMG /> IS CONTAINED WITHIN */
+	$content = preg_replace( '/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content );
 
-/* INSERT <SPAN> BETWEEN OPEN AND CLOSING <A CLASS='BTN'> TAGS */
-function add_spans_to_buttons( $content ) {
-	return preg_replace( '/(<a .*class=[\'"][\w\d\s-]*btn[\w\d\s-]*[\'"].*>)(.+)(<\/a>)/iU', '\1<span>\2</span>\3', $content );
-}
-add_filter( 'the_content', 'add_spans_to_buttons' );
+	/* INSERT <SPAN> BETWEEN OPEN AND CLOSING <A CLASS='BTN'> TAGS */
+	$content = preg_replace( '/(<a .*class=[\'"][\w\d\s-]*btn[\w\d\s-]*[\'"].*>)(.+)(<\/a>)/iU', '\1<span>\2</span>\3', $content );
 
-/* REMOVE <P> WRAPPER WHEN ONLY A.BTN IS CONTAINED WITHIN */
-function filter_ptags_on_btns( $content ) {
-	return preg_replace( '/<p>\s*(<a .*class=[\'"][\w\d\s-]*btn[\w\d\s-]*[\'"].*>.+<\/a>)\s*<\/p>/iU', '\1', $content );
+	/* REMOVE <P> WRAPPER WHEN ONLY A.BTN IS CONTAINED WITHIN */
+	$content = preg_replace( '/<p>\s*(<a .*class=[\'"][\w\d\s-]*btn[\w\d\s-]*[\'"].*>.+<\/a>)\s*<\/p>/iU', '\1', $content );
+
+	/* REMOVE EMPTY <P> TAG */
+	$content = preg_replace( '/<p>[(?:&nbsp;)\s]*<\/p>/iU', '', $content );
+
+	return $content;
 }
-add_filter( 'the_content', 'filter_ptags_on_btns' );
 
 /* RUN ANY ACF WYSIWYG FIELD THROUGH THE "THE_CONTENT" FILTER */
 add_filter( 'acf/format_value/type=wysiwyg', 'format_value_wysiwyg', 10, 3 );
