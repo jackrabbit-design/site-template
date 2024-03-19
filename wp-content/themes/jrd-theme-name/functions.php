@@ -205,12 +205,12 @@ add_action( 'wp_enqueue_scripts', 'enqueue_styles' );
 
 /* Add a Stylesheet for Admin Content Area */
 function admin_font_setup() {
-	add_editor_style( array( 'style-wysiwyg.css', '/' ) );
+	add_editor_style( array( 'style-wysiwyg.css?v=' . current_time( 'his' ), '/' ) );
 }
 add_action( 'after_setup_theme', 'admin_font_setup' );
 
 function my_custom_fonts() {
-	wp_enqueue_style( 'style-wysiwyg', get_template_directory_uri() . '/style-wysiwyg.css', array(), '1.0.0' );
+	wp_enqueue_style( 'style-wysiwyg', get_template_directory_uri() . '/style-wysiwyg.css', array(), current_time( 'his' ) );
 }
 add_action( 'admin_head', 'my_custom_fonts' );
 
