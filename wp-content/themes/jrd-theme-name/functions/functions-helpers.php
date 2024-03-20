@@ -166,7 +166,7 @@ function jrd_link( $link, $classes = '', $id = '', $span = true, $atts = array()
 		$target     = $link['target'] ?? '_self';
 		$nofollow   = isset( $link['nofollow'] ) && 'nofollow' === $link['nofollow'] ? "rel='nofollow'" : '';
 		$title      = $span ? tag_wrap( $link['title'], 'span' ) : $link['title'];
-		$class      = esc_attr( $class );
+		$classes    = esc_attr( $classes );
 		$id         = esc_attr( $id );
 		if ( ! empty( $atts ) ) {
 			$atts = '';
