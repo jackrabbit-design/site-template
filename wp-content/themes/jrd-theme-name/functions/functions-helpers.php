@@ -372,7 +372,7 @@ function jrd_ui( $file_path = '', $parent_or_child = 'parent' ) {
  * @param string $description    defaults to false
  * @param string $ajax           defaults to true
  **/
-function jrd_gf( $gf_id, $title = 'false', $description = 'false', $ajax = 'true' ) {
+function jrd_gf( $gf_id, $title = false, $description = false, $ajax = true ) {
 	$shortcode   = '';
 	$title       = json_encode( $title );
 	$description = json_encode( $description );
