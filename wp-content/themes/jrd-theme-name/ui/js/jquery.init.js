@@ -105,3 +105,15 @@ function unruntify( str ){
     }
     return new_pieces.join(' ');
 }
+
+// QUERIFY
+// usage: $('form').querify();
+// returns URL query string, e.g., ?foo=bar&baz=qux
+jQuery.fn.querify = function(){
+    if ( jQuery(this).length ) {
+        var serial = jQuery(this).serialize().replace(/[\w\d-]+=&/g, '');
+        serial = '?' + serial;
+        serial = serial.replace(/[?&][\w\d-]+=$/g, '');
+        return serial;
+    }
+}
