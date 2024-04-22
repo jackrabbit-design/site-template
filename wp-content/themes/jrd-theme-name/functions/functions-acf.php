@@ -1,8 +1,8 @@
 <?php
-function jrd_acf_gui_notice() { 
+function jrd_acf_gui_notice() {
 	?>
 	<div class="notice notice-warning">
-		<p>Your theme is currently utilizing <code>functions-acf.php</code>. Following any changes made, the contents of that file should be replaced with a new export of all field groups.</p>
+		<p>Your theme is currently utilizing <code>functions-acf.php</code>. Following any changes made, the contents of that file must be replaced with a new export of all field groups.</p>
 	</div>
 	<?php
 }

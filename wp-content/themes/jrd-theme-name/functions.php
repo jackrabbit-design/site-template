@@ -1,4 +1,6 @@
 <?php
+$production_url = ''; // set this to the Production URL after this site's Staging environment is created post-launch, e.g. 'www.jumpingjackrabbit.com';
+$is_production  = $_SERVER['HTTP_HOST'] === $production_url;
 
 // Use this as a conditional instead of is_user_logged_in(). This function is more strict, as long as your wp username is admin_jackrabbit
 function is_jrd() {
@@ -619,8 +621,14 @@ if ( is_admin() ) {
 	if ( isset( $_GET['post_type'] ) && 'acf-field-group' === $_GET['post_type'] ) {
 		$currently_acf = true;
 	}
-	if ( $currently_acf && $not_jrd ) {
-		echo 'You are not authorized to edit custom fields.';
+	if ( $currently_acf && ( $not_jrd || $is_production ) ) {
+		if ( $not_jrd ) {
+			$reason = 'This section is for developers only.';
+		}
+		if ( $is_production ) {
+			$reason = 'You are on the Production environment.';
+		}
+		wp_die( "<h1>Disallowed</h1><p>You are not authorized to edit custom fields on this environment.</p><p><b>Reason:</b> $reason</p>" );
 		die;
 	}
 }
