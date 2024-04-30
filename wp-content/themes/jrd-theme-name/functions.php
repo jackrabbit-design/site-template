@@ -745,6 +745,12 @@ function acf_block_templates() {
 }
 add_action( 'init', 'acf_block_templates' );
 
+/**
+ * Deprecated function to fetch a block's data
+ * @param  string $block_name Name of the block
+ * @param int|string The post ID, defaulting to the current post
+ * @return string The block data
+ */
 function find_block( $block_name, $post_id = false ) {
 	$found      = false;
 	$post_id    = $post_id ? $post_id : get_the_ID();
@@ -756,6 +762,29 @@ function find_block( $block_name, $post_id = false ) {
 		}
 	}
 	return false;
+}
+
+/**
+ * Convert block data back to ACF data
+ * @param  string $block_name Name of the block
+ * @param int|string The post ID, defaulting to the current post
+ * @return string The block ID
+ *
+ * Usage:
+ * $block_id = setup_block_acf('jrd/block-name');
+ * get_field( 'field_name', $block_id );
+ */
+function setup_block_acf( $block_name, $post_id = false ) {
+	$post_id    = $post_id ? $post_id : get_the_ID();
+	$all_blocks = parse_blocks( get_the_content( '', false, $post_id ) );
+	foreach ( $all_blocks as $block ) {
+		if ( $block_name === $block['blockName'] ) {
+			$block_data = $block['attrs']['data'];
+			$block_id   = acf_get_block_id( $block_data );
+			acf_setup_meta( $block_data, $block_id );
+			return $block_id;
+		}
+	}
 }
 
 add_action( 'wp_ajax_function_name', 'my_function_name' );
