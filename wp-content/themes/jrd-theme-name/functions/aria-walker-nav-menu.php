@@ -142,16 +142,10 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 		if( $depth == 0 && in_array( 'menu-item-has-children', $item->classes )){
 			$item_output = $args->before;
-			if ( str_contains( $attributes, 'data-link="active"' ) ) {
-				$item_output .= '<a'. $attributes .'>';
-				$item_output .= $args->link_before . $title . $args->link_after;
-				$item_output .= '</a>';
-				$item_output .= '<button id="' . $args->menu->slug . '-menu-item-'.$item->ID.'B" class="menu-toggle-button" aria-controls="' . $args->menu->slug . '-menu-item-'.$item->ID.'C" data-toggle="true" aria-expanded="false"><span class="sr-only">Show submenu for "' . $title . '"</span></button>';
-			} else {
-				$item_output .= '<a'. $attributes .' id="' . $args->menu->slug . '-menu-item-'.$item->ID.'B" data-toggle="true" aria-expanded="false">';
-				$item_output .= $args->link_before . $title . $args->link_after;
-				$item_output .= '</a>';
-			}
+			$item_output .= '<a'. $attributes .'>';
+			$item_output .= $args->link_before . $title . $args->link_after;
+			$item_output .= '</a>';
+			$item_output .= '<button id="' . $args->menu->slug . '-menu-item-'.$item->ID.'B" class="menu-toggle-button" aria-controls="' . $args->menu->slug . '-menu-item-'.$item->ID.'C" data-toggle="true" aria-expanded="false"><span class="sr-only">Show submenu for "' . $title . '"</span></button>';
 			$item_output .= $args->after;
 		} else if( $depth > 0 ) {
 			$item_output = $args->before;
