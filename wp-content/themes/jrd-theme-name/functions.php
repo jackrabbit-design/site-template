@@ -76,6 +76,7 @@ require_once 'functions/functions-rg.php';
 /* == Uncomment below line when site launches == */
 // require_once 'functions/functions-acf.php';
 
+// require_once 'functions/aria-walker-nav-menu.php';
 // require_once 'functions/functions-widgets.php';
 // require_once 'functions/functions-comments.php';
 
