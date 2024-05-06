@@ -796,3 +796,9 @@ function my_function_name() {
 	echo $foo;
 	wp_die();
 }
+
+function block_preview( $dir ) {
+	$result = preg_replace( '/^(?>\/code\/)(.+)/m', '/$1', $dir . '/preview.jpg.webp' );
+	$result = home_url() . str_replace( $_SERVER['DOCUMENT_ROOT'], '', $result );
+	return "<img src='$result' alt='preview' style='display: block !important; margin: 0 auto !important;' />";
+}
