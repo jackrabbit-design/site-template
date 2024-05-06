@@ -12,8 +12,7 @@
  */
 
 if ( ! empty( $block['data']['_is_preview'] ) ) {
-	$result = preg_replace( '/^(?>\/code\/)(.+)/m', '/$1', __DIR__ . '/preview.jpg' );
-	echo " <img src='$result' alt='preview' style='display: block !important; margin: 0 auto !important;' />";
+	echo block_preview( __DIR__ );
 	return false;
 }
 
@@ -26,6 +25,6 @@ if ( ! empty( $block['className'] ) ) {
 }
 ?>
 
-<div class='<?php echo esc_attr( $class_name ); ?>'>
+<section class='<?php echo esc_attr( $class_name ); ?>'>
 
-</div>
+</section>
