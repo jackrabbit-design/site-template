@@ -677,3 +677,21 @@ function my_function_name() {
 	echo $foo;
 	wp_die();
 }
+
+/**
+ * Allow mailto: and tel: links in URL field
+ */
+function jrd_validate_acf_urls( $valid, $value, $field, $input ) {
+	if ( true === $valid ) {
+		return $valid;
+	}
+	if ( 'url' === $field['type'] ) {
+		if ( preg_match( '/^(mailto\:|tel\:).*/', $value ) ) {
+			$valid = true;
+		} else {
+			$valid = 'Value must be a valid URL, mailto:, or tel: link.';
+		}
+	}
+	return $valid;
+}
+add_filter( 'acf/validate_value', 'jrd_validate_acf_urls', 10, 4 );
