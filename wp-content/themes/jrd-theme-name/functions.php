@@ -803,3 +803,21 @@ function block_preview( $dir ) {
 	$result = home_url() . str_replace( $_SERVER['DOCUMENT_ROOT'], '', $result );
 	return "<img src='$result' alt='preview' style='display: block !important; margin: 0 auto !important;' />";
 }
+
+/**
+ * Allow mailto: and tel: links in URL field
+ */
+function jrd_validate_acf_urls( $valid, $value, $field, $input ) {
+	if ( true === $valid ) {
+		return $valid;
+	}
+	if ( 'url' === $field['type'] ) {
+		if ( preg_match( '/^(mailto\:|tel\:).*/', $value ) ) {
+			$valid = true;
+		} else {
+			$valid = 'Value must be a valid URL, mailto:, or tel: link.';
+		}
+	}
+	return $valid;
+}
+add_filter( 'acf/validate_value', 'jrd_validate_acf_urls', 10, 4 );
