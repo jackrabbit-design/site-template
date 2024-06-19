@@ -476,7 +476,9 @@ function my_mce_before_init( $settings ) {
 		array(
 			'title'   => 'Button Link',
 			'inline'  => 'a',
-			'classes' => 'btn',
+			'attributes' => array(
+				'class' => "btn",
+			),
 		),
 	);
 
