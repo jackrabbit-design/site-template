@@ -673,7 +673,15 @@ function year_in_seconds() {
 }
 add_filter( 'admin_email_check_interval', 'year_in_seconds' );
 
-
+// truly lock out password-protected pages
+function jrd_password_protected_filter() {
+	if ( post_password_required() ) {
+		the_content();
+		get_footer();
+		exit;
+	}
+}
+add_filter( 'loop_start', 'jrd_password_protected_filter' );
 
 /* ================================================================================ */
 /* SETUP ACF BLOCKS */
