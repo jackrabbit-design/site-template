@@ -73,8 +73,20 @@ add_filter( 'wp_headers', 'replace_wp_headers' );
 require_once 'functions/functions-post-types.php';
 require_once 'functions/functions-helpers.php';
 require_once 'functions/functions-rg.php';
-/* == Uncomment below line when site launches == */
-// require_once 'functions/functions-acf.php';
+
+// setup acf-json folder
+function jrd_acf_json_save_point( $path ) {
+	return get_stylesheet_directory() . '/functions/acf-json';
+}
+add_filter( 'acf/settings/save_json', 'jrd_acf_json_save_point' );
+
+// make acf read acf-json folder
+function jrd_acf_json_load_point( $paths ) {
+	unset( $paths[0] );
+	$paths[] = get_stylesheet_directory() . '/functions/acf-json';
+	return $paths;
+}
+add_filter( 'acf/settings/load_json', 'jrd_acf_json_load_point' );
 
 // require_once 'functions/functions-widgets.php';
 // require_once 'functions/functions-comments.php';
