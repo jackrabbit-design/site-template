@@ -683,6 +683,21 @@ function jrd_password_protected_filter() {
 }
 add_filter( 'loop_start', 'jrd_password_protected_filter' );
 
+// setup acf-json folder
+function jrd_acf_json_save_point( $path ) {
+	return get_stylesheet_directory() . '/functions/acf-json';
+}
+add_filter( 'acf/settings/save_json', 'jrd_acf_json_save_point' );
+
+// make acf read acf-json folder
+function jrd_acf_json_load_point( $paths ) {
+	unset( $paths[0] );
+	$paths[] = get_stylesheet_directory() . '/functions/acf-json';
+	return $paths;
+}
+add_filter( 'acf/settings/load_json', 'jrd_acf_json_load_point' );
+
+
 /* ================================================================================ */
 /* SETUP ACF BLOCKS */
 /* ================================================================================ */
