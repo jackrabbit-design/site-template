@@ -697,3 +697,13 @@ function jrd_validate_acf_urls( $valid, $value, $field, $input ) {
 	return $valid;
 }
 add_filter( 'acf/validate_value', 'jrd_validate_acf_urls', 10, 4 );
+
+// truly lock out password-protected pages
+function jrd_password_protected_filter() {
+	if ( post_password_required() ) {
+		the_content();
+		get_footer();
+		exit;
+	}
+}
+add_filter( 'loop_start', 'jrd_password_protected_filter' );
