@@ -219,7 +219,6 @@ function enqueue_styles() {
 add_action( 'wp_enqueue_scripts', 'enqueue_styles' );
 
 
-/* Add a Stylesheet for Admin Content Area */
 add_filter( 'tiny_mce_before_init', 'override_tinymce_styles' );
 function override_tinymce_styles( $mce_init ) {
 	$content_css = get_stylesheet_directory_uri() . '/style-wysiwyg.css?v=' . current_time( 'his' );
