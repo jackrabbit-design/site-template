@@ -5,10 +5,10 @@
     "category": "",
     "icon": "block-default",
     "keywords": [],
-    "post_types": [],
     "acf": {
         "mode": "preview",
-        "renderTemplate": "example.php"
+        "renderTemplate": "example.php",
+        "postTypes": []
     },
     "align": "full",
     "supports": {
