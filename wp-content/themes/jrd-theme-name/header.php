@@ -70,18 +70,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	}
 	?>
 	<div class="wrap">
-		<nav id="main-nav" aria-label="Main" tabindex="-1">
-			<ul>
-				<li>
-					<a href="#">Menu Item 1</a>
-				</li>
-				<li>
-					<a href="#">Menu Item 2</a>
-				</li>
-				<li>
-					<a href="#">Menu Item 3</a>
-				</li>
-			</ul>
+		<nav id="main-nav" aria-label="Main">
+			<?php
+			wp_nav_menu(
+				array(
+					'theme_location' => 'main-menu',
+					'container'      => '',
+					'menu_class'     => '',
+					'menu_id'        => '',
+					'depth'          => 2,
+					//'walker'         => new Aria_Walker_Nav_Menu,
+					'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+				)
+			);
+			?>
 		</nav>
 		<button id="menu-toggle"><span></span></button>
 	</div>
