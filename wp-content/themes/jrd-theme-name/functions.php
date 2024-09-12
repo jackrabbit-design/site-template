@@ -699,14 +699,14 @@ add_filter( 'loop_start', 'jrd_password_protected_filter' );
 /* SETUP ACF BLOCKS */
 /* ================================================================================ */
 
-add_action( 'admin_head', 'jrd_custom_css' );
-
 function jrd_custom_css() {
 	echo <<<HTML
   	<style>
+	.akismet-section-header__actions { display: none; }
 	</style>
 HTML;
 }
+add_action( 'admin_head', 'jrd_custom_css' );
 
 function enqueue_block_scripts() {
 	wp_enqueue_script( 'modernizr', jrd_ui( 'js/modernizr.js' ), array(), '1.0.0', true );
