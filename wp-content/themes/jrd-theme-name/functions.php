@@ -229,6 +229,15 @@ function my_custom_fonts() {
 }
 add_action( 'admin_head', 'my_custom_fonts' );
 
+function jrd_custom_css() {
+	echo <<<HTML
+  	<style>
+	.akismet-section-header__actions { display: none; }
+	</style>
+HTML;
+}
+add_action( 'admin_head', 'jrd_custom_css' );
+
 
 /* ========================================================================= */
 /* GRAVITY FORM CUSTOMIZATIONS */
