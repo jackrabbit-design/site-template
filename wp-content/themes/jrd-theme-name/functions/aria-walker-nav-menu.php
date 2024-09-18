@@ -96,7 +96,12 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 			//$atts['aria-expanded']   = "false";
 			//$atts['tabindex']   = "0";
 		}
-
+		$current_domain = parse_url( home_url(), PHP_URL_HOST );
+		$href_domain = parse_url( $atts['href'], PHP_URL_HOST ); //echo $current_domain  . ' - ' . $href_domain . '|  ';
+		$href_fragment = parse_url( $atts['href'], PHP_URL_FRAGMENT );
+		if ( ( $href_domain != $current_domain ) && !isset( $href_fragment ) ) {
+			$atts['rel'] = "external";
+		}
 		/**
 		 * Filter the HTML attributes applied to a menu item's anchor element.
 		 *
@@ -142,10 +147,16 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 		if( $depth == 0 && in_array( 'menu-item-has-children', $item->classes )){
 			$item_output = $args->before;
-			$item_output .= '<a'. $attributes .'>';
-			$item_output .= $args->link_before . $title . $args->link_after;
-			$item_output .= '</a>';
-			$item_output .= '<button id="' . $args->menu->slug . '-menu-item-'.$item->ID.'B" class="menu-toggle-button" aria-controls="' . $args->menu->slug . '-menu-item-'.$item->ID.'C" data-toggle="true" aria-expanded="false"><span class="sr-only">Show submenu for "' . $title . '"</span></button>';
+			if ( str_contains( $attributes, 'data-link="active"' ) ) {
+				$item_output .= '<a'. $attributes .'>';
+				$item_output .= $args->link_before . $title . $args->link_after;
+				$item_output .= '</a>';
+				$item_output .= '<button id="' . $args->menu->slug . '-menu-item-'.$item->ID.'B" class="menu-toggle-button" aria-controls="' . $args->menu->slug . '-menu-item-'.$item->ID.'C" data-toggle="true" aria-expanded="false"><span class="sr-only">Show submenu for "' . $title . '"</span></button>';
+			} else {
+				$item_output .= '<a'. $attributes .' id="' . $args->menu->slug . '-menu-item-'.$item->ID.'B" data-toggle="true" aria-expanded="false">';
+				$item_output .= $args->link_before . $title . $args->link_after;
+				$item_output .= '</a>';
+			}
 			$item_output .= $args->after;
 		} else if( $depth > 0 ) {
 			$item_output = $args->before;
