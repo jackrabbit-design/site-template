@@ -117,3 +117,23 @@ jQuery.fn.querify = function(){
         return serial;
     }
 }
+
+jQuery.fn.extend({showModal: function() {
+    return this.each(function() {
+        if(this.tagName=== "DIALOG"){
+            this.showModal();
+        }
+    });
+}});
+jQuery.fn.extend({close: function() {
+    return this.each(function() {
+        if(this.tagName=== "DIALOG"){
+            this.close();
+        }
+    });
+}});
+/*
+* To use with <dialog> elements, use the following:
+* $('dialog').showModal(); // to open
+* $('dialog').close(); // to close
+*/
