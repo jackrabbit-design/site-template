@@ -159,3 +159,7 @@
         white-space:-moz-pre-wrap;
         word-wrap:break-word;
     }
+
+	svg path {
+		d: revert-layer !important;
+	}
