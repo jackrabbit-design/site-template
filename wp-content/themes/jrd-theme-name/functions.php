@@ -341,7 +341,7 @@ if ( ! function_exists( 'input_to_button' ) ) {
 }
 
 // Disables the Gravity Forms CSS.
-add_filter( 'gform_disable_css', '__return_true' );
+// add_filter( 'gform_disable_css', '__return_true' );
 
 
 /* ========================================================================= */
