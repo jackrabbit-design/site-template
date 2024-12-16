@@ -358,7 +358,7 @@ if ( ! function_exists( 'input_to_button' ) ) {
 }
 
 // Disables the Gravity Forms CSS.
-add_filter( 'gform_disable_css', '__return_true' );
+// add_filter( 'gform_disable_css', '__return_true' );
 
 /* ========================================================================= */
 /* ADD ACF5 OPTIONS PAGE - more args available at http://www.advancedcustomfields.com/resources/acf_add_options_page/  */
