@@ -10,4 +10,4 @@
 ENV="your-staging-environment-name"
 THEME="jrd-your-theme-name"
 
-rsync $ENV@$ENV.ssh.wpengine.net:/sites/$ENV/wp-content/themes/$THEME/functions/acf-json ./wp-content/themes/$THEME/functions/acf-json
+rsync -r $ENV@$ENV.ssh.wpengine.net:/sites/$ENV/wp-content/themes/$THEME/functions/acf-json ./wp-content/themes/$THEME/functions/acf-json
