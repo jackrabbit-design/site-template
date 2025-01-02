@@ -269,6 +269,7 @@ if ( ! function_exists( 'jrd_login_url' ) ) {
 	add_action( 'wp_enqueue_scripts', 'jrd_enqueue_styles' );
 }
 
+/*
 if ( ! function_exists( 'override_tinymce_styles' ) ) {
 	function override_tinymce_styles( $mce_init ) {
 		$content_css = get_stylesheet_directory_uri() . '/style-wysiwyg.css?v=' . current_time( 'his' );
@@ -280,6 +281,7 @@ if ( ! function_exists( 'override_tinymce_styles' ) ) {
 	}
 	add_filter( 'tiny_mce_before_init', 'override_tinymce_styles' );
 }
+	*/
 
 
 /* ========================================================================= */
