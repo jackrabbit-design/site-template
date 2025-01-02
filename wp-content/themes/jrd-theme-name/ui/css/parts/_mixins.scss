@@ -47,6 +47,14 @@
         @return math.div($px,$rem_size)*1rem;
     }
 
+    // $columns: the number of columns (items per row) of the flexbox
+    // $gap: the gap between columns (can be pixels, percentage, em, whatever)
+    @function flex-math( $columns, $gap ) {
+        $perc: percentage( math.div( 1, $columns ) );
+        $between: calc( $gap * ( ( $columns - 1 ) / $columns ) );
+        @return calc( $perc - $between );
+    }
+
 /*
     // Use Case: $b (second) variable is optional and defaults to 'max-width'
 
