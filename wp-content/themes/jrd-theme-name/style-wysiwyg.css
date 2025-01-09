@@ -98,16 +98,13 @@
 }
 
 #tinymce a.btn {
-  color: #00f;
-  border: 1px solid #00f;
-  /*
-  border-radius: 50px;
-  background-color: #00f;
   color: #fff;
-  */
+  border: 1px solid #000;
+  text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  padding: 10px 25px 10px 25px;
+  font-weight: 600;
+  padding: 10px 25px;
 }
 
 #tinymce h2 strong,
