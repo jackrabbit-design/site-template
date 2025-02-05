@@ -122,7 +122,7 @@ if ( ! function_exists( 'tag_wrap' ) ) {
  * @return string         The sanitized string
  */
 if ( ! function_exists( 'clean' ) ) {
-	function clean( $str ) {
+	function clean( $string ) {
 		$string = wp_strip_all_tags( $string );
 		$string = strtolower( $string );
 		$string = preg_replace( '/\s+/', '-', $string );
