@@ -375,74 +375,59 @@ if ( ! function_exists( 'new_excerpt_more' ) ) {
 /* ========================================================================= */
 /*  BROWSER DETECTION body_class() OUTPUT */
 /* ========================================================================= */
-if ( ! function_exists( 'body_class_adjustments' ) ) {
-	function body_class_adjustments( $classes1 ) {
+function custom_body_browser_classes( $classes ) {
+	$user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : '';
 
-		$browser = $_SERVER['HTTP_USER_AGENT'];
-		global  $is_iphone,     //iPhone Safari
-				$is_chrome,     //Google Chrome
-				$is_safari,     //Safari
-				$is_NS4,        //NetScape 4
-				$is_opera,      //Opera
-				$is_macIE,      //Mac Internet Explorer
-				$is_winIE,      //Windows Internet Explorer
-				$is_gecko,      //FireFox
-				$is_lynx,       //Lynx - The Rad Termninal Browsers
-				$is_IE,         //Internet Explore
-				$is_edge;       //Microsoft Edge
-
-		$classes = array();
-		/* Browsers no one cares about or uses... just fun to keep lol lynx*/
-		if ( $is_lynx ) {
-			$classes[] = 'lynx';
-		} elseif ( $is_NS4 ) {
-			$classes[] = 'ns4';
-		} elseif ( $is_opera ) {
-			$classes[] = 'opera';
-		} elseif ( $is_chrome ) {
-			$browser   = explode( ' ', $browser );
-			$browser   = explode( '/', $browser[11] );
-			$browser   = explode( '.', $browser[1] );
-			$browser   = 'chrome-' . $browser[0];
-			$classes[] = $browser;
-			$classes[] = 'chrome';
-		} elseif ( $is_gecko ) {
-			$browser   = explode( 'Gecko', $browser )[1];
-			$browser   = explode( ' ', $browser )[1];
-			$browser   = strtolower( $browser );
-			$browser   = str_replace( '/', '-', str_replace( '.0', '', $browser ) );
-			$classes[] = $browser;
-			$classes[] = 'gecko';
-		} elseif ( $is_safari ) {
-			$browser   = explode( ' ', $browser );
-			$browser   = str_replace( 'Version/', '', $browser[11] );
-			$browser   = explode( '.', $browser );
-			$browser   = 'safari-' . $browser[0];
-			$classes[] = $browser;
-			$classes[] = 'safari';
-		} elseif ( $is_edge ) {
-			$browser   = explode( ' ', $browser );
-			$browser   = strtolower( str_replace( '/', '-', $browser[12] ) );
-			$browser   = explode( '.', $browser );
-			$browser   = $browser[0];
-			$classes[] = $browser;
-			$classes[] = 'edge';
-		} elseif ( $is_IE ) {
-			$iecheck = substr( "$browser", 25, 8 );
-			if ( 'MSIE 10.' === $iecheck ) {
-				$classes[] = 'ie10';
-				$classes[] = 'ie';
-			} else {
-				//Assume ie11 it's the last one.
-				$classes[] = 'ie11';
-				$classes[] = 'ie';
-			}
-		}
-
-		return array_merge( $classes1, $classes );
+	$browser = 'unknown';
+	if ( preg_match( '/MSIE|Trident/i', $user_agent ) ) {
+		$browser = 'Internet Explorer';
+	} elseif ( preg_match( '/Edge/i', $user_agent ) ) {
+		$browser = 'Edge';
+	} elseif ( preg_match( '/OPR|Opera/i', $user_agent ) ) {
+		$browser = 'Opera';
+	} elseif ( preg_match( '/Chrome/i', $user_agent ) ) {
+		$browser = 'Chrome';
+	} elseif ( preg_match( '/Safari/i', $user_agent ) ) {
+		$browser = 'Safari';
+	} elseif ( preg_match( '/Firefox/i', $user_agent ) ) {
+		$browser = 'Firefox';
 	}
-	add_filter( 'body_class', 'body_class_adjustments' );
+
+	$parent = 'unknown';
+	if ( in_array( $browser, array( 'Chrome', 'Opera' ) ) ) {
+		$parent = 'Chromium';
+	} elseif ( 'Safari' === $browser ) {
+		$parent = 'WebKit';
+	} elseif ( 'Firefox' === $browser ) {
+		$parent = 'Gecko';
+	} elseif ( 'Internet Explorer' === $browser ) {
+		$parent = 'Trident';
+	} elseif ( 'Edge' === $browser ) {
+		$parent = 'EdgeHTML';
+	}
+
+	$platform = 'unknown';
+	if ( preg_match( '/windows|win32/i', $user_agent ) ) {
+		$platform = 'windows';
+	} elseif ( preg_match( '/macintosh|mac os x/i', $user_agent ) ) {
+		$platform = 'mac';
+	} elseif ( preg_match( '/linux/i', $user_agent ) ) {
+		$platform = 'linux';
+	} elseif ( preg_match( '/android/i', $user_agent ) ) {
+		$platform = 'android';
+	} elseif ( preg_match( '/iphone|ipad|ipod/i', $user_agent ) ) {
+		$platform = 'ios';
+	}
+
+	// Append the classes to the body_class array.
+	$classes[] = 'browser-' . sanitize_html_class( strtolower( $browser ) );
+	$classes[] = 'parent-' . sanitize_html_class( strtolower( $parent ) );
+	$classes[] = 'platform-' . sanitize_html_class( strtolower( $platform ) );
+
+	return $classes;
 }
+add_filter( 'body_class', 'custom_body_browser_classes' );
+
 
 
 /* Apply various additional filters to the_content() and anything with 'the_content' filtering */
@@ -806,10 +791,8 @@ if ( ! function_exists( 'jrd_custom_css' ) ) {
 
 if ( ! function_exists( 'enqueue_block_scripts' ) ) {
 	function enqueue_block_scripts() {
-		wp_enqueue_script( 'modernizr', jrd_ui( 'js/modernizr.js' ), array(), '1.0.0', true );
-		wp_enqueue_script( 'svgxuse', jrd_ui( 'js/svgxuse.js' ), array(), '1.0.0', true );
 		wp_enqueue_script( 'plugins', jrd_ui( 'js/jquery.plugins.js' ), array( 'jquery' ), '1.0.0', true );
-		wp_enqueue_script( 'init', jrd_ui( 'js/jquery.init.js' ), array( 'jquery', 'acf', 'plugins', 'modernizr' ), filemtime( get_template_directory() . '/ui/js/jquery.init.js' ), true );
+		wp_enqueue_script( 'init', jrd_ui( 'js/jquery.init.js' ), array( 'jquery', 'acf', 'plugins' ), filemtime( get_template_directory() . '/ui/js/jquery.init.js' ), true );
 	}
 	add_action( 'enqueue_block_editor_assets', 'enqueue_block_scripts' );
 }
