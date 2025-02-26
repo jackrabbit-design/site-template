@@ -2,6 +2,17 @@
 $production_url = ''; // set this to the Production URL after this site's Staging environment is created post-launch, e.g. 'www.jumpingjackrabbit.com';
 $is_production  = $_SERVER['HTTP_HOST'] === $production_url;
 
+// force "discourage search engines" to be unchecked in production
+if ( $is_production ) {
+	if ( (int) 0 === (int) get_option( 'blog_public' ) ) {
+		update_option( 'blog_public', 1 );
+	}
+} else {
+	if ( (int) 1 === (int) get_option( 'blog_public' ) ) {
+		update_option( 'blog_public', 0 );
+	}
+}
+
 // Use this as a conditional instead of is_user_logged_in(). This function is more strict, as long as your wp username is admin_jackrabbit
 if ( ! function_exists( 'is_jrd' ) ) {
 	function is_jrd() {
