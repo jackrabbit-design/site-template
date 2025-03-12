@@ -2,11 +2,11 @@
 
 Original Developer: **Your Name**
 
-:white_check_mark: Robots snippet
+:x: Robots snippet
 
-:white_check_mark: ACF-JSON sync
+:x: ACF-JSON sync
 
-:white_check_mark: Production deployment
+:x: Production deployment
 
 [comment]: <> (Replace :x: with :white_check_mark: upon completion)
 
