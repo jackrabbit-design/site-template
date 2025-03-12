@@ -2,37 +2,13 @@
 
 Original Developer: **Your Name**
 
-### 3.1.0
-- Functions File
-- Added helper file
-- Adjusted browser_class(); 
-- Adjusted the_slug();
+:white_check_mark: Robots snippet
 
-### 3.0.0
-- Everything that's been done since 2.1.0
-- Remove MSSmartTagsPreventParsing meta
+:white_check_mark: ACF-JSON sync
 
-### 2.1.0
-- Update jQuery to 3.1.0
-- Remove jQuery source map
-- Add search.php to theme
-- Update modernizr to 3.3.1
+:white_check_mark: Production deployment
 
-### 2.0.0
-- Moved files into _build and _wp folders by default
-- Added debug condition to wp-config
-- Removed emoji support from functions
-- Removed style-editor and function from wp theme folder
-- Removed Cycle from default jQuery plugins
-- Updated Modernizr to 3.2.0. Added more features
-
----
-
-### ACF Fields Practices
-1. Make ACF changes in staging GUI
-2. Copy PHP into staging `functions-acf-fields.php`
-3. Download `acf-export-YYYY-MM-DD.json` to repo, leave in Github and do not upload
-4. Upload staging `functions-acf-fields.php` to live
+[comment]: <> (Replace :x: with :white_check_mark: upon completion)
 
 ### Versioning
 Jackrabbit will be utilizing a three-point numbering system.
