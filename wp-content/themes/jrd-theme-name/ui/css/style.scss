@@ -94,6 +94,84 @@
 	}
 
 	#main-nav {
+		> ul {
+			> li {
+				display:inline-block;
+				position: relative;
+				> a {
+					padding:17px 15px 15px;
+					display:block;
+					color:#000;
+					font-weight: 600;
+					&:hover, &:focus {
+						color:#fff;
+						background-color:#555;
+					}
+				}
+				.sub-menu-wrap {
+					display:none;
+					background:#555;
+					width:300px;
+					padding:30px 20px;
+					position: absolute;
+					li {
+						display:block;
+						width:100%;
+						text-align: left;
+						padding:10px 0;
+						a {
+							color:#fff;
+							text-decoration: none;
+						}
+					}
+				}
+				&.menu-item-has-children {
+					position: relative;
+					> .menu-toggle-button {
+						width:0;
+						height:0;
+						border:none;
+						padding:0;
+						margin:0;
+						background-color:none;
+						position: absolute;
+						right: 0;
+						top: 50%;
+					}
+					> a {
+						&:hover {
+							&+.sub-menu-wrap {
+								@include break(769, 'min-width'){
+									display: block;
+								}
+							}
+						}
+					}
+					&:hover {
+						.sub-menu-wrap {
+							@include break(769, 'min-width'){
+								display: block;
+							}
+						}
+						> a {
+							color:#fff;
+							background-color:#555;
+						}
+					}
+					&.open {
+						.sub-menu-wrap {
+							@include break(769, 'min-width'){
+								display: block;
+							}
+						}
+						> a {
+							color:#fff;
+							background-color:#555;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	#menu-toggle {
