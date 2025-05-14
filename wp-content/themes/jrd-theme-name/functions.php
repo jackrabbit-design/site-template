@@ -135,6 +135,7 @@ if ( ! function_exists( 'jrd_acf_json_load_point' ) ) {
 	add_filter( 'acf/settings/load_json', 'jrd_acf_json_load_point' );
 }
 
+require_once 'functions/aria-walker-nav-menu.php';
 // require_once 'functions/functions-widgets.php';
 // require_once 'functions/functions-comments.php';
 

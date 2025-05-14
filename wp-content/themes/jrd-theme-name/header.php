@@ -79,7 +79,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				'menu_class'     => '',
 				'menu_id'        => '',
 				'depth'          => 2,
-				//'walker'         => new Aria_Walker_Nav_Menu,
+				'walker'         => new Aria_Walker_Nav_Menu(),
 				'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul>',
 			)
 		);
