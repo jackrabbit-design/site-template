@@ -812,7 +812,7 @@ if ( ! function_exists( 'enqueue_block_styles' ) ) {
 	function enqueue_block_styles() {
 		wp_enqueue_style( 'style', jrd_ui( 'css/gb.css' ), array(), filemtime( get_template_directory() . '/ui/css/gb.css' ) );
 	}
-	add_action( 'wp_enqueue_scripts', 'enqueue_styles' );
+	add_action( 'wp_enqueue_scripts', 'enqueue_block_styles' );
 	add_action( 'enqueue_block_editor_assets', 'enqueue_block_styles' );
 }
 
