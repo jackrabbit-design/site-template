@@ -268,17 +268,15 @@ if ( ! function_exists( 'jrd_enqueue_scripts' ) ) {
 /* ENQUEUE STYLES */
 /* ========================================================================= */
 
-if ( ! function_exists( 'jrd_login_url' ) ) {
-	function jrd_enqueue_styles() {
-		wp_enqueue_style( 'style', jrd_ui( 'css/style.css' ), array(), filemtime( get_template_directory() . '/ui/css/style.css' ) );
-	}
-	// With Print Style Sheet
-	// function enqueue_styles() {
-	//     wp_enqueue_style( 'style', '/ui/css/style.css', array(), null, 'screen' );
-	//     wp_enqueue_style( 'print', '/ui/css/print.css', array(), null, 'print' );
-	// }
-	add_action( 'wp_enqueue_scripts', 'jrd_enqueue_styles' );
+function jrd_enqueue_styles() {
+	wp_enqueue_style( 'style', jrd_ui( 'css/style.css' ), array(), filemtime( get_template_directory() . '/ui/css/style.css' ) );
 }
+// With Print Style Sheet
+// function enqueue_styles() {
+//     wp_enqueue_style( 'style', '/ui/css/style.css', array(), null, 'screen' );
+//     wp_enqueue_style( 'print', '/ui/css/print.css', array(), null, 'print' );
+// }
+add_action( 'wp_enqueue_scripts', 'jrd_enqueue_styles' );
 
 /*
 if ( ! function_exists( 'override_tinymce_styles' ) ) {
