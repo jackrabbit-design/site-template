@@ -1,5 +1,5 @@
 <?php
-$production_url = ''; // set this to the Production URL after this site's Staging environment is created post-launch, e.g. 'www.jumpingjackrabbit.com';
+$production_url = ''; // set this to the same value as $_SERVER['HTTP_HOST'] on the Production environment - do this after this site's Staging environment is created post-launch, e.g. 'www.jumpingjackrabbit.com';
 $is_production  = $_SERVER['HTTP_HOST'] === $production_url;
 
 // force "discourage search engines" to be unchecked in production
