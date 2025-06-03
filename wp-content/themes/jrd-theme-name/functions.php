@@ -829,3 +829,14 @@ if ( ! function_exists( 'jrd_password_protected_filter' ) ) {
 	}
 	add_filter( 'loop_start', 'jrd_password_protected_filter' );
 }
+
+// block users endpoint
+add_filter( 'rest_endpoints', function( $endpoints ) {
+    if ( isset( $endpoints['/wp/v2/users'] ) ) {
+        unset( $endpoints['/wp/v2/users'] );
+    }
+    if ( isset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] ) ) {
+        unset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] );
+    }
+    return $endpoints;
+} );
