@@ -117,11 +117,13 @@ require_once 'functions/functions-helpers.php';
 require_once 'functions/functions-rg.php';
 
 // setup acf-json folder
-if ( ! function_exists( 'jrd_acf_json_load_point' ) ) {
+if ( ! function_exists( 'jrd_acf_json_save_point' ) ) {
 	function jrd_acf_json_save_point( $path ) {
 		return get_stylesheet_directory() . '/functions/acf-json';
 	}
-	add_filter( 'acf/settings/save_json', 'jrd_acf_json_save_point' );
+	if ( ! $is_production ) {
+		add_filter( 'acf/settings/save_json', 'jrd_acf_json_save_point' );
+	}
 }
 
 // make acf read acf-json folder
