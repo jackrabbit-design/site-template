@@ -79,6 +79,27 @@ jQuery(function($){
 		}, 0);
 	});
 
+	// Email address copy script
+	$('a[href^="mailto:"]').filter(function() {
+  		return $(this).closest('.social-nav').length === 0;
+	}).append('<span class="copy-email"></span>');
+
+	$('a .copy-email').on('click', function(e){
+		e.stopPropagation();
+		$span = $(this);
+		let email = $span.parent('a').attr('href').replace(/^mailto:([\w\d\.\-]+@[\w\d\.\-]+\.[\w]+).*$/, '$1');
+		var $temp = $("<input>");
+		$("body").append($temp);
+		$temp.val(email).select();
+		document.execCommand("copy");
+		$temp.remove();
+		$span.addClass('copied');
+		setTimeout(function(){
+			$span.removeClass('copied');
+		}, 100);
+		return false;
+	});
+
     /*
     $.ajax({
         type: "POST",
