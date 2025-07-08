@@ -109,7 +109,7 @@
 					}
 				}
 				.sub-menu-wrap {
-					display:none;
+					display:block;
 					background:#555;
 					width:300px;
 					padding:30px 20px;
@@ -141,19 +141,12 @@
 						right: 0;
 						top: 50%;
 					}
-					> a {
-						&:hover {
-							&+.sub-menu-wrap {
+					&:hover {
+						.sub-menu-wrap {
+							ul {
 								@include break(769, 'min-width'){
 									display: block;
 								}
-							}
-						}
-					}
-					&:hover {
-						.sub-menu-wrap {
-							@include break(769, 'min-width'){
-								display: block;
 							}
 						}
 						> a {
@@ -163,8 +156,10 @@
 					}
 					&.open {
 						.sub-menu-wrap {
-							@include break(769, 'min-width'){
-								display: block;
+							ul {
+								@include break(769, 'min-width'){
+									display: block;
+								}
 							}
 						}
 						> a {
