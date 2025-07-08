@@ -114,6 +114,9 @@
 					width:300px;
 					padding:30px 20px;
 					position: absolute;
+					ul[aria-hidden=true] {
+						display:none;
+					}
 					li {
 						display:block;
 						width:100%;
