@@ -269,7 +269,7 @@ $rem_size: 16;
 					}
 				}
 				.sub-menu-wrap {
-					display:none;
+					display:block;
 					background:#555;
 					width:300px;
 					padding:30px 20px;
@@ -301,19 +301,12 @@ $rem_size: 16;
 						right: 0;
 						top: 50%;
 					}
-					> a {
-						&:hover {
-							&+.sub-menu-wrap {
-								@include break(769, 'min-width'){
-									display: block;
-								}
-							}
-						}
-					}
 					&:hover {
 						.sub-menu-wrap {
-							@include break(769, 'min-width'){
-								display: block;
+							ul {
+								@include break(769, 'min-width'){
+									display:block;
+								}
 							}
 						}
 						> a {
@@ -321,10 +314,12 @@ $rem_size: 16;
 							background-color:#555;
 						}
 					}
-					&.open {
+					&.active {
 						.sub-menu-wrap {
-							@include break(769, 'min-width'){
-								display: block;
+							ul {
+								@include break(769, 'min-width'){
+									display:block;
+								}
 							}
 						}
 						> a {
