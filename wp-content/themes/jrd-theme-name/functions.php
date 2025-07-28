@@ -1,6 +1,11 @@
 <?php
-$production_url = ''; // set this to the same value as $_SERVER['HTTP_HOST'] on the Production environment - do this after this site's Staging environment is created post-launch, e.g. 'www.jumpingjackrabbit.com';
-$is_production  = $_SERVER['HTTP_HOST'] === $production_url;
+// Populate the array below with the value of $_SERVER['HTTP_HOST'] used on the Production environment.
+// This should be one entry per live site in your multisite setup - or just one entry for a single site.
+// IMPORTANT: This must remain an array, even if it only contains one item.
+// Add these values **after** the site's Staging environment has been created post-launch.
+// Example: array( 'www.jumpingjackrabbit.com', 'www.333edgehill.com' );
+$production_urls = array( '' );
+$is_production   = in_array( $_SERVER['HTTP_HOST'], $production_urls, true );
 
 // force "discourage search engines" to be unchecked in production
 if ( $is_production ) {
@@ -555,10 +560,10 @@ if ( ! function_exists( 'jrd_mce_before_init' ) ) {
 
 		$style_formats = array(
 			array(
-				'title'   => 'Button Link',
-				'inline'  => 'a',
+				'title'      => 'Button Link',
+				'inline'     => 'a',
 				'attributes' => array(
-					'class' => "btn",
+					'class' => 'btn',
 				),
 			),
 		);
@@ -961,40 +966,40 @@ if ( ! function_exists( 'jrd_validate_acf_urls' ) ) {
 /* ================================================================================ */
 
 function is_jrd_user() {
-    $current_user = wp_get_current_user();
-    $email = $current_user->user_email;
+	$current_user = wp_get_current_user();
+	$email        = $current_user->user_email;
 
-    // Regex pattern to match only @jumpingjackrabbit.com emails
-    $pattern = '/^[a-zA-Z0-9._%+-]+@jumpingjackrabbit\.com$/';
+	// Regex pattern to match only @jumpingjackrabbit.com emails
+	$pattern = '/^[a-zA-Z0-9._%+-]+@jumpingjackrabbit\.com$/';
 
-    if ( preg_match( $pattern, $email ) ) {
-        return true;
-    }
+	if ( preg_match( $pattern, $email ) ) {
+		return true;
+	}
 
-    return false;
+	return false;
 }
 
 add_action( 'admin_menu', 'jrd_restrict_plugin_access_for_users', 999 );
 
 function jrd_restrict_plugin_access_for_users() {
-    $restricted_plugin_slug = 'activity-log-page'; // e.g., 'wp-mail-smtp' or 'some-plugin/settings.php'
+	$restricted_plugin_slug = 'activity-log-page'; // e.g., 'wp-mail-smtp' or 'some-plugin/settings.php'
 
-    if ( !is_jrd_user() ) {
-        remove_menu_page( $restricted_plugin_slug );
-    }
+	if ( ! is_jrd_user() ) {
+		remove_menu_page( $restricted_plugin_slug );
+	}
 }
 
 // Prevent direct access to plugin page even if user knows the URL
 add_action( 'admin_init', 'jrd_block_plugin_page_access' );
 
 function jrd_block_plugin_page_access() {
-    $restricted_plugin_page = 'activity-log-page'; // e.g., 'wp-mail-smtp' or 'some-plugin/settings.php'
+	$restricted_plugin_page = 'activity-log-page'; // e.g., 'wp-mail-smtp' or 'some-plugin/settings.php'
 
-    if ( isset( $_GET['page'] ) && $_GET['page'] === $restricted_plugin_page ) {
-        if ( !is_jrd_user() ) {
-            wp_die( 'You do not have sufficient permissions to access this page.' );
-        }
-    }
+	if ( isset( $_GET['page'] ) && $_GET['page'] === $restricted_plugin_page ) {
+		if ( ! is_jrd_user() ) {
+			wp_die( 'You do not have sufficient permissions to access this page.' );
+		}
+	}
 }
 
 // Removes from Plugin list
@@ -1002,9 +1007,9 @@ add_filter( 'all_plugins', 'jrd_hide_plugins_from_list' );
 
 function jrd_hide_plugins_from_list( $plugins ) {
 
-    if ( !is_jrd_user() ) {
-        unset( $plugins['aryo-activity-log/aryo-activity-log.php'] ); // Replace with actual plugin path
-    }
+	if ( ! is_jrd_user() ) {
+		unset( $plugins['aryo-activity-log/aryo-activity-log.php'] ); // Replace with actual plugin path
+	}
 
-    return $plugins;
+	return $plugins;
 }
