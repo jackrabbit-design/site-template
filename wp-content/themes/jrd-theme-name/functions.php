@@ -1,6 +1,11 @@
 <?php
-$production_url = ''; // set this to the same value as $_SERVER['HTTP_HOST'] on the Production environment - do this after this site's Staging environment is created post-launch, e.g. 'www.jumpingjackrabbit.com';
-$is_production  = $_SERVER['HTTP_HOST'] === $production_url;
+// Populate the array below with the value of $_SERVER['HTTP_HOST'] used on the Production environment.
+// This should be one entry per live site in your multisite setup - or just one entry for a single site.
+// IMPORTANT: This must remain an array, even if it only contains one item.
+// Add these values **after** the site's Staging environment has been created post-launch.
+// Example: array( 'www.jumpingjackrabbit.com', 'www.333edgehill.com' );
+$production_urls = array( '' );
+$is_production   = in_array( $_SERVER['HTTP_HOST'], $production_urls, true );
 
 // force "discourage search engines" to be unchecked in production
 if ( $is_production ) {
