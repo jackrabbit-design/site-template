@@ -575,10 +575,10 @@ if ( ! function_exists( 'jrd_mce_before_init' ) ) {
 
 		$style_formats = array(
 			array(
-				'title'   => 'Button Link',
-				'inline'  => 'a',
+				'title'      => 'Button Link',
+				'inline'     => 'a',
 				'attributes' => array(
-					'class' => "btn",
+					'class' => 'btn',
 				),
 			),
 		);
@@ -838,15 +838,18 @@ if ( ! function_exists( 'jrd_password_protected_filter' ) ) {
 }
 
 // block users endpoint
-add_filter( 'rest_endpoints', function( $endpoints ) {
-    if ( isset( $endpoints['/wp/v2/users'] ) ) {
-        unset( $endpoints['/wp/v2/users'] );
-    }
-    if ( isset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] ) ) {
-        unset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] );
-    }
-    return $endpoints;
-} );
+add_filter(
+	'rest_endpoints',
+	function ( $endpoints ) {
+		if ( isset( $endpoints['/wp/v2/users'] ) ) {
+			unset( $endpoints['/wp/v2/users'] );
+		}
+		if ( isset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] ) ) {
+			unset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] );
+		}
+		return $endpoints;
+	}
+);
 
 
 /* ================================================================================ */
@@ -854,40 +857,40 @@ add_filter( 'rest_endpoints', function( $endpoints ) {
 /* ================================================================================ */
 
 function is_jrd_user() {
-    $current_user = wp_get_current_user();
-    $email = $current_user->user_email;
+	$current_user = wp_get_current_user();
+	$email        = $current_user->user_email;
 
-    // Regex pattern to match only @jumpingjackrabbit.com emails
-    $pattern = '/^[a-zA-Z0-9._%+-]+@jumpingjackrabbit\.com$/';
+	// Regex pattern to match only @jumpingjackrabbit.com emails
+	$pattern = '/^[a-zA-Z0-9._%+-]+@jumpingjackrabbit\.com$/';
 
-    if ( preg_match( $pattern, $email ) ) {
-        return true;
-    }
+	if ( preg_match( $pattern, $email ) ) {
+		return true;
+	}
 
-    return false;
+	return false;
 }
 
 add_action( 'admin_menu', 'jrd_restrict_plugin_access_for_users', 999 );
 
 function jrd_restrict_plugin_access_for_users() {
-    $restricted_plugin_slug = 'activity-log-page'; // e.g., 'wp-mail-smtp' or 'some-plugin/settings.php'
+	$restricted_plugin_slug = 'activity-log-page'; // e.g., 'wp-mail-smtp' or 'some-plugin/settings.php'
 
-    if ( !is_jrd_user() ) {
-        remove_menu_page( $restricted_plugin_slug );
-    }
+	if ( ! is_jrd_user() ) {
+		remove_menu_page( $restricted_plugin_slug );
+	}
 }
 
 // Prevent direct access to plugin page even if user knows the URL
 add_action( 'admin_init', 'jrd_block_plugin_page_access' );
 
 function jrd_block_plugin_page_access() {
-    $restricted_plugin_page = 'activity-log-page'; // e.g., 'wp-mail-smtp' or 'some-plugin/settings.php'
+	$restricted_plugin_page = 'activity-log-page'; // e.g., 'wp-mail-smtp' or 'some-plugin/settings.php'
 
-    if ( isset( $_GET['page'] ) && $_GET['page'] === $restricted_plugin_page ) {
-        if ( !is_jrd_user() ) {
-            wp_die( 'You do not have sufficient permissions to access this page.' );
-        }
-    }
+	if ( isset( $_GET['page'] ) && $_GET['page'] === $restricted_plugin_page ) {
+		if ( ! is_jrd_user() ) {
+			wp_die( 'You do not have sufficient permissions to access this page.' );
+		}
+	}
 }
 
 // Removes from Plugin list
@@ -895,9 +898,9 @@ add_filter( 'all_plugins', 'jrd_hide_plugins_from_list' );
 
 function jrd_hide_plugins_from_list( $plugins ) {
 
-    if ( !is_jrd_user() ) {
-        unset( $plugins['aryo-activity-log/aryo-activity-log.php'] ); // Replace with actual plugin path
-    }
+	if ( ! is_jrd_user() ) {
+		unset( $plugins['aryo-activity-log/aryo-activity-log.php'] ); // Replace with actual plugin path
+	}
 
-    return $plugins;
+	return $plugins;
 }
