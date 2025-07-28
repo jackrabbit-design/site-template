@@ -8,7 +8,7 @@
 ## Original Developer
 - Name
 
-## Updates
+## Dev Checklist
 [comment]: <> (Replace :x: with :white_check_mark: upon completion)
 - :x: Robots snippet
 - :x: ACF-JSON sync
