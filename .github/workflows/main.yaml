@@ -11,6 +11,5 @@ jobs:
     - name: GitHub Action Deploy to WP Engine
       uses: wpengine/github-action-wpe-site-deploy@v3
       with:
-        WPE_SSHG_KEY_PRIVATE: |-
-          PASTE PRIVATE KEY HERE. FIND IT IN HYPERVAULT, UNDER "Jackrabbit - WP Engine"
+        WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPE_SSHG_KEY_PRIVATE }}
         WPE_ENV: your-production-environment-name
