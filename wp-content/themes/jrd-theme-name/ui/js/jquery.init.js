@@ -14,6 +14,10 @@ jQuery(function($){
 		Cookies.set('alert_cookie', 'hide', { expires: 1, path: '/' });
     });
 
+	// ADA Fix for Honeypot fields
+	$(".gfield--type-honeypot").attr('aria-hidden','true');
+	$(".gfield--type-honeypot input").attr('tabindex','-1');
+
 	// SIMPLE TOGGLE MENU
 	$("#menu-toggle").on('click', function () {
 		$("#header").toggleClass("active");
