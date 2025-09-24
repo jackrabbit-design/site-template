@@ -65,6 +65,9 @@ if ( function_exists( 'register_nav_menus' ) ) {
 
 add_theme_support( 'title-tag' ); // Add support for title tag in wp_head
 
+/* Disables 'auto' size on images */
+add_filter('wp_img_tag_add_auto_sizes', '__return_false');
+
 /* ========================================================================= */
 /* Favor GD over Imagick (prevent HTTP Error) */
 /* ========================================================================= */
