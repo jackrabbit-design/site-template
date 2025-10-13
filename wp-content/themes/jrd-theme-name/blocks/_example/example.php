@@ -19,12 +19,12 @@ if ( ! empty( $block['data']['_is_preview'] ) ) {
 // global $post;
 
 // Create class attribute allowing for custom "className" value.
-$class_name = '';
+$classes = array();
 if ( ! empty( $block['className'] ) ) {
-	$class_name .= ' ' . $block['className'];
+	$classes[] = $block['className'];
 }
 ?>
 
-<section class='<?php echo esc_attr( $class_name ); ?>'>
+<section class='<?php echo esc_attr( implode( ' ', $classes ) ); ?>'>
 
 </section>
