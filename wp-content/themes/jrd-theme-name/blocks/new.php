@@ -2,10 +2,9 @@
 /*
 
 To use:
-1. Open the terminal app of your choice
-2. ls to the "blocks" directory of this theme
-3. enter "php new.php"
-4. Type the slug and title for the new block
+1. Right-click new.php, select "Open in Integrated Terminal"
+2. enter "php new.php"
+3. Type the slug and title for the new block
 
 */
 
