@@ -49,7 +49,7 @@ if ( ! function_exists( 'get_the_slug' ) ) {
  */
 if ( ! function_exists( 'the_slug' ) ) {
 	function the_slug() {
-		echo esc_html( get_the_slug() );
+		echo esc_attr( get_the_slug() );
 	}
 }
 
@@ -213,7 +213,7 @@ if ( ! function_exists( 'ada_link' ) ) {
 			$target     = $link['link']['target'] ?? '_self';
 			$nofollow   = $link['nofollow'] ? "rel='nofollow'" : '';
 			$title      = $span ? tag_wrap( $link['link']['title'], 'span' ) : $link['link']['title'];
-			$atts = '';
+			$atts       = '';
 			if ( ! empty( $atts_array ) ) {
 				foreach ( $atts_array as $key => $val ) {
 					$key   = esc_attr( $key );
@@ -299,8 +299,6 @@ if ( ! function_exists( 'jrd_date_range' ) ) {
 	}
 }
 
-
-
 /**
  * Social Media Nav Creator
  * @param string $field_name    parent field name
@@ -321,21 +319,32 @@ if ( ! function_exists( 'jrd_date_range' ) ) {
 	social_youtube : YouTube
  */
 if ( ! function_exists( 'jrd_social_nav' ) ) {
-	function jrd_social_nav( $field_name, $icon_field, $url_field, $id = 'nav-social', $option_menu = true, $wrap_nav = true ) {
+	function jrd_social_nav( $field_name, $icon_subfield = 'social_platform', $link_subfield = 'social_link', $option_menu = true, $wrap_nav = true ) {
+		global $post;
 		$html = '';
-		$option = '';
-		if ( $option_menu ) {
-			$option = 'option';
-		}
-		if ( have_rows( $field_name, $option ) ) {
+		$loc  = $option_menu ? 'options' : $post->ID;
+		if ( have_rows( $field_name, $loc ) ) {
 			if ( $wrap_nav ) {
-				$html .= "<nav id=\"{$id}\" class=\"social-media\" aria-label='Social Media'><ul>";
+				$html .= "<nav class='social-media' aria-label='Social Media'><ul>";
 			}
-			while ( have_rows( $field_name, $option ) ) {
+			while ( have_rows( $field_name, $loc ) ) {
 				the_row();
-				$icon  = get_sub_field( $icon_field );
-				$url   = get_sub_field( $url_field );
-				$html .= "<li class=\"social\"><a href=\"{$url}\" target=\"_blank\" aria-label=\"{$icon['label']}\"><svg class=\"{$icon['value']}\"><use xlink:href=\"" . jrd_ui( 'svg/sprites.svg') . "#{$icon['value']}\"></use></svg></a></li>";
+				$icon     = get_sub_field( $icon_subfield );
+				$link     = get_sub_field( $link_subfield );
+				$icon_url = jrd_ui( "svg/sprites.svg#social_{$icon['value']}" );
+				$html    .= <<<HTML
+				<li class="social">
+					<a
+						href="{$link['url']}"
+						target="_blank"
+						aria-label="{$link['title']}"
+					>
+						<svg class="{$icon['value']}">
+							<use xlink:href="{$icon_url}"></use>
+						</svg>
+					</a>
+				</li>
+HTML;
 			}
 			if ( $wrap_nav ) {
 				$html .= '</ul></nav>';
@@ -344,7 +353,7 @@ if ( ! function_exists( 'jrd_social_nav' ) ) {
 		return $html;
 	}
 }
-
+// TODO: fix field referencing, add phone option
 
 /**
  * SVG Use generator
@@ -410,31 +419,42 @@ if ( ! function_exists( 'jrd_gf' ) ) {
 	}
 }
 
+
+
 /**
- * Video Embed URL generator
- * @param string $video_link          the URL of the video
- **/
-if ( ! function_exists( 'jrd_embed_url' ) ) {
-	function jrd_embed_url( $video_link ) {
-		$video_id = '';
-		$host     = parse_url( $video_link, PHP_URL_HOST );
-		if ( 'youtu.be' === $host ) {
-			//YouTube short URL
-			$path            = parse_url( $video_link, PHP_URL_PATH );
-			$video_id        = substr( $path, 1 );
-			$video_embed_url = "https://www.youtube.com/embed/$video_id";
-		} elseif ( 'www.youtube.com' === $host || 'youtube.com' === $host ) {
-			//YouTube long URL
-			$query = parse_url( $video_link, PHP_URL_QUERY );
-			parse_str( $query, $params );
-			$video_id        = $params['v'];
-			$video_embed_url = "https://www.youtube.com/embed/$video_id";
-		} elseif ( 'vimeo.com' === $host || 'www.vimeo.com' === $host ) {
-			//Vimeo URL
-			$path            = parse_url( $video_link, PHP_URL_PATH );
-			$video_id        = substr( $path, 1 );
-			$video_embed_url = "https://player.vimeo.com/video/$video_id";
-		}
-		return $video_embed_url;
+ * JRD Phone
+ * Replaces all letters with their respective numbers on a phone keypad.
+ * Strips out all other characters except digits, plus signs, commas, and semicolons
+ * @param string $phone    The phone number
+*/
+
+function jrd_phone( $phone ) {
+	if ( $phone ) {
+		$formatted_number = preg_replace(
+			array(
+				'/[abc]/i',
+				'/[def]/i',
+				'/[ghi]/i',
+				'/[jkl]/i',
+				'/[mno]/i',
+				'/[pqrs]/i',
+				'/[tuv]/i',
+				'/[wxyz]/i',
+				'/[^\d\+,;]/',
+			),
+			array(
+				'2',
+				'3',
+				'4',
+				'5',
+				'6',
+				'7',
+				'8',
+				'9',
+				'',
+			),
+			$phone
+		);
+		return $formatted_number;
 	}
 }
