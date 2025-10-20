@@ -13,3 +13,4 @@ jobs:
       with:
         WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPE_SSHG_KEY_PRIVATE }}
         WPE_ENV: your-production-environment-name
+        FLAGS: -azvr --inplace --exclude-from='.deployignore'
