@@ -1,8 +1,8 @@
 .*
+_githooks
+_wp-config.php
+gitignore.txt
+htaccess.txt
 prepros.config
 README.md
 robots.txt.sample
-htaccess.txt
-gitignore.txt
-_wp-config.php
-_githooks
