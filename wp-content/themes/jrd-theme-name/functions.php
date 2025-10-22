@@ -427,16 +427,16 @@ function custom_body_browser_classes( $classes ) {
 	}
 
 	$platform = 'unknown';
-	if ( preg_match( '/windows|win32/i', $user_agent ) ) {
+	if ( preg_match( '/android/i', $user_agent ) ) {
+		$platform = 'android';
+	} elseif ( preg_match( '/iphone|ipad|ipod/i', $user_agent ) ) {
+		$platform = 'ios';
+	} elseif ( preg_match( '/windows|win32/i', $user_agent ) ) {
 		$platform = 'windows';
 	} elseif ( preg_match( '/macintosh|mac os x/i', $user_agent ) ) {
 		$platform = 'mac';
 	} elseif ( preg_match( '/linux/i', $user_agent ) ) {
 		$platform = 'linux';
-	} elseif ( preg_match( '/android/i', $user_agent ) ) {
-		$platform = 'android';
-	} elseif ( preg_match( '/iphone|ipad|ipod/i', $user_agent ) ) {
-		$platform = 'ios';
 	}
 
 	// Append the classes to the body_class array.
