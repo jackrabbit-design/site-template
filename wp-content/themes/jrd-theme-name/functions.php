@@ -859,21 +859,23 @@ if ( ! function_exists( 'acf_block_templates' ) ) {
 	function acf_block_templates() {
 
 		// POSTS
-		$page_type_object = get_post_type_object( 'post' );
+		if ( post_type_exists( 'post' ) ) {
+			$page_type_object = get_post_type_object( 'post' );
 
-		$page_type_object->template = array(
-			/*
-			array(
-				'jrd/example',
+			$page_type_object->template = array(
+				/*
 				array(
-					'lock' => array(
-						'move'   => true,
-						'remove' => true,
+					'jrd/example',
+					array(
+						'lock' => array(
+							'move'   => true,
+							'remove' => true,
+						),
 					),
 				),
-			),
-			*/
-		);
+				*/
+			);
+		}
 	}
 	add_action( 'init', 'acf_block_templates' );
 }
