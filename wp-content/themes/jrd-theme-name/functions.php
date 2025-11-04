@@ -645,12 +645,35 @@ if ( ! function_exists( 'jrd_admin_background' ) ) {
 if ( ! function_exists( 'custom_fields_to_excerpts' ) ) {
 	function custom_fields_to_excerpts( $content, $post, $query ) {
 
-		$custom_fields            = get_post_custom_keys( $post->ID );
 		$remove_underscore_fields = true;
 
-		if ( is_array( $custom_fields ) ) {
-			$custom_fields = array_unique( $custom_fields );
-			foreach ( $custom_fields as $field ) {
+		$post_fields = get_post_custom_keys( $post->ID );
+		foreach ( $post_fields as $field ) {
+			$values = get_post_meta( $post->ID, $field, false );
+			foreach ( $values as $value ) {
+				if ( is_array( $value ) ) {
+					continue;
+				}
+				$custom_fields[] = array( $field, $value );
+			}
+		}
+
+		$all_blocks = array();
+		$blocks     = parse_blocks( $post->post_content );
+		foreach ( $blocks as $block ) {
+			foreach ( $block['attrs']['data'] as $field => $value ) {
+				if ( is_array( $value ) ) {
+					continue;
+				}
+				$custom_fields[] = array( $field, $value );
+			}
+		}
+
+		if ( is_array( $post_fields ) ) {
+			$post_fields = array_unique( $post_fields );
+			foreach ( $post_fields as $field_data ) {
+				$field = $field_data[0];
+				$value = $field_data[1];
 				if ( $remove_underscore_fields ) {
 					if ( '_' === substr( $field, 0, 1 ) ) {
 						continue;
