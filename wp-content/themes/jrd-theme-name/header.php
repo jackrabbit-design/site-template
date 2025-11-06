@@ -58,7 +58,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <noscript aria-hidden="true"><div style="text-align:center;background-color:#000;color:#fff;padding:5px;">It looks like JavaScript is disabled in your browser. Please enable JavaScript to view the full site.</div></noscript>
 
-<header id="header" role="banner">
+<header id="header">
 	<a id="skipnav" href="#body-content">Skip to Main Content</a>
 	<?php
 	if ( get_field( '_display_alert', 'options' ) ) {
