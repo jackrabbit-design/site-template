@@ -163,3 +163,7 @@
 	svg path {
 		d: revert-layer !important;
 	}
+
+    * {
+        text-wrap: pretty;
+    }
