@@ -6,7 +6,7 @@
     "icon": "block-default",
     "keywords": [],
     "acf": {
-        "blockVersion": 3,
+        "mode": "preview",
         "renderTemplate": "example.php",
         "postTypes": []
     },

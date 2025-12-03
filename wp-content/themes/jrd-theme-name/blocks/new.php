@@ -28,7 +28,7 @@ file_put_contents(
     "icon": "block-default",
     "keywords": [],
     "acf": {
-        "blockVersion": 3,
+        "mode": "preview",
         "renderTemplate": "' . $slug . '.php",
         "postTypes": []
     },
