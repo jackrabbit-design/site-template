@@ -333,19 +333,17 @@ if ( ! function_exists( 'jrd_social_nav' ) ) {
 			}
 			while ( have_rows( $field_name, $loc ) ) {
 				the_row();
-				$icon     = get_sub_field( $icon_subfield );
-				$link     = get_sub_field( $link_subfield );
-				$icon_url = jrd_ui( "svg/sprites.svg#social_{$icon['value']}" );
-				$html    .= <<<HTML
+				$icon  = get_sub_field( $icon_subfield );
+				$link  = get_sub_field( $link_subfield );
+				$svg   = jrd_use( "social_{$icon}", $icon );
+				$html .= <<<HTML
 				<li class="social">
 					<a
 						href="{$link['url']}"
 						target="_blank"
 						aria-label="{$link['title']}"
 					>
-						<svg class="{$icon['value']}">
-							<use xlink:href="{$icon_url}"></use>
-						</svg>
+						$svg
 					</a>
 				</li>
 HTML;
@@ -356,8 +354,7 @@ HTML;
 		}
 		return $html;
 	}
-}
-// TODO: fix field referencing, add phone option
+}// TODO: fix field referencing, add phone option
 
 /**
  * SVG Use generator
