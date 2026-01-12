@@ -183,11 +183,10 @@ if ( ! function_exists( 'jrd_link' ) ) {
 			$nofollow   = isset( $link['nofollow'] ) && 'nofollow' === $link['nofollow'] ? "rel='nofollow'" : '';
 			$title      = $span ? tag_wrap( $link['title'], 'span' ) : $link['title'];
 			if ( isset( $link['classes'] ) && '' !== (string) $link['classes'] ) {
-				$classes = esc_attr( $link['classes'] );
-			} else {
-				$classes = esc_attr( $classes );
+				$classes .= ' ' . $link['classes'];
 			}
-			$id   = esc_attr( $id );
+			$classes    = esc_attr( $classes );
+			$id         = esc_attr( $id );
 			$atts = '';
 			if ( ! empty( $atts_array ) ) {
 				foreach ( $atts_array as $key => $val ) {
