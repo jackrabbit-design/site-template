@@ -154,7 +154,7 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 				$item_output .= '</a>';
 				$item_output .= '<button id="' . $args->menu->slug . '-menu-item-' . $item->ID . 'B" class="menu-toggle-button" aria-controls="' . $args->menu->slug . '-menu-item-' . $item->ID . 'C" data-toggle="true" aria-expanded="false"><span class="sr-only">Show submenu for "' . $title . '"</span></button>';
 			} else {
-				$item_output .= '<a' . $attributes . ' id="' . $args->menu->slug . '-menu-item-' . $item->ID . 'B" data-toggle="true" aria-expanded="false">';
+				$item_output .= '<a' . $attributes . ' id="' . $args->menu->slug . '-menu-item-' . $item->ID . 'A" data-toggle="true">';
 				$item_output .= $args->link_before . $title . $args->link_after;
 				$item_output .= '</a>';
 				$item_output .= '<button id="' . $args->menu->slug . '-menu-item-' . $item->ID . 'B" class="menu-toggle-button" aria-controls="' . $args->menu->slug . '-menu-item-' . $item->ID . 'C" data-toggle="true" aria-expanded="false"><span class="sr-only">Show submenu for "' . $title . '"</span></button>';
