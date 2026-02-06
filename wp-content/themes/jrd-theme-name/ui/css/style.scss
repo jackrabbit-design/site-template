@@ -1,11 +1,11 @@
 $rem_size: 16;
 
 @use 'sass:math';
-@import 'parts/reset';
-@import 'parts/fonts';
-@import 'parts/variables';
-@import 'parts/mixins';
-@import 'parts/vendor';
+@use 'parts/reset';
+@use 'parts/fonts';
+@use 'parts/variables';
+@use 'parts/mixins';
+@use 'parts/vendor';
 
 /* ========================================================================= */
 /* !STYLES */
@@ -16,7 +16,7 @@ $rem_size: 16;
 	html, body {
         scroll-behavior: smooth;
         font: {
-            family: $font_family_two;
+            family: variables.$font_family_two;
             size: $rem_size * 1px;
         }
     }
@@ -127,7 +127,7 @@ $rem_size: 16;
                 fill: #fff;
                 background-color: #000;
                 padding: 2px;
-                @include size(27px);
+                @include mixins.size(27px);
                 border-radius: 50%;
                 transition: all 0.2s;
                 &:hover {
@@ -181,7 +181,7 @@ $rem_size: 16;
 	}
 
 	*:focus {
-		outline: 3px solid $focus_color;
+		outline: 3px solid variables.$focus_color;
         outline-offset: 3px;
 	}
 
@@ -190,7 +190,7 @@ $rem_size: 16;
             outline:none;
         }
         *:focus-visible {
-            outline: 3px solid $focus_color;
+            outline: 3px solid variables.$focus_color;
             outline-offset: 3px;
         }
     }
@@ -316,7 +316,7 @@ $rem_size: 16;
 					&:hover {
 						.sub-menu-wrap {
 							ul {
-								@include break(769, 'min-width'){
+								@include mixins.break(769, 'min-width'){
 									display:block;
 								}
 							}
@@ -329,7 +329,7 @@ $rem_size: 16;
 					&.active {
 						.sub-menu-wrap {
 							ul {
-								@include break(769, 'min-width'){
+								@include mixins.break(769, 'min-width'){
 									display:block;
 								}
 							}
@@ -512,7 +512,7 @@ $rem_size: 16;
 	select {
 		padding: 10px 35px 10px 15px;
 		width: 100%;
-		background: #fff inline_svg('<svg width="13" height="8" viewBox="0 0 13 8" xmlns="http://www.w3.org/2000/svg"><path d="M.293.293c.36-.36.928-.388 1.32-.083l.094.083L6.51 5.096 11.313.293c.36-.36.928-.388 1.32-.083l.094.083c.36.36.389.928.084 1.32l-.084.094-5.51 5.51c-.36.36-.927.388-1.32.083l-.094-.083-5.51-5.51c-.39-.39-.39-1.024 0-1.414z" fill="#f00" fill-rule="evenodd"/></svg>') no-repeat calc(100% - 10px) 50%;
+		background: #fff mixins.inline_svg('<svg width="13" height="8" viewBox="0 0 13 8" xmlns="http://www.w3.org/2000/svg"><path d="M.293.293c.36-.36.928-.388 1.32-.083l.094.083L6.51 5.096 11.313.293c.36-.36.928-.388 1.32-.083l.094.083c.36.36.389.928.084 1.32l-.084.094-5.51 5.51c-.36.36-.927.388-1.32.083l-.094-.083-5.51-5.51c-.39-.39-.39-1.024 0-1.414z" fill="#f00" fill-rule="evenodd"/></svg>') no-repeat calc(100% - 10px) 50%;
 		border: 1px solid #f00;
 	}
 

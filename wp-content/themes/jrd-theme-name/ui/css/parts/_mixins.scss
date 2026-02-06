@@ -1,3 +1,7 @@
+@use "sass:math";
+@use "sass:meta";
+@use "sass:string";
+
 /* ========================================================================= */
 /* !SASS VARIABLES & MIXINS */
 /* ========================================================================= */
@@ -11,13 +15,13 @@
     }
 
     @mixin size($w, $h: $w) {
-        @if ( type-of($w) == 'number' ) {
-            @if ( unitless($w) ) {
+        @if ( meta.type-of($w) == 'number' ) {
+            @if ( math.is-unitless($w) ) {
                 $w: $w + px;
             }
         }
-        @if ( type-of($h) == 'number' ) {
-            @if ( unitless($h) ) {
+        @if ( meta.type-of($h) == 'number' ) {
+            @if ( math.is-unitless($h) ) {
                 $h: $h + px;
             }
         }
@@ -44,13 +48,13 @@
 
     // make sure you change "16" to whatever your main content's font size
     @function rem($px) {
-        @return math.div($px,$rem_size)*1rem;
+        @return math.div($px,style.$rem_size)*1rem;
     }
 
     // $columns: the number of columns (items per row) of the flexbox
     // $gap: the gap between columns (can be pixels, percentage, em, whatever)
     @function flex-math( $columns, $gap ) {
-        $perc: percentage( math.div( 1, $columns ) );
+        $perc: math.percentage( math.div( 1, $columns ) );
         $between: calc( $gap * ( ( $columns - 1 ) / $columns ) );
         @return calc( $perc - $between );
     }
@@ -88,9 +92,9 @@
     // usage: background-image: inline-svg('<svg><!-- your svg code --></svg>');
 */
 @function str-replace($string, $search, $replace: '') {
-    $index: str-index($string, $search);
+    $index: string.index($string, $search);
     @if $index {
-        @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+        @return string.slice($string, 1, $index - 1) + $replace + str-replace(string.slice($string, $index + string.length($search)), $search, $replace);
     }
     @return $string;
 }
