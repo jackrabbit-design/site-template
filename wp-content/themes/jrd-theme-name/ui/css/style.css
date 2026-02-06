@@ -9,7 +9,7 @@
 
 /* != .clearfix - CLEAR ELEMENTS */.clear{clear:both}.clearfix{display:block}.clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0}
 
-/* != .wordwrap - CONTINUE LONG URLS/WORDS ON NEXT LINE */.wordwrap{white-space:pre;white-space:pre-wrap;white-space:pre-line;white-space:-pre-wrap;white-space:-o-pre-wrap;white-space:-moz-pre-wrap;word-wrap:break-word}svg path{d:revert-layer!important}
+/* != .wordwrap - CONTINUE LONG URLS/WORDS ON NEXT LINE */.wordwrap{white-space:pre;white-space:pre-wrap;white-space:pre-line;white-space:-pre-wrap;white-space:-o-pre-wrap;white-space:-moz-pre-wrap;word-wrap:break-word}svg path{d:revert-layer!important}*{text-wrap:pretty}
 /* !SASS VARIABLES & MIXINS */
 /* !FONTS (@fontface generated with FontSpring Syntax formatting */
 /* !STYLES */

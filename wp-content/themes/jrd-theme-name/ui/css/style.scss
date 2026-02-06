@@ -1,6 +1,8 @@
 @use 'sass:math';
-@import 'parts/reset';
-@import 'parts/variables';
+@use "sass:meta";
+@use 'parts/reset';
+@use 'parts/variables';
+@use "parts/mixins";
 
 /* ========================================================================= */
 /* !STYLES */
@@ -11,8 +13,8 @@
 	html, body {
         scroll-behavior: smooth;
         font: {
-            family: $font_family_two;
-            size: $rem_size * 1px;
+            family: variables.$font_family_two;
+            size: variables.$rem_size * 1px;
         }
     }
 
@@ -35,7 +37,7 @@
 	}
 
 	*:focus {
-		outline: 3px solid $focus_color;
+		outline: 3px solid variables.$focus_color;
 		outline-offset: 3px;
 	}
 
@@ -44,7 +46,7 @@
 			outline:none;
 		}
 		*:focus-visible {
-			outline: 3px solid $focus_color;
+			outline: 3px solid variables.$focus_color;
 			outline-offset: 3px;
 		}
 	}
@@ -156,7 +158,7 @@
 					&:hover {
 						.sub-menu-wrap {
 							ul {
-								@include break(769, 'min-width'){
+								@include mixins.break(769, 'min-width'){
 									display: block;
 								}
 							}
@@ -169,7 +171,7 @@
 					&.open {
 						.sub-menu-wrap {
 							ul {
-								@include break(769, 'min-width'){
+								@include mixins.break(769, 'min-width'){
 									display: block;
 								}
 							}
@@ -190,7 +192,7 @@
 		}
 	}
 
-    @import 'parts/elements';
+    @include meta.load-css('parts/elements');
 
     #footer {
 		.jackrabbit {

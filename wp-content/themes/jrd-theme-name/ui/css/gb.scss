@@ -1,5 +1,6 @@
 @use 'sass:math';
-@import 'parts/variables';
+@use "sass:meta";
+@use 'parts/variables';
 
 html .wp-block {
 	max-width: 1140px;
@@ -7,12 +8,12 @@ html .wp-block {
 	container-type: inline-size;
 	font: {
 		family: sans-serif; // replace this with your font
-		size: $rem_size * 1px;
+		size: variables.$rem_size * 1px;
 	}
 	color: #000;
 	line-height: math.div(29, 18);
-	@import 'parts/reset';
-	@import 'parts/elements';
+	@include meta.load-css('parts/reset');
+	@include meta.load-css('parts/elements');
 	.wrap {
 		padding: {
 			left: 0;
