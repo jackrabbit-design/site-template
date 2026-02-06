@@ -3,6 +3,12 @@
 /* BE SURE TO COMMENT CODE/IDENTIFY PER PLUGIN CALL */
 /* ========================================================================= */
 
+if ( !('ontouchstart' in window || navigator.maxTouchPoints) ) {
+    new Lenis({
+        autoRaf: true,
+    });
+}
+
 jQuery(function($){
 
 	// ALERT
