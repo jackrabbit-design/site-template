@@ -8,6 +8,15 @@
 /* !STYLES */
 /* ========================================================================= */
 
+@view-transition {
+	navigation: auto;
+}
+
+::view-transition-group(root) {
+	animation-duration: 0.5s;
+	animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* != DEFAULT STYLES ===== */
 
 	html, body {
@@ -216,3 +225,33 @@
     }
 */
 
+/* lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis [data-lenis-prevent],
+.lenis [data-lenis-prevent-wheel],
+.lenis [data-lenis-prevent-touch] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+.lenis.lenis-autoToggle {
+  transition-property: overflow;
+  transition-duration: 1ms;
+  transition-behavior: allow-discrete;
+}
+
+
+.stagger-children > * {
+	opacity: 0;
+}

@@ -1,4 +1,5 @@
 // jshint esversion: 6
+
 /* ========================================================================= */
 /* BE SURE TO COMMENT CODE/IDENTIFY PER PLUGIN CALL */
 /* ========================================================================= */
@@ -22,7 +23,7 @@ jQuery(function($){
 	$("#menu-toggle").on('click', function () {
 		$("#header").toggleClass("active");
         $(this).toggleClass("active");
-        $('#main-nav').focus();
+        $('#main-nav').trigger('focus');
     });
 
 	// ADVANCED TOGGLE MENU (Works with ADA NAV WALKER)
@@ -36,7 +37,7 @@ jQuery(function($){
 	// 				$("#header").removeClass("active");
 	// 				$("#menu-toggle").removeClass("active");
 	// 				$("#menu-toggle").attr('aria-expanded','false');
-	// 				$("#menu-toggle").focus();
+	// 				$("#menu-toggle").trigger('focus');
 	// 			}
 	// 		});
 	//     } else {
@@ -63,7 +64,7 @@ jQuery(function($){
 
     $("li.menu-item-has-children .menu-toggle-button").on("keydown", function(event){
 		/* Enter || Spacebar */
-		if ( event.keyCode == 13 || event.keyCode == 32 ) {
+		if ( event.key == ' ' || event.key == 'Enter' ) {
 			event.preventDefault();
 			$(this).parent().toggleClass('active');
 			if($(this).parent().hasClass('active')){
@@ -74,7 +75,7 @@ jQuery(function($){
 				$(this).parent().find('.sub-menu').attr('aria-hidden','true');
 			}
 		}
-		if ( event.keyCode == 27 ) {
+		if ( event.key == 'Escape' ) {
 			if($(this).parent().hasClass('active')){
 				$(this).parent().toggleClass('active');
 				$(this).attr('aria-expanded','false');
@@ -85,12 +86,12 @@ jQuery(function($){
 
 	/* Esc */
 	$("li.menu-item-has-children .sub-menu-wrap a").on("keydown", function(event){
-		if ( event.keyCode == 27 ) {
+		if ( event.key == 'Escape' ) {
 			//e.preventDefault();
 			$(this).parents('li.menu-item-has-children').toggleClass('active');
 			$(this).attr('aria-expanded','false');
 			$(this).parents('li.menu-item-has-children').find('.sub-menu').attr('aria-hidden','true');
-			$(this).parents('li.menu-item-has-children').find('.menu-toggle-button').focus();
+			$(this).parents('li.menu-item-has-children').find('.menu-toggle-button').trigger('focus');
 		}
 	});
 
@@ -127,12 +128,7 @@ jQuery(function($){
 		e.stopPropagation();
 		$span = $(this);
 		let email = $span.parent('a').attr('href').replace(/^mailto:([\w\d\.\-]+@[\w\d\.\-]+\.[\w]+).*$/, '$1');
-		var $temp = $("<input>");
-		$("body").append($temp);
-		$temp.val(email).select();
-		document.execCommand("copy");
-		$temp.remove();
-		$span.addClass('copied');
+        navigator.clipboard.writeText(email);
 		setTimeout(function(){
 			$span.removeClass('copied');
 		}, 100);
@@ -241,3 +237,12 @@ jQuery.fn.extend({close: function() {
 * $('dialog').showModal(); // to open
 * $('dialog').close(); // to close
 */
+
+// Initialize Lenis on non-touch devices
+if ( ! jQuery('body').hasClass('wp-admin') ) {
+    if ( !('ontouchstart' in window || navigator.maxTouchPoints) ) {
+        new Lenis({
+            autoRaf: true,
+        });
+    }
+}
