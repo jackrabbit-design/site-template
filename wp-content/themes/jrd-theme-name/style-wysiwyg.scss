@@ -1,5 +1,5 @@
-@import url("ui/css/parts/fonts.css");
-@import url("ui/css/parts/variables");
+@use "ui/css/parts/fonts";
+@use "ui/css/parts/variables" as *;
 
 #tinymce h1, #tinymce h2, #tinymce h3, #tinymce h4, #tinymce h5, #tinymce h6 {
 	border-bottom: 2px dotted #ddd;

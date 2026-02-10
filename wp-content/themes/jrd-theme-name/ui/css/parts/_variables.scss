@@ -1,3 +1,12 @@
+@use 'sass:math';
+@use "mixins" as *;
+
+// make sure you change "16" to whatever your main content's font size
+$rem_size: 16;
+
+@function rem($px) {
+	@return math.div($px, $rem_size)*1rem;
+}
 
 $font_family_one: Helvetica, Arial, sans-serif;
 $font_family_two: Helvetica, Arial, $font_family_one;
@@ -5,3 +14,7 @@ $font_family_two: Helvetica, Arial, $font_family_one;
 $black: #000000;
 $white: #ffffff;
 $focus_color: rgba(0,0,0,0.5);
+
+:root {
+	// your --variables here
+}
