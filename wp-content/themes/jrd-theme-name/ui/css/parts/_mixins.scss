@@ -46,11 +46,6 @@
         @return math.div($value, $fontsize) * 1em;
     }
 
-    // make sure you change "16" to whatever your main content's font size
-    @function rem($px) {
-        @return math.div($px,variables.$rem_size)*1rem;
-    }
-
     // $columns: the number of columns (items per row) of the flexbox
     // $gap: the gap between columns (can be pixels, percentage, em, whatever)
     @function flex-math( $columns, $gap ) {

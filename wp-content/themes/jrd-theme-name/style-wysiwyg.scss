@@ -1,5 +1,5 @@
-@import url("ui/css/parts/fonts.css");
-@import url("ui/css/parts/variables");
+@use "ui/css/parts/fonts";
+@use "ui/css/parts/variables" as *;
 
 #tinymce {
     h1, h2, h3, h4, h5, h6 {

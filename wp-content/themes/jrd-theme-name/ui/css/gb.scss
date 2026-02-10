@@ -1,6 +1,9 @@
 @use 'sass:math';
 @use "sass:meta";
-@use 'parts/variables';
+@use 'parts/fonts';
+@use 'parts/mixins' as *;
+@use 'parts/variables' as *;
+@use 'parts/vendor';
 
 html .wp-block {
 	max-width: 1140px;
@@ -8,7 +11,7 @@ html .wp-block {
 	container-type: inline-size;
 	font: {
 		family: sans-serif; // replace this with your font
-		size: variables.$rem_size * 1px;
+		size: $rem_size * 1px;
 	}
 	color: #000;
 	line-height: math.div(29, 18);
