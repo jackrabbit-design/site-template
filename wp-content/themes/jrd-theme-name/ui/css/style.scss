@@ -5,6 +5,9 @@
 @use 'parts/mixins' as *;
 @use 'parts/variables' as *;
 @use 'parts/vendor';
+@use 'parts/elements';
+
+@include reset.reset;
 
 /* ========================================================================= */
 /* !STYLES */
@@ -203,7 +206,7 @@
 		}
 	}
 
-    @include meta.load-css('parts/elements');
+    @include elements.elements;
 
     #footer {
 		.jackrabbit {

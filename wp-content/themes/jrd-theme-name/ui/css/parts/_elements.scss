@@ -4,350 +4,354 @@
 @use "mixins" as *;
 @use 'variables' as *;
 
-h1, .title1 {
-}
+@mixin elements {
 
-h2, .title2 {
-}
-
-h3, .title3 {
-}
-
-h4, .title4 {
-}
-
-h5, .title5 {
-}
-
-h6, .title6 {
-}
-
-p {
-}
-
-blockquote {
-}
-
-cite {
-}
-
-a {
-	&:hover {
+	h1, .title1 {
 	}
-}
 
-hr {
-}
+	h2, .title2 {
+	}
 
-body {
-	background-image: var(--logo);
-}
+	h3, .title3 {
+	}
 
-.btn {
-	display: inline-block;
-	text-decoration: none;
-	text-align: center;
-	transition: .2s;
-	&:hover {
+	h4, .title4 {
 	}
-}
 
-figure, .wp-caption {
-	img {
+	h5, .title5 {
 	}
-	figcaption, .wp-caption-text {
-	}
-}
 
-table {
-	thead {
+	h6, .title6 {
 	}
-	tbody {
-	}
-	th, td {
-	}
-}
 
-.content-main {
-	ul:not([class*="gf"]) {
-		> li {
-			position: relative;
-			padding-left: 10px;
-			&:before {
-				content: '\2022';
-				position: absolute;
-				left: 0;
-			}
-		}
+	p {
 	}
-	ol {
-		counter-reset:li;
-		> li {
-			position: relative;
-			padding-left: 20px;
-			&:before {
-				content:counter(li) '. ';
-				counter-increment: li;
-				position: absolute;
-				right: calc(100% - 15px);
-			}
-		}
-	}
-}
 
-.socials {
-	display: flex;
-	gap: 16px;
-	.social {
-		height: 27px;
+	blockquote {
+	}
+
+	cite {
+	}
+
+	a {
 		&:hover {
-			svg {
-				fill: #000;
-				background-color: #eaeaea;
+		}
+	}
+
+	hr {
+	}
+
+	body {
+		background-image: var(--logo);
+	}
+
+	.btn {
+		display: inline-block;
+		text-decoration: none;
+		text-align: center;
+		transition: .2s;
+		&:hover {
+		}
+	}
+
+	figure, .wp-caption {
+		img {
+		}
+		figcaption, .wp-caption-text {
+		}
+	}
+
+	table {
+		thead {
+		}
+		tbody {
+		}
+		th, td {
+		}
+	}
+
+	.content-main {
+		ul:not([class*="gf"]) {
+			> li {
+				position: relative;
+				padding-left: 10px;
+				&:before {
+					content: '\2022';
+					position: absolute;
+					left: 0;
+				}
 			}
 		}
-		svg {
-			fill: #fff;
-			background-color: #000;
-			padding: 2px;
-			@include size(27px);
-			border-radius: 50%;
-			transition: all 0.2s;
+		ol {
+			counter-reset:li;
+			> li {
+				position: relative;
+				padding-left: 20px;
+				&:before {
+					content:counter(li) '. ';
+					counter-increment: li;
+					position: absolute;
+					right: calc(100% - 15px);
+				}
+			}
+		}
+	}
+
+	.socials {
+		display: flex;
+		gap: 16px;
+		.social {
+			height: 27px;
 			&:hover {
-				fill: #000;
+				svg {
+					fill: #000;
+					background-color: #eaeaea;
+				}
+			}
+			svg {
+				fill: #fff;
+				background-color: #000;
+				padding: 2px;
+				@include size(27px);
+				border-radius: 50%;
+				transition: all 0.2s;
+				&:hover {
+					fill: #000;
+				}
 			}
 		}
 	}
-}
 
-::backdrop {
-    background-color: rgba(#000,0.8);
-}
-
-
-/* != DEFAULT WORDPRESS STYLES = USE AS NEEDED = .wp-caption = .wp-caption-dd = .wpGallery = .shutter = .shutterset ==== */
-
-.aligncenter {
-	display: block;
-	margin: 25px auto;
-}
-
-.alignleft {
-	float: left;
-	margin: 0 25px 25px 0;
-}
-
-.alignright {
-	float: right;
-	margin: 0 0 25px 25px;
-}
-
-.alignnone {
-	display: inline-block;
-}
-
-
-
-/* != ACCESSIBILITY STYLES ===== */
-
-.sr-only, .slick-sr-only {
-	/* Styles below are so elements are shown to screen readers only */
-	border: none !important;
-	clip: rect(0, 0, 0, 0) !important;
-	height: 0.01em !important;
-	overflow: hidden !important;
-	padding: 0 !important;
-	position: absolute !important;
-	white-space: nowrap !important;
-	width: 0.01em !important;
-}
-
-*:focus {
-	outline: 3px solid $focus_color;
-	outline-offset: 3px;
-}
-
-@supports selector(:focus-visible) {
-	*:focus {
-		outline:none;
+	::backdrop {
+		background-color: rgba(#000,0.8);
 	}
-	*:focus-visible {
+
+
+	/* != DEFAULT WORDPRESS STYLES = USE AS NEEDED = .wp-caption = .wp-caption-dd = .wpGallery = .shutter = .shutterset ==== */
+
+	.aligncenter {
+		display: block;
+		margin: 25px auto;
+	}
+
+	.alignleft {
+		float: left;
+		margin: 0 25px 25px 0;
+	}
+
+	.alignright {
+		float: right;
+		margin: 0 0 25px 25px;
+	}
+
+	.alignnone {
+		display: inline-block;
+	}
+
+
+
+	/* != ACCESSIBILITY STYLES ===== */
+
+	.sr-only, .slick-sr-only {
+		/* Styles below are so elements are shown to screen readers only */
+		border: none !important;
+		clip: rect(0, 0, 0, 0) !important;
+		height: 0.01em !important;
+		overflow: hidden !important;
+		padding: 0 !important;
+		position: absolute !important;
+		white-space: nowrap !important;
+		width: 0.01em !important;
+	}
+
+	*:focus {
 		outline: 3px solid $focus_color;
 		outline-offset: 3px;
 	}
-}
 
-
-.wrap {
-	max-width: 1180px;
-	width: 100%;
-	margin: {
-		left: auto;
-		right: auto;
+	@supports selector(:focus-visible) {
+		*:focus {
+			outline:none;
+		}
+		*:focus-visible {
+			outline: 3px solid $focus_color;
+			outline-offset: 3px;
+		}
 	}
-	padding: 0 20px;
-}
 
 
-
-/* != FORM STYLES ===== */
-
-
-label:not(fieldset label), //targets default labels without the need to override fieldset labels. See below for checkbox and radio button labels
-fieldset legend {
-}
-
-fieldset {
-	legend { //checkbox and radio button labels
+	.wrap {
+		max-width: 1180px;
+		width: 100%;
+		margin: {
+			left: auto;
+			right: auto;
+		}
+		padding: 0 20px;
 	}
-	label {
-	}
-}
 
-input {
-	&[type=text],
-	&[type=password],
-	&[type=url],
-	&[type=number],
-	&[type=tel],
-	&[type=email] {
+
+
+	/* != FORM STYLES ===== */
+
+
+	label:not(fieldset label), //targets default labels without the need to override fieldset labels. See below for checkbox and radio button labels
+	fieldset legend {
+	}
+
+	fieldset {
+		legend { //checkbox and radio button labels
+		}
+		label {
+		}
+	}
+
+	input {
+		&[type=text],
+		&[type=password],
+		&[type=url],
+		&[type=number],
+		&[type=tel],
+		&[type=email] {
+			width: 100%;
+			padding: 10px 15px;
+			box-shadow: inset 0 1px 2px rgba(#000,0.2);
+			background-color: #fff;
+			border: 1px solid #f00;
+		}
+	}
+
+	textarea {
 		width: 100%;
 		padding: 10px 15px;
-		box-shadow: inset 0 1px 2px rgba(#000,0.2);
 		background-color: #fff;
+		box-shadow: inset 0 1px 2px rgba(#000,0.2);
 		border: 1px solid #f00;
 	}
-}
 
-textarea {
-	width: 100%;
-	padding: 10px 15px;
-	background-color: #fff;
-	box-shadow: inset 0 1px 2px rgba(#000,0.2);
-	border: 1px solid #f00;
-}
-
-// Uncomment the below to style checkboxes and radio buttons
-/* .ginput_container_checkbox {
-	.gfield_checkbox {
-		.gchoice {
-			label {
-				padding: 0 0 0 2px;
-				cursor: pointer;
-				position: relative;
-				&:before {
-					border: 1px solid #00f;
-					@include size(15px);
-					border-radius: 2px;
-					left: -17px;
-					top: 1px;
-					content: '';
-					position: absolute;
-					opacity: 1;
-				}
-				&:after {
-					border-left: 3px solid #f00;
-					border-bottom: 3px solid #f00;
-					@include size(17px, 6px);
-					transform: rotate(-45deg);
-					top: 5px;
-					left: -14px;
-					content: '';
-					position: absolute;
-					opacity: 0;
-				}
-				&:hover {
+	// Uncomment the below to style checkboxes and radio buttons
+	/* .ginput_container_checkbox {
+		.gfield_checkbox {
+			.gchoice {
+				label {
+					padding: 0 0 0 2px;
+					cursor: pointer;
+					position: relative;
+					&:before {
+						border: 1px solid #00f;
+						@include size(15px);
+						border-radius: 2px;
+						left: -17px;
+						top: 1px;
+						content: '';
+						position: absolute;
+						opacity: 1;
+					}
 					&:after {
-						opacity: 0.3;
+						border-left: 3px solid #f00;
+						border-bottom: 3px solid #f00;
+						@include size(17px, 6px);
+						transform: rotate(-45deg);
+						top: 5px;
+						left: -14px;
+						content: '';
+						position: absolute;
+						opacity: 0;
+					}
+					&:hover {
+						&:after {
+							opacity: 0.3;
+						}
 					}
 				}
-			}
-			input[type=checkbox] {
-				visibility: hidden;
-				&:checked + label:after {
-					opacity: 1;
+				input[type=checkbox] {
+					visibility: hidden;
+					&:checked + label:after {
+						opacity: 1;
+					}
 				}
 			}
 		}
 	}
-}
-.ginput_container_radio {
-	.gfield_radio {
-		.gchoice {
-			label {
-				padding: 0 0 0 2px;
-				cursor: pointer;
-				position: relative;
-				&:before {
-					border: 1px solid #00f;
-					@include size(15px);
-					border-radius: 50%;
-					left: -17px;
-					top: 1px;
-					content: '';
-					position: absolute;
-					opacity: 1;
-				}
-				&:after {
-					@include size(5px);
-					border-radius: 50%;
-					left: -12px;
-					top: 6px;
-					content: '';
-					position: absolute;
-					opacity: 0;
-				}
-				&:hover {
+	.ginput_container_radio {
+		.gfield_radio {
+			.gchoice {
+				label {
+					padding: 0 0 0 2px;
+					cursor: pointer;
+					position: relative;
+					&:before {
+						border: 1px solid #00f;
+						@include size(15px);
+						border-radius: 50%;
+						left: -17px;
+						top: 1px;
+						content: '';
+						position: absolute;
+						opacity: 1;
+					}
 					&:after {
-						opacity: 0.3;
+						@include size(5px);
+						border-radius: 50%;
+						left: -12px;
+						top: 6px;
+						content: '';
+						position: absolute;
+						opacity: 0;
+					}
+					&:hover {
+						&:after {
+							opacity: 0.3;
+						}
+					}
+				}
+				input[type=radio] {
+					visibility: hidden;
+					&:checked + label:before {
+						background: #f00;
+						border: 1px solid #f00;
+					}
+					&:checked + label:after {
+						background: #fff;
+						opacity: 1;
 					}
 				}
 			}
-			input[type=radio] {
-				visibility: hidden;
-				&:checked + label:before {
-					background: #f00;
-					border: 1px solid #f00;
-				}
-				&:checked + label:after {
-					background: #fff;
-					opacity: 1;
-				}
-			}
+		}
+	} */
+
+	input[type=submit], button {
+		display: inline-block;
+		cursor: pointer;
+		&:hover {
 		}
 	}
-} */
 
-input[type=submit], button {
-	display: inline-block;
-	cursor: pointer;
-	&:hover {
+	select {
+		padding: 10px 35px 10px 15px;
+		width: 100%;
+		background: #fff inline_svg('<svg width="13" height="8" viewBox="0 0 13 8" xmlns="http://www.w3.org/2000/svg"><path d="M.293.293c.36-.36.928-.388 1.32-.083l.094.083L6.51 5.096 11.313.293c.36-.36.928-.388 1.32-.083l.094.083c.36.36.389.928.084 1.32l-.084.094-5.51 5.51c-.36.36-.927.388-1.32.083l-.094-.083-5.51-5.51c-.39-.39-.39-1.024 0-1.414z" fill="#f00" fill-rule="evenodd"/></svg>') no-repeat calc(100% - 10px) 50%;
+		border: 1px solid #f00;
 	}
-}
 
-select {
-	padding: 10px 35px 10px 15px;
-	width: 100%;
-	background: #fff inline_svg('<svg width="13" height="8" viewBox="0 0 13 8" xmlns="http://www.w3.org/2000/svg"><path d="M.293.293c.36-.36.928-.388 1.32-.083l.094.083L6.51 5.096 11.313.293c.36-.36.928-.388 1.32-.083l.094.083c.36.36.389.928.084 1.32l-.084.094-5.51 5.51c-.36.36-.927.388-1.32.083l-.094-.083-5.51-5.51c-.39-.39-.39-1.024 0-1.414z" fill="#f00" fill-rule="evenodd"/></svg>') no-repeat calc(100% - 10px) 50%;
-	border: 1px solid #f00;
-}
-
-.gform_validation_errors {
-	background-color: #c00;
-	color: #fff;
-	padding: 20px;
-	h2 {
+	.gform_validation_errors {
+		background-color: #c00;
 		color: #fff;
+		padding: 20px;
+		h2 {
+			color: #fff;
+		}
 	}
-}
 
-.gform_validation_container {
-	// display: none;
-	// visibility: hidden;
-	// uncomment the above if the below doesn't work.
-	position:absolute;
-	top:-9999px;
-	left:-9999px;
-	pointer-events:none;
-	opacity:0;
+	.gform_validation_container {
+		// display: none;
+		// visibility: hidden;
+		// uncomment the above if the below doesn't work.
+		position:absolute;
+		top:-9999px;
+		left:-9999px;
+		pointer-events:none;
+		opacity:0;
+	}
+
 }
