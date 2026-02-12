@@ -1,7 +1,7 @@
 @use 'sass:math';
 @use 'vendor';
 @use 'fonts';
-@use "mixins" as *;
+@use 'mixins' as *;
 @use 'variables' as *;
 
 @mixin elements {
@@ -102,12 +102,6 @@
 		gap: 16px;
 		.social {
 			height: 27px;
-			&:hover {
-				svg {
-					fill: #000;
-					background-color: #eaeaea;
-				}
-			}
 			svg {
 				fill: #fff;
 				background-color: #000;
@@ -115,8 +109,11 @@
 				@include size(27px);
 				border-radius: 50%;
 				transition: all 0.2s;
-				&:hover {
+			}
+			&:hover {
+				svg {
 					fill: #000;
+					background-color: #eaeaea;
 				}
 			}
 		}
