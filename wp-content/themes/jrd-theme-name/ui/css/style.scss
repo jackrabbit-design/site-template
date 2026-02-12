@@ -125,23 +125,20 @@
         gap: 16px;
         .social {
             height: 27px;
-            &:hover {
-                svg {
-                    fill: #000;
-                    background-color: #eaeaea;
-                }
-            }
             svg {
-                fill: #fff;
+				fill: #fff;
                 background-color: #000;
                 padding: 2px;
                 @include size(27px);
                 border-radius: 50%;
                 transition: all 0.2s;
-                &:hover {
-                    fill: #000;
-                }
             }
+			&:hover {
+				svg {
+					fill: #000;
+					background-color: #eaeaea;
+				}
+			}
         }
     }
 
