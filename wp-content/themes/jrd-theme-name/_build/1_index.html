@@ -69,6 +69,109 @@
 
 <main id="body-content">
 
+	<form action="/submit-data" method="POST">
+
+        <fieldset>
+            <legend>Personal Information</legend>
+
+            <div>
+                <label for="fname">First Name (Text):</label>
+                <input type="text" id="fname" name="fname" placeholder="John" required>
+            </div>
+
+            <div>
+                <label for="pass">Password (Password):</label>
+                <input type="password" id="pass" name="pass">
+            </div>
+
+            <div>
+                <label for="email">Email Address (Email):</label>
+                <input type="email" id="email" name="email" placeholder="john@example.com">
+            </div>
+
+            <div>
+                <label for="age">Age (Number):</label>
+                <input type="number" id="age" name="age" min="18" max="99">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Preferences</legend>
+
+            <div>
+                <label>Gender (Radio Buttons):</label>
+                <input type="radio" id="male" name="gender" value="male">
+                <label style="display:inline" for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label style="display:inline" for="female">Female</label>
+            </div>
+
+            <div>
+                <label>Interests (Checkboxes):</label>
+                <input type="checkbox" id="coding" name="interest" value="coding">
+                <label style="display:inline" for="coding">Coding</label>
+                <input type="checkbox" id="music" name="interest" value="music">
+                <label style="display:inline" for="music">Music</label>
+            </div>
+
+            <div>
+                <label for="country">Country (Select Dropdown):</label>
+                <select id="country" name="country">
+                    <option value="usa">USA</option>
+                    <option value="uk">UK</option>
+                    <option value="canada">Canada</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="browser">Preferred Browser (Datalist):</label>
+                <input list="browsers" name="browser" id="browser">
+                <datalist id="browsers">
+                    <option value="Chrome">
+                    <option value="Firefox">
+                    <option value="Safari">
+                    <option value="Edge">
+                </datalist>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Upload & Feedback</legend>
+
+            <div>
+                <label for="bday">Birthday (Date):</label>
+                <input type="date" id="bday" name="bday">
+            </div>
+
+            <div>
+                <label for="myfile">Select a file (File):</label>
+                <input type="file" id="myfile" name="myfile">
+            </div>
+
+            <div>
+                <label for="favcolor">Favorite Color (Color):</label>
+                <input type="color" id="favcolor" name="favcolor" value="#ff0000">
+            </div>
+
+            <div>
+                <label for="volume">Volume (Range):</label>
+                <input type="range" id="volume" name="volume" min="0" max="100">
+            </div>
+
+            <div>
+                <label for="bio">Biography (Textarea):</label>
+                <textarea id="bio" name="bio" rows="4" cols="30" placeholder="Tell us about yourself..."></textarea>
+            </div>
+        </fieldset>
+
+        <div>
+            <button type="submit">Submit Form</button>
+            <button type="reset">Reset Form</button>
+            <button type="button" onclick="alert('Hello World!')">Click Me (Generic Button)</button>
+        </div>
+
+    </form>
+
 </main>
 
 <footer id="footer">
