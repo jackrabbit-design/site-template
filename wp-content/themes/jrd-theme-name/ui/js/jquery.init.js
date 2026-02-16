@@ -9,13 +9,13 @@ if ( !('ontouchstart' in window || navigator.maxTouchPoints) ) {
     });
 }
 
-jQuery(function($){
+jQuery(($) => {
 
 	// ALERT
-	if(Cookies.get('alert_cookie') != 'hide'){
+	if(Cookies.get('alert_cookie') !== 'hide'){
 		$('#alert').css('display','block');
 	}
-	$('#alert .close').on('click',function(){
+	$('#alert .close').on('click',()=>{
 		$('#alert').slideUp(100);
 		Cookies.set('alert_cookie', 'hide', { expires: 1, path: '/' });
     });
@@ -55,10 +55,10 @@ jQuery(function($){
 
     /* ADA MAIN NAV MENU SCRIPTS ============================== */
 
-    $("#header #main-nav a[data-link=nonactive]").on('click', function(event) {
+    $("#header #main-nav a[data-link=nonactive]").on('click', (event) => {
         event.preventDefault();
     });
-	$("#header #main-nav .menu-item-has-children").on('click', function(event) {
+	$("#header #main-nav .menu-item-has-children").on('click', (event) => {
         if( $("#header").hasClass("active") ) {
             if( !$(event.target).is("a") ) {
                 $(this).toggleClass("active");
@@ -69,7 +69,7 @@ jQuery(function($){
 
     $("li.menu-item-has-children .menu-toggle-button").on("keydown", function(event){
 		/* Enter || Spacebar */
-		if ( event.keyCode == 13 || event.keyCode == 32 ) {
+		if ( event.keyCode === 13 || event.keyCode === 32 ) {
 			event.preventDefault();
 			$(this).parent().toggleClass('active');
 			if($(this).parent().hasClass('active')){
@@ -80,7 +80,7 @@ jQuery(function($){
 				$(this).parent().find('.sub-menu').attr('aria-hidden','true');
 			}
 		}
-		if ( event.keyCode == 27 ) {
+		if ( event.keyCode === 27 ) {
 			if($(this).parent().hasClass('active')){
 				$(this).parent().toggleClass('active');
 				$(this).attr('aria-expanded','false');
@@ -90,8 +90,8 @@ jQuery(function($){
 	});
 
 	/* Esc */
-	$("li.menu-item-has-children .sub-menu-wrap a").on("keydown", function(event){
-		if ( event.keyCode == 27 ) {
+	$("li.menu-item-has-children .sub-menu-wrap a").on("keydown", (event) => {
+		if ( event.keyCode === 27 ) {
 			//e.preventDefault();
 			$(this).parents('li.menu-item-has-children').toggleClass('active');
 			$(this).attr('aria-expanded','false');
@@ -101,12 +101,11 @@ jQuery(function($){
 	});
 
 	$('li.menu-item-has-children .sub-menu-wrap').on('focusout', function() {
-		var that = this;
-		setTimeout(function() {
-		  if (!$(that).find(':focus').length) {
-			$(that).parents('li.menu-item-has-children').toggleClass('active');
-			//$(that).attr('aria-expanded','false');
-			$(that).parents('li.menu-item-has-children').find('.sub-menu').attr('aria-hidden','true');
+		setTimeout(() => {
+		  if (!$(this).find(':focus').length) {
+			$(this).parents('li.menu-item-has-children').toggleClass('active');
+			//$(this).attr('aria-expanded','false');
+			$(this).parents('li.menu-item-has-children').find('.sub-menu').attr('aria-hidden','true');
 		  }
 		}, 0);
 	});
@@ -116,34 +115,29 @@ jQuery(function($){
     // PARALLAX
     $.fn.plax = function(x, y){
         this.css({
-            'webkitTransform' : 'translate3d('+x+'px, '+y+'px, 0)',
-            'MozTransform'    : 'translate3d('+x+'px, '+y+'px, 0)',
-            'msTransform'     : 'translateX('+x+'px) translateY('+y+'px)',
-            'OTransform'      : 'translate3d('+x+'px, '+y+'px, 0)',
-            'transform'       : 'translate3d('+x+'px, '+y+'px, 0)'
+            'webkitTransform' : `translate3d(${x}px, ${y}px, 0)`,
+            'MozTransform'    : `translate3d(${x}px, ${y}px, 0)`,
+            'msTransform'     : `translateX(${x}px) translateY(${y}px)`,
+            'OTransform'      : `translate3d(${x}px, ${y}px, 0)`,
+            'transform'       : `translate3d(${x}px, ${y}px, 0)`
         });
     };
 
-	// Email address copy script
-	$('a[href^="mailto:"]').filter(function() {
-  		return $(this).closest('.social-nav').length === 0;
-	}).append('<span class="copy-email"></span>');
+    // Email address copy script
+    $('a[href^="mailto:"]').filter((_, el) => {
+        return $(el).closest('.social-nav').length === 0;
+    }).append('<span class="copy-email"></span>');
 
-	$('a .copy-email').on('click', function(e){
-		e.stopPropagation();
-		$span = $(this);
-		let email = $span.parent('a').attr('href').replace(/^mailto:([\w\d\.\-]+@[\w\d\.\-]+\.[\w]+).*$/, '$1');
-		var $temp = $("<input>");
-		$("body").append($temp);
-		$temp.val(email).select();
-		document.execCommand("copy");
-		$temp.remove();
-		$span.addClass('copied');
-		setTimeout(function(){
-			$span.removeClass('copied');
-		}, 100);
-		return false;
-	});
+    $('a .copy-email').on('click', (e) => {
+        e.stopPropagation();
+        const $span = $(e.currentTarget).addClass('copied');
+        const email = $span.closest('a').attr('href').replace(/^mailto:([\w\d.-]+@[\w\d.-]+\.[\w]+).*$/, '$1');
+        navigator.clipboard.writeText(email);
+        setTimeout(() => {
+            $span.removeClass('copied');
+        }, 450);
+        return false;
+    });
 
     /*
     $(document).scroll(function(){
@@ -191,15 +185,15 @@ jQuery.fn.unrunt = function(){
 function unruntify( str ){
     var pieces = str.trim().split(' ');
     var new_pieces = [];
-    pieces.forEach(function(x,i){
-        if ( x.indexOf('<') == 0 && x.indexOf('>') == -1 ) {
-            var element = x;
-            var remove_items = [];
+    pieces.forEach((x,i) => {
+        if ( x.indexOf('<') === 0 && x.indexOf('>') === -1 ) {
+            let element = x;
+            const remove_items = [];
             for( ++i; i < pieces.length; i++ ) {
-                element += ' ' + pieces[i];
+                element += ` ${pieces[i]}`;
                 remove_items.push(i-1);
-                if ( pieces[i].indexOf('>') != -1 ) {
-                    remove_items.forEach(function(x){ // jshint ignore:line
+                if ( pieces[i].indexOf('>') !== -1 ) {
+                    remove_items.forEach((x) => {
                         pieces.splice(x, 1);
                     });
                     break;
@@ -211,7 +205,7 @@ function unruntify( str ){
         }
     });
     if (new_pieces.length > 1) {
-        new_pieces[new_pieces.length-2] += "&nbsp;" + new_pieces[new_pieces.length-1];
+        new_pieces[new_pieces.length-2] += `&nbsp;${new_pieces[new_pieces.length-1]}`;
         new_pieces.pop();
     }
     return new_pieces.join(' ');
@@ -222,8 +216,8 @@ function unruntify( str ){
 // returns URL query string, e.g., ?foo=bar&baz=qux
 jQuery.fn.querify = function(){
     if ( jQuery(this).length ) {
-        var serial = jQuery(this).serialize().replace(/[\w\d-]+=&/g, '');
-        serial = '?' + serial;
+        let serial = jQuery(this).serialize().replace(/[\w\d-]+=&/g, '');
+        serial = `?${serial}`;
         serial = serial.replace(/[?&][\w\d-]+=$/g, '');
         return serial;
     }
