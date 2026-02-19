@@ -5,17 +5,27 @@
 // Add these values **after** the site's Staging environment has been created post-launch.
 // Example: array( 'www.jumpingjackrabbit.com', 'www.333edgehill.com' );
 $production_urls = array( '' );
-$is_production   = in_array( $_SERVER['HTTP_HOST'], $production_urls, true );
+if ( isset( $_SERVER['HTTP_HOST'] ) ) {
+	$is_production = in_array( $_SERVER['HTTP_HOST'], $production_urls, true );
+} else {
+	$is_production = false;
+}
 
 // force "discourage search engines" to be unchecked in production
-if ( $is_production ) {
-	if ( (int) 0 === (int) get_option( 'blog_public' ) ) {
-		update_option( 'blog_public', 1 );
+if ( ! function_exists( 'set_visibility' ) ) {
+	function set_visibility() {
+		global $is_production;
+		if ( $is_production ) {
+			if ( (int) 0 === (int) get_option( 'blog_public' ) ) {
+				update_option( 'blog_public', 1 );
+			}
+		} else {
+			if ( (int) 1 === (int) get_option( 'blog_public' ) ) {
+				update_option( 'blog_public', 0 );
+			}
+		}
 	}
-} else {
-	if ( (int) 1 === (int) get_option( 'blog_public' ) ) {
-		update_option( 'blog_public', 0 );
-	}
+	add_action( 'after_setup_theme', 'set_visibility' );
 }
 
 // Use this as a conditional instead of is_user_logged_in(). This function is more strict, as long as your wp username is admin_jackrabbit
@@ -65,7 +75,7 @@ if ( function_exists( 'register_nav_menus' ) ) {
 add_theme_support( 'title-tag' ); // Add support for title tag in wp_head
 
 /* Disables 'auto' size on images */
-add_filter('wp_img_tag_add_auto_sizes', '__return_false');
+add_filter( 'wp_img_tag_add_auto_sizes', '__return_false' );
 
 /* ========================================================================= */
 /* Favor GD over Imagick (prevent HTTP Error) */
@@ -123,27 +133,6 @@ if ( ! function_exists( 'attachment_redirect' ) ) {
 require_once 'functions/functions-post-types.php';
 require_once 'functions/functions-helpers.php';
 require_once 'functions/functions-rg.php';
-
-// setup acf-json folder
-if ( ! function_exists( 'jrd_acf_json_save_point' ) ) {
-	function jrd_acf_json_save_point( $path ) {
-		return get_stylesheet_directory() . '/functions/acf-json';
-	}
-	if ( ! $is_production ) {
-		add_filter( 'acf/settings/save_json', 'jrd_acf_json_save_point' );
-	}
-}
-
-// make acf read acf-json folder
-if ( ! function_exists( 'jrd_acf_json_load_point' ) ) {
-	function jrd_acf_json_load_point( $paths ) {
-		unset( $paths[0] );
-		$paths[] = get_stylesheet_directory() . '/functions/acf-json';
-		return $paths;
-	}
-	add_filter( 'acf/settings/load_json', 'jrd_acf_json_load_point' );
-}
-
 require_once 'functions/class-aria-walker-nav-menu.php';
 // require_once 'functions/functions-widgets.php';
 // require_once 'functions/functions-comments.php';
@@ -661,11 +650,13 @@ if ( ! function_exists( 'custom_fields_to_excerpts' ) ) {
 		$all_blocks = array();
 		$blocks     = parse_blocks( $post->post_content );
 		foreach ( $blocks as $block ) {
-			foreach ( $block['attrs']['data'] as $field => $value ) {
-				if ( is_array( $value ) ) {
-					continue;
+			if ( isset( $block['attrs']['data'] ) && is_array( $block['attrs']['data'] ) ) {
+				foreach ( $block['attrs']['data'] as $field => $value ) {
+					if ( is_array( $value ) ) {
+						continue;
+					}
+					$custom_fields[] = array( $field, $value );
 				}
-				$custom_fields[] = array( $field, $value );
 			}
 		}
 
@@ -734,7 +725,7 @@ if ( ! function_exists( 'jrd_add_featured_image_size' ) ) {
 		if ( isset( $size ) ) {
 			$content = "$size recommended.";
 			$css     = "<style>#postimagediv .inside:after { content: '$content' }</style>";
-			echo $css;
+			echo wp_kses( $css );
 		}
 	}
 	add_action( 'admin_head', 'jrd_add_featured_image_size' );
@@ -745,7 +736,7 @@ if ( is_admin() ) {
 	$not_jrd       = -1 === strpos( get_userdata( get_current_user_id() )->data->user_login, 'jackrabbit' );
 	$currently_acf = false;
 	if ( isset( $_GET['post'] ) ) {
-		if ( 'acf-field-group' === get_post( $_GET['post'] )->post_type ) {
+		if ( 'acf-field-group' === get_post( absint( $_GET['post'] ) )->post_type ) {
 			$currently_acf = true;
 		}
 	}
@@ -783,7 +774,7 @@ if ( ! function_exists( 'jrd_edit_post' ) ) {
 			';
 			$html .= '<a href="' . get_edit_post_link( $post->ID ) . '" id="jrd-edit-post"><span class="dashicons dashicons-edit"></span></a>';
 		}
-		echo $html;
+		echo wp_kses( $html );
 	}
 	add_action( 'wp_footer', 'jrd_edit_post' );
 }
@@ -849,10 +840,57 @@ if ( ! function_exists( 'enqueue_block_styles' ) ) {
 }
 
 $jrd_blocks = array();
-foreach ( scandir( __DIR__ . '/blocks' ) as $dir ) {
-	if ( '.' !== $dir && '..' !== $dir && '_example' !== $dir ) {
-		$jrd_blocks[] = $dir;
+$scandir    = scandir( __DIR__ . '/blocks' );
+if ( $scandir ) {
+	foreach ( $scandir as $dir ) {
+		if ( '.' !== $dir && '..' !== $dir && '_example' !== $dir && 'new.php' !== $dir ) {
+			$jrd_blocks[] = $dir;
+		}
 	}
+}
+
+function custom_acf_json_filename( $filename, $post, $load_path ) {
+
+	$location = $post['location'][0][0];
+	if ( 'block' === $location['param'] ) {
+		$block    = str_replace( 'jrd/', '', $location['value'] );
+		$filename = "acf-{$block}.json";
+	} else {
+		$filename = strtolower( $filename );
+	}
+
+	return $filename;
+}
+add_filter( 'acf/json/save_file_name', 'custom_acf_json_filename', 10, 3 );
+
+function custom_acf_json_save_paths( $paths, $post ) {
+	$location = $post['location'][0][0];
+	if ( 'block' === $location['param'] ) {
+		$block = str_replace( 'jrd/', '', $location['value'] );
+		$paths = array( get_stylesheet_directory() . "/blocks/{$block}" );
+	} else {
+		$paths = array( get_stylesheet_directory() . '/functions/acf-json' );
+	}
+
+	return $paths;
+}
+add_filter( 'acf/json/save_paths', 'custom_acf_json_save_paths', 10, 2 );
+
+// make acf read acf-json folder
+if ( ! function_exists( 'jrd_acf_json_load_point' ) ) {
+	function jrd_acf_json_load_point( $paths ) {
+		global $jrd_blocks;
+		$paths   = $jrd_blocks;
+		$paths   = array_map(
+			function ( $block ) {
+				return get_stylesheet_directory() . "/blocks/{$block}";
+			},
+			$paths
+		);
+		$paths[] = get_stylesheet_directory() . '/functions/acf-json';
+		return $paths;
+	}
+	add_filter( 'acf/settings/load_json', 'jrd_acf_json_load_point' );
 }
 
 if ( ! function_exists( 'register_acf_blocks' ) ) {
@@ -949,6 +987,8 @@ if ( ! function_exists( 'setup_block_acf' ) ) {
 	}
 }
 
+/*
+ * Example AJAX function
 if ( ! function_exists( 'my_function_name' ) ) {
 	function my_function_name() {
 		// use $_POST variables to pull in data
@@ -960,11 +1000,13 @@ if ( ! function_exists( 'my_function_name' ) ) {
 	add_action( 'wp_ajax_my_function_name', 'my_function_name' );
 	add_action( 'wp_ajax_nopriv_my_function_name', 'my_function_name' );
 }
+*/
 
 if ( ! function_exists( 'block_preview' ) ) {
 	function block_preview( $dir ) {
 		$result = preg_replace( '/^(?>\/code\/)(.+)/m', '/$1', $dir . '/preview.jpg.webp' );
 		$result = home_url() . str_replace( $_SERVER['DOCUMENT_ROOT'], '', $result );
+		$result = esc_url( $result );
 		return "<img src='$result' alt='preview' style='display: block !important; margin: 0 auto !important;' />";
 	}
 }

@@ -9,7 +9,7 @@ if ( have_rows( 'social_links' ) ) {
 		$platform    = get_sub_field( 'social_platform' );
 		$link        = get_sub_field( 'social_link' );
 		$aria_string = 'Link to [platform]';
-		$aria_label  = str_replace( '[platform]', $platform, $aria_string );
+		$aria_label  = esc_attr( str_replace( '[platform]', $platform, $aria_string ) );
 		if ( $link ) {
 			$url    = $link['url'];
 			$target = $link['target'];
@@ -18,6 +18,8 @@ if ( have_rows( 'social_links' ) ) {
 			$url    = 'mailto:' . get_sub_field( 'email_address' );
 			$target = '_blank';
 		}
+		$url    = esc_url( $url );
+		$target = esc_attr( $target );
 		echo "<a class='social' aria-label='$aria_label' href='$url' target='$target'>";
 			echo jrd_use( "social_$platform" );
 		echo '</a>' . PHP_EOL;

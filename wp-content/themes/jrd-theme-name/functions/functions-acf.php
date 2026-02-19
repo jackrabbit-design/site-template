@@ -1,7 +1,7 @@
 <?php
 $currently_acf = false;
 if ( isset( $_GET['post'] ) ) {
-	if ( 'acf-field-group' === get_post( $_GET['post'] )->post_type ) {
+	if ( 'acf-field-group' === get_post( absint( $_GET['post'] ) )->post_type ) {
 		$currently_acf = true;
 	}
 }

@@ -178,10 +178,11 @@ if ( ! function_exists( 'jrd_link' ) ) {
 	function jrd_link( $link, $classes = '', $id = '', $span = true, $atts_array = array() ) {
 		if ( isset( $link['url'] ) && '' !== (string) $link['url'] ) {
 			$link_label = isset( $link['label'] ) && '' !== (string) $link['label'] ? $link['label'] : esc_attr( $link['title'] );
+			$link_label = esc_attr( $link_label );
 			$link_url   = esc_url( $link['url'] );
-			$target     = $link['target'] ?? '_self';
-			$nofollow   = isset( $link['nofollow'] ) && 'nofollow' === $link['nofollow'] ? "rel='nofollow'" : '';
-			$title      = $span ? tag_wrap( $link['title'], 'span' ) : $link['title'];
+			$target     = esc_attr( $link['target'] ?? '_self' );
+			$nofollow   = esc_attr( isset( $link['nofollow'] ) && 'nofollow' === $link['nofollow'] ? "rel='nofollow'" : '' );
+			$title      = wp_kses_post( $span ? tag_wrap( $link['title'], 'span' ) : $link['title'] );
 			if ( isset( $link['classes'] ) && '' !== (string) $link['classes'] ) {
 				$classes = esc_attr( $link['classes'] );
 			} else {
@@ -212,11 +213,11 @@ if ( ! function_exists( 'jrd_link' ) ) {
 if ( ! function_exists( 'ada_link' ) ) {
 	function ada_link( $link, $classes = '', $id = '', $span = true, $atts_array = array() ) {
 		if ( isset( $link['link']['url'] ) && '' !== (string) $link['link']['url'] ) {
-			$link_label = isset( $link['aria_label'] ) && '' !== (string) $link['aria_label'] ? $link['aria_label'] : esc_attr( $link['link']['title'] );
+			$link_label = esc_attr( isset( $link['aria_label'] ) && '' !== (string) $link['aria_label'] ? $link['aria_label'] : esc_attr( $link['link']['title'] ) );
 			$link_url   = esc_url( $link['link']['url'] );
-			$target     = $link['link']['target'] ?? '_self';
-			$nofollow   = $link['nofollow'] ? "rel='nofollow'" : '';
-			$title      = $span ? tag_wrap( $link['link']['title'], 'span' ) : $link['link']['title'];
+			$target     = esc_attr( $link['link']['target'] ?? '_self' );
+			$nofollow   = esc_attr( $link['nofollow'] ? "rel='nofollow'" : '' );
+			$title      = wp_kses_post( $span ? tag_wrap( $link['link']['title'], 'span' ) : $link['link']['title'] );
 			$atts       = '';
 			if ( ! empty( $atts_array ) ) {
 				foreach ( $atts_array as $key => $val ) {
@@ -253,7 +254,7 @@ if ( ! function_exists( 'jrd_terms_dropdown' ) ) {
 		$html  = "<select id=\"{$id}\" name=\"{$tax}\"{$aria}>" . PHP_EOL;
 		$html .= "<option value=\"{$default_value}\">{$default_text}</option>" . PHP_EOL;
 		foreach ( $terms as $term ) {
-			$selected = ( isset( $_GET[ $tax ] ) && $_GET[ $tax ] === $term->slug ) ? 'selected' : '';
+			$selected = ( isset( $_GET[ $tax ] ) && sanitize_text_field( $_GET[ $tax ] ) === $term->slug ) ? 'selected' : '';
 			$html    .= "<option $selected value=\"{$term->slug}\">{$term->name}</option>" . PHP_EOL;
 		}
 		$html .= '</select>' . PHP_EOL;

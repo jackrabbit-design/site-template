@@ -125,7 +125,7 @@ if ( ! function_exists( 'rgempty' ) ) {
 			$arr = $_POST;
 		}
 
-		$val = rgar( $array, $name );
+		$val = rgar( $arr, $name );
 
 		return empty( $val );
 	}
