@@ -13,13 +13,15 @@
 /* !STYLES */
 /* ========================================================================= */
 
-@view-transition {
-	navigation: auto;
-}
+@media (prefers-reduced-motion: no-preference) {
+	@view-transition {
+		navigation: auto;
+	}
 
-::view-transition-group(root) {
-	animation-duration: 0.5s;
-	animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	::view-transition-group(root) {
+		animation-duration: 0.5s;
+		animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	}
 }
 
 /* != DEFAULT STYLES ===== */

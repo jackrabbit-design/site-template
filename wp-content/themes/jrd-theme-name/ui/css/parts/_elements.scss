@@ -152,7 +152,7 @@
 	.sr-only, .slick-sr-only {
 		/* Styles below are so elements are shown to screen readers only */
 		border: none !important;
-		clip: rect(0, 0, 0, 0) !important;
+		clip-path: inset(50%) !important;
 		height: 0.01em !important;
 		overflow: hidden !important;
 		padding: 0 !important;
