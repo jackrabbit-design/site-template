@@ -579,7 +579,7 @@ if ( ! function_exists( 'jrd_mce_before_init' ) ) {
 		$style_formats = array(
 			array(
 				'title'      => 'Button Link',
-				'inline'     => 'a',
+				'selector'     => 'a',
 				'attributes' => array(
 					'class' => 'btn',
 				),
