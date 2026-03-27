@@ -58,7 +58,7 @@ jQuery(($) => {
     $("#header #main-nav a[data-link=nonactive]").on('click', (event) => {
         event.preventDefault();
     });
-	$("#header #main-nav .menu-item-has-children").on('click', (event) => {
+	$("#header #main-nav .menu-item-has-children").on('click', function(event) {
         if( $("#header").hasClass("active") ) {
             if( !$(event.target).is("a") ) {
                 $(this).toggleClass("active");
@@ -237,6 +237,9 @@ jQuery.fn.extend({close: function() {
         }
     });
 }});
+
+jQuery('dialog').attr('data-lenis-prevent', '');
+
 /*
 * To use with <dialog> elements, use the following:
 * $('dialog').showModal(); // to open
