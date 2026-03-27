@@ -42,6 +42,23 @@
         }
     }
 
+    @mixin sm() {
+        @media only screen and ( min-width: 480px ){
+            @content;
+        }
+    }
+
+    @mixin md() {
+        @media only screen and ( min-width: 768px ){
+            @content;
+        }
+    }
+    @mixin lg() {
+        @media only screen and ( min-width: 991px ){
+            @content;
+        }
+    }
+
     @function em( $value, $fontsize ) {
         @return math.div($value, $fontsize) * 1em;
     }

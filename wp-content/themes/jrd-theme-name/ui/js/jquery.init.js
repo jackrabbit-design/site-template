@@ -53,7 +53,7 @@ jQuery(($) =>{
     $("#header #main-nav a[data-link=nonactive]").on('click', (event) => {
         event.preventDefault();
     });
-	$("#header #main-nav .menu-item-has-children").on('click', (event) => {
+	$("#header #main-nav .menu-item-has-children").on('click', function(event){
         if( $("#header").hasClass("active") ) {
             if( !$(event.target).is("a") ) {
                 $(this).toggleClass("active");
@@ -236,6 +236,7 @@ jQuery.fn.extend({close: function() {
 * $('dialog').showModal(); // to open
 * $('dialog').close(); // to close
 */
+jQuery('dialog').attr('data-lenis-prevent', '');
 
 // Initialize Lenis on non-touch devices
 if ( ! jQuery('body').hasClass('wp-admin') ) {
