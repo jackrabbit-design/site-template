@@ -774,7 +774,7 @@ if ( ! function_exists( 'jrd_edit_post' ) ) {
 			';
 			$html .= '<a href="' . get_edit_post_link( $post->ID ) . '" id="jrd-edit-post"><span class="dashicons dashicons-edit"></span></a>';
 		}
-		echo wp_kses( $html );
+		echo $html;
 	}
 	add_action( 'wp_footer', 'jrd_edit_post' );
 }
