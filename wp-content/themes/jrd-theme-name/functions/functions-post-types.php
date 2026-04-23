@@ -56,7 +56,9 @@ register_taxonomy(
 	$taxonomy_name_slug,
 	array( $post_name_slug ),
 	array(
-		'hierarchical' => true,                                   // Category or Tag functionality
+		'hierarchical' => true, // Category or Tag functionality
+		'show_ui'      => true,
+		'show_in_rest' => true,
 		'query_var'    => true,
 		'rewrite'      => array( 'slug' => $taxonomy_name_slug ),
 		'labels'       => array(
