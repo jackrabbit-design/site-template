@@ -706,6 +706,20 @@ if ( ! function_exists( 'custom_fields_to_excerpts' ) ) {
 	add_filter( 'relevanssi_excerpt_content', 'custom_fields_to_excerpts', 10, 3 );
 }
 
+// Exclude certain blocks from Relevanssi indexing
+add_filter(
+	'relevanssi_block_to_render',
+	function ( $block ) {
+		$blocks_to_ignore = array(
+			'jrd/my-block-name',
+		);
+		if ( in_array( $block['blockName'], $blocks_to_ignore, true ) ) {
+			return null; // Returning null stops Relevanssi from indexing this block
+		}
+		return $block;
+	}
+);
+
 // Stay logged in for longer periods
 if ( ! function_exists( 'keep_me_logged_in' ) ) {
 	function keep_me_logged_in( $expirein ) {
