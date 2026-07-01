@@ -19,6 +19,16 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 	 */
 	private $curItem; // phpcs:ignore
 
+	private function menu_prefix( $args ) {
+		if ( ! empty( $args->menu->slug ) ) {
+			return $args->menu->slug;
+		}
+		if ( ! empty( $args->theme_location ) ) {
+			return sanitize_html_class( $args->theme_location );
+		}
+		return 'nav-' . absint( $args->menu->term_id );
+	}
+
 	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 		$this->curItem = $item; // phpcs:ignore
 		$indent        = ( $depth ) ? str_repeat( "\t", $depth ) : '';
@@ -63,18 +73,9 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 		 * @param int    $depth   Depth of menu item. Used for padding.
 		 */
 		$id = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args, $depth );
-		$id = $id ? ' id="' . $args->menu->slug . '-' . esc_attr( $id ) . '"' : '';
-		//$roles = ' role="none"';
-
-		// $output .= sprintf( '%s<li%s%s%s>',
-		//  $indent,
-		//  $id,
-		//  $class_names,
-		//  $roles
-		// );
-
+		$id = $id ? ' id="' . $this->menu_prefix( $args ) . '-' . esc_attr( $id ) . '"' : '';
 		$output .= sprintf(
-			'%s<li%s%s>',
+			'%s<li%s%s role="none">',
 			$indent,
 			$id,
 			$class_names,
@@ -85,7 +86,7 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$atts['target']       = ! empty( $item->target ) ? $item->target : '';
 		$atts['rel']          = ! empty( $item->xfn ) ? $item->xfn : '';
 		$atts['href']         = ! empty( $item->url ) ? $item->url : '';
-		$atts['aria-current'] = isset( $menu_item->current ) ? 'page' : '';
+		$atts['aria-current'] = ! empty( $item->current ) ? 'page' : '';
 		$atts['aria-label']   = ! empty( $item->target ) ? __( 'Opens in new window', 'jrd' ) : '';
 		if ( '#' === $atts['href'] ) {
 			$atts['data-link']  = 'nonactive';
@@ -152,12 +153,12 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 				$item_output .= '<a' . $attributes . '>';
 				$item_output .= $args->link_before . $title . $args->link_after;
 				$item_output .= '</a>';
-				$item_output .= '<button id="' . $args->menu->slug . '-menu-item-' . $item->ID . 'B" class="menu-toggle-button" aria-controls="' . $args->menu->slug . '-menu-item-' . $item->ID . 'C" data-toggle="true" aria-expanded="false"><span class="sr-only">Show submenu for "' . $title . '"</span></button>';
+				$item_output .= '<button id="' . $this->menu_prefix( $args ) . '-menu-item-' . $item->ID . 'B" class="menu-toggle-button" aria-controls="' . $this->menu_prefix( $args ) . '-menu-item-' . $item->ID . 'C" data-toggle="true" aria-expanded="false"><span class="sr-only">Show submenu for "' . $title . '"</span></button>';
 			} else {
-				$item_output .= '<a' . $attributes . ' id="' . $args->menu->slug . '-menu-item-' . $item->ID . 'A" data-toggle="true">';
+				$item_output .= '<a' . $attributes . ' id="' . $this->menu_prefix( $args ) . '-menu-item-' . $item->ID . 'A" data-toggle="true">';
 				$item_output .= $args->link_before . $title . $args->link_after;
 				$item_output .= '</a>';
-				$item_output .= '<button id="' . $args->menu->slug . '-menu-item-' . $item->ID . 'B" class="menu-toggle-button" aria-controls="' . $args->menu->slug . '-menu-item-' . $item->ID . 'C" data-toggle="true" aria-expanded="false"><span class="sr-only">Show submenu for "' . $title . '"</span></button>';
+				$item_output .= '<button id="' . $this->menu_prefix( $args ) . '-menu-item-' . $item->ID . 'B" class="menu-toggle-button" aria-controls="' . $this->menu_prefix( $args ) . '-menu-item-' . $item->ID . 'C" data-toggle="true" aria-expanded="false"><span class="sr-only">Show submenu for "' . $title . '"</span></button>';
 			}
 			$item_output .= $args->after;
 		} elseif ( $depth > 0 ) {
@@ -219,7 +220,7 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 			$role       = ' aria-label="Sub Menu for ' . $this->curItem->post_title . '" aria-hidden="true"'; // phpcs:ignore
 			$parentlink = $this->curItem->ID; // phpcs:ignore
-			$output    .= "{$n}{$indent}<div class='sub-menu-wrap'><ul id=\"{$args->menu->slug}-menu-item-{$parentlink}C\" $class_names $role>{$n}";
+			$output    .= "{$n}{$indent}<div class='sub-menu-wrap'><ul id=\"{$this->menu_prefix( $args )}-menu-item-{$parentlink}C\" $class_names $role>{$n}";
 	}
 
 	public function end_lvl( &$output, $depth = 0, $args = array() ) {
