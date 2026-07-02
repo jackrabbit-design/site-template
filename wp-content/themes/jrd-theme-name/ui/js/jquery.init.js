@@ -95,12 +95,12 @@ jQuery(($) =>{
 		}
 	});
 
-	$('li.menu-item-has-children .sub-menu-wrap').on('focusout', function() {
+	$('li.menu-item-has-children').on('focusout', function() {
 		setTimeout(() => {
-		  if (!$(this).find(':focus').length) {
-			$(this).parents('li.menu-item-has-children').toggleClass('active');
-			//$(this).attr('aria-expanded','false');
-			$(this).parents('li.menu-item-has-children').find('.sub-menu').attr('aria-hidden','true');
+		  if ($(this).hasClass('active') && !$(this).find(':focus').length) {
+			$(this).removeClass('active');
+			$(this).find('.menu-toggle-button').attr('aria-expanded','false');
+			$(this).find('.sub-menu').attr('aria-hidden','true');
 		  }
 		}, 0);
 	});
