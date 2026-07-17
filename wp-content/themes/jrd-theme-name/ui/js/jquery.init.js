@@ -4,6 +4,21 @@
 /* BE SURE TO COMMENT CODE/IDENTIFY PER PLUGIN CALL */
 /* ========================================================================= */
 
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if ( ! reduceMotion ) {
+    // Initialize Lenis on non-touch devices
+    if ( ! jQuery('body').hasClass('wp-admin') ) {
+        if ( !('ontouchstart' in window || navigator.maxTouchPoints) ) {
+            new Lenis({
+                autoRaf: true,
+            });
+        }
+    }
+} else {
+    jQuery.fx.off = true;
+}
+jQuery('dialog').attr('data-lenis-prevent', '');
+
 jQuery(($) =>{
 
 	// ALERT
@@ -166,6 +181,14 @@ jQuery(($) =>{
     });
     */
 
+    // add external link class and attributes to links in body content
+    $('#body-content a').filter(function() {
+        return this.hostname && this.hostname !== location.hostname;
+    }).addClass('external-link').attr('target','_blank').attr('rel','noopener noreferrer').attr('aria-label', function() {
+        const label = $(this).text().trim() || $(this).attr('href');
+        return `${label} - (Opens in a new tab)`;
+    });
+
 });
 
 // UNRUNT
@@ -236,13 +259,3 @@ jQuery.fn.extend({close: function() {
 * $('dialog').showModal(); // to open
 * $('dialog').close(); // to close
 */
-jQuery('dialog').attr('data-lenis-prevent', '');
-
-// Initialize Lenis on non-touch devices
-if ( ! jQuery('body').hasClass('wp-admin') ) {
-    if ( !('ontouchstart' in window || navigator.maxTouchPoints) ) {
-        new Lenis({
-            autoRaf: true,
-        });
-    }
-}
