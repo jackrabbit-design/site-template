@@ -1098,3 +1098,15 @@ function jrd_hide_plugins_from_list( $plugins ) {
 
 	return $plugins;
 }
+
+
+/* Remove author from Rank Math rich snippet */
+add_filter(
+	'rank_math/snippet/rich_snippet_article_entity',
+	function ( $entity ) {
+		if ( isset( $entity['author'] ) ) {
+			unset( $entity['author'] );
+		}
+		return $entity;
+	}
+);
