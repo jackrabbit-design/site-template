@@ -66,7 +66,7 @@ if ( function_exists( 'register_nav_menus' ) ) {
 add_theme_support( 'title-tag' ); // Add support for title tag in wp_head
 
 /* Disables 'auto' size on images */
-add_filter('wp_img_tag_add_auto_sizes', '__return_false');
+add_filter( 'wp_img_tag_add_auto_sizes', '__return_false' );
 
 /* ========================================================================= */
 /* Favor GD over Imagick (prevent HTTP Error) */
@@ -579,7 +579,7 @@ if ( ! function_exists( 'jrd_mce_before_init' ) ) {
 		$style_formats = array(
 			array(
 				'title'      => 'Button Link',
-				'selector'     => 'a',
+				'selector'   => 'a',
 				'attributes' => array(
 					'class' => 'btn',
 				),
@@ -907,3 +907,15 @@ function jrd_hide_plugins_from_list( $plugins ) {
 
 	return $plugins;
 }
+
+
+/* Remove author from Rank Math rich snippet */
+add_filter(
+	'rank_math/snippet/rich_snippet_article_entity',
+	function ( $entity ) {
+		if ( isset( $entity['author'] ) ) {
+			unset( $entity['author'] );
+		}
+		return $entity;
+	}
+);
