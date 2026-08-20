@@ -86,16 +86,12 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$atts['rel']          = ! empty( $item->xfn ) ? $item->xfn : '';
 		$atts['href']         = ! empty( $item->url ) ? $item->url : '';
 		$atts['aria-current'] = isset( $menu_item->current ) ? 'page' : '';
-		$atts['aria-label']   = ! empty( $item->target ) ? __( 'Opens in new window', 'jrd' ) : '';
+		$atts['aria-label']   = ! empty( $item->target ) ? $item->title . ' (' . __( 'opens in new window', 'jrd' ) . ')' : '';
 		if ( '#' === $atts['href'] ) {
 			$atts['data-link'] = 'nonactive';
-			if ( (int) 0 === (int) $depth ) {
-				// No href means the <a> isn't focusable or exposed as a link to AT, unlike href="#".
-				$atts['href']       = '';
-				$atts['aria-label'] = '';
-			} else {
-				$atts['aria-label'] = __( 'This link goes no where and is only for presentation', 'jrd' );
-			}
+			// No href means the <a> isn't focusable or exposed as a link to AT, unlike href="#".
+			$atts['href']       = '';
+			$atts['aria-label'] = '';
 		} else {
 			$atts['data-link'] = 'active';
 		}
