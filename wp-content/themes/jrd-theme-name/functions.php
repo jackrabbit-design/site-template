@@ -354,27 +354,36 @@ if ( ! function_exists( 'add_custom_css_classes' ) ) {
  *
  * @return string The filtered button.
  */
-if ( ! function_exists( 'input_to_button' ) ) {
-	function input_to_button( $button, $form ) {
-		$dom = new DOMDocument();
-		$dom->loadHTML( '<?xml encoding="utf-8" ?>' . $button );
-		$input      = $dom->getElementsByTagName( 'input' )->item( 0 );
-		$new_button = $dom->createElement( 'button' );
-		$new_button->appendChild( $dom->createTextNode( $input->getAttribute( 'value' ) ) );
-		$input->removeAttribute( 'value' );
-		foreach ( $input->attributes as $attribute ) {
-			$new_button->setAttribute( $attribute->name, $attribute->value );
-		}
-		$classes  = $new_button->getAttribute( 'class' );
-		$classes .= ' submit btn';
-		$new_button->setAttribute( 'class', $classes );
-		$input->parentNode->replaceChild( $new_button, $input ); // phpcs:ignore
+function input_to_button( $button, $form ) {
+	$button = preg_replace_callback(
+		'/class=["\']([^"\']*)["\']/',
+		function ( $matches ) {
+			$classes = trim( $matches[1] . ' submit btn' );
+			return 'class="' . esc_attr( $classes ) . '"';
+		},
+		$button
+	);
+	$button = preg_replace_callback(
+		'/<input([^>]*?)type=["\']submit["\']([^>]*?)>/',
+		function ( $matches ) {
+			$attrs = $matches[1] . $matches[2];
+			$label = '';
+			if ( preg_match( '/value=["\']([^"\']*)["\']/', $attrs, $value_matches ) ) {
+				$label = esc_html( $value_matches[1] );
+			}
+			return '<button' . $matches[1] . 'type="submit"' . $matches[2] . '>' . $label . '</button>';
+		},
+		$button
+	);
+	$button = preg_replace_callback(
+		'/(<button[^>]*>)(.*?)(<\/button>)/s',
+		function ( $matches ) {
+			return $matches[1] . '<span>' . $matches[2] . '</span>' . $matches[3];
+		},
+		$button
+	);
 
-		return $dom->saveHtml( $new_button );
-	}
-	add_filter( 'gform_next_button', 'input_to_button', 10, 2 );
-	add_filter( 'gform_previous_button', 'input_to_button', 10, 2 );
-	add_filter( 'gform_submit_button', 'input_to_button', 10, 2 );
+	return $button;
 }
 
 // Disables the Gravity Forms CSS.
