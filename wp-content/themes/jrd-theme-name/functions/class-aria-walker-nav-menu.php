@@ -85,13 +85,13 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$atts['target']       = ! empty( $item->target ) ? $item->target : '';
 		$atts['rel']          = ! empty( $item->xfn ) ? $item->xfn : '';
 		$atts['href']         = ! empty( $item->url ) ? $item->url : '';
-		$atts['aria-current'] = isset( $menu_item->current ) ? 'page' : '';
-		$atts['aria-label']   = ! empty( $item->target ) ? $item->title . ' (' . __( 'opens in new window', 'jrd' ) . ')' : '';
+		$atts['aria-current'] = ! empty( $item->current ) ? 'page' : '';
 		if ( '#' === $atts['href'] ) {
 			$atts['data-link'] = 'nonactive';
-			// No href means the <a> isn't focusable or exposed as a link to AT, unlike href="#".
-			$atts['href']       = '';
-			$atts['aria-label'] = '';
+			if ( (int) 0 === (int) $depth ) {
+				// No href means the <a> isn't focusable or exposed as a link to AT, unlike href="#".
+				$atts['href'] = '';
+			}
 		} else {
 			$atts['data-link'] = 'active';
 		}
@@ -150,16 +150,18 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 		 */
 		$title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
 
+		$new_window = ! empty( $item->target ) ? '<span class="sr-only"> ' . __( '(opens in new window)', 'jrd' ) . '</span>' : '';
+
 		if ( (int) 0 === (int) $depth && in_array( 'menu-item-has-children', $item->classes, true ) ) {
 			$item_output = $args->before;
 			if ( str_contains( $attributes, 'data-link="active"' ) ) {
 				$item_output .= '<a' . $attributes . '>';
-				$item_output .= $args->link_before . $title . $args->link_after;
+				$item_output .= $args->link_before . $title . $new_window . $args->link_after;
 				$item_output .= '</a>';
 				$item_output .= '<button id="' . $args->menu->slug . '-menu-item-' . $item->ID . 'B" class="menu-toggle-button" aria-controls="' . $args->menu->slug . '-menu-item-' . $item->ID . 'C" data-toggle="true" aria-expanded="false"><span class="sr-only">Show submenu for "' . $title . '"</span></button>';
 			} else {
 				$item_output .= '<a' . $attributes . ' id="' . $args->menu->slug . '-menu-item-' . $item->ID . 'A" data-toggle="true">';
-				$item_output .= $args->link_before . $title . $args->link_after;
+				$item_output .= $args->link_before . $title . $new_window . $args->link_after;
 				$item_output .= '</a>';
 				$item_output .= '<button id="' . $args->menu->slug . '-menu-item-' . $item->ID . 'B" class="menu-toggle-button" aria-controls="' . $args->menu->slug . '-menu-item-' . $item->ID . 'C" data-toggle="true" aria-expanded="false"><span class="sr-only">Show submenu for "' . $title . '"</span></button>';
 			}
@@ -167,13 +169,13 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 		} elseif ( $depth > 0 ) {
 			$item_output  = $args->before;
 			$item_output .= '<a' . $attributes . '>';
-			$item_output .= $args->link_before . $title . $args->link_after;
+			$item_output .= $args->link_before . $title . $new_window . $args->link_after;
 			$item_output .= '</a>';
 			$item_output .= $args->after;
 		} else {
 			$item_output  = $args->before;
 			$item_output .= '<a' . $attributes . '>';
-			$item_output .= $args->link_before . $title . $args->link_after;
+			$item_output .= $args->link_before . $title . $new_window . $args->link_after;
 			$item_output .= '</a>';
 			$item_output .= $args->after;
 		}
@@ -221,7 +223,7 @@ class Aria_Walker_Nav_Menu extends Walker_Nav_Menu {
 			$class_names = join( ' ', apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth ) );
 			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
-			$role       = ' aria-label="Sub Menu for ' . $this->curItem->post_title . '" aria-hidden="true"'; // phpcs:ignore
+			$role       = ' aria-label="' . esc_attr( 'Sub Menu for ' . $this->curItem->title ) . '"'; // phpcs:ignore
 			$parentlink = $this->curItem->ID; // phpcs:ignore
 			$output    .= "{$n}{$indent}<div class='sub-menu-wrap'><ul id=\"{$args->menu->slug}-menu-item-{$parentlink}C\" $class_names $role>{$n}";
 	}
