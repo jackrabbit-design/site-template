@@ -11,6 +11,9 @@ $is_production   = in_array( $_SERVER['HTTP_HOST'], $production_urls, true );
 if ( $is_production ) {
 	if ( (int) 0 === (int) get_option( 'blog_public' ) ) {
 		update_option( 'blog_public', 1 );
+		if ( class_exists( 'RankMath\Helper' ) ) {
+			\RankMath\Helper::remove_notification( 'search_engine_visibility' );
+		}
 	}
 } else {
 	if ( (int) 1 === (int) get_option( 'blog_public' ) ) {
