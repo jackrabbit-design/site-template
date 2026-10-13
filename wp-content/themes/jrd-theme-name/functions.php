@@ -94,6 +94,20 @@ if ( ! function_exists( 'change_graphic_lib' ) ) {
 }
 
 /* ========================================================================= */
+/* Define Additional HTTP Headers */
+/* ========================================================================= */
+
+/*
+if ( ! function_exists( 'replace_wp_headers' ) ) {
+	function replace_wp_headers( $headers ) {
+		$headers['']    = '';
+		return $headers;
+	}
+	add_filter( 'wp_headers', 'replace_wp_headers' );
+}
+*/
+
+/* ========================================================================= */
 /* WordPress External Files     */
 /* ========================================================================= */
 
