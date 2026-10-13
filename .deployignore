@@ -6,3 +6,4 @@ htaccess.txt
 prepros.config
 README.md
 robots.txt.sample
+wp-content/themes/**/blocks/new.php

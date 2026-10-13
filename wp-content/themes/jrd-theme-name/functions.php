@@ -61,6 +61,7 @@ if ( ! function_exists( 'jrd_add_img_sizes' ) ) {
 	}
 }
 add_theme_support( 'post-thumbnails' );
+add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'script', 'style' ) );
 set_post_thumbnail_size( 64, 64, true );
 //add_image_size( 'size-name', 100, 100, true );
 //jrd_add_img_sizes( 'size-name', 100, 100 );
@@ -93,43 +94,6 @@ if ( ! function_exists( 'change_graphic_lib' ) ) {
 }
 
 /* ========================================================================= */
-/* Define Additional HTTP Headers */
-/* ========================================================================= */
-if ( ! function_exists( 'replace_wp_headers' ) ) {
-	function replace_wp_headers( $headers ) {
-		$headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'; // Forces the User Agent to use HTTPS
-		$headers['X-Frame-Options']           = 'SAMEORIGIN'; // Prevents a browser from framing your site and protects against attacks like clickjacking.
-		$headers['X-Content-Type-Options']    = 'nosniff'; // Stops a browser from trying to MIME-sniff the content type and forces it to stick with the declared content-type.
-		return $headers;
-	}
-	add_filter( 'wp_headers', 'replace_wp_headers' );
-}
-
-/* ========================================================================= */
-/* Redirect attachment post to parent post */
-/* ========================================================================= */
-
-if ( ! function_exists( 'attachment_redirect' ) ) {
-	function attachment_redirect() {
-		global $post;
-		if ( ! is_attachment() || ! isset( $post->post_parent ) || ! is_numeric( $post->post_parent ) ) {
-			return;
-		}
-		// Does the attachment have a parent post?
-		// If the post is trashed, fallback to redirect to homepage.
-		if ( 0 !== $post->post_parent && 'publish' === get_post_status( $post->post_parent ) ) {
-			// Redirect to the attachment parent.
-			wp_safe_redirect( get_permalink( $post->post_parent ), 301 );
-		} else {
-			// For attachment without a parent redirect to homepage.
-			wp_safe_redirect( home_url(), 302 );
-		}
-		exit;
-	}
-	add_action( 'template_redirect', 'attachment_redirect', 1 );
-}
-
-/* ========================================================================= */
 /* WordPress External Files     */
 /* ========================================================================= */
 
@@ -148,11 +112,7 @@ require_once 'functions/class-aria-walker-nav-menu.php';
 remove_action( 'wp_head', 'feed_links_extra', 3 ); // Display the links to the extra feeds such as category feeds
 remove_action( 'wp_head', 'feed_links', 2 ); // Display the links to the general feeds: Post and Comment Feed
 remove_action( 'wp_head', 'rsd_link' ); // Display the link to the Really Simple Discovery service endpoint, EditURI link
-remove_action( 'wp_head', 'wlwmanifest_link' ); // Display the link to the Windows Live Writer manifest file.
-remove_action( 'wp_head', 'index_rel_link' ); // index link
-remove_action( 'wp_head', 'parent_post_rel_link', 10, 0 ); // prev link
-remove_action( 'wp_head', 'start_post_rel_link', 10, 0 ); // start link
-remove_action( 'wp_head', 'adjacent_posts_rel_link', 10, 0 ); // Display relational links for the posts adjacent to the current post.
+remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10 ); // Display relational links for the posts adjacent to the current post.
 remove_action( 'wp_head', 'wp_generator' ); // Display the XHTML generator that is generated on the wp_head hook, WP version
 
 /* Prevent Login Errors for Security */
@@ -249,10 +209,8 @@ if ( ! function_exists( 'jrd_login_title' ) ) {
 if ( ! function_exists( 'jrd_enqueue_scripts' ) ) {
 	function jrd_enqueue_scripts() {
 		wp_enqueue_script( 'jquery' );
-		wp_enqueue_script( 'modernizr', jrd_ui( 'js/modernizr.js' ), array(), '1.0.0', true );
-		wp_enqueue_script( 'svgxuse', jrd_ui( 'js/svgxuse.js' ), array(), '1.0.0', true );
 		wp_enqueue_script( 'plugins', jrd_ui( 'js/jquery.plugins.js' ), array( 'jquery' ), '1.0.0', true );
-		wp_enqueue_script( 'init', jrd_ui( 'js/jquery.init-dist.js' ), array( 'jquery', 'plugins', 'modernizr' ), filemtime( get_template_directory() . '/ui/js/jquery.init.js' ), true );
+		wp_enqueue_script( 'init', jrd_ui( 'js/jquery.init-dist.js' ), array( 'jquery', 'plugins' ), filemtime( get_template_directory() . '/ui/js/jquery.init-dist.js' ), true );
 		wp_localize_script(
 			'init',
 			'jrd',
@@ -331,6 +289,7 @@ function add_custom_css_classes( $button, $form ) {
  *
  * @return string The filtered button.
  */
+
 function input_to_button( $button, $form ) {
 	$button = preg_replace_callback(
 		'/class=["\']([^"\']*)["\']/',
@@ -363,6 +322,10 @@ function input_to_button( $button, $form ) {
 	return $button;
 }
 
+add_filter( 'gform_next_button', 'input_to_button', 10, 2 );
+add_filter( 'gform_previous_button', 'input_to_button', 10, 2 );
+add_filter( 'gform_submit_button', 'input_to_button', 10, 2 );
+
 // Disables the Gravity Forms CSS.
 // add_filter( 'gform_disable_css', '__return_true' );
 
@@ -391,65 +354,6 @@ if ( ! function_exists( 'new_excerpt_more' ) ) {
 	}
 	add_filter( 'excerpt_more', 'new_excerpt_more' );
 }
-
-
-/* ========================================================================= */
-/*  BROWSER DETECTION body_class() OUTPUT */
-/* ========================================================================= */
-function custom_body_browser_classes( $classes ) {
-	$user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : '';
-
-	$browser = 'unknown';
-	if ( preg_match( '/MSIE|Trident/i', $user_agent ) ) {
-		$browser = 'Internet Explorer';
-	} elseif ( preg_match( '/Edge/i', $user_agent ) ) {
-		$browser = 'Edge';
-	} elseif ( preg_match( '/OPR|Opera/i', $user_agent ) ) {
-		$browser = 'Opera';
-	} elseif ( preg_match( '/Chrome/i', $user_agent ) ) {
-		$browser = 'Chrome';
-	} elseif ( preg_match( '/Safari/i', $user_agent ) ) {
-		$browser = 'Safari';
-	} elseif ( preg_match( '/Firefox/i', $user_agent ) ) {
-		$browser = 'Firefox';
-	}
-
-	$parent = 'unknown';
-	if ( in_array( $browser, array( 'Chrome', 'Opera' ) ) ) {
-		$parent = 'Chromium';
-	} elseif ( 'Safari' === $browser ) {
-		$parent = 'WebKit';
-	} elseif ( 'Firefox' === $browser ) {
-		$parent = 'Gecko';
-	} elseif ( 'Internet Explorer' === $browser ) {
-		$parent = 'Trident';
-	} elseif ( 'Edge' === $browser ) {
-		$parent = 'EdgeHTML';
-	}
-
-	$platform = 'unknown';
-	if ( preg_match( '/android/i', $user_agent ) ) {
-		$platform = 'android';
-	} elseif ( preg_match( '/iphone|ipad|ipod/i', $user_agent ) ) {
-		$platform = 'ios';
-	} elseif ( preg_match( '/windows|win32/i', $user_agent ) ) {
-		$platform = 'windows';
-	} elseif ( preg_match( '/macintosh|mac os x/i', $user_agent ) ) {
-		$platform = 'mac';
-	} elseif ( preg_match( '/linux/i', $user_agent ) ) {
-		$platform = 'linux';
-	}
-
-	// Append the classes to the body_class array.
-	$classes[] = 'browser-' . sanitize_html_class( strtolower( $browser ) );
-	$classes[] = 'parent-' . sanitize_html_class( strtolower( $parent ) );
-	$classes[] = 'platform-' . sanitize_html_class( strtolower( $platform ) );
-
-	return $classes;
-}
-add_filter( 'body_class', 'custom_body_browser_classes' );
-
-
 
 /* Apply various additional filters to the_content() and anything with 'the_content' filtering */
 if ( ! function_exists( 'jrd_content_filters' ) ) {
@@ -647,8 +551,9 @@ if ( ! function_exists( 'custom_fields_to_excerpts' ) ) {
 	function custom_fields_to_excerpts( $content, $post, $query ) {
 
 		$remove_underscore_fields = true;
+		$custom_fields            = array();
 
-		$post_fields = get_post_custom_keys( $post->ID );
+		$post_fields = (array) get_post_custom_keys( $post->ID );
 		foreach ( $post_fields as $field ) {
 			$values = get_post_meta( $post->ID, $field, false );
 			foreach ( $values as $value ) {
@@ -672,9 +577,9 @@ if ( ! function_exists( 'custom_fields_to_excerpts' ) ) {
 			}
 		}
 
-		if ( is_array( $post_fields ) ) {
-			$post_fields = array_unique( $post_fields );
-			foreach ( $post_fields as $field_data ) {
+		if ( ! empty( $custom_fields ) ) {
+			$custom_fields = array_unique( $custom_fields, SORT_REGULAR );
+			foreach ( $custom_fields as $field_data ) {
 				$field = $field_data[0];
 				$value = $field_data[1];
 				if ( $remove_underscore_fields ) {
@@ -702,15 +607,10 @@ if ( ! function_exists( 'custom_fields_to_excerpts' ) ) {
 					continue;
 				}
 
-				$values = get_post_meta( $post->ID, $field, false );
-				if ( '' === $values ) {
+				if ( '' === $value ) {
 					continue;
 				}
-				foreach ( $values as $value ) {
-					if ( ! is_array( $value ) ) {
-						$content .= ' ' . $value;
-					}
-				}
+				$content .= ' ' . $value;
 			}
 		}
 		return $content;
@@ -759,10 +659,10 @@ if ( ! function_exists( 'jrd_add_featured_image_size' ) ) {
 
 // Prevent non-Jackrabbit users from accessing ACF config pages
 if ( is_admin() ) {
-	$not_jrd       = -1 === strpos( get_userdata( get_current_user_id() )->data->user_login, 'jackrabbit' );
+	$not_jrd       = false === strpos( wp_get_current_user()->user_login, 'jackrabbit' );
 	$currently_acf = false;
 	if ( isset( $_GET['post'] ) ) {
-		if ( 'acf-field-group' === get_post( absint( $_GET['post'] ) )->post_type ) {
+		if ( 'acf-field-group' === get_post_type( absint( $_GET['post'] ) ) ) {
 			$currently_acf = true;
 		}
 	}
@@ -877,8 +777,8 @@ if ( $scandir ) {
 
 function custom_acf_json_filename( $filename, $post, $load_path ) {
 
-	$location = $post['location'][0][0];
-	if ( 'block' === $location['param'] ) {
+	$location = $post['location'][0][0] ?? array();
+	if ( 'block' === ( $location['param'] ?? '' ) ) {
 		$block    = str_replace( 'jrd/', '', $location['value'] );
 		$filename = "acf-{$block}.json";
 	} else {
@@ -890,8 +790,8 @@ function custom_acf_json_filename( $filename, $post, $load_path ) {
 add_filter( 'acf/json/save_file_name', 'custom_acf_json_filename', 10, 3 );
 
 function custom_acf_json_save_paths( $paths, $post ) {
-	$location = $post['location'][0][0];
-	if ( 'block' === $location['param'] ) {
+	$location = $post['location'][0][0] ?? array();
+	if ( 'block' === ( $location['param'] ?? '' ) ) {
 		$block = str_replace( 'jrd/', '', $location['value'] );
 		$paths = array( get_stylesheet_directory() . "/blocks/{$block}" );
 	} else {
@@ -931,12 +831,15 @@ if ( ! function_exists( 'register_acf_blocks' ) ) {
 	add_action( 'init', 'register_acf_blocks' );
 }
 
+if ( ! function_exists( 'prepend_jrd' ) ) {
+	function prepend_jrd( $block ) {
+		return 'jrd/' . $block;
+	}
+}
+
 if ( ! function_exists( 'jrd_allowed_block_types' ) ) {
 	function jrd_allowed_block_types() {
 		global $jrd_blocks;
-		function prepend_jrd( $block ) {
-			return 'jrd/' . $block;
-		}
 		return array_map( 'prepend_jrd', $jrd_blocks );
 	}
 	add_filter( 'allowed_block_types_all', 'jrd_allowed_block_types' );
@@ -1030,7 +933,7 @@ if ( ! function_exists( 'my_function_name' ) ) {
 
 if ( ! function_exists( 'block_preview' ) ) {
 	function block_preview( $dir ) {
-		$result = preg_replace( '/^(?>\/code\/)(.+)/m', '/$1', $dir . '/preview.jpg.webp' );
+		$result = preg_replace( '/^(?>\/code\/)(.+)/m', '/$1', $dir . '/preview.jpg' );
 		$result = home_url() . str_replace( $_SERVER['DOCUMENT_ROOT'], '', $result );
 		$result = esc_url( $result );
 		return "<img src='$result' alt='preview' style='display: block !important; margin: 0 auto !important;' />";

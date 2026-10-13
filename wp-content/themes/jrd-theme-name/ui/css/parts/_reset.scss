@@ -3,6 +3,10 @@
 /* !RESETS AND DEFAULTS */
 /* ========================================================================= */
 
+    :root {
+        interpolate-size: allow-keywords;
+    }
+
     html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p,
     blockquote, pre, abbr, address, cite, code, del, dfn, img,
     ins, kbd, q, samp, var, hr, acronym, dl, dt, dd, ol, ul, li,
